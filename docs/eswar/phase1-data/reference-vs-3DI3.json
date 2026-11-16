@@ -1,0 +1,85 @@
+{
+  "pdb_file": "3DI3.pdb",
+  "chain": "B",
+  "dbref_offset_pdb_to_uniprot": 20,
+  "pdb_residues": 193,
+  "pdb_uniprot_range": [
+    37,
+    229
+  ],
+  "pdb_gaps_inside_range": [],
+  "pdb_vs_uniprot_identity_differences": [
+    {
+      "position": 66,
+      "pdb": "T",
+      "uniprot": "I"
+    }
+  ],
+  "reference_residues": 195,
+  "reference_range": [
+    37,
+    231
+  ],
+  "reference_vs_uniprot_identity_differences": [],
+  "shared_residues": 193,
+  "only_in_reference": [
+    230,
+    231
+  ],
+  "only_in_pdb": [],
+  "ca_rmsd_angstrom_over_shared": 0.784,
+  "official_positions_without_pdb_coordinates": [
+    21,
+    22,
+    23,
+    24,
+    25,
+    26,
+    27,
+    28,
+    29,
+    30,
+    31,
+    32,
+    33,
+    34,
+    35,
+    36,
+    230,
+    231,
+    232,
+    233,
+    234,
+    235,
+    236,
+    237,
+    238,
+    239
+  ],
+  "official_positions_without_reference_coordinates": [
+    21,
+    22,
+    23,
+    24,
+    25,
+    26,
+    27,
+    28,
+    29,
+    30,
+    31,
+    32,
+    33,
+    34,
+    35,
+    36,
+    232,
+    233,
+    234,
+    235,
+    236,
+    237,
+    238,
+    239
+  ]
+}

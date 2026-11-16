@@ -83,6 +83,7 @@ def write_conditioning(reference_dir, output_dir, hotspots, binder_length, *, ho
     """
     if not hotspot_source or not str(hotspot_source).strip():
         raise ValueError("State where the hotspots came from (hotspot_source)")
+    hotspots = list(hotspots)  # a one-shot iterable would be empty on its second use below
     reference_dir, output_dir = Path(reference_dir), Path(output_dir)
     if output_dir.exists() and any(output_dir.iterdir()):
         raise ValueError("Use a fresh output directory")

@@ -65,6 +65,12 @@ class HistoricalReproductionTests(unittest.TestCase):
                                               "conditions.json": digest(out / "conditions.json")})
             self.assertNotEqual(audit["role"], "reference_rehearsal_only")
 
+    def test_one_shot_iterable_of_hotspots_is_accepted(self):
+        with tempfile.TemporaryDirectory() as temp:
+            audit = write_conditioning(EXAMPLE, Path(temp) / "o", (h for h in HISTORICAL_HOTSPOTS), 60,
+                                       hotspot_source="provisional_historical")
+            self.assertEqual(audit["hotspots_uniprot"], HISTORICAL_HOTSPOTS)
+
     def test_range_is_recorded_as_a_pair(self):
         with tempfile.TemporaryDirectory() as temp:
             audit = write_conditioning(EXAMPLE, Path(temp) / "o", HISTORICAL_HOTSPOTS, (50, 80),
