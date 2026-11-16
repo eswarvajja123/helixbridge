@@ -16,7 +16,7 @@
 |---|---|---|
 | 1.1 | Run the **existing** command (no new script needed): `cd pipeline && python -m binder_campaign prepare-targets --config config/targets-2026-11-13.json --output data/current-targets` | `data/current-targets/il7ra/manifest.json` has start 21, end 239, 219 aa, hashed. ✅ **Tested 16 Nov** (219 aa, starts E, ends D) |
 | 1.2 | Run the **existing** MSA script (it already accepts any manifest): `python scripts/fetch-target-msa.py --manifest data/current-targets/il7ra/manifest.json --output data/current-targets/il7ra/msa`. Do **not** trim the old 1–236 MSA. | `target.a3m` + `manifest.json` (rows, sha256) saved. ✅ **Tested 16 Nov** (1022 rows, target-only) |
-| 1.3 | Keep the frozen 37–231 structure for generation. Write a short note: residues 21–36 and 232–239 have no structure; 3DI3 position 66 differs from UniProt. No silent repair. | note saved with the data |
+| 1.3 | Keep the frozen 37–231 structure for generation. Write a short note: residues 21–36 and 232–239 have no structure; 3DI3 position 66 differs from UniProt. No silent repair. | ✅ **Done 16 Nov** — see `docs/eswar/phase1-reference-note.md` (finding: the shipped reference may not be 3DI3 chain B) |
 | 1.4 | Build the conditioning file with **binder length and hotspots as parameters** (new `binder_campaign/conditioning.py` + test). Hotspots come from Samyuktha; until then use the historical ten, labelled provisional. | valid `conditions.json` + `audit.json`. ✅ **Built and tested 16 Nov** (45/45 tests pass; rebuilds the historical file byte for byte). The variable-length contig is a syntax check only until a GPU run. |
 
 **Phase output:** on-target evaluation inputs (21–239 sequence + new MSA) and a parametrized conditioning file.
