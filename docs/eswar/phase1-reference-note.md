@@ -27,6 +27,11 @@ Compared with `pipeline/scripts/compare-reference-to-pdb.py`; full output in `ph
 - Limit: this is one definition (5 Å, heavy atoms, one crystal). Other partners (the common gamma chain, TSLP) were not examined.
 - **Why it matters for Samyuktha's site choice:** a binder on this site would compete with IL-7. Whether the competition wants that, or an off-site epitope, is a biology decision.
 
+## Glycans (3DI3 crystal; `phase1-data/glycan-context.json`)
+- **[tested]** The target sequence has six N-X-S/T sequons: 49, 65, 151, 182, 232, 233. 3DI3 shows an **observed glycan at 49, 65 and 151** (two NAG sugars each). 182 is in the resolved region with **no** glycan seen. 232 and 233 lie outside the resolved region, so nothing is known there.
+- **[tested]** **No provisional hotspot is within 8 Å of an observed glycan.** Closest: the N151 glycan to residues 158 and 161 (12 Å) and the N49 glycan to residues 158 and 159 (15 Å). The N65 glycan, which sits next to residue 66, is 31 Å from the hotspots.
+- **Limits:** only the first two sugars are seen, so real glycans are larger and could reach further. Crystal glycosylation is not the occupancy in the assay protein. The 8 Å screen is my choice, not a published rule. **Any new hotspot set must be rechecked with `check-glycan-context.py`.**
+
 ## What this means
 - The shipped reference is the same fold as the competition's named structure, within 0.78 Å, but it is **not the same coordinates**: residue 66 differs (I vs T) and it has two extra C-terminal residues.
 - **[tested]** For the historical hotspots (100–102, 158–161, 211–214), the nearest CA-to-CA distance to residue 66 in the shipped reference is **28.2 Å**, so the residue-66 difference is unlikely to touch that epitope. **A new epitope choice must be rechecked against residue 66.**

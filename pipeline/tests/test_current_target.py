@@ -68,6 +68,16 @@ class CurrentTargetTests(unittest.TestCase):
         self.assertGreater(report["residue_66_min_heavy_atom_distance_to_partner_angstrom"], 20)
         self.assertEqual(report["interface_count"], len(report["interface_residues_uniprot"]))
 
+    def test_glycan_context(self):
+        report = json.loads((DATA / "glycan-context.json").read_text())
+        self.assertEqual(report["sequons_in_target_sequence"], [49, 65, 151, 182, 232, 233])
+        self.assertEqual(report["sequons_with_observed_glycan"], [49, 65, 151])
+        self.assertEqual(report["sequons_resolved_without_glycan"], [182])
+        self.assertEqual(report["sequons_outside_resolved_range"], [232, 233])
+        self.assertEqual(report["hotspots_near_any_glycan"], [])
+        closest = min(d for g in report["glycans"] for d in g["min_distance_to_hotspots_angstrom"].values())
+        self.assertGreater(closest, report["screen_cutoff_angstrom"])
+
 
 if __name__ == "__main__":
     unittest.main()

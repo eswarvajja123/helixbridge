@@ -1,0 +1,102 @@
+{
+  "pdb_file": "3DI3.pdb",
+  "chain": "B",
+  "partner_chain": "A",
+  "sequons_in_target_sequence": [
+    49,
+    65,
+    151,
+    182,
+    232,
+    233
+  ],
+  "sequons_with_observed_glycan": [
+    49,
+    65,
+    151
+  ],
+  "sequons_resolved_without_glycan": [
+    182
+  ],
+  "sequons_outside_resolved_range": [
+    232,
+    233
+  ],
+  "glycans": [
+    {
+      "asn_uniprot": 49,
+      "sugar_chain": "E",
+      "sugar_residues": 2,
+      "in_sequon_list": true,
+      "min_distance_to_hotspots_angstrom": {
+        "100": 18.55,
+        "101": 17.27,
+        "102": 22.56,
+        "158": 15.68,
+        "159": 15.33,
+        "161": 19.43,
+        "211": 25.87,
+        "212": 24.27,
+        "213": 20.47,
+        "214": 22.21
+      },
+      "hotspots_within_screen_cutoff": [],
+      "min_distance_to_partner_chain_angstrom": 9.09
+    },
+    {
+      "asn_uniprot": 65,
+      "sugar_chain": "D",
+      "sugar_residues": 2,
+      "in_sequon_list": true,
+      "min_distance_to_hotspots_angstrom": {
+        "100": 31.06,
+        "101": 31.02,
+        "102": 32.62,
+        "158": 40.19,
+        "159": 36.38,
+        "161": 39.91,
+        "211": 39.99,
+        "212": 37.01,
+        "213": 35.39,
+        "214": 32.06
+      },
+      "hotspots_within_screen_cutoff": [],
+      "min_distance_to_partner_chain_angstrom": 32.6
+    },
+    {
+      "asn_uniprot": 151,
+      "sugar_chain": "C",
+      "sugar_residues": 2,
+      "in_sequon_list": true,
+      "min_distance_to_hotspots_angstrom": {
+        "100": 24.7,
+        "101": 20.9,
+        "102": 26.88,
+        "158": 12.01,
+        "159": 15.01,
+        "161": 12.08,
+        "211": 19.73,
+        "212": 21.52,
+        "213": 18.93,
+        "214": 21.9
+      },
+      "hotspots_within_screen_cutoff": [],
+      "min_distance_to_partner_chain_angstrom": 14.6
+    }
+  ],
+  "hotspots": [
+    100,
+    101,
+    102,
+    158,
+    159,
+    161,
+    211,
+    212,
+    213,
+    214
+  ],
+  "screen_cutoff_angstrom": 8.0,
+  "hotspots_near_any_glycan": [],
+  "limits": "Crystal glycans only; occupancy in the assay protein is unknown. Distances are to the observed NAG residues, not full glycans."
+}
