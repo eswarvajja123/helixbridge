@@ -12,6 +12,7 @@ from .runner import digest, write_json
 
 MIN_BINDER = 40
 MAX_BINDER = 100
+CONDITIONING_ROLE = "conditioning_input; not a submission-eligible candidate or binding result"
 
 
 def _bounds(binder_length):
@@ -100,7 +101,7 @@ def write_conditioning(reference_dir, output_dir, hotspots, binder_length, *, ho
     write_json(output_dir / "conditions.json", conditions)
     sorted_hotspots = _check_hotspots(hotspots, reference["positions"])
     audit = {**reference,
-             "role": "conditioning_input; not a submission-eligible candidate or binding result",
+             "role": CONDITIONING_ROLE,
              "binder_length": _audit_length(binder_length),
              "hotspots_uniprot": sorted_hotspots,
              "hotspot_source": str(hotspot_source),
