@@ -14,10 +14,10 @@
 
 | Task | What to do | Done when |
 |---|---|---|
-| 1.1 | Run the **existing** command (no new script needed): `cd pipeline && python -m binder_campaign prepare-targets --config config/targets-2026-11-13.json --output data/current-targets` | `data/current-targets/il7ra/manifest.json` has start 21, end 239, 219 aa, hashed. ✅ **Tested 16 Nov** (219 aa, starts E, ends D) |
-| 1.2 | Run the **existing** MSA script (it already accepts any manifest): `python scripts/fetch-target-msa.py --manifest data/current-targets/il7ra/manifest.json --output data/current-targets/il7ra/msa`. Do **not** trim the old 1–236 MSA. | `target.a3m` + `manifest.json` (rows, sha256) saved. ✅ **Tested 16 Nov** (1022 rows, target-only) |
-| 1.3 | Keep the frozen 37–231 structure for generation. Write a short note: residues 21–36 and 232–239 have no structure; 3DI3 position 66 differs from UniProt. No silent repair. | note saved with the data |
-| 1.4 | Build the conditioning file with **binder length and hotspots as parameters** (new `binder_campaign/conditioning.py` + test). Hotspots come from Samyuktha; until then use the historical ten, labelled provisional. | valid `conditions.json` + `audit.json` |
+| 1.1 | Run the **existing** command (no new script needed): `cd pipeline && python -m binder_campaign prepare-targets --config config/targets-2026-11-13.json --output data/current-targets` | `data/current-targets/il7ra/manifest.json` has start 21, end 239, 219 aa, hashed. ✅ **Tested 16 Nov** (219 aa, starts E, ends D); output saved in `docs/eswar/phase1-data/` |
+| 1.2 | Run the **existing** MSA script (it already accepts any manifest): `python scripts/fetch-target-msa.py --manifest data/current-targets/il7ra/manifest.json --output data/current-targets/il7ra/msa`. Do **not** trim the old 1–236 MSA. | `target.a3m` + `manifest.json` (rows, sha256) saved. ✅ **Tested 16 Nov** (1022 rows, target-only); saved in `docs/eswar/phase1-data/` |
+| 1.3 | Keep the frozen 37–231 structure for generation. Write a short note: residues 21–36 and 232–239 have no structure; 3DI3 position 66 differs from UniProt. No silent repair. | ✅ **Done 16 Nov** — see `docs/eswar/phase1-reference-note.md` (finding: the shipped reference is the same fold as 3DI3 chain B, 0.78 Å, but not identical: residue 66 and two extra residues) |
+| 1.4 | Build the conditioning file with **binder length and hotspots as parameters** (new `binder_campaign/conditioning.py` + test). Hotspots come from Samyuktha; until then use the historical ten, labelled provisional. | valid `conditions.json` + `audit.json`. ✅ **Built and tested 16 Nov** (50/50 tests pass; rebuilds the historical file byte for byte). The variable-length contig is a syntax check only until a GPU run. |
 
 **Phase output:** on-target evaluation inputs (21–239 sequence + new MSA) and a parametrized conditioning file.
 **Needs internet:** rest.uniprot.org and api.colabfold.com (blocked in the cloud session — run on your laptop).
@@ -28,7 +28,7 @@
 
 | Task | What to do | Done when |
 |---|---|---|
-| 2.1 | New `scripts/rfd4-generate.py` from `rfd4-il7ra-seed.py`: remove the seed whitelist and the `reference_rehearsal_only` role guard, read binder length from the audit. Keep identity/chain/finite checks. | dry-run passes input checks. Note: upstream contigs accept length ranges (e.g. `"40-100, /0, A37-231"`), so a length range is possible; relax the script's `binder_length` equality check. |
+| 2.1 | New `scripts/rfd4-generate.py` from `rfd4-il7ra-seed.py`: remove the seed whitelist and the `reference_rehearsal_only` role guard, read binder length from the audit. Keep identity/chain/finite checks. | dry-run passes input checks. Note: upstream contigs accept length ranges (e.g. `"40-100, /0, A37-231"`), so a length range is possible, but per the upstream spec the **model samples the length itself** with a range; use fixed numbers (50, 60, 70, 80) for a controlled length sweep. Relax the script's `binder_length` equality check for ranges. |
 | 2.2 | New `binder_campaign/dedup.py`: drop a design too similar (sequence overlap / backbone TM) to one already kept. Add `tests/test_dedup.py`. | tests pass |
 | 2.3 | New `import_current()` in `candidates.py` (tag `competition_campaign`, `submission_eligible=False`) + test. | tests pass |
 | 2.4 | Update `modal_app.py`: `stage_root` must load the **current** manifest + MSA (today it copies the historical ones). Add a `--length` option. Run **one** small test generation. | one on-target design generated, cost logged |

@@ -1,0 +1,30 @@
+{
+  "id": "il7ra",
+  "uniprot": "P16871-1",
+  "start": 21,
+  "end": 239,
+  "first": "E",
+  "last": "D",
+  "format": "minibinder",
+  "min_length": 40,
+  "max_length": 100,
+  "pdb": "3DI3",
+  "chains": [
+    "B"
+  ],
+  "requirement": null,
+  "tag": "C-terminal His-tag",
+  "sequence": "ESGYAQNGDLEDAELDDYSFSCYSQLEVNGSQHSLTCAFEDPDVNITNLEFEICGALVEVKCLNFRKLQEIYFIETKKFLLIGKSNICVKVGEKSLTCKKIDLTTIVKPEAPFDLSVVYREGANDFVVTFNTSHLQKKYVKVLMHDVAYRQEKDENKWTHVNLSSTKLTLLQRKLQPAAMYEIKVRSIPDHYFKGFWSEWSPSYYFRTPEINNSSGEMD",
+  "sequence_sha256": "ecdc20f8346168dbf6fd9c54ee032b1b9f1dc64a43d027bb0e06f66017de371c",
+  "fasta_sha256": "2826bebc74fcca7f91c3c4cc768f64106ca3aec2772c1ae3280a14a229c9452e",
+  "source_url": "https://rest.uniprot.org/uniprotkb/P16871.json",
+  "source_sha256": "aca605c272edcda929c5738a393833bb342ef7aa1ee94d4106dec6d39ebfd8d1",
+  "entry_audit": {
+    "firstPublicDate": "1990-08-01",
+    "lastAnnotationUpdateDate": "2026-11-04",
+    "lastSequenceUpdateDate": "2018-09-12",
+    "entryVersion": 233,
+    "sequenceVersion": 3
+  },
+  "construct_status": "official_sequence_range; experimental_processing_unconfirmed"
+}

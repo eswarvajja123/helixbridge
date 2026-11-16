@@ -1,0 +1,10 @@
+{
+  "server": "https://api.colabfold.com",
+  "id": "m-3Q6gXOIRwxxLav_QIYAIlnZqmMm_PSv9lu7g",
+  "sequence_sha256": "ecdc20f8346168dbf6fd9c54ee032b1b9f1dc64a43d027bb0e06f66017de371c",
+  "target_id": "il7ra",
+  "mode": "env",
+  "public_target_only": true,
+  "rows": 1022,
+  "msa_sha256": "1358c9a4a5a7568226bb5d6f25cddb9420c9f30458b8a015def57bcd567d0761"
+}
