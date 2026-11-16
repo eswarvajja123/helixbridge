@@ -20,6 +20,9 @@ parser.add_argument("--chain", required=True)
 parser.add_argument("--reference-cif", type=Path, required=True, help="mmCIF whose label_seq_id is the UniProt position")
 parser.add_argument("--manifest", type=Path, required=True, help="target manifest with start and sequence (UniProt numbering)")
 parser.add_argument("--output", type=Path, required=True)
+parser.add_argument("--partner-chain", help="optional: chain of the natural binding partner (3DI3: A, IL-7)")
+parser.add_argument("--hotspots", help="optional: comma-separated UniProt hotspots to compare with the partner interface")
+parser.add_argument("--interface-cutoff", type=float, default=5.0, help="heavy-atom distance in angstrom")
 args = parser.parse_args()
 if args.output.exists():
     raise ValueError("Use a fresh output file")
@@ -67,6 +70,33 @@ report = {
     "official_positions_without_pdb_coordinates": [p for p in official if p not in pdb],
     "official_positions_without_reference_coordinates": [p for p in official if p not in reference],
 }
+if args.partner_chain:
+    def heavy_atoms(chain):  # protein ATOM records only (no waters or glycans), first alternate location
+        out = []
+        for l in lines:
+            if l.startswith("ATOM") and l[21] == chain and l[16] in " A" and l[76:78].strip() not in ("H", "D"):
+                out.append((int(l[22:26]) + offset, np.array([float(l[30:38]), float(l[38:46]), float(l[46:54])])))
+        return out
+    own, partner = heavy_atoms(args.chain), heavy_atoms(args.partner_chain)
+    if not own or not partner:
+        raise ValueError("No atoms found for the chain or its partner")
+    partner_xyz = np.array([c for _, c in partner])
+    nearest = {}
+    for position, xyz in own:
+        nearest[position] = min(nearest.get(position, 1e9), float(np.linalg.norm(partner_xyz - xyz, axis=1).min()))
+    interface = sorted(p for p, d in nearest.items() if d <= args.interface_cutoff)
+    report["partner_chain"] = args.partner_chain
+    report["interface_cutoff_angstrom"] = args.interface_cutoff
+    report["interface_residues_uniprot"] = interface
+    report["interface_count"] = len(interface)
+    if 66 in nearest:
+        report["residue_66_min_heavy_atom_distance_to_partner_angstrom"] = round(nearest[66], 2)
+    if args.hotspots:
+        hotspots = sorted(int(x) for x in args.hotspots.split(","))
+        report["hotspots"] = hotspots
+        report["hotspots_in_partner_interface"] = [h for h in hotspots if h in interface]
+        report["hotspots_not_in_partner_interface"] = [h for h in hotspots if h not in interface]
+        report["hotspot_min_distance_to_partner_angstrom"] = {str(h): round(nearest[h], 2) for h in hotspots if h in nearest}
 args.output.parent.mkdir(parents=True, exist_ok=True)
 args.output.write_text(json.dumps(report, indent=2) + "\n")
 print(json.dumps({k: report[k] for k in ("pdb_residues", "pdb_uniprot_range", "pdb_vs_uniprot_identity_differences",

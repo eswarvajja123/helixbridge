@@ -60,6 +60,14 @@ class CurrentTargetTests(unittest.TestCase):
         self.assertEqual(report["reference_vs_uniprot_identity_differences"], [])
         self.assertLess(report["ca_rmsd_angstrom_over_shared"], 1.5)
 
+    def test_natural_il7_interface_and_residue_66(self):
+        report = json.loads((DATA / "reference-vs-3DI3.json").read_text())
+        self.assertEqual(report["partner_chain"], "A")
+        self.assertEqual(report["hotspots_in_partner_interface"], [100, 101, 102, 158, 159, 211, 212, 213])
+        self.assertEqual(report["hotspots_not_in_partner_interface"], [161, 214])
+        self.assertGreater(report["residue_66_min_heavy_atom_distance_to_partner_angstrom"], 20)
+        self.assertEqual(report["interface_count"], len(report["interface_residues_uniprot"]))
+
 
 if __name__ == "__main__":
     unittest.main()
