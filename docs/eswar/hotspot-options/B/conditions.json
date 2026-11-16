@@ -1,0 +1,29 @@
+{
+  "il7ra": {
+    "input": "target.cif",
+    "contig": "60, /0, A37-231",
+    "conditions": {
+      "C_CRDGRP": {
+        "1": [
+          {
+            "select": "sel('A/*/*/[N,CA,C,O]')"
+          }
+        ]
+      },
+      "C_SEQ": {
+        "true": [
+          {
+            "select": "sel('A')"
+          }
+        ]
+      },
+      "C_HOT": {
+        "true": [
+          {
+            "select": "sel('A/*/[78,79,98,100,102,103,158,159,211,212]')"
+          }
+        ]
+      }
+    }
+  }
+}

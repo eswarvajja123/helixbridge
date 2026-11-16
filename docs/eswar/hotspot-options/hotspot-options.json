@@ -1,0 +1,1461 @@
+{
+  "pdb_file": "3DI3.pdb",
+  "chain": "B",
+  "partner_chain": "A",
+  "thresholds": {
+    "interface_cutoff": 5.0,
+    "b_min_sasa": 30.0,
+    "b_min_glycan": 10.0,
+    "c_min_sasa": 30.0,
+    "c_min_partner": 15.0,
+    "c_min_glycan": 15.0,
+    "patch_radius": 10.0,
+    "c_exclude_from": 220,
+    "size": 10
+  },
+  "options": {
+    "A_current_provisional": {
+      "rule": "unchanged historical set",
+      "hotspots": [
+        100,
+        101,
+        102,
+        158,
+        159,
+        161,
+        211,
+        212,
+        213,
+        214
+      ],
+      "count": 10,
+      "in_natural_interface": [
+        100,
+        101,
+        102,
+        158,
+        159,
+        211,
+        212,
+        213
+      ],
+      "mean_sasa": 92.8,
+      "buried_below_30": [
+        101
+      ],
+      "min_glycan_distance": 12.01,
+      "min_partner_distance": 2.95,
+      "max_ca_ca_spread": 18.4
+    },
+    "B_exposed_natural_site": {
+      "rule": "natural-interface residues with exposure and glycan-distance floors, top by exposure",
+      "hotspots": [
+        78,
+        79,
+        98,
+        100,
+        102,
+        103,
+        158,
+        159,
+        211,
+        212
+      ],
+      "count": 10,
+      "in_natural_interface": [
+        78,
+        79,
+        98,
+        100,
+        102,
+        103,
+        158,
+        159,
+        211,
+        212
+      ],
+      "mean_sasa": 100.1,
+      "buried_below_30": [],
+      "min_glycan_distance": 12.01,
+      "min_partner_distance": 2.95,
+      "max_ca_ca_spread": 28.1
+    },
+    "C_offsite_exploratory": {
+      "rule": "best exposed patch away from the natural site and glycans (center 170)",
+      "center": 170,
+      "hotspots": [
+        170,
+        172,
+        173,
+        174,
+        175,
+        176,
+        177,
+        178,
+        179,
+        200
+      ],
+      "count": 10,
+      "in_natural_interface": [],
+      "mean_sasa": 86.6,
+      "buried_below_30": [],
+      "min_glycan_distance": 21.98,
+      "min_partner_distance": 29.65,
+      "max_ca_ca_spread": 14.9
+    }
+  },
+  "residues": {
+    "37": {
+      "aa": "ASP",
+      "sasa": 167.3,
+      "partner_dist": 27.63,
+      "glycan_dist": 12.36,
+      "in_interface": false
+    },
+    "38": {
+      "aa": "TYR",
+      "sasa": 91.3,
+      "partner_dist": 24.73,
+      "glycan_dist": 7.11,
+      "in_interface": false
+    },
+    "39": {
+      "aa": "SER",
+      "sasa": 36.6,
+      "partner_dist": 24.58,
+      "glycan_dist": 15.12,
+      "in_interface": false
+    },
+    "40": {
+      "aa": "PHE",
+      "sasa": 11.7,
+      "partner_dist": 19.57,
+      "glycan_dist": 15.76,
+      "in_interface": false
+    },
+    "41": {
+      "aa": "SER",
+      "sasa": 52.4,
+      "partner_dist": 20.11,
+      "glycan_dist": 18.59,
+      "in_interface": false
+    },
+    "42": {
+      "aa": "CYS",
+      "sasa": 8.2,
+      "partner_dist": 16.33,
+      "glycan_dist": 19.42,
+      "in_interface": false
+    },
+    "43": {
+      "aa": "TYR",
+      "sasa": 64.5,
+      "partner_dist": 15.1,
+      "glycan_dist": 14.55,
+      "in_interface": false
+    },
+    "44": {
+      "aa": "SER",
+      "sasa": 0.4,
+      "partner_dist": 10.98,
+      "glycan_dist": 15.23,
+      "in_interface": false
+    },
+    "45": {
+      "aa": "GLN",
+      "sasa": 37.2,
+      "partner_dist": 10.61,
+      "glycan_dist": 11.51,
+      "in_interface": false
+    },
+    "46": {
+      "aa": "LEU",
+      "sasa": 4.5,
+      "partner_dist": 7.12,
+      "glycan_dist": 12.11,
+      "in_interface": false
+    },
+    "47": {
+      "aa": "GLU",
+      "sasa": 15.2,
+      "partner_dist": 5.98,
+      "glycan_dist": 9.31,
+      "in_interface": false
+    },
+    "48": {
+      "aa": "VAL",
+      "sasa": 46.2,
+      "partner_dist": 10.84,
+      "glycan_dist": 6.98,
+      "in_interface": false
+    },
+    "49": {
+      "aa": "ASN",
+      "sasa": 101.0,
+      "partner_dist": 7.99,
+      "glycan_dist": 1.45,
+      "in_interface": false
+    },
+    "50": {
+      "aa": "GLY",
+      "sasa": 61.9,
+      "partner_dist": 7.2,
+      "glycan_dist": 5.81,
+      "in_interface": false
+    },
+    "51": {
+      "aa": "SER",
+      "sasa": 65.8,
+      "partner_dist": 3.26,
+      "glycan_dist": 7.67,
+      "in_interface": true
+    },
+    "52": {
+      "aa": "GLN",
+      "sasa": 39.8,
+      "partner_dist": 6.61,
+      "glycan_dist": 4.58,
+      "in_interface": false
+    },
+    "53": {
+      "aa": "HIS",
+      "sasa": 5.8,
+      "partner_dist": 4.25,
+      "glycan_dist": 9.71,
+      "in_interface": true
+    },
+    "54": {
+      "aa": "SER",
+      "sasa": 5.8,
+      "partner_dist": 10.4,
+      "glycan_dist": 10.66,
+      "in_interface": false
+    },
+    "55": {
+      "aa": "LEU",
+      "sasa": 0.0,
+      "partner_dist": 12.76,
+      "glycan_dist": 13.4,
+      "in_interface": false
+    },
+    "56": {
+      "aa": "THR",
+      "sasa": 15.4,
+      "partner_dist": 15.81,
+      "glycan_dist": 14.08,
+      "in_interface": false
+    },
+    "57": {
+      "aa": "CYS",
+      "sasa": 1.0,
+      "partner_dist": 18.2,
+      "glycan_dist": 16.5,
+      "in_interface": false
+    },
+    "58": {
+      "aa": "ALA",
+      "sasa": 34.7,
+      "partner_dist": 22.22,
+      "glycan_dist": 15.45,
+      "in_interface": false
+    },
+    "59": {
+      "aa": "PHE",
+      "sasa": 57.1,
+      "partner_dist": 25.7,
+      "glycan_dist": 10.17,
+      "in_interface": false
+    },
+    "60": {
+      "aa": "GLU",
+      "sasa": 112.9,
+      "partner_dist": 24.18,
+      "glycan_dist": 15.26,
+      "in_interface": false
+    },
+    "61": {
+      "aa": "ASP",
+      "sasa": 75.9,
+      "partner_dist": 29.52,
+      "glycan_dist": 11.78,
+      "in_interface": false
+    },
+    "62": {
+      "aa": "PRO",
+      "sasa": 124.8,
+      "partner_dist": 32.39,
+      "glycan_dist": 11.4,
+      "in_interface": false
+    },
+    "63": {
+      "aa": "ASP",
+      "sasa": 102.4,
+      "partner_dist": 32.6,
+      "glycan_dist": 7.69,
+      "in_interface": false
+    },
+    "64": {
+      "aa": "VAL",
+      "sasa": 78.4,
+      "partner_dist": 32.68,
+      "glycan_dist": 4.52,
+      "in_interface": false
+    },
+    "65": {
+      "aa": "ASN",
+      "sasa": 132.8,
+      "partner_dist": 32.81,
+      "glycan_dist": 1.46,
+      "in_interface": false
+    },
+    "66": {
+      "aa": "THR",
+      "sasa": 143.9,
+      "partner_dist": 30.22,
+      "glycan_dist": 3.86,
+      "in_interface": false
+    },
+    "67": {
+      "aa": "THR",
+      "sasa": 43.2,
+      "partner_dist": 28.08,
+      "glycan_dist": 3.72,
+      "in_interface": false
+    },
+    "68": {
+      "aa": "ASN",
+      "sasa": 63.8,
+      "partner_dist": 26.88,
+      "glycan_dist": 3.24,
+      "in_interface": false
+    },
+    "69": {
+      "aa": "LEU",
+      "sasa": 14.2,
+      "partner_dist": 25.0,
+      "glycan_dist": 5.45,
+      "in_interface": false
+    },
+    "70": {
+      "aa": "GLU",
+      "sasa": 101.2,
+      "partner_dist": 22.41,
+      "glycan_dist": 9.05,
+      "in_interface": false
+    },
+    "71": {
+      "aa": "PHE",
+      "sasa": 7.4,
+      "partner_dist": 18.81,
+      "glycan_dist": 12.24,
+      "in_interface": false
+    },
+    "72": {
+      "aa": "GLU",
+      "sasa": 42.0,
+      "partner_dist": 15.8,
+      "glycan_dist": 15.68,
+      "in_interface": false
+    },
+    "73": {
+      "aa": "ILE",
+      "sasa": 0.6,
+      "partner_dist": 12.39,
+      "glycan_dist": 19.23,
+      "in_interface": false
+    },
+    "74": {
+      "aa": "CYS",
+      "sasa": 30.8,
+      "partner_dist": 10.29,
+      "glycan_dist": 21.61,
+      "in_interface": false
+    },
+    "75": {
+      "aa": "GLY",
+      "sasa": 31.0,
+      "partner_dist": 7.74,
+      "glycan_dist": 22.26,
+      "in_interface": false
+    },
+    "76": {
+      "aa": "ALA",
+      "sasa": 20.8,
+      "partner_dist": 6.38,
+      "glycan_dist": 20.24,
+      "in_interface": false
+    },
+    "77": {
+      "aa": "LEU",
+      "sasa": 23.7,
+      "partner_dist": 3.75,
+      "glycan_dist": 18.72,
+      "in_interface": true
+    },
+    "78": {
+      "aa": "VAL",
+      "sasa": 80.3,
+      "partner_dist": 3.84,
+      "glycan_dist": 17.65,
+      "in_interface": true
+    },
+    "79": {
+      "aa": "GLU",
+      "sasa": 88.5,
+      "partner_dist": 4.18,
+      "glycan_dist": 17.79,
+      "in_interface": true
+    },
+    "80": {
+      "aa": "VAL",
+      "sasa": 50.5,
+      "partner_dist": 6.26,
+      "glycan_dist": 18.49,
+      "in_interface": false
+    },
+    "81": {
+      "aa": "LYS",
+      "sasa": 71.5,
+      "partner_dist": 8.18,
+      "glycan_dist": 22.15,
+      "in_interface": false
+    },
+    "82": {
+      "aa": "CYS",
+      "sasa": 55.3,
+      "partner_dist": 10.16,
+      "glycan_dist": 20.47,
+      "in_interface": false
+    },
+    "83": {
+      "aa": "LEU",
+      "sasa": 35.0,
+      "partner_dist": 9.62,
+      "glycan_dist": 15.81,
+      "in_interface": false
+    },
+    "84": {
+      "aa": "ASN",
+      "sasa": 122.3,
+      "partner_dist": 14.01,
+      "glycan_dist": 16.73,
+      "in_interface": false
+    },
+    "85": {
+      "aa": "PHE",
+      "sasa": 23.2,
+      "partner_dist": 15.9,
+      "glycan_dist": 15.64,
+      "in_interface": false
+    },
+    "86": {
+      "aa": "ARG",
+      "sasa": 132.2,
+      "partner_dist": 14.74,
+      "glycan_dist": 10.59,
+      "in_interface": false
+    },
+    "87": {
+      "aa": "LYS",
+      "sasa": 68.1,
+      "partner_dist": 19.48,
+      "glycan_dist": 11.61,
+      "in_interface": false
+    },
+    "88": {
+      "aa": "LEU",
+      "sasa": 74.5,
+      "partner_dist": 19.75,
+      "glycan_dist": 12.34,
+      "in_interface": false
+    },
+    "89": {
+      "aa": "GLN",
+      "sasa": 187.2,
+      "partner_dist": 24.66,
+      "glycan_dist": 12.35,
+      "in_interface": false
+    },
+    "90": {
+      "aa": "GLU",
+      "sasa": 69.0,
+      "partner_dist": 26.01,
+      "glycan_dist": 13.2,
+      "in_interface": false
+    },
+    "91": {
+      "aa": "ILE",
+      "sasa": 76.2,
+      "partner_dist": 22.26,
+      "glycan_dist": 14.84,
+      "in_interface": false
+    },
+    "92": {
+      "aa": "TYR",
+      "sasa": 15.6,
+      "partner_dist": 19.23,
+      "glycan_dist": 8.89,
+      "in_interface": false
+    },
+    "93": {
+      "aa": "PHE",
+      "sasa": 34.3,
+      "partner_dist": 16.16,
+      "glycan_dist": 10.61,
+      "in_interface": false
+    },
+    "94": {
+      "aa": "ILE",
+      "sasa": 8.8,
+      "partner_dist": 12.62,
+      "glycan_dist": 11.77,
+      "in_interface": false
+    },
+    "95": {
+      "aa": "GLU",
+      "sasa": 97.7,
+      "partner_dist": 9.09,
+      "glycan_dist": 6.93,
+      "in_interface": false
+    },
+    "96": {
+      "aa": "THR",
+      "sasa": 13.0,
+      "partner_dist": 6.83,
+      "glycan_dist": 10.27,
+      "in_interface": false
+    },
+    "97": {
+      "aa": "LYS",
+      "sasa": 134.5,
+      "partner_dist": 2.73,
+      "glycan_dist": 7.06,
+      "in_interface": true
+    },
+    "98": {
+      "aa": "LYS",
+      "sasa": 69.7,
+      "partner_dist": 4.16,
+      "glycan_dist": 13.09,
+      "in_interface": true
+    },
+    "99": {
+      "aa": "PHE",
+      "sasa": 14.7,
+      "partner_dist": 3.67,
+      "glycan_dist": 14.03,
+      "in_interface": true
+    },
+    "100": {
+      "aa": "LEU",
+      "sasa": 87.1,
+      "partner_dist": 3.5,
+      "glycan_dist": 18.55,
+      "in_interface": true
+    },
+    "101": {
+      "aa": "LEU",
+      "sasa": 18.1,
+      "partner_dist": 3.63,
+      "glycan_dist": 17.27,
+      "in_interface": true
+    },
+    "102": {
+      "aa": "ILE",
+      "sasa": 111.8,
+      "partner_dist": 3.55,
+      "glycan_dist": 22.56,
+      "in_interface": true
+    },
+    "103": {
+      "aa": "GLY",
+      "sasa": 38.4,
+      "partner_dist": 4.0,
+      "glycan_dist": 24.51,
+      "in_interface": true
+    },
+    "104": {
+      "aa": "LYS",
+      "sasa": 112.7,
+      "partner_dist": 6.24,
+      "glycan_dist": 25.61,
+      "in_interface": false
+    },
+    "105": {
+      "aa": "SER",
+      "sasa": 1.3,
+      "partner_dist": 8.6,
+      "glycan_dist": 22.37,
+      "in_interface": false
+    },
+    "106": {
+      "aa": "ASN",
+      "sasa": 31.2,
+      "partner_dist": 10.91,
+      "glycan_dist": 21.19,
+      "in_interface": false
+    },
+    "107": {
+      "aa": "ILE",
+      "sasa": 0.0,
+      "partner_dist": 14.27,
+      "glycan_dist": 18.46,
+      "in_interface": false
+    },
+    "108": {
+      "aa": "CYS",
+      "sasa": 21.5,
+      "partner_dist": 17.04,
+      "glycan_dist": 14.82,
+      "in_interface": false
+    },
+    "109": {
+      "aa": "VAL",
+      "sasa": 0.0,
+      "partner_dist": 20.9,
+      "glycan_dist": 10.92,
+      "in_interface": false
+    },
+    "110": {
+      "aa": "LYS",
+      "sasa": 56.4,
+      "partner_dist": 20.01,
+      "glycan_dist": 9.16,
+      "in_interface": false
+    },
+    "111": {
+      "aa": "VAL",
+      "sasa": 41.0,
+      "partner_dist": 25.56,
+      "glycan_dist": 5.48,
+      "in_interface": false
+    },
+    "112": {
+      "aa": "GLY",
+      "sasa": 69.4,
+      "partner_dist": 24.36,
+      "glycan_dist": 8.37,
+      "in_interface": false
+    },
+    "113": {
+      "aa": "GLU",
+      "sasa": 136.6,
+      "partner_dist": 22.54,
+      "glycan_dist": 10.17,
+      "in_interface": false
+    },
+    "114": {
+      "aa": "LYS",
+      "sasa": 56.3,
+      "partner_dist": 25.43,
+      "glycan_dist": 8.8,
+      "in_interface": false
+    },
+    "115": {
+      "aa": "SER",
+      "sasa": 71.6,
+      "partner_dist": 21.05,
+      "glycan_dist": 11.63,
+      "in_interface": false
+    },
+    "116": {
+      "aa": "LEU",
+      "sasa": 72.0,
+      "partner_dist": 23.07,
+      "glycan_dist": 8.62,
+      "in_interface": false
+    },
+    "117": {
+      "aa": "THR",
+      "sasa": 47.2,
+      "partner_dist": 20.78,
+      "glycan_dist": 13.4,
+      "in_interface": false
+    },
+    "118": {
+      "aa": "CYS",
+      "sasa": 69.8,
+      "partner_dist": 17.55,
+      "glycan_dist": 16.86,
+      "in_interface": false
+    },
+    "119": {
+      "aa": "LYS",
+      "sasa": 85.8,
+      "partner_dist": 14.4,
+      "glycan_dist": 20.09,
+      "in_interface": false
+    },
+    "120": {
+      "aa": "LYS",
+      "sasa": 123.6,
+      "partner_dist": 8.62,
+      "glycan_dist": 23.49,
+      "in_interface": false
+    },
+    "121": {
+      "aa": "ILE",
+      "sasa": 15.2,
+      "partner_dist": 9.88,
+      "glycan_dist": 22.55,
+      "in_interface": false
+    },
+    "122": {
+      "aa": "ASP",
+      "sasa": 33.4,
+      "partner_dist": 4.64,
+      "glycan_dist": 23.01,
+      "in_interface": true
+    },
+    "123": {
+      "aa": "LEU",
+      "sasa": 8.6,
+      "partner_dist": 8.63,
+      "glycan_dist": 19.06,
+      "in_interface": false
+    },
+    "124": {
+      "aa": "THR",
+      "sasa": 4.0,
+      "partner_dist": 4.64,
+      "glycan_dist": 21.13,
+      "in_interface": true
+    },
+    "125": {
+      "aa": "THR",
+      "sasa": 58.2,
+      "partner_dist": 8.27,
+      "glycan_dist": 22.65,
+      "in_interface": false
+    },
+    "126": {
+      "aa": "ILE",
+      "sasa": 16.4,
+      "partner_dist": 11.4,
+      "glycan_dist": 19.37,
+      "in_interface": false
+    },
+    "127": {
+      "aa": "VAL",
+      "sasa": 1.4,
+      "partner_dist": 9.32,
+      "glycan_dist": 17.49,
+      "in_interface": false
+    },
+    "128": {
+      "aa": "LYS",
+      "sasa": 33.4,
+      "partner_dist": 13.92,
+      "glycan_dist": 15.66,
+      "in_interface": false
+    },
+    "129": {
+      "aa": "PRO",
+      "sasa": 2.5,
+      "partner_dist": 14.32,
+      "glycan_dist": 13.79,
+      "in_interface": false
+    },
+    "130": {
+      "aa": "GLU",
+      "sasa": 50.1,
+      "partner_dist": 14.25,
+      "glycan_dist": 9.53,
+      "in_interface": false
+    },
+    "131": {
+      "aa": "ALA",
+      "sasa": 35.3,
+      "partner_dist": 19.41,
+      "glycan_dist": 9.45,
+      "in_interface": false
+    },
+    "132": {
+      "aa": "PRO",
+      "sasa": 4.3,
+      "partner_dist": 20.67,
+      "glycan_dist": 9.0,
+      "in_interface": false
+    },
+    "133": {
+      "aa": "PHE",
+      "sasa": 81.4,
+      "partner_dist": 19.37,
+      "glycan_dist": 3.4,
+      "in_interface": false
+    },
+    "134": {
+      "aa": "ASP",
+      "sasa": 109.5,
+      "partner_dist": 23.57,
+      "glycan_dist": 4.78,
+      "in_interface": false
+    },
+    "135": {
+      "aa": "LEU",
+      "sasa": 24.2,
+      "partner_dist": 26.97,
+      "glycan_dist": 9.09,
+      "in_interface": false
+    },
+    "136": {
+      "aa": "SER",
+      "sasa": 30.9,
+      "partner_dist": 29.33,
+      "glycan_dist": 9.89,
+      "in_interface": false
+    },
+    "137": {
+      "aa": "VAL",
+      "sasa": 17.5,
+      "partner_dist": 32.21,
+      "glycan_dist": 12.63,
+      "in_interface": false
+    },
+    "138": {
+      "aa": "VAL",
+      "sasa": 82.1,
+      "partner_dist": 33.26,
+      "glycan_dist": 12.12,
+      "in_interface": false
+    },
+    "139": {
+      "aa": "TYR",
+      "sasa": 80.1,
+      "partner_dist": 36.76,
+      "glycan_dist": 16.61,
+      "in_interface": false
+    },
+    "140": {
+      "aa": "ARG",
+      "sasa": 158.1,
+      "partner_dist": 37.64,
+      "glycan_dist": 18.06,
+      "in_interface": false
+    },
+    "141": {
+      "aa": "GLU",
+      "sasa": 81.4,
+      "partner_dist": 41.0,
+      "glycan_dist": 21.12,
+      "in_interface": false
+    },
+    "142": {
+      "aa": "GLY",
+      "sasa": 63.9,
+      "partner_dist": 41.09,
+      "glycan_dist": 22.13,
+      "in_interface": false
+    },
+    "143": {
+      "aa": "ALA",
+      "sasa": 67.0,
+      "partner_dist": 37.74,
+      "glycan_dist": 20.59,
+      "in_interface": false
+    },
+    "144": {
+      "aa": "ASN",
+      "sasa": 74.9,
+      "partner_dist": 38.53,
+      "glycan_dist": 22.05,
+      "in_interface": false
+    },
+    "145": {
+      "aa": "ASP",
+      "sasa": 27.9,
+      "partner_dist": 34.85,
+      "glycan_dist": 18.07,
+      "in_interface": false
+    },
+    "146": {
+      "aa": "PHE",
+      "sasa": 7.8,
+      "partner_dist": 32.06,
+      "glycan_dist": 16.02,
+      "in_interface": false
+    },
+    "147": {
+      "aa": "VAL",
+      "sasa": 33.5,
+      "partner_dist": 30.05,
+      "glycan_dist": 11.59,
+      "in_interface": false
+    },
+    "148": {
+      "aa": "VAL",
+      "sasa": 3.3,
+      "partner_dist": 26.72,
+      "glycan_dist": 10.64,
+      "in_interface": false
+    },
+    "149": {
+      "aa": "THR",
+      "sasa": 47.6,
+      "partner_dist": 26.22,
+      "glycan_dist": 7.51,
+      "in_interface": false
+    },
+    "150": {
+      "aa": "PHE",
+      "sasa": 13.0,
+      "partner_dist": 21.12,
+      "glycan_dist": 5.96,
+      "in_interface": false
+    },
+    "151": {
+      "aa": "ASN",
+      "sasa": 53.6,
+      "partner_dist": 18.59,
+      "glycan_dist": 1.45,
+      "in_interface": false
+    },
+    "152": {
+      "aa": "THR",
+      "sasa": 1.4,
+      "partner_dist": 16.37,
+      "glycan_dist": 4.93,
+      "in_interface": false
+    },
+    "153": {
+      "aa": "SER",
+      "sasa": 29.8,
+      "partner_dist": 12.9,
+      "glycan_dist": 5.37,
+      "in_interface": false
+    },
+    "154": {
+      "aa": "HIS",
+      "sasa": 4.9,
+      "partner_dist": 11.36,
+      "glycan_dist": 7.56,
+      "in_interface": false
+    },
+    "155": {
+      "aa": "LEU",
+      "sasa": 102.4,
+      "partner_dist": 11.51,
+      "glycan_dist": 6.15,
+      "in_interface": false
+    },
+    "156": {
+      "aa": "GLN",
+      "sasa": 124.0,
+      "partner_dist": 8.39,
+      "glycan_dist": 3.59,
+      "in_interface": false
+    },
+    "157": {
+      "aa": "LYS",
+      "sasa": 24.8,
+      "partner_dist": 7.32,
+      "glycan_dist": 9.34,
+      "in_interface": false
+    },
+    "158": {
+      "aa": "LYS",
+      "sasa": 145.0,
+      "partner_dist": 3.37,
+      "glycan_dist": 12.01,
+      "in_interface": true
+    },
+    "159": {
+      "aa": "TYR",
+      "sasa": 98.6,
+      "partner_dist": 3.51,
+      "glycan_dist": 15.01,
+      "in_interface": true
+    },
+    "160": {
+      "aa": "VAL",
+      "sasa": 1.9,
+      "partner_dist": 6.45,
+      "glycan_dist": 12.91,
+      "in_interface": false
+    },
+    "161": {
+      "aa": "LYS",
+      "sasa": 95.9,
+      "partner_dist": 6.09,
+      "glycan_dist": 12.08,
+      "in_interface": false
+    },
+    "162": {
+      "aa": "VAL",
+      "sasa": 75.6,
+      "partner_dist": 8.71,
+      "glycan_dist": 14.26,
+      "in_interface": false
+    },
+    "163": {
+      "aa": "LEU",
+      "sasa": 10.4,
+      "partner_dist": 11.68,
+      "glycan_dist": 11.7,
+      "in_interface": false
+    },
+    "164": {
+      "aa": "MET",
+      "sasa": 46.5,
+      "partner_dist": 14.2,
+      "glycan_dist": 15.51,
+      "in_interface": false
+    },
+    "165": {
+      "aa": "HIS",
+      "sasa": 7.1,
+      "partner_dist": 17.03,
+      "glycan_dist": 10.81,
+      "in_interface": false
+    },
+    "166": {
+      "aa": "ASP",
+      "sasa": 4.8,
+      "partner_dist": 20.71,
+      "glycan_dist": 16.18,
+      "in_interface": false
+    },
+    "167": {
+      "aa": "VAL",
+      "sasa": 1.4,
+      "partner_dist": 23.89,
+      "glycan_dist": 14.84,
+      "in_interface": false
+    },
+    "168": {
+      "aa": "ALA",
+      "sasa": 0.4,
+      "partner_dist": 27.08,
+      "glycan_dist": 18.85,
+      "in_interface": false
+    },
+    "169": {
+      "aa": "TYR",
+      "sasa": 28.3,
+      "partner_dist": 30.57,
+      "glycan_dist": 20.42,
+      "in_interface": false
+    },
+    "170": {
+      "aa": "ARG",
+      "sasa": 35.7,
+      "partner_dist": 34.01,
+      "glycan_dist": 23.47,
+      "in_interface": false
+    },
+    "171": {
+      "aa": "GLN",
+      "sasa": 28.9,
+      "partner_dist": 37.59,
+      "glycan_dist": 26.33,
+      "in_interface": false
+    },
+    "172": {
+      "aa": "GLU",
+      "sasa": 110.8,
+      "partner_dist": 40.66,
+      "glycan_dist": 27.67,
+      "in_interface": false
+    },
+    "173": {
+      "aa": "LYS",
+      "sasa": 151.7,
+      "partner_dist": 42.88,
+      "glycan_dist": 30.47,
+      "in_interface": false
+    },
+    "174": {
+      "aa": "ASP",
+      "sasa": 38.1,
+      "partner_dist": 39.92,
+      "glycan_dist": 29.99,
+      "in_interface": false
+    },
+    "175": {
+      "aa": "GLU",
+      "sasa": 129.5,
+      "partner_dist": 37.28,
+      "glycan_dist": 28.75,
+      "in_interface": false
+    },
+    "176": {
+      "aa": "ASN",
+      "sasa": 141.0,
+      "partner_dist": 35.14,
+      "glycan_dist": 29.35,
+      "in_interface": false
+    },
+    "177": {
+      "aa": "LYS",
+      "sasa": 56.0,
+      "partner_dist": 35.06,
+      "glycan_dist": 27.73,
+      "in_interface": false
+    },
+    "178": {
+      "aa": "TRP",
+      "sasa": 62.4,
+      "partner_dist": 31.66,
+      "glycan_dist": 21.98,
+      "in_interface": false
+    },
+    "179": {
+      "aa": "THR",
+      "sasa": 67.8,
+      "partner_dist": 29.65,
+      "glycan_dist": 22.33,
+      "in_interface": false
+    },
+    "180": {
+      "aa": "HIS",
+      "sasa": 102.2,
+      "partner_dist": 26.34,
+      "glycan_dist": 21.7,
+      "in_interface": false
+    },
+    "181": {
+      "aa": "VAL",
+      "sasa": 39.4,
+      "partner_dist": 23.42,
+      "glycan_dist": 18.05,
+      "in_interface": false
+    },
+    "182": {
+      "aa": "ASN",
+      "sasa": 96.5,
+      "partner_dist": 20.57,
+      "glycan_dist": 18.12,
+      "in_interface": false
+    },
+    "183": {
+      "aa": "LEU",
+      "sasa": 30.3,
+      "partner_dist": 18.12,
+      "glycan_dist": 12.57,
+      "in_interface": false
+    },
+    "184": {
+      "aa": "SER",
+      "sasa": 85.4,
+      "partner_dist": 16.04,
+      "glycan_dist": 12.83,
+      "in_interface": false
+    },
+    "185": {
+      "aa": "SER",
+      "sasa": 52.9,
+      "partner_dist": 18.37,
+      "glycan_dist": 10.14,
+      "in_interface": false
+    },
+    "186": {
+      "aa": "THR",
+      "sasa": 41.6,
+      "partner_dist": 19.71,
+      "glycan_dist": 6.14,
+      "in_interface": false
+    },
+    "187": {
+      "aa": "LYS",
+      "sasa": 117.4,
+      "partner_dist": 22.8,
+      "glycan_dist": 9.03,
+      "in_interface": false
+    },
+    "188": {
+      "aa": "LEU",
+      "sasa": 21.8,
+      "partner_dist": 25.57,
+      "glycan_dist": 11.69,
+      "in_interface": false
+    },
+    "189": {
+      "aa": "THR",
+      "sasa": 60.0,
+      "partner_dist": 28.23,
+      "glycan_dist": 14.69,
+      "in_interface": false
+    },
+    "190": {
+      "aa": "LEU",
+      "sasa": 19.5,
+      "partner_dist": 30.71,
+      "glycan_dist": 17.65,
+      "in_interface": false
+    },
+    "191": {
+      "aa": "LEU",
+      "sasa": 94.3,
+      "partner_dist": 33.96,
+      "glycan_dist": 20.89,
+      "in_interface": false
+    },
+    "192": {
+      "aa": "GLN",
+      "sasa": 37.4,
+      "partner_dist": 37.69,
+      "glycan_dist": 22.93,
+      "in_interface": false
+    },
+    "193": {
+      "aa": "ARG",
+      "sasa": 98.5,
+      "partner_dist": 39.31,
+      "glycan_dist": 25.88,
+      "in_interface": false
+    },
+    "194": {
+      "aa": "LYS",
+      "sasa": 123.9,
+      "partner_dist": 34.97,
+      "glycan_dist": 24.56,
+      "in_interface": false
+    },
+    "195": {
+      "aa": "LEU",
+      "sasa": 16.3,
+      "partner_dist": 35.56,
+      "glycan_dist": 22.61,
+      "in_interface": false
+    },
+    "196": {
+      "aa": "GLN",
+      "sasa": 91.0,
+      "partner_dist": 40.73,
+      "glycan_dist": 27.13,
+      "in_interface": false
+    },
+    "197": {
+      "aa": "PRO",
+      "sasa": 89.4,
+      "partner_dist": 43.7,
+      "glycan_dist": 28.96,
+      "in_interface": false
+    },
+    "198": {
+      "aa": "ALA",
+      "sasa": 56.3,
+      "partner_dist": 45.03,
+      "glycan_dist": 28.7,
+      "in_interface": false
+    },
+    "199": {
+      "aa": "ALA",
+      "sasa": 9.7,
+      "partner_dist": 41.75,
+      "glycan_dist": 25.51,
+      "in_interface": false
+    },
+    "200": {
+      "aa": "MET",
+      "sasa": 72.8,
+      "partner_dist": 39.99,
+      "glycan_dist": 24.59,
+      "in_interface": false
+    },
+    "201": {
+      "aa": "TYR",
+      "sasa": 16.6,
+      "partner_dist": 36.42,
+      "glycan_dist": 20.89,
+      "in_interface": false
+    },
+    "202": {
+      "aa": "GLU",
+      "sasa": 19.5,
+      "partner_dist": 33.38,
+      "glycan_dist": 20.23,
+      "in_interface": false
+    },
+    "203": {
+      "aa": "ILE",
+      "sasa": 1.1,
+      "partner_dist": 30.09,
+      "glycan_dist": 16.15,
+      "in_interface": false
+    },
+    "204": {
+      "aa": "LYS",
+      "sasa": 34.3,
+      "partner_dist": 26.81,
+      "glycan_dist": 16.24,
+      "in_interface": false
+    },
+    "205": {
+      "aa": "VAL",
+      "sasa": 0.1,
+      "partner_dist": 22.82,
+      "glycan_dist": 13.21,
+      "in_interface": false
+    },
+    "206": {
+      "aa": "ARG",
+      "sasa": 56.3,
+      "partner_dist": 20.16,
+      "glycan_dist": 14.92,
+      "in_interface": false
+    },
+    "207": {
+      "aa": "SER",
+      "sasa": 0.0,
+      "partner_dist": 17.04,
+      "glycan_dist": 12.3,
+      "in_interface": false
+    },
+    "208": {
+      "aa": "ILE",
+      "sasa": 28.2,
+      "partner_dist": 13.32,
+      "glycan_dist": 16.1,
+      "in_interface": false
+    },
+    "209": {
+      "aa": "PRO",
+      "sasa": 17.4,
+      "partner_dist": 10.93,
+      "glycan_dist": 17.74,
+      "in_interface": false
+    },
+    "210": {
+      "aa": "ASP",
+      "sasa": 64.1,
+      "partner_dist": 9.43,
+      "glycan_dist": 18.18,
+      "in_interface": false
+    },
+    "211": {
+      "aa": "HIS",
+      "sasa": 149.6,
+      "partner_dist": 4.59,
+      "glycan_dist": 19.73,
+      "in_interface": true
+    },
+    "212": {
+      "aa": "TYR",
+      "sasa": 132.2,
+      "partner_dist": 2.95,
+      "glycan_dist": 21.52,
+      "in_interface": true
+    },
+    "213": {
+      "aa": "PHE",
+      "sasa": 34.7,
+      "partner_dist": 3.37,
+      "glycan_dist": 18.93,
+      "in_interface": true
+    },
+    "214": {
+      "aa": "LYS",
+      "sasa": 54.6,
+      "partner_dist": 9.49,
+      "glycan_dist": 21.9,
+      "in_interface": false
+    },
+    "215": {
+      "aa": "GLY",
+      "sasa": 24.1,
+      "partner_dist": 12.88,
+      "glycan_dist": 22.1,
+      "in_interface": false
+    },
+    "216": {
+      "aa": "PHE",
+      "sasa": 95.9,
+      "partner_dist": 15.66,
+      "glycan_dist": 19.31,
+      "in_interface": false
+    },
+    "217": {
+      "aa": "TRP",
+      "sasa": 79.7,
+      "partner_dist": 18.67,
+      "glycan_dist": 18.46,
+      "in_interface": false
+    },
+    "218": {
+      "aa": "SER",
+      "sasa": 6.7,
+      "partner_dist": 18.82,
+      "glycan_dist": 14.71,
+      "in_interface": false
+    },
+    "219": {
+      "aa": "GLU",
+      "sasa": 113.6,
+      "partner_dist": 21.36,
+      "glycan_dist": 15.4,
+      "in_interface": false
+    },
+    "220": {
+      "aa": "TRP",
+      "sasa": 86.2,
+      "partner_dist": 24.5,
+      "glycan_dist": 15.34,
+      "in_interface": false
+    },
+    "221": {
+      "aa": "SER",
+      "sasa": 4.4,
+      "partner_dist": 25.06,
+      "glycan_dist": 12.53,
+      "in_interface": false
+    },
+    "222": {
+      "aa": "PRO",
+      "sasa": 101.7,
+      "partner_dist": 27.12,
+      "glycan_dist": 13.05,
+      "in_interface": false
+    },
+    "223": {
+      "aa": "SER",
+      "sasa": 50.9,
+      "partner_dist": 30.75,
+      "glycan_dist": 16.48,
+      "in_interface": false
+    },
+    "224": {
+      "aa": "TYR",
+      "sasa": 77.5,
+      "partner_dist": 32.39,
+      "glycan_dist": 13.59,
+      "in_interface": false
+    },
+    "225": {
+      "aa": "TYR",
+      "sasa": 130.9,
+      "partner_dist": 35.53,
+      "glycan_dist": 18.06,
+      "in_interface": false
+    },
+    "226": {
+      "aa": "PHE",
+      "sasa": 26.8,
+      "partner_dist": 34.67,
+      "glycan_dist": 18.41,
+      "in_interface": false
+    },
+    "227": {
+      "aa": "ARG",
+      "sasa": 141.6,
+      "partner_dist": 40.26,
+      "glycan_dist": 21.85,
+      "in_interface": false
+    },
+    "228": {
+      "aa": "THR",
+      "sasa": 0.1,
+      "partner_dist": 39.86,
+      "glycan_dist": 23.98,
+      "in_interface": false
+    },
+    "229": {
+      "aa": "PRO",
+      "sasa": 77.5,
+      "partner_dist": 42.21,
+      "glycan_dist": 24.35,
+      "in_interface": false
+    }
+  },
+  "limits": "Isolated chain only: no membrane, gamma-c, TSLP receptor or full glycans. Crystal glycans only. Not a binding prediction."
+}

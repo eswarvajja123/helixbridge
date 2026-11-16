@@ -78,6 +78,34 @@ class CurrentTargetTests(unittest.TestCase):
         closest = min(d for g in report["glycans"] for d in g["min_distance_to_hotspots_angstrom"].values())
         self.assertGreater(closest, report["screen_cutoff_angstrom"])
 
+    def test_hotspot_options(self):
+        report = json.loads((DATA.parent / "hotspot-options/hotspot-options.json").read_text())
+        a, b, c = (report["options"][k] for k in ("A_current_provisional", "B_exposed_natural_site", "C_offsite_exploratory"))
+        self.assertEqual(a["hotspots"], [100, 101, 102, 158, 159, 161, 211, 212, 213, 214])
+        self.assertEqual(len(a["in_natural_interface"]), 8)
+        self.assertEqual(a["buried_below_30"], [101])
+        self.assertEqual(b["hotspots"], [78, 79, 98, 100, 102, 103, 158, 159, 211, 212])
+        self.assertEqual(len(b["in_natural_interface"]), 10)
+        self.assertEqual(c["hotspots"], [170, 172, 173, 174, 175, 176, 177, 178, 179, 200])
+        self.assertEqual(c["in_natural_interface"], [])
+        self.assertTrue(all(h < 220 for h in c["hotspots"]))  # never next to the C-terminal tag
+        for option in (b, c):
+            self.assertGreaterEqual(option["min_glycan_distance"], 10)
+            self.assertEqual(option["count"], 10)
+
+    def test_option_conditioning_files_match_the_options(self):
+        options = DATA.parent / "hotspot-options"
+        report = json.loads((options / "hotspot-options.json").read_text())
+        for letter, key in (("A", "A_current_provisional"), ("B", "B_exposed_natural_site"), ("C", "C_offsite_exploratory")):
+            audit = json.loads((options / letter / "audit.json").read_text())
+            self.assertEqual(audit["hotspots_uniprot"], report["options"][key]["hotspots"])
+            self.assertEqual(audit["binder_length"], 60)
+            self.assertEqual(audit["hotspot_source"].startswith("proposed"), letter != "A")
+            selection = json.loads((options / letter / "conditions.json").read_text())["il7ra"]["conditions"]["C_HOT"]["true"][0]["select"]
+            self.assertEqual(selection, "sel('A/*/[" + ",".join(map(str, audit["hotspots_uniprot"])) + "]')")
+        if EXAMPLE.is_dir():  # Option A must equal the historical conditioning file exactly
+            self.assertEqual((options / "A/conditions.json").read_bytes(), (EXAMPLE / "conditions.json").read_bytes())
+
 
 if __name__ == "__main__":
     unittest.main()
