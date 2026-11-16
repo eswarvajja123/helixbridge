@@ -1,0 +1,3 @@
+# Extra dependency for Task 2.2 (backbone comparison in the dedup gate); everything else is in the project requirements.
+# Used to run TM-align on CA traces. Imported only when coordinates are supplied.
+tmtools==0.3.0
