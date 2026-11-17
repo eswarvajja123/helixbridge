@@ -196,6 +196,53 @@ For every pair of designs, within each structure source (generator, ESMFold2, Bo
 
 Any pool works: `--pool pool.json` with `{"target_sequence": ..., "positions": [...], "members": [{"id", "binder_sequence", "structure"}]}`. The TM-scores come from `tmtools` (TM-align), which matched the real USalign binary on 28 real backbone pairs (`pipeline/tests/fixtures/usalign_reference.json`), so no USalign build or container change is needed. The groups are descriptive, not protein families or binding predictions, and complete-link grouping depends on member order (sorted by id).
 
+## Stage H — build one candidate pool from several batches (free, CPU)
+
+Each batch removes near-duplicates only inside itself. To compare hotspot options (or just combine batches), merge them first; the first batch you list wins ties:
+
+```bash
+python pipeline/scripts/merge-pool.py --batch results/batch-eswar-pA --batch results/batch-eswar-pB --batch results/batch-eswar-pC --out results/pool-eswar-p1
+```
+
+It copies every structure into one self-contained folder, re-checks each SHA-256, refuses batches made for a different target, generator revision or dedup thresholds, and re-runs the near-duplicate gate across all batches. Then run **Stage E** (`modal_evaluate.py ... --candidates results/pool-eswar-p1/candidates.json`), **Stage F** (`qc-candidates.py --evaluation ... --batch-dir results/pool-eswar-p1`) and **Stage G** as before.
+
+## Stage J — Task 5.1: novelty pre-screen against a public database (free, CPU)
+
+Needs the `mmseqs` program (`apt install mmseqs2` on Linux; see mmseqs.com for Windows and macOS). Build the public database once (about 210 MB download, a few minutes): Swiss-Prot plus the PDB's protein chains.
+
+```bash
+python pipeline/scripts/build-public-db.py --out data/public-db
+python pipeline/scripts/novelty-prescreen.py --records results/qc-eswar-q1/qc-candidates.json --database data/public-db/publicDB --out results/novelty-eswar-n1
+```
+
+A design is flagged when a public hit has query coverage of at least 0.80 and identity above 0.70, which is the team's recorded reading of the organizers' rule, applied to a public database. **No flag does not mean novel**: the organizers' database is private and their exact settings are unconfirmed. `novelty_review` stays `pending` whatever this finds. A flag adds a `public_similarity:...` reason, which blocks export.
+
+## Stage K — Task 5.2: sequence liabilities (free, CPU)
+
+```bash
+python pipeline/scripts/review-liabilities.py --records results/novelty-eswar-n1/novelty-candidates.json --out results/liabilities-eswar-l1
+```
+
+Records the team's descriptive sequence diagnostics and four categorical flags (odd cysteine count, N-glycosylation sequon, Asn-Gly, Asp-Pro). There are no numeric pass/fail limits and nothing is removed or repaired (the optional SolubleMPNN repair is not built).
+
+## Stage L — Task 5.3: propose a shortlist, then the export guard (free, CPU)
+
+Re-run Stage G on the liabilities output, then select:
+
+```bash
+python pipeline/scripts/diversity-report.py --records results/liabilities-eswar-l1/liabilities-candidates.json --evaluation results/eval-eswar-e1 --batch-dir results/pool-eswar-p1 --out results/diversity-eswar-d4
+python pipeline/scripts/select-finalists.py --records results/liabilities-eswar-l1/liabilities-candidates.json --diversity results/diversity-eswar-d4/diversity.json --out results/selection-eswar-s1
+```
+
+It proposes at most 20 designs by **coverage** (round-robin over fold groups, preferring a site not yet represented, then fewer liability flags, then the best agreement between the two predictors); `pick_order` is the order of picking, **not a quality ranking**, and scores are not used to rank. It then runs the team's own export guard and prints exactly what a person still has to review. The guard needs three human decisions per design (novelty review, independent structure review, screen review); to record them, write a reviews file and add `--reviews reviews.json`:
+
+```json
+{"reviewer": "your name", "date": "2026-11-18",
+ "candidates": {"il7ra-rfd4-...": {"novelty_review": "passed", "independent_prediction_status": "reviewed", "screen_status": "approximation_reviewed"}}}
+```
+
+Only record a decision you actually made. **Task 5.4** (the AlphaFold cross-check by Stefanos) is a person's step, not code.
+
 ## Optional: re-check the real ESMFold2 library on your machine (free, CPU)
 
 The test suite normally uses stand-ins for `esm`, `torch` and `huggingface_hub`. `pipeline/tests/test_real_esm.py` runs the **real** `esm` fold code with a tiny random-weight model instead (no GPU, no weights download, about 90 s), and checks that my validator and the real pinned ipSAE accept what it writes. It is skipped unless you point it at a Python that has the real libraries:

@@ -67,10 +67,10 @@
 
 | Task | What to do | Done when |
 |---|---|---|
-| 5.1 | Novelty pre-screen with MMseqs2 (coverage ≥0.8, identity ≤0.7). Needs MMseqs2 + a public database (neither is in the repo). Flag only; cannot certify. | flag per candidate |
-| 5.2 | Sequence liabilities via `sequence_review.py`; optional SolubleMPNN repair (lead101 pattern). | liabilities recorded |
-| 5.3 | Select ≤20 maximizing distinct fold/site clusters, no duplicates; export with `export_draft`. | export guards pass |
-| 5.4 | Send finalists to Stefanos for AlphaFold cross-check. | AF result per finalist |
+| 5.1 | Novelty pre-screen with MMseqs2 (coverage ≥0.8, identity ≤0.7). Needs MMseqs2 + a public database (neither is in the repo). Flag only; cannot certify. | flag per candidate ✅ **Built and tested 17 Nov.** `binder_campaign/novelty.py`, `public_db.py`, `scripts/build-public-db.py`, `scripts/novelty-prescreen.py`. MMseqs2 15 from the package mirror; public database = Swiss-Prot (576,073 entries) + unique PDB protein chains (180,353) = 756,426 sequences, built from rest.uniprot.org and files.rcsb.org. Checked with the real program on known cases (an exact IL-7Rα fragment is flagged with the PDB structure 5j11 as best hit; 10 % and 25 % mutated copies are flagged; a 40 % mutated copy and a random sequence are not). Rule applied: query coverage >= 0.80 and identity > 0.70, a conservative reading of the organizers' rule; **a flag is information, no flag proves nothing** (their database is private). 24 tests; 8 planted bugs caught. See `docs/eswar/RUN-GPU.md`, Stage J. |
+| 5.2 | Sequence liabilities via `sequence_review.py`; optional SolubleMPNN repair (lead101 pattern). | liabilities recorded ✅ **Built and tested 17 Nov** (repair not built). `binder_campaign/liabilities.py`, `scripts/review-liabilities.py`: the team's diagnostics per design plus four categorical flags (odd Cys, N-glycosylation sequon, Asn-Gly, Asp-Pro); no numeric thresholds, nothing removed. Flags agree with an independent recomputation on 500 random sequences. See Stage K. |
+| 5.3 | Select ≤20 maximizing distinct fold/site clusters, no duplicates; export with `export_draft`. | export guards pass ✅ **Selection built and tested 17 Nov; the guard passes only after a person records the reviews.** `binder_campaign/selection.py`, `scripts/select-finalists.py`: proposes at most 20 designs by coverage of folds and sites (not by score) and runs the team's own export guard, reporting exactly which human reviews are still missing (novelty, independent structure review, screen review). It never sets those itself. 19 tests; 8 planted bugs caught. See Stage L. |
+| 5.4 | Send finalists to Stefanos for AlphaFold cross-check. | AF result per finalist *(a person's step, not code; waits on a real shortlist)* |
 
 ---
 
