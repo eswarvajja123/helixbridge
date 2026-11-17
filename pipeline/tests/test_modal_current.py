@@ -129,7 +129,8 @@ class RunBodyLocallyTests(unittest.TestCase):
         for package, source in (("torch", TORCH_STUB), ("rfd4_proteina", RFD4_STUB)):
             (stubs / package).mkdir(parents=True)
             (stubs / package / "__init__.py").write_text(source)
-        self.saved = (list(sys.path), dict(os.environ), {k: v for k, v in sys.modules.items() if k in ("torch", "rfd4_proteina")})
+        self.saved = (list(sys.path), dict(os.environ), {k: v for k, v in sys.modules.items() if k in ("torch", "rfd4_proteina")},
+                      {k: v for k, v in sys.modules.items() if k == "binder_campaign" or k.startswith("binder_campaign.")})
         sys.path.insert(0, str(stubs))
         os.environ["PYTHONPATH"] = str(stubs) + os.pathsep + os.environ.get("PYTHONPATH", "")
         os.environ["STUB_STRUCTURE"] = str(REAL / "generator.cif")
@@ -145,6 +146,10 @@ class RunBodyLocallyTests(unittest.TestCase):
         for name in ("torch", "rfd4_proteina"):
             sys.modules.pop(name, None)
         sys.modules.update(self.saved[2])
+        # the function body imports binder_campaign from this test's temporary folder; do not leave that package cached
+        for name in [n for n in sys.modules if n == "binder_campaign" or n.startswith("binder_campaign.")]:
+            sys.modules.pop(name)
+        sys.modules.update(self.saved[3])
 
     def call(self, **overrides):
         args = dict(run_id="run-one", seed=7, hotspots=[100, 101, 102], hotspot_source="provisional_historical", binder_length=[60, 60])
@@ -192,6 +197,51 @@ class RunBodyLocallyTests(unittest.TestCase):
             with self.assertRaises(ValueError, msg=repr(kwargs)):
                 self.call(run_id=kwargs.get("run_id", "fresh-run"), **{k: v for k, v in kwargs.items() if k != "run_id"})
             self.assertFalse((self.cache / "runs/fresh-run/generation").exists(), repr(kwargs))
+
+    def test_whole_chain_batch_runs_through_the_entrypoint_the_real_body_the_script_and_the_engine(self):
+        import types
+        real = self.module.generate_current
+        self.module.generate_current = types.SimpleNamespace(remote=real.local)    # the only stand-in: "remote" runs locally
+        out = self.dir / "batch-out"
+        self.module.main.info.raw_f(stage="batch", batch_id="chain1", seeds="3,4,5", lengths="60", option="A",
+                                    max_designs=3, max_gpu_seconds=10000.0, out=str(out))
+        report = json.loads((out / "batch-report.json").read_text())
+        # the stand-in model returns the same design every time: one is kept, the other two are exact duplicates
+        self.assertEqual((report["done"], report["kept"], report["dropped_by_reason"], report["stop_reason"]),
+                         (3, 1, {"exact_duplicate": 2}, "completed"))
+        records = json.loads((out / "candidates.json").read_text())["candidates"]
+        self.assertEqual([r["seed"] for r in records], [3, 4, 5])
+        self.assertEqual([r["qc_reasons"] for r in records], [[], ["near_duplicate:exact_duplicate"]] + [["near_duplicate:exact_duplicate"]])
+        self.assertTrue(all(r["submission_eligible"] is False and r["hotspot_review"] == "unreviewed" for r in records))
+        self.assertTrue((self.cache / "runs/chain1-s3-l60-a1/generation/audit.json").is_file())    # the container-side run exists
+
+    def test_batch_entrypoint_refuses_a_missing_budget_before_launching_anything(self):
+        import types
+        launched = []
+        self.module.generate_current = types.SimpleNamespace(remote=lambda *a: launched.append(a))
+        for budget in ({"max_designs": 0, "max_gpu_seconds": 100.0}, {"max_designs": 2, "max_gpu_seconds": 0.0}):
+            with self.assertRaises(ValueError):
+                self.module.main.info.raw_f(stage="batch", batch_id="nb", seeds="1", lengths="60", option="A",
+                                            out=str(self.dir / "nb"), **budget)
+        self.assertEqual(launched, [])
+
+    def test_batch_entrypoint_runs_the_free_input_checks_before_launching_anything(self):
+        import types
+        launched = []
+        self.module.generate_current = types.SimpleNamespace(remote=lambda *a: launched.append(a))
+        with self.assertRaises(ValueError):          # hotspot 25 has no coordinates: only the dry run can know that
+            self.module.main.info.raw_f(stage="batch", batch_id="pre", seeds="1", lengths="60", hotspots="25,100",
+                                        hotspot_source="test", max_designs=2, max_gpu_seconds=100.0, out=str(self.dir / "pre"))
+        self.assertEqual(launched, [])
+        self.assertFalse((self.dir / "pre/state.json").exists())
+
+    def test_the_real_functions_archive_is_readable_by_the_batch_engine(self):
+        from binder_campaign import batch
+        result = self.call()
+        folder = self.dir / "extract"
+        model, audit = batch._extract(result["archive"], "run-one", folder)
+        sequence, coords = batch._gate_inputs(folder, audit)
+        self.assertEqual((len(sequence), len(coords)), (60, 60))
 
     def test_a_used_run_id_is_refused(self):
         self.call()

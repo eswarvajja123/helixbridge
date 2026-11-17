@@ -88,8 +88,35 @@ modal billing summary
 
 Write the balance difference next to the run in `docs/experiment-template.csv`.
 
+## Stage C — Task 2.5: a small budget-capped batch
+
+Only after Stage B passes. Plan it for free first; it prints every design, the budget, and the exact Modal command to run:
+
+```bash
+python pipeline/scripts/run-il7ra-generation.py plan --batch-id eswar-b1 --seeds 43,44,45 --lengths 50,60,70 --option A --max-designs 6 --max-gpu-seconds 900
+```
+
+Then run the command it prints (it looks like this):
+
+```bash
+modal run modal_current.py --stage batch --batch-id eswar-b1 --seeds 43,44,45 --lengths 50,60,70 --option A --max-designs 6 --max-gpu-seconds 900 --max-failures 2
+```
+
+How the budget works:
+- `--max-designs` and `--max-gpu-seconds` are **required**. The batch stops before launching a design once either cap is reached, and after `--max-failures` failures.
+- The GPU seconds are the function's own count. Modal bills container time, which is longer, so set the cap lower than your real limit and check `modal billing summary`.
+- Designs run one after another, so a small batch takes several minutes.
+
+If it stops or you press Ctrl-C, run the **same command again** to resume: finished designs are skipped. It refuses a changed configuration (only the caps may change). Failed designs are not retried unless you add `--retry-failed`; a design interrupted mid-call is reported and not relaunched unless you add `--retry-interrupted` (it may already have been billed).
+
+Results are in `results\batch-eswar-b1\`: `batch-report.json` (counts, failures, GPU seconds), `candidates.json` (every design, including ones dropped as near-duplicates, each unreviewed and not eligible), `state.json`, and one folder per design. To print the summary again without launching anything:
+
+```bash
+python pipeline/scripts/run-il7ra-generation.py report --out results/batch-eswar-b1
+```
+
 ## What to send me
-- The text of `generate-current.json` (it holds no token) and your balance before and after.
+- The text of `generate-current.json` (Stage B) or `batch-report.json` (Stage C); neither holds a token. Also your balance before and after.
 - If anything failed: the **last 30 lines** of the error.
 - **Never** send `~/.modal.toml` or any token.
 

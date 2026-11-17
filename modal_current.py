@@ -8,7 +8,7 @@ No candidate here is a submission entry or a binding result.
   python pipeline/scripts/plan-modal-run.py --option A --seed 43            # free local check first
   modal run modal_current.py --stage generate --run-id eswar-cur-001 --seed 43 --option A
 
-Stages: generate (one GPU run, one design) and plan (the same local checks; but `modal run` starts the Modal app, which can
+Stages: generate (one GPU run, one design), batch (several designs, budget-capped and resumable) and plan (the same local checks; but `modal run` starts the Modal app, which can
 trigger an image build, so use plan-modal-run.py for a fully free check). Evaluation on the current target is Phase 3.
 """
 from pathlib import Path
@@ -109,12 +109,31 @@ def generate_current(run_id: str, seed: int, hotspots: list, hotspot_source: str
 
 @app.local_entrypoint()
 def main(stage: str = "plan", run_id: str = "", seed: int = 43, option: str = "", hotspots: str = "",
-         hotspot_source: str = "", length: int = 60, length_min: int = 0, length_max: int = 0):
-    """Stages: plan (local checks only) or generate (one paid GPU run). Never launches a batch."""
-    if stage not in {"plan", "generate"}:
-        raise ValueError("Choose plan or generate")
+         hotspot_source: str = "", length: int = 60, length_min: int = 0, length_max: int = 0,
+         batch_id: str = "", seeds: str = "", lengths: str = "", max_designs: int = 0, max_gpu_seconds: float = 0.0,
+         max_failures: int = 2, retry_failed: bool = False, retry_interrupted: bool = False, out: str = ""):
+    """Stages: plan (local checks), generate (one paid GPU run) or batch (several designs, budget-capped, resumable)."""
+    if stage not in {"plan", "generate", "batch"}:
+        raise ValueError("Choose plan, generate or batch")
     sys.path.insert(0, str(HERE / "pipeline"))
-    from binder_campaign.modal_plan import build_plan, local_dry_run
+    from binder_campaign.modal_plan import MANIFEST_RELATIVE, build_plan, local_dry_run, resolve_hotspots
+    if stage == "batch":
+        from binder_campaign.batch import make_config, parse_lengths, parse_seeds, run_batch
+        hotspot_list, source = resolve_hotspots(HERE, option, hotspots, hotspot_source)
+        cfg = make_config(batch_id, parse_seeds(seeds), parse_lengths(lengths), hotspot_list, source,
+                          max_designs=max_designs, max_gpu_seconds=max_gpu_seconds, max_failures=max_failures)
+        for low, high in cfg["lengths"]:           # free preflight for every length, before any spending
+            local_dry_run(HERE, build_plan(HERE, seed=cfg["seeds"][0], hotspots=",".join(map(str, cfg["hotspots"])),
+                                           hotspot_source=cfg["hotspot_source"], length=low if low == high else 60,
+                                           length_min=0 if low == high else low, length_max=0 if low == high else high))
+        folder = Path(out) if out else HERE / "results" / f"batch-{batch_id}"
+        print(json.dumps({"batch": cfg, "input_checks": "passed", "gpu_preference": GPU, "output": str(folder)}, indent=2))
+        report = run_batch(cfg, lambda t: generate_current.remote(t["run_id"], t["seed"], t["hotspots"], t["hotspot_source"],
+                                                                  t["binder_length"]),
+                           folder, HERE / MANIFEST_RELATIVE, retry_failed=retry_failed, retry_interrupted=retry_interrupted)
+        print(json.dumps({k: report[k] for k in ("stop_reason", "planned", "done", "kept", "dropped_by_dedup", "failed",
+                                                 "interrupted", "not_started", "gpu_seconds_reported", "gpu_seconds_note")}, indent=2))
+        return
     plan = build_plan(HERE, run_id=run_id, seed=seed, option=option, hotspots=hotspots, hotspot_source=hotspot_source,
                       length=length, length_min=length_min, length_max=length_max)
     checked = local_dry_run(HERE, plan)          # the same input checks the GPU run makes, before any spending
