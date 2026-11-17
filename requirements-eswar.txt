@@ -1,3 +1,6 @@
-# Extra dependency for Task 2.2 (backbone comparison in the dedup gate); everything else is in the project requirements.
-# Used to run TM-align on CA traces. Imported only when coordinates are supplied.
+# Extra dependencies for the Phase 2 work in this repo; everything else is in the project requirements.
+# Backbone comparison in the dedup gate (TM-align on CA traces). Imported only when coordinates are supplied.
 tmtools==0.3.0
+# Optional, test-only: lets tests/test_generation_script.py run rfd4-generate.py end to end on a CPU. Same version the Modal image pins.
+# Those tests skip themselves if it is missing.
+biotite==1.6.0

@@ -22,8 +22,13 @@ def _decision_dict(decision):
     return decision.as_dict() if hasattr(decision, "as_dict") else dict(decision)
 
 
-def import_current(audit_path, target_manifest, output, dedup_decision=None):
-    """Write one candidate record for a generation audit. `dedup_decision` is a dedup.Decision (or its dict)."""
+def import_current(audit_path, target_manifest, output, dedup_decision=None, require_reviewed_hotspots=False):
+    """Write one candidate record for a generation audit.
+
+    `dedup_decision` is a dedup.Decision (or its dict). With `require_reviewed_hotspots=True`, a design made from
+    unreviewed hotspots gets the QC reason `hotspots_not_reviewed`, which keeps it out of export_draft until the
+    epitope has been reviewed. The default only records the status.
+    """
     audit_path, target_manifest, output = Path(audit_path), Path(target_manifest), Path(output)
     if output.exists():
         raise ValueError("Use a fresh output file")
@@ -55,6 +60,9 @@ def import_current(audit_path, target_manifest, output, dedup_decision=None):
     if decision is not None and not decision["kept"]:
         reasons.append("near_duplicate:" + decision["reason"])
     source = reference.get("hotspot_source")
+    hotspot_review = "reviewed" if str(source).startswith("reviewed_by_") else "unreviewed"
+    if require_reviewed_hotspots and hotspot_review != "reviewed":
+        reasons.append("hotspots_not_reviewed")
     identity = digest(audit_path)[:12]
     record = {
         "schema_version": SCHEMA_VERSION,
@@ -64,8 +72,7 @@ def import_current(audit_path, target_manifest, output, dedup_decision=None):
         "campaign_kind": "competition_campaign", "seed": audit["seed"],
         "binder_length_requested": audit["binder_length_requested"],
         "hotspots_uniprot": reference["hotspots_uniprot"], "hotspot_source": source,
-        # information only: a design from unreviewed hotspots is not blocked, but it is visible
-        "hotspot_review": "reviewed" if str(source).startswith("reviewed_by_") else "unreviewed",
+        "hotspot_review": hotspot_review,
         "construct": {"uniprot": target["uniprot"], "start": target["start"], "end": target["end"],
                       "target_sequence_sha256": target.get("sequence_sha256"),
                       "construct_status": target.get("construct_status")},

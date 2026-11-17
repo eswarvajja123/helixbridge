@@ -1,0 +1,10 @@
+--- a/pipeline/binder_campaign/candidates.py
++++ b/pipeline/binder_campaign/candidates.py
+@@ -3,6 +3,7 @@
+ import json
+ from pathlib import Path
+ from .runner import digest, write_json
++from .current_candidates import import_current  # noqa: F401  (re-export; implemented in current_candidates.py)
+ 
+ ALPHABET = set("ACDEFGHIKLMNPQRSTVWY")
+ 

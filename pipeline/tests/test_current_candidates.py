@@ -96,6 +96,27 @@ class ImportCurrentTests(unittest.TestCase):
         self.make_audit("two", source="reviewed_by_samyuktha_2026-11-18")
         self.assertEqual(self.run_import("two")["hotspot_review"], "reviewed")
 
+    def test_unreviewed_hotspots_are_only_marked_by_default(self):
+        record = self.run_import()
+        self.assertEqual((record["hotspot_review"], record["qc_reasons"]), ("unreviewed", []))
+
+    def test_unreviewed_hotspots_can_be_blocked(self):
+        from binder_campaign.candidates import export_draft
+        record = self.run_import(require_reviewed_hotspots=True)
+        self.assertEqual(record["qc_reasons"], ["hotspots_not_reviewed"])
+        records = self.dir / "one-records.json"
+        data = json.loads(records.read_text())
+        data["candidates"][0].update(novelty_review="passed", independent_prediction_status="reviewed",
+                                     screen_status="approximation_reviewed")   # everything else reviewed...
+        records.write_text(json.dumps(data))
+        with self.assertRaises(ValueError):                                      # ...yet the export is still refused
+            export_draft(records, self.dir / "draft.csv", [record["candidate_id"]])
+
+    def test_reviewed_hotspots_pass_the_blocking_option(self):
+        self.make_audit("two", source="reviewed_by_samyuktha_2026-11-18")
+        record = self.run_import("two", require_reviewed_hotspots=True)
+        self.assertEqual((record["hotspot_review"], record["qc_reasons"]), ("reviewed", []))
+
     def test_output_file_has_the_candidate_list(self):
         self.run_import()
         written = json.loads((self.dir / "one-records.json").read_text())
