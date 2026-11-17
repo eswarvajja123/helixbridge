@@ -130,7 +130,7 @@ def third_party(path):
 class ImageAndPinTests(unittest.TestCase):
     def test_pins_and_build_checks_are_in_the_image(self):
         source = MODULE.read_text()
-        for needed in ("'torch==2.11.0'", "'esm==3.4.1.post1'", "'huggingface-hub'", "uv==0.12.9", "Python.h",
+        for needed in ("'torch==2.11.0'", "'esm==3.4.1.post1'", "'biopython==1.88'", "'huggingface-hub'", "uv==0.12.9", "Python.h",
                        "gcc -fsyntax-only", "import triton", "from esm.models.esmfold2 import", "build-essential"):
             self.assertIn(needed, source, needed)
 

@@ -37,7 +37,7 @@ base = modal.Image.debian_slim(python_version="3.12").apt_install("git", "build-
 image = (
     base.run_commands(
         # esm 3.4.1.post1 needs torch >= 2.11.0 and < 2.12.0; 2.11.0 is the only release in that range (CUDA 13.0 libraries)
-        "uv pip install --system 'torch==2.11.0' 'esm==3.4.1.post1' 'huggingface-hub'",
+        "uv pip install --system 'torch==2.11.0' 'esm==3.4.1.post1' 'biopython==1.88' 'huggingface-hub'",
         # The fused kernels are compiled by Triton at run time. The team's first cluster run failed on a missing Python.h,
         # so the build itself proves the headers exist and a C compiler can use them.
         "python -c \"import os, sysconfig; p = os.path.join(sysconfig.get_path('include'), 'Python.h'); assert os.path.exists(p), p\"",

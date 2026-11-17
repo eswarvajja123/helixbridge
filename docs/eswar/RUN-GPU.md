@@ -11,7 +11,7 @@ git clone https://github.com/RishyanthReddy/helixbridge helixbridge-team
 cd helixbridge-team
 git remote add eswar https://github.com/eswarvajja123/helixbridge
 git fetch eswar main
-git checkout eswar/main -- pipeline docs/eswar requirements-eswar.txt modal_current.py modal_esmfold2.py
+git checkout eswar/main -- pipeline docs/eswar requirements-eswar.txt modal_current.py modal_esmfold2.py modal_evaluate.py
 ```
 
 That copies only my files into the team's folder (and stages them). **Do not commit or push from `helixbridge-team`.** If your repo is private, git asks for your GitHub login.
@@ -135,8 +135,40 @@ If the fast `fused` kernels fail (for example a Triton compile error), retry wit
 
 Known risks: the team's first cluster run failed because Triton could not find `Python.h`, so the image build now proves the headers exist and a C compiler can use them; if that build step fails, send me the error. Also untested: PyTorch's CUDA 13.0 libraries on Modal's hosts, and how long the 25 GB load from the Volume takes.
 
+## Stage E — Task 3.2: score many candidates with ESMFold2 and Boltz-2
+
+Only after Stage C (you need a `candidates.json` from a batch) and after **both** weight downloads in this workspace: `modal run modal_app.py --stage prepare` (Boltz-2, Stage A) and `modal run modal_esmfold2.py --stage prepare` (ESMFold2, Stage D). Prefer to run Stage D's single `qualify` fold first, so you know what one ESMFold2 fold costs.
+
+Plan it for free first. It repeats the container's input checks on your machine and prints the exact command:
+
+```bash
+python pipeline/scripts/evaluate-candidates.py plan --candidates results/batch-eswar-b1/candidates.json --eval-id eswar-e1 --max-calls 6 --max-gpu-seconds 1800
+```
+
+Then run the command it prints (it looks like this):
+
+```bash
+modal run modal_evaluate.py --stage evaluate --candidates results/batch-eswar-b1/candidates.json --eval-id eswar-e1 --predictors esmfold2,boltz2 --chunk-size 4 --max-calls 6 --max-gpu-seconds 1800 --max-failures 3
+```
+
+How it works:
+- Only candidates with **no QC reasons** are scored, so GPU time is not spent on near-duplicates; the skipped ones are listed with their reasons (`--include-flagged` overrides this).
+- Candidates are scored against the **current target (21-239)** with its target-only MSA. Both predictors report ipTM, pTM and ipSAE (PAE cutoff 10, distance cutoff 10). ESMFold2 uses the team's local approximation of the organizer screen; Boltz-2 uses the team's own `boltz-predict.py`.
+- Each call handles `--chunk-size` candidates. ESMFold2 loads its ~25 GB model **once per call**, so a larger chunk loads it less often (but a call must finish within its time limit; the maximum is 20).
+- `--max-calls` and `--max-gpu-seconds` are **required**; it also stops after `--max-failures` failed scores. GPU seconds are the function's own count and Modal bills more (loading, start-up), so keep the cap below your real limit and check `modal billing summary`.
+- A failure for one candidate never discards the others. Run the **same command again** to resume: finished pairs are skipped, and a changed candidate file or setting is refused. Failed pairs are retried only with `--retry-failed`; a call interrupted mid-way is reported, not relaunched, unless you add `--retry-interrupted`.
+- If the fast `fused` ESMFold2 kernels fail, add `--kernel-backend none` (or `cuequivariance`). The backend is part of the run's identity.
+
+Results are in `results\eval-eswar-e1\`: `evaluations.json` (your candidate records with the raw scores attached), `scores.csv` (one row per candidate and predictor), `evaluation-report.json`, `state.json`, and the structures and PAE files per candidate. To print the summary again without launching anything:
+
+```bash
+python pipeline/scripts/evaluate-candidates.py report --out results/eval-eswar-e1
+```
+
+**These are raw model outputs.** Nothing is ranked, thresholded or combined, ESMFold2 and Boltz-2 numbers are not on one scale, and the two models disagreed even on the natural IL-7/IL-7Rα pair in the team's earlier control. No score is a binding prediction, and `screen_status`, `novelty_review` and `submission_eligible` are left exactly as they were.
+
 ## What to send me
-- The text of `generate-current.json` (Stage B) `batch-report.json` (Stage C) or `esmfold2-qualify.json` (Stage D); none holds a token. Also your balance before and after.
+- The text of `generate-current.json` (Stage B) `batch-report.json` (Stage C) or `esmfold2-qualify.json` (Stage D) or `evaluation-report.json` plus `scores.csv` (Stage E); none holds a token. Also your balance before and after.
 - If anything failed: the **last 30 lines** of the error.
 - **Never** send `~/.modal.toml` or any token.
 
