@@ -160,7 +160,7 @@ def reachable_third_party(entry_modules):
 @unittest.skipUnless(AVAILABLE, "needs modal_evaluate.py, docs/eswar/phase1-data and the fixture")
 class ImageAndPinTests(unittest.TestCase):
     def test_every_import_the_esm_function_can_reach_is_provided_by_its_image(self):
-        provided = {"numpy": "esm==3.4.1.post1", "biotite": "esm==3.4.1.post1", "Bio": "biopython==1.88", "torch": "torch==2.11.0",
+        provided = {"numpy": "esm==3.4.1.post1", "biotite": "biotite==1.6.0", "Bio": "biopython==1.88", "torch": "torch==2.11.0",
                     "esm": "esm==3.4.1.post1", "huggingface_hub": "huggingface-hub"}
         source = MODULE.read_text()
         used = reachable_third_party(["modal_plan", "esm_eval", "scoring"])
@@ -176,13 +176,22 @@ class ImageAndPinTests(unittest.TestCase):
 
     def test_the_esm_image_recipe_matches_modal_esmfold2(self):
         ours, theirs = MODULE.read_text(), (ROOT / "modal_esmfold2.py").read_text()
-        for part in ("'torch==2.11.0' 'esm==3.4.1.post1' 'biopython==1.88' 'huggingface-hub'", "assert os.path.exists(p), p",
+        for part in ("-c /tmp/esm-constraints.txt 'torch==2.11.0' 'esm==3.4.1.post1' 'biopython==1.88' 'biotite==1.6.0' 'huggingface-hub'",
+                     "esm-image-constraints.txt", "assert os.path.exists(p), p",
                      "gcc -fsyntax-only", "from esm.models.esmfold2 import EsmFold2Model, ESMFold2InputBuilder, ProteinInput, "
                      "StructurePredictionInput; ", "import triton"):
             self.assertIn(part, ours, part)
             self.assertIn(part, theirs, part)
 
     @unittest.skipUnless(TEAM_MODAL.is_file(), "needs the team's modal_app.py")
+    def test_the_ccd_variable_points_at_the_file_not_the_folder(self):
+        self.assertIn('os.environ["ESMCFOLD_CCD_PATH"] = str(folder / "ccd.pkl")', MODULE.read_text())
+
+    def test_the_builder_receives_the_checkpoint_folder_and_the_ccd_file_is_named(self):
+        # asserted on the real call order in the container body
+        body = MODULE.read_text().split("def esmfold2_evaluate")[1].split("def boltz_evaluate")[0]
+        self.assertLess(body.index("ESMCFOLD_CCD_PATH"), body.index("ESMFold2InputBuilder(ccd_cache"))
+
     def test_the_boltz_image_and_scorer_commit_match_the_teams(self):
         theirs = TEAM_MODAL.read_text()
         self.assertIn('base.uv_pip_install("boltz==2.2.1", "huggingface-hub", "biopython")', theirs)

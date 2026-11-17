@@ -130,12 +130,13 @@ def third_party(path):
 class ImageAndPinTests(unittest.TestCase):
     def test_pins_and_build_checks_are_in_the_image(self):
         source = MODULE.read_text()
-        for needed in ("'torch==2.11.0'", "'esm==3.4.1.post1'", "'biopython==1.88'", "'huggingface-hub'", "uv==0.12.9", "Python.h",
+        for needed in ("'torch==2.11.0'", "'esm==3.4.1.post1'", "'biopython==1.88'", "'biotite==1.6.0'", "'huggingface-hub'",
+                       "-c /tmp/esm-constraints.txt", "esm-image-constraints.txt", "uv==0.12.9", "Python.h",
                        "gcc -fsyntax-only", "import triton", "from esm.models.esmfold2 import", "build-essential"):
             self.assertIn(needed, source, needed)
 
     def test_every_third_party_import_is_provided_by_the_image(self):
-        provides = {"numpy": "esm==3.4.1.post1", "biotite": "esm==3.4.1.post1", "torch": "torch==2.11.0",
+        provides = {"numpy": "esm==3.4.1.post1", "biotite": "biotite==1.6.0", "torch": "torch==2.11.0",
                     "esm": "esm==3.4.1.post1", "huggingface_hub": "huggingface-hub"}
         used = third_party(MODULE) | third_party(ROOT / "pipeline/binder_campaign/esm_eval.py")
         self.assertTrue(used)
@@ -143,6 +144,24 @@ class ImageAndPinTests(unittest.TestCase):
         source = MODULE.read_text()
         for package in used:
             self.assertIn(provides[package], source, package)
+
+    def test_the_constraints_file_freezes_exactly_the_versions_the_image_names(self):
+        constraints = ROOT / "docs/eswar/esm-image-constraints.txt"
+        self.assertTrue(constraints.is_file())
+        pinned = dict(line.split("==") for line in constraints.read_text().splitlines() if "==" in line and not line.startswith("#"))
+        for name, version in (("torch", "2.11.0"), ("esm", "3.4.1.post1"), ("biopython", "1.88"), ("biotite", "1.6.0"),
+                              ("triton", "3.6.0")):
+            self.assertEqual(pinned.get(name), version, name)
+        self.assertGreater(len(pinned), 100)                       # the whole resolved set, not just the top-level names
+        for name in ("numpy", "transformers", "huggingface-hub", "cuda-toolkit"):
+            self.assertIn(name, pinned)
+        source = MODULE.read_text()
+        for explicit in ("'torch==2.11.0'", "'esm==3.4.1.post1'", "'biopython==1.88'", "'biotite==1.6.0'"):
+            self.assertIn(explicit, source)                        # every explicit pin in the image appears in the constraints too
+
+    def test_the_ccd_variable_points_at_the_file_not_the_folder(self):
+        self.assertIn('os.environ["ESMCFOLD_CCD_PATH"] = str(folder / "ccd.pkl")', MODULE.read_text())
+        self.assertNotIn('os.environ["ESMCFOLD_CCD_PATH"] = str(folder)', MODULE.read_text())
 
     def test_the_smaller_gpu_is_left_out_and_the_choice_can_be_forced(self):
         source = MODULE.read_text()
@@ -285,7 +304,7 @@ class BodyTests(unittest.TestCase):
         by_kind = {c[0]: c for c in self.calls()}
         self.assertEqual(by_kind["from_pretrained"][1:], (str(self.folder), False, "cuda"))
         self.assertEqual(by_kind["set_kernel_backend"][1], "fused")
-        self.assertEqual(by_kind["builder"][1:], (str(self.folder), str(self.folder)))          # ccd path set before folding
+        self.assertEqual(by_kind["builder"][1:], (str(self.folder), str(self.folder / "ccd.pkl")))   # a FILE, as esm opens it
         _, inputs, settings = by_kind["fold"]
         self.assertEqual(inputs, [("A", self.target, True), ("B", self.binder, False)])         # target with MSA, binder without
         self.assertEqual(settings, {"num_loops": 20, "num_sampling_steps": 200, "num_diffusion_samples": 1, "seed": 5,

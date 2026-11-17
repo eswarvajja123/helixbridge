@@ -43,8 +43,8 @@ _ipsae = [f"git clone https://github.com/DunbrackLab/IPSAE.git {OPT}/IPSAE", f"g
 _local = lambda image: (image.add_local_dir(HERE / "pipeline", "/opt/pipeline", ignore=["data/", "__pycache__/", "*.pyc"])
                         .add_local_dir(HERE / "docs" / "eswar", "/opt/docs/eswar"))
 # Same recipe as modal_esmfold2.py (esm 3.4.1.post1 needs torch 2.11.0; Triton compiles C at run time, so the headers are checked)
-esm_image = _local(base.run_commands(
-    "uv pip install --system 'torch==2.11.0' 'esm==3.4.1.post1' 'biopython==1.88' 'huggingface-hub'",
+esm_image = _local(base.add_local_file(HERE / "docs" / "eswar" / "esm-image-constraints.txt", "/tmp/esm-constraints.txt", copy=True).run_commands(
+    "uv pip install --system -c /tmp/esm-constraints.txt 'torch==2.11.0' 'esm==3.4.1.post1' 'biopython==1.88' 'biotite==1.6.0' 'huggingface-hub'",
     "python -c \"import os, sysconfig; p = os.path.join(sysconfig.get_path('include'), 'Python.h'); assert os.path.exists(p), p\"",
     "printf '#include <Python.h>\\nint main(void){return 0;}\\n' > /tmp/header-check.c && "
     "gcc -fsyntax-only -I$(python -c \"import sysconfig; print(sysconfig.get_path('include'))\") /tmp/header-check.c",
@@ -136,7 +136,7 @@ def esmfold2_evaluate(request: dict):
     model = EsmFold2Model.from_pretrained(str(folder), load_esmc=False, device="cuda").eval()
     if model.esmc is None or model.config.esmc_config is None:
         raise ValueError("The checkpoint did not supply its expected bundled ESMC backbone")
-    os.environ["ESMCFOLD_CCD_PATH"] = str(folder)
+    os.environ["ESMCFOLD_CCD_PATH"] = str(folder / "ccd.pkl")      # a FILE: esm opens it as one if this is set before it is imported
     model.set_kernel_backend(backend)
     load_seconds = time.monotonic() - load_started
     builder = ESMFold2InputBuilder(ccd_cache=Path(folder))

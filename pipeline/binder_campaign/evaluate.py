@@ -22,6 +22,7 @@ import json
 import os
 from pathlib import Path
 import re
+import statistics
 import tarfile
 import time
 
@@ -223,6 +224,65 @@ def _extract_candidate(archive_bytes, run_id, cid, folder):
     return {name: digest(folder / name) for name in FILES}
 
 
+COMPARE_METRICS = (("iptm", lambda s: s.get("iptm")), ("ipsae_max", lambda s: (s.get("ipsae") or {}).get("max")))
+
+
+def _spread(values):
+    """min / median / max of a list of numbers, or None when there are none. Descriptive only."""
+    values = [v for v in values if isinstance(v, (int, float)) and not isinstance(v, bool)]
+    if not values:
+        return None
+    return {"n": len(values), "min": min(values), "median": statistics.median(values), "max": max(values)}
+
+
+def _done_score(item, predictor):
+    e = item["evaluations"].get(predictor) or {}
+    return e.get("score") if e.get("status") == "done" else None
+
+
+def comparison_rows(evaluated, predictors):
+    """One row per candidate, in the order of the candidate file (never sorted by score): each predictor's iptm and ipsae_max side by
+    side, plus the plain difference between the first two predictors where both finished. The difference is arithmetic, not a verdict."""
+    rows = []
+    for item in evaluated:
+        if "evaluation_skipped" in item:
+            continue
+        row = {"candidate_id": item["candidate_id"], "seed": item.get("seed"), "binder_length": len(item["sequence"])}
+        scores = {p: _done_score(item, p) for p in predictors}
+        for predictor in predictors:
+            for name, get in COMPARE_METRICS:
+                value = get(scores[predictor]) if scores[predictor] else None
+                row[f"{predictor}_{name}"] = value
+        if len(predictors) == 2:
+            first, second = predictors
+            for name, _ in COMPARE_METRICS:
+                a, b = row[f"{first}_{name}"], row[f"{second}_{name}"]
+                row[f"{first}_minus_{second}_{name}"] = None if a is None or b is None else round(a - b, 6)
+        rows.append(row)
+    return rows
+
+
+def pool_summary(evaluated, predictors):
+    """Spread of each raw metric over THIS pool of candidates. Describes the pool; says nothing about any design being good."""
+    out = {"by_predictor": {}, "paired_difference": {}}
+    for predictor in predictors:
+        scores = [s for s in (_done_score(i, predictor) for i in evaluated) if s]
+        out["by_predictor"][predictor] = {name: _spread([get(s) for s in scores]) for name, get in COMPARE_METRICS}
+    if len(predictors) == 2:
+        first, second = predictors
+        for name, get in COMPARE_METRICS:
+            diffs = []
+            for item in evaluated:
+                a, b = _done_score(item, first), _done_score(item, second)
+                if a and b and get(a) is not None and get(b) is not None:
+                    diffs.append(get(a) - get(b))
+            out["paired_difference"][f"{first}_minus_{second}_{name}"] = _spread(diffs)
+    out["note"] = ("Descriptive spread over this pool only. There is no supportable pass/fail threshold: the team's public pilot "
+                   "(outputs/) found negative controls scoring as high as binders, and its numeric gates are relative to a parent "
+                   "design. Disagreement between the two predictors is a reason for a person to look, not a verdict.")
+    return out
+
+
 def assemble(config, state, records, chosen, skipped, out_dir):
     out_dir = Path(out_dir)
     skipped_ids = {s["candidate_id"]: s["reasons"] for s in skipped}
@@ -257,6 +317,13 @@ def assemble(config, state, records, chosen, skipped, out_dir):
                 writer.writerow([item["candidate_id"], item.get("seed"), len(item["sequence"]), predictor, e["status"],
                                  s.get("iptm", ""), s.get("ptm", ""), ip.get("a_b", ""), ip.get("b_a", ""), ip.get("max", ""),
                                  ip.get("min_directional", ""), s.get("plddt_raw_mean") if s.get("plddt_raw_mean") is not None else ""])
+    rows = comparison_rows(evaluated, config["predictors"])
+    columns = list(rows[0]) if rows else ["candidate_id"]
+    with (out_dir / "comparison.csv").open("w", newline="") as stream:
+        writer = csv.DictWriter(stream, fieldnames=columns)
+        writer.writeheader()
+        for row in rows:
+            writer.writerow({k: ("" if v is None else v) for k, v in row.items()})
     per = {}
     for predictor in config["predictors"]:
         counts = {"done": 0, "failed": 0, "started": 0, "not_started": 0}
@@ -274,6 +341,7 @@ def assemble(config, state, records, chosen, skipped, out_dir):
               "gpu_seconds_reported": round(state["gpu_seconds"], 2),
               "gpu_seconds_note": "The function's own count; Modal bills container time, which is longer. Check billing.",
               "budget": {k: config[k] for k in ("max_calls", "max_gpu_seconds", "max_failures")},
+              "pool_summary": pool_summary(evaluated, config["predictors"]),
               "status_note": "Raw scores only. No threshold, ranking or combination; not a binding result."}
     write_json(out_dir / "evaluation-report.json", report)
     return report

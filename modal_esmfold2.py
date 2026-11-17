@@ -35,9 +35,9 @@ app = modal.App("helixbridge-esmfold2")
 cache = modal.Volume.from_name(VOLUME_NAME, create_if_missing=True)
 base = modal.Image.debian_slim(python_version="3.12").apt_install("git", "build-essential").pip_install("uv==0.12.9")
 image = (
-    base.run_commands(
+    base.add_local_file(HERE / "docs" / "eswar" / "esm-image-constraints.txt", "/tmp/esm-constraints.txt", copy=True).run_commands(
         # esm 3.4.1.post1 needs torch >= 2.11.0 and < 2.12.0; 2.11.0 is the only release in that range (CUDA 13.0 libraries)
-        "uv pip install --system 'torch==2.11.0' 'esm==3.4.1.post1' 'biopython==1.88' 'huggingface-hub'",
+        "uv pip install --system -c /tmp/esm-constraints.txt 'torch==2.11.0' 'esm==3.4.1.post1' 'biopython==1.88' 'biotite==1.6.0' 'huggingface-hub'",
         # The fused kernels are compiled by Triton at run time. The team's first cluster run failed on a missing Python.h,
         # so the build itself proves the headers exist and a C compiler can use them.
         "python -c \"import os, sysconfig; p = os.path.join(sysconfig.get_path('include'), 'Python.h'); assert os.path.exists(p), p\"",
@@ -135,7 +135,7 @@ def qualify_esmfold2(run_id: str, seed: int = 0, kernel_backend: str = "fused"):
     model = EsmFold2Model.from_pretrained(str(folder), load_esmc=False, device="cuda").eval()
     if model.esmc is None or model.config.esmc_config is None:
         raise ValueError("The checkpoint did not supply its expected bundled ESMC backbone")
-    os.environ["ESMCFOLD_CCD_PATH"] = str(folder)
+    os.environ["ESMCFOLD_CCD_PATH"] = str(folder / "ccd.pkl")      # a FILE: esm opens it as one if this is set before it is imported
     settings = dict(request["settings"])
     settings.pop("kernel_backend")
     model.set_kernel_backend(backend)

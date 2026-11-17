@@ -123,7 +123,7 @@ Independent of Stages B and C; do it after Stage A. ESMFold2 has never run on Mo
 modal run modal_esmfold2.py --stage prepare
 ```
 
-This downloads the pinned checkpoint (`biohub/ESMFold2` at one fixed revision, 11 files, 24.9 GiB) into the shared model Volume and checks **every file's size and SHA-256** against `docs/eswar/esmfold2-checkpoint-manifest.json`. It is a CPU job and takes a while. The first run also builds the image (PyTorch 2.11.0 with CUDA 13 libraries, several GB); check billing for the build. Add `--skip-hash` only for a quick size-only check.
+This downloads the pinned checkpoint (`biohub/ESMFold2` at one fixed revision, 11 files, 24.9 GiB) into the shared model Volume and checks **every file's size and SHA-256** against `docs/eswar/esmfold2-checkpoint-manifest.json`. It is a CPU job and takes a while. The first run also builds the image (PyTorch 2.11.0 with CUDA 13 libraries, several GB; every dependency is pinned in `docs/eswar/esm-image-constraints.txt`, 113 packages resolved on 17 Nov 2026); check billing for the build. Add `--skip-hash` only for a quick size-only check.
 
 ```bash
 modal run modal_esmfold2.py --stage qualify --run-id eswar-esm-001
@@ -159,13 +159,25 @@ How it works:
 - A failure for one candidate never discards the others. Run the **same command again** to resume: finished pairs are skipped, and a changed candidate file or setting is refused. Failed pairs are retried only with `--retry-failed`; a call interrupted mid-way is reported, not relaunched, unless you add `--retry-interrupted`.
 - If the fast `fused` ESMFold2 kernels fail, add `--kernel-backend none` (or `cuequivariance`). The backend is part of the run's identity.
 
-Results are in `results\eval-eswar-e1\`: `evaluations.json` (your candidate records with the raw scores attached), `scores.csv` (one row per candidate and predictor), `evaluation-report.json`, `state.json`, and the structures and PAE files per candidate. To print the summary again without launching anything:
+Results are in `results\eval-eswar-e1\`: `evaluations.json` (your candidate records with the raw scores attached), `scores.csv` (one row per candidate and predictor), `comparison.csv` (one row per candidate, the two predictors side by side plus their plain difference; rows stay in the order of your candidate file, never sorted by score), `evaluation-report.json` (including `pool_summary`: min, median and max of each raw metric over this pool), `state.json`, and the structures and PAE files per candidate. To print the summary again without launching anything:
 
 ```bash
 python pipeline/scripts/evaluate-candidates.py report --out results/eval-eswar-e1
 ```
 
-**These are raw model outputs.** Nothing is ranked, thresholded or combined, ESMFold2 and Boltz-2 numbers are not on one scale, and the two models disagreed even on the natural IL-7/IL-7Rα pair in the team's earlier control. No score is a binding prediction, and `screen_status`, `novelty_review` and `submission_eligible` are left exactly as they were.
+**These are raw model outputs.** Nothing is ranked, thresholded or combined (`comparison.csv` and `pool_summary` only lay the numbers side by side; the team's public pilot found negative controls scoring as high as binders, so no pass/fail line is supportable), ESMFold2 and Boltz-2 numbers are not on one scale, and the two models disagreed even on the natural IL-7/IL-7Rα pair in the team's earlier control. No score is a binding prediction, and `screen_status`, `novelty_review` and `submission_eligible` are left exactly as they were.
+
+## Optional: re-check the real ESMFold2 library on your machine (free, CPU)
+
+The test suite normally uses stand-ins for `esm`, `torch` and `huggingface_hub`. `pipeline/tests/test_real_esm.py` runs the **real** `esm` fold code with a tiny random-weight model instead (no GPU, no weights download, about 90 s), and checks that my validator and the real pinned ipSAE accept what it writes. It is skipped unless you point it at a Python that has the real libraries:
+
+```bash
+python -m venv esm-check
+esm-check/bin/pip install -c docs/eswar/esm-image-constraints.txt torch==2.11.0 esm==3.4.1.post1 biopython==1.88 biotite==1.6.0 huggingface-hub
+HELIXBRIDGE_ESM_PYTHON=esm-check/bin/python python -m unittest tests.test_real_esm
+```
+
+(On Windows use `esm-check\Scripts\python.exe`; run the last command from `pipeline/`. Set `HELIXBRIDGE_IPSAE` to a checkout of the pinned ipSAE to include the real scorer.) This proves the code path, **not** that the trained weights, the GPU `fused` kernels or the 25 GB load work on Modal; only Stage D proves that.
 
 ## What to send me
 - The text of `generate-current.json` (Stage B) `batch-report.json` (Stage C) or `esmfold2-qualify.json` (Stage D) or `evaluation-report.json` plus `scores.csv` (Stage E); none holds a token. Also your balance before and after.

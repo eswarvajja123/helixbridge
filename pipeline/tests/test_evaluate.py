@@ -1,6 +1,7 @@
 import copy
 import csv
 import hashlib
+import io
 import json
 from pathlib import Path
 import sys
@@ -337,6 +338,96 @@ class EngineTests(unittest.TestCase):
         self.candidates.write_text(json.dumps({"candidates": [record(1, flagged=True)]}))
         with self.assertRaisesRegex(ValueError, "No candidates"):
             self.go()
+
+
+class ComparisonTests(unittest.TestCase):
+    """comparison.csv and the pool summary: descriptive only, in file order, no ranking, no verdict."""
+
+    def setUp(self):
+        self.temp = tempfile.TemporaryDirectory()
+        self.addCleanup(self.temp.cleanup)
+        self.dir = Path(self.temp.name)
+        self.records = [record(i) for i in range(1, 5)] + [record(9, flagged=True)]
+        self.candidates = self.dir / "candidates.json"
+        self.candidates.write_text(json.dumps({"candidates": self.records}))
+        self.out = self.dir / "out"
+        self.iptm = {"esmfold2": {1: 0.5, 2: 0.9, 3: 0.3, 4: 0.7}, "boltz2": {1: 0.8, 2: 0.2, 3: 0.6, 4: 0.4}}   # neither is in order, on purpose
+
+    def fn(self, fail=()):
+        def run(request):
+            results, members = [], {}
+            for c in request["candidates"]:
+                index = int(c["id"].rsplit("-", 1)[1], 16)
+                if (request["predictor"], index) in fail:
+                    results.append({"id": c["id"], "status": "failed", "error": "scripted"})
+                    continue
+                value = self.iptm[request["predictor"]][index]
+                rows = [{**r, "ipsae": round(value / 2, 6) if r["type"] == "max" else r["ipsae"]} for r in ROWS]
+                score = build_score(request["predictor"], iptm=value, ptm=0.7, rows=rows, seconds=5.0, peak_reserved_mib=1.0,
+                                    plddt_raw_mean=0.8 if request["predictor"] == "esmfold2" else None, gpu="Fake")
+                results.append({"id": c["id"], "status": "ok", "sequence": c["sequence"], "score": score})
+                for name in EV.FILES:
+                    members[f"{request['run_id']}/{c['id']}/{name}"] = b"x"
+            return {"run_id": request["run_id"], "gpu": "Fake", "worker_seconds": 5.0, "results": results, "archive": D.archive(members)}
+        return run
+
+    def go(self, predictors=("esmfold2", "boltz2"), fail=()):
+        cfg = make_config("e1", list(predictors), 2, max_calls=50, max_gpu_seconds=1e6)
+        return run_evaluation(cfg, self.candidates, self.fn(fail), self.out, log=lambda *_: None)
+
+    def rows(self):
+        return list(csv.DictReader(io.StringIO((self.out / "comparison.csv").read_text())))
+
+    def test_rows_stay_in_file_order_whatever_the_scores_are(self):
+        self.go()
+        rows = self.rows()
+        self.assertEqual([r["candidate_id"] for r in rows], [r["candidate_id"] for r in self.records[:4]])      # flagged one is absent
+        values = [float(r["esmfold2_iptm"]) for r in rows]
+        self.assertEqual(values, [0.5, 0.9, 0.3, 0.7])
+        self.assertNotIn(values, (sorted(values), sorted(values, reverse=True)))     # in neither score order
+        self.assertEqual([float(r["boltz2_iptm"]) for r in rows], [0.8, 0.2, 0.6, 0.4])
+
+    def test_difference_is_plain_arithmetic(self):
+        self.go()
+        first = self.rows()[0]
+        self.assertAlmostEqual(float(first["esmfold2_minus_boltz2_iptm"]), -0.3, places=6)
+        self.assertAlmostEqual(float(first["esmfold2_minus_boltz2_ipsae_max"]), -0.15, places=6)
+
+    def test_a_failed_predictor_leaves_blanks_not_zeros(self):
+        self.go(fail={("boltz2", 2)})
+        row = self.rows()[1]
+        self.assertEqual((row["boltz2_iptm"], row["esmfold2_minus_boltz2_iptm"]), ("", ""))
+        self.assertEqual(float(row["esmfold2_iptm"]), 0.9)
+
+    def test_pool_summary_is_the_spread_and_carries_no_verdict(self):
+        report = self.go()
+        summary = report["pool_summary"]
+        esm = summary["by_predictor"]["esmfold2"]["iptm"]
+        self.assertEqual((esm["n"], esm["min"], esm["max"]), (4, 0.3, 0.9))
+        self.assertAlmostEqual(esm["median"], 0.6)
+        paired = summary["paired_difference"]["esmfold2_minus_boltz2_iptm"]
+        self.assertEqual(paired["n"], 4)
+        self.assertAlmostEqual(paired["min"], -0.3)
+        self.assertAlmostEqual(paired["max"], 0.7)
+        banned = {"rank", "ranking", "pass", "fail", "threshold_met", "recommended", "best", "good", "score_total", "combined"}
+        def keys(node):
+            if isinstance(node, dict):
+                for k, v in node.items():
+                    yield k.lower()
+                    yield from keys(v)
+        self.assertFalse(banned & set(keys(report)))
+        self.assertFalse(banned & {c.lower() for c in self.rows()[0]})
+        self.assertIn("no supportable pass/fail threshold", summary["note"])
+
+    def test_one_predictor_gives_no_difference_columns(self):
+        report = self.go(predictors=("boltz2",))
+        self.assertEqual(report["pool_summary"]["paired_difference"], {})
+        self.assertNotIn("esmfold2_minus_boltz2_iptm", self.rows()[0])
+
+    def test_empty_pool_summary_when_nothing_finished(self):
+        report = self.go(fail={("esmfold2", i) for i in range(1, 5)} | {("boltz2", i) for i in range(1, 5)})
+        self.assertIsNone(report["pool_summary"]["by_predictor"]["esmfold2"]["iptm"])
+        self.assertTrue(all(r["esmfold2_iptm"] == "" for r in self.rows()))
 
 
 if __name__ == "__main__":
