@@ -9,10 +9,13 @@ My files live in your repo; the team's `modal_app.py`, `binder_campaign/` and ex
 ```bash
 git clone https://github.com/RishyanthReddy/helixbridge helixbridge-team
 cd helixbridge-team
+git config core.autocrlf false
 git remote add eswar https://github.com/eswarvajja123/helixbridge
 git fetch eswar main
 git checkout eswar/main -- pipeline docs/eswar requirements-eswar.txt modal_current.py modal_esmfold2.py modal_evaluate.py
 ```
+
+**On Windows, run `git config core.autocrlf false` first (it is the first line above).** Several input files are checked against a SHA-256, and Git's default of converting line endings to CRLF changes their bytes: the first laptop run failed with `Reference input changed after preparation` for exactly this reason (17 Nov). If you already cloned, set the option and re-run the `git checkout` line so the files are rewritten with Unix line endings.
 
 That copies only my files into the team's folder (and stages them). **Do not commit or push from `helixbridge-team`.** If your repo is private, git asks for your GitHub login.
 
@@ -65,7 +68,7 @@ modal run modal_app.py --stage generate --run-id eswar-seed43-001 --seed 43
 modal run modal_app.py --stage evaluate --run-id eswar-seed43-001
 ```
 
-Compare with the team's verified run (`examples/verified-modal-run/summary.json`): 60-aa binder, ipTM about 0.945, max ipSAE about 0.78, generation about 58 s. Small differences are normal.
+Compare with the team's verified run (`examples/verified-modal-run/summary.json`): 60-aa binder, ipTM about 0.945, max ipSAE about 0.78, generation about 58 s. **Do not expect the same design.** Generation is stochastic, and the first laptop run (17 Nov, A100-40GB, seed 43) produced a different 60-aa binder with ipTM 0.775 and max ipSAE 0.376; the run time and memory matched (57.6 s, 2,564 MiB). What must hold is that all three steps finish, the binder is 60 residues and the numbers are finite. Whether seed 43 is reproducible on one GPU type is not yet known: repeat the generate step once with a new `--run-id` and compare sequences.
 
 ## Stage B — Task 2.4: one on-target design with the new script
 
