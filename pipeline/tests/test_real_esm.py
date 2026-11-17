@@ -67,6 +67,17 @@ class RealLibraryTests(unittest.TestCase):
         checks = validate_prediction(self.pae, self.cif, self.target, self.binder)
         self.assertEqual(checks["chains"], [{"id": "A", "length": len(self.target)}, {"id": "B", "length": len(self.binder)}])
 
+    def test_the_teams_pose_review_and_our_qc_read_the_real_exporters_structure(self):
+        """QC (Task 3.3) reads the real exporter's mmCIF with the team's pose_review: numbering, chains and atoms are as assumed."""
+        from binder_campaign import qc
+        path = self.out / "model.cif"
+        positions = list(range(21, 240))
+        pose, problems = qc.inspect_structure(path, "esmfold2", self.target, self.binder, positions)
+        self.assertEqual(problems, [])
+        self.assertEqual((len(pose["target_ca"]), len(pose["binder_ca"])), (len(self.target), len(self.binder)))
+        self.assertTrue(all(isinstance(c, int) and 21 <= c <= 239 for c in pose["target_contacts_lt_5A"]))
+        self.assertTrue(np.isfinite(pose["min_heavy_distance_A"]))
+
     def test_our_confidence_summary_accepts_the_real_values(self):
         summary = confidence_summary(np.full(10, self.result["plddt_mean"]), self.result["ptm"], self.result["iptm"])
         self.assertAlmostEqual(summary["iptm"], self.result["iptm"])

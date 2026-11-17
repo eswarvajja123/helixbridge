@@ -1,0 +1,302 @@
+{
+ "about": "TM-scores, aligned lengths and RMSDs written by the REAL USalign binary for CA-only backbones cut from the real verified RFD4/Boltz-2 files in examples/verified-modal-run. tests/test_diversity.py checks that tmtools reproduces them. TM-score \"a\" is normalised by the first structure, \"b\" by the second.",
+ "usalign": {
+  "source": "https://github.com/pylelab/USalign",
+  "commit": "23f14ffcf8647f2dc1c0e01043db3a7f3a661c28",
+  "build": "clang++ -std=c++11 -O3 -Wno-deprecated-declarations USalign.cpp",
+  "command": "USalign a.pdb b.pdb -mol prot",
+  "date": "2026-11-17"
+ },
+ "objects": {
+  "gen": {
+   "file": "generator.cif",
+   "chain": "B",
+   "slice": [
+    0,
+    60
+   ]
+  },
+  "boltz": {
+   "file": "boltz.cif",
+   "chain": "B",
+   "slice": [
+    0,
+    60
+   ]
+  },
+  "gen_first48": {
+   "file": "generator.cif",
+   "chain": "B",
+   "slice": [
+    0,
+    48
+   ]
+  },
+  "t0": {
+   "file": "generator.cif",
+   "chain": "A",
+   "slice": [
+    0,
+    60
+   ]
+  },
+  "t30": {
+   "file": "generator.cif",
+   "chain": "A",
+   "slice": [
+    30,
+    90
+   ]
+  },
+  "t60": {
+   "file": "generator.cif",
+   "chain": "A",
+   "slice": [
+    60,
+    120
+   ]
+  },
+  "t90": {
+   "file": "generator.cif",
+   "chain": "A",
+   "slice": [
+    90,
+    150
+   ]
+  },
+  "t120": {
+   "file": "generator.cif",
+   "chain": "A",
+   "slice": [
+    120,
+    180
+   ]
+  }
+ },
+ "pairs": [
+  {
+   "a": "gen",
+   "b": "boltz",
+   "tm_a": 0.99272,
+   "tm_b": 0.99272,
+   "aligned_length": 60,
+   "rmsd_A": 0.22
+  },
+  {
+   "a": "gen",
+   "b": "gen_first48",
+   "tm_a": 0.8,
+   "tm_b": 1.0,
+   "aligned_length": 48,
+   "rmsd_A": 0.0
+  },
+  {
+   "a": "gen",
+   "b": "t0",
+   "tm_a": 0.24676,
+   "tm_b": 0.24676,
+   "aligned_length": 34,
+   "rmsd_A": 4.1
+  },
+  {
+   "a": "gen",
+   "b": "t30",
+   "tm_a": 0.29257,
+   "tm_b": 0.29257,
+   "aligned_length": 41,
+   "rmsd_A": 3.97
+  },
+  {
+   "a": "gen",
+   "b": "t60",
+   "tm_a": 0.19749,
+   "tm_b": 0.19749,
+   "aligned_length": 21,
+   "rmsd_A": 3.07
+  },
+  {
+   "a": "gen",
+   "b": "t90",
+   "tm_a": 0.2597,
+   "tm_b": 0.2597,
+   "aligned_length": 32,
+   "rmsd_A": 3.65
+  },
+  {
+   "a": "gen",
+   "b": "t120",
+   "tm_a": 0.28188,
+   "tm_b": 0.28188,
+   "aligned_length": 33,
+   "rmsd_A": 3.8
+  },
+  {
+   "a": "boltz",
+   "b": "gen_first48",
+   "tm_a": 0.79452,
+   "tm_b": 0.99022,
+   "aligned_length": 48,
+   "rmsd_A": 0.22
+  },
+  {
+   "a": "boltz",
+   "b": "t0",
+   "tm_a": 0.24966,
+   "tm_b": 0.24966,
+   "aligned_length": 33,
+   "rmsd_A": 3.97
+  },
+  {
+   "a": "boltz",
+   "b": "t30",
+   "tm_a": 0.29066,
+   "tm_b": 0.29066,
+   "aligned_length": 41,
+   "rmsd_A": 4.02
+  },
+  {
+   "a": "boltz",
+   "b": "t60",
+   "tm_a": 0.19783,
+   "tm_b": 0.19783,
+   "aligned_length": 22,
+   "rmsd_A": 3.45
+  },
+  {
+   "a": "boltz",
+   "b": "t90",
+   "tm_a": 0.22653,
+   "tm_b": 0.22653,
+   "aligned_length": 27,
+   "rmsd_A": 3.22
+  },
+  {
+   "a": "boltz",
+   "b": "t120",
+   "tm_a": 0.27635,
+   "tm_b": 0.27635,
+   "aligned_length": 36,
+   "rmsd_A": 3.95
+  },
+  {
+   "a": "gen_first48",
+   "b": "t0",
+   "tm_a": 0.24521,
+   "tm_b": 0.22238,
+   "aligned_length": 25,
+   "rmsd_A": 3.76
+  },
+  {
+   "a": "gen_first48",
+   "b": "t30",
+   "tm_a": 0.29799,
+   "tm_b": 0.264,
+   "aligned_length": 28,
+   "rmsd_A": 3.61
+  },
+  {
+   "a": "gen_first48",
+   "b": "t60",
+   "tm_a": 0.21396,
+   "tm_b": 0.19605,
+   "aligned_length": 20,
+   "rmsd_A": 2.55
+  },
+  {
+   "a": "gen_first48",
+   "b": "t90",
+   "tm_a": 0.25924,
+   "tm_b": 0.23356,
+   "aligned_length": 25,
+   "rmsd_A": 3.2
+  },
+  {
+   "a": "gen_first48",
+   "b": "t120",
+   "tm_a": 0.28374,
+   "tm_b": 0.25961,
+   "aligned_length": 32,
+   "rmsd_A": 3.88
+  },
+  {
+   "a": "t0",
+   "b": "t30",
+   "tm_a": 0.5,
+   "tm_b": 0.5,
+   "aligned_length": 30,
+   "rmsd_A": 0.0
+  },
+  {
+   "a": "t0",
+   "b": "t60",
+   "tm_a": 0.31588,
+   "tm_b": 0.31588,
+   "aligned_length": 26,
+   "rmsd_A": 2.18
+  },
+  {
+   "a": "t0",
+   "b": "t90",
+   "tm_a": 0.52493,
+   "tm_b": 0.52493,
+   "aligned_length": 49,
+   "rmsd_A": 2.76
+  },
+  {
+   "a": "t0",
+   "b": "t120",
+   "tm_a": 0.28078,
+   "tm_b": 0.28078,
+   "aligned_length": 32,
+   "rmsd_A": 3.57
+  },
+  {
+   "a": "t30",
+   "b": "t60",
+   "tm_a": 0.5,
+   "tm_b": 0.5,
+   "aligned_length": 30,
+   "rmsd_A": 0.0
+  },
+  {
+   "a": "t30",
+   "b": "t90",
+   "tm_a": 0.42647,
+   "tm_b": 0.42647,
+   "aligned_length": 46,
+   "rmsd_A": 3.34
+  },
+  {
+   "a": "t30",
+   "b": "t120",
+   "tm_a": 0.42226,
+   "tm_b": 0.42226,
+   "aligned_length": 44,
+   "rmsd_A": 3.38
+  },
+  {
+   "a": "t60",
+   "b": "t90",
+   "tm_a": 0.5,
+   "tm_b": 0.5,
+   "aligned_length": 30,
+   "rmsd_A": 0.0
+  },
+  {
+   "a": "t60",
+   "b": "t120",
+   "tm_a": 0.31345,
+   "tm_b": 0.31345,
+   "aligned_length": 30,
+   "rmsd_A": 2.96
+  },
+  {
+   "a": "t90",
+   "b": "t120",
+   "tm_a": 0.5,
+   "tm_b": 0.5,
+   "aligned_length": 30,
+   "rmsd_A": 0.0
+  }
+ ]
+}

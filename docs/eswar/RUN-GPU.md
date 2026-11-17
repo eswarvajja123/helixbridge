@@ -167,6 +167,28 @@ python pipeline/scripts/evaluate-candidates.py report --out results/eval-eswar-e
 
 **These are raw model outputs.** Nothing is ranked, thresholded or combined (`comparison.csv` and `pool_summary` only lay the numbers side by side; the team's public pilot found negative controls scoring as high as binders, so no pass/fail line is supportable), ESMFold2 and Boltz-2 numbers are not on one scale, and the two models disagreed even on the natural IL-7/IL-7Rα pair in the team's earlier control. No score is a binding prediction, and `screen_status`, `novelty_review` and `submission_eligible` are left exactly as they were.
 
+## Stage F — Task 3.3: structure QC (free, CPU, no Modal)
+
+After Stage E. It reads the structures the earlier stages saved (the RFD4 generator pose and the ESMFold2 / Boltz-2 refolds) and checks each candidate: binder length 40–100, exactly one binder chain, close heavy-atom pairs (clash, below 2 Å), contact with the target, contact with a hotspot the design was conditioned on, and binder pose shift (generator vs each refold, and ESMFold2 vs Boltz-2, after aligning on the shared reference core 37–231).
+
+```bash
+python pipeline/scripts/qc-candidates.py --evaluation results/eval-eswar-e1 --batch-dir results/batch-eswar-b1 --out results/qc-eswar-q1
+```
+
+It writes `qc-candidates.json` (your records with `qc_reasons` filled in and a `qc` block of measurements; the originals are never changed), `qc.csv` and `qc-report.json` into the new `--out` folder. Each candidate is `flagged`, `no_flags` or `incomplete` (a structure is missing, so it is never reported clean).
+
+The limits are the team's own provisional ones (zero close pairs, pose within 2.5 Å of the generated pose and within 3.0 Å between the two refolds); the team recorded them as a consistency screen, not a validated threshold, and they are options on the command (`--max-close-pairs`, `--max-shift-generator`, `--max-shift-between`, `--min-contact-residues`, `--no-hotspot-requirement`). **No flags does not mean a good design**: the team's pilot had high-scoring non-binders with zero close pairs.
+
+## Stage G — Task 3.4: diversity report (free, CPU, no Modal)
+
+```bash
+python pipeline/scripts/diversity-report.py --records results/qc-eswar-q1/qc-candidates.json --evaluation results/eval-eswar-e1 --batch-dir results/batch-eswar-b1 --out results/diversity-eswar-d1
+```
+
+For every pair of designs, within each structure source (generator, ESMFold2, Boltz-2): fold similarity (TM-score of the binder backbones, with an 80 % coverage rule), site similarity (Jaccard overlap of the target residues each binder touches) and sequence identity; then groups at TM 0.5 / 0.6 / 0.7 and site Jaccard 0.3 / 0.5 / 0.7, as greedy complete-link and as connected components (both are reported, as the team did). Records with QC flags are left out unless you add `--include-flagged`. Output: `diversity.json`, `pairs.csv`, `groups.csv`.
+
+Any pool works: `--pool pool.json` with `{"target_sequence": ..., "positions": [...], "members": [{"id", "binder_sequence", "structure"}]}`. The TM-scores come from `tmtools` (TM-align), which matched the real USalign binary on 28 real backbone pairs (`pipeline/tests/fixtures/usalign_reference.json`), so no USalign build or container change is needed. The groups are descriptive, not protein families or binding predictions, and complete-link grouping depends on member order (sorted by id).
+
 ## Optional: re-check the real ESMFold2 library on your machine (free, CPU)
 
 The test suite normally uses stand-ins for `esm`, `torch` and `huggingface_hub`. `pipeline/tests/test_real_esm.py` runs the **real** `esm` fold code with a tiny random-weight model instead (no GPU, no weights download, about 90 s), and checks that my validator and the real pinned ipSAE accept what it writes. It is skipped unless you point it at a Python that has the real libraries:
