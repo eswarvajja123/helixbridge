@@ -11,7 +11,7 @@ git clone https://github.com/RishyanthReddy/helixbridge helixbridge-team
 cd helixbridge-team
 git remote add eswar https://github.com/eswarvajja123/helixbridge
 git fetch eswar main
-git checkout eswar/main -- pipeline docs/eswar requirements-eswar.txt modal_current.py
+git checkout eswar/main -- pipeline docs/eswar requirements-eswar.txt modal_current.py modal_esmfold2.py
 ```
 
 That copies only my files into the team's folder (and stages them). **Do not commit or push from `helixbridge-team`.** If your repo is private, git asks for your GitHub login.
@@ -115,8 +115,28 @@ Results are in `results\batch-eswar-b1\`: `batch-report.json` (counts, failures,
 python pipeline/scripts/run-il7ra-generation.py report --out results/batch-eswar-b1
 ```
 
+## Stage D — Task 3.1: qualify ESMFold2 (the competition's screening model)
+
+Independent of Stages B and C; do it after Stage A. ESMFold2 has never run on Modal, so this checks that it loads, folds one complex, and how much memory and time it needs. **It says nothing about how accurate ESMFold2 is.**
+
+```bash
+modal run modal_esmfold2.py --stage prepare
+```
+
+This downloads the pinned checkpoint (`biohub/ESMFold2` at one fixed revision, 11 files, 24.9 GiB) into the shared model Volume and checks **every file's size and SHA-256** against `docs/eswar/esmfold2-checkpoint-manifest.json`. It is a CPU job and takes a while. The first run also builds the image (PyTorch 2.11.0 with CUDA 13 libraries, several GB); check billing for the build. Add `--skip-hash` only for a quick size-only check.
+
+```bash
+modal run modal_esmfold2.py --stage qualify --run-id eswar-esm-001
+```
+
+This folds the verified 60-residue design against the current IL-7Rα target (21-239) with its target-only MSA, using the team's local approximation of the screen (20 loops, 200 sampling steps, one sample, seed 0, MSA depth 1024), on an A100-80GB (else an L40S; the 24 GB A10G is left out because ESMFold2 reached about 26 GiB on the team's cluster). Results: `results\eswar-esm-001\esmfold2-qualify.json`. Check `gpu`, `load_seconds`, `fold_seconds`, `peak_reserved_mib`, `ptm`, `iptm` and `versions`. It counts as qualified when the fold finished and the output validated (the run stops with an error otherwise).
+
+If the fast `fused` kernels fail (for example a Triton compile error), retry with `--kernel-backend none` (slower, pure PyTorch) or `--kernel-backend cuequivariance`. A run with a different backend is recorded as such and is not guaranteed to match the team's `fused` runs.
+
+Known risks: the team's first cluster run failed because Triton could not find `Python.h`, so the image build now proves the headers exist and a C compiler can use them; if that build step fails, send me the error. Also untested: PyTorch's CUDA 13.0 libraries on Modal's hosts, and how long the 25 GB load from the Volume takes.
+
 ## What to send me
-- The text of `generate-current.json` (Stage B) or `batch-report.json` (Stage C); neither holds a token. Also your balance before and after.
+- The text of `generate-current.json` (Stage B) `batch-report.json` (Stage C) or `esmfold2-qualify.json` (Stage D); none holds a token. Also your balance before and after.
 - If anything failed: the **last 30 lines** of the error.
 - **Never** send `~/.modal.toml` or any token.
 
