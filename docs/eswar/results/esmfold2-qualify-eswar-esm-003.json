@@ -1,0 +1,51 @@
+{
+  "run_id": "eswar-esm-003",
+  "metrics": {
+    "status": "ESMFold2 qualification on Modal; software check only, not accuracy, not a binding result",
+    "run_id": "eswar-esm-003",
+    "repo": "biohub/ESMFold2",
+    "revision": "69869f737beffec5294845ede23db5fc0b4f509e",
+    "checks": {
+      "chains": [
+        {
+          "id": "A",
+          "length": 219
+        },
+        {
+          "id": "B",
+          "length": 60
+        }
+      ],
+      "residues": 279
+    },
+    "plddt_raw_mean": 0.8884943723678589,
+    "ptm": 0.8850709199905396,
+    "iptm": 0.9491758346557617,
+    "settings": {
+      "num_loops": 20,
+      "num_sampling_steps": 200,
+      "num_diffusion_samples": 1,
+      "seed": 0,
+      "lm_dropout": 0.3,
+      "msa_max_depth": 1024,
+      "msa_column_mask_rate": 0.1,
+      "kernel_backend": "fused"
+    },
+    "kernel_backend": "fused",
+    "gpu": "NVIDIA A100-SXM4-80GB",
+    "load_seconds": 17.49,
+    "fold_seconds": 27.12,
+    "peak_allocated_mib": 25419.3134765625,
+    "peak_reserved_mib": 26272.0,
+    "versions": {
+      "torch": "2.11.0+cu130",
+      "esm": "3.4.1.post1",
+      "triton": "3.6.0"
+    },
+    "target_residues": 219,
+    "binder_residues": 60,
+    "msa_rows_requested": 1024,
+    "protocol_status": "local approximation of the organizer screen; exact implementation and parameters unconfirmed"
+  },
+  "modal_profile": "active CLI profile"
+}

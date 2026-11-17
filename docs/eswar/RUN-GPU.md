@@ -45,6 +45,10 @@ python pipeline/scripts/plan-modal-run.py --option A --seed 43
 
 It prints `"input_checks": "passed"` and the 14 generation settings. If it prints `REFUSED`, stop and send me the line.
 
+## 2b. Running from a cloud Claude Code session instead of your laptop
+
+It works, with three settings (all found 17 Nov): install the Modal client with proxy support (`pip install 'modal[api-proxy-support]'`, which adds `python-socks`), and allow these hosts in the environment's network settings: `api.modal.com`, `input-plane.us-east.modal.com` (function calls), `clobber.modal-storage.com` and `duot2hadvvkdh.cloudfront.net` (large results and volume downloads; the second is an opaque CDN name Modal may change). Without the last two, a GPU job can finish and its result still fail to download. Credentials belong in the environment's variables (`MODAL_TOKEN_ID`, `MODAL_TOKEN_SECRET`), never in chat.
+
 ## 3. Modal login and balance
 
 ```bash

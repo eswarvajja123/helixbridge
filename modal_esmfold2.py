@@ -96,9 +96,7 @@ def prepare_esmfold2(verify_hashes: bool = True):
             "seconds": round(time.monotonic() - started, 1)}
 
 
-@app.function(image=image, gpu=GPU, cpu=4, memory=65536, volumes={str(CACHE): cache}, timeout=1800, retries=0,
-              max_containers=1, scaledown_window=2)
-def qualify_esmfold2(run_id: str, seed: int = 0, kernel_backend: str = "fused"):
+def _qualify_body(run_id: str, seed: int = 0, kernel_backend: str = "fused"):
     """Fold the verified design against the current target on one GPU and report what it took."""
     import time
     sys.path.insert(0, str(OPT / "pipeline"))
@@ -162,12 +160,29 @@ def qualify_esmfold2(run_id: str, seed: int = 0, kernel_backend: str = "fused"):
         "load_seconds": round(loaded - started, 2), "fold_seconds": round(folded - loaded, 2),
         "peak_allocated_mib": torch.cuda.max_memory_allocated() / 1024 ** 2,
         "peak_reserved_mib": torch.cuda.max_memory_reserved() / 1024 ** 2,
-        "versions": {"torch": getattr(torch, "__version__", "unavailable"), "esm": _version("esm"), "triton": _version("triton")},
+        "versions": {"torch": str(getattr(torch, "__version__", "unavailable")), "esm": _version("esm"), "triton": _version("triton")},
         "target_residues": len(target), "binder_residues": len(binder), "msa_rows_requested": request["settings"]["msa_max_depth"],
         "protocol_status": request["protocol_status"]}
-    (out / "metrics.json").write_text(json.dumps(metrics, indent=2) + "\n")
+    metrics = json.loads(json.dumps(metrics))                       # plain Python types only: torch's own str/float subclasses cannot
+    (out / "metrics.json").write_text(json.dumps(metrics, indent=2) + "\n")   # be unpickled by a laptop that has no torch
     _commit()
     return {"run_id": run_id, "metrics": metrics, "archive": _archive(root)}
+
+
+@app.function(image=image, gpu=GPU, cpu=4, memory=65536, volumes={str(CACHE): cache}, timeout=1800, retries=0,
+              max_containers=1, scaledown_window=2)
+def qualify_esmfold2(run_id: str, seed: int = 0, kernel_backend: str = "fused"):
+    """Run the qualification; a failure comes back as plain text (type, message, traceback) instead of an exception object.
+
+    A raised PyTorch exception cannot be unpickled by a laptop that has no torch installed, which hides the real error."""
+    import traceback
+    try:
+        return _qualify_body(run_id, seed, kernel_backend)
+    except ValueError:
+        raise                                                      # our own refusals: plain, picklable, raised before any model load
+    except Exception as error:                                     # noqa: BLE001  (everything else must come back readable)
+        return {"run_id": run_id, "failed": {"type": type(error).__name__, "message": str(error)[:3000],
+                                             "traceback": traceback.format_exc()[-6000:]}}
 
 
 @app.local_entrypoint()
@@ -196,6 +211,10 @@ def main(stage: str = "prepare", run_id: str = "", seed: int = 0, kernel_backend
         raise ValueError("Refusing to overwrite an existing local result")
     folder.mkdir(parents=True, exist_ok=True)
     result = qualify_esmfold2.remote(run_id, seed, kernel_backend)
+    if "failed" in result:
+        (folder / "esmfold2-qualify-failed.json").write_text(json.dumps(result, indent=2) + "\n")
+        raise RuntimeError(f"ESMFold2 qualification failed on the GPU: {result['failed']['type']}: {result['failed']['message']}\n"
+                           + result["failed"]["traceback"])
     archive_path.write_bytes(result.pop("archive"))
     result["modal_profile"] = os.environ.get("MODAL_PROFILE", "active CLI profile")
     (folder / "esmfold2-qualify.json").write_text(json.dumps(result, indent=2) + "\n")

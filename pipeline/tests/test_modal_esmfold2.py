@@ -359,6 +359,55 @@ class BodyTests(unittest.TestCase):
             self.qualify()
         self.assertFalse((self.cache / "runs/q1").exists())
 
+    def break_the_model(self, error):
+        self.qualify(run_id="warm")                                       # imports the stand-in esm package
+        cls = sys.modules["esm.models.esmfold2"].EsmFold2Model
+        original = cls.from_pretrained
+        def broken(*a, **k):
+            raise error
+        cls.from_pretrained = staticmethod(broken)
+        self.addCleanup(setattr, cls, "from_pretrained", original)
+
+    def test_the_returned_metrics_are_plain_python_types_so_a_laptop_without_torch_can_read_them(self):
+        """Seen on the first GPU run: torch.__version__ is a str subclass defined by torch, and unpickling it needs torch locally."""
+        self.qualify(run_id="warm2")
+        torch_module = sys.modules["torch"]
+        torch_module.__version__ = type("TorchVersion", (str,), {})("2.11.0+cu130")
+        result = self.qualify(run_id="plain1")
+        def check(node, path="metrics"):
+            if isinstance(node, dict):
+                for k, v in node.items():
+                    check(v, f"{path}.{k}")
+            elif isinstance(node, (list, tuple)):
+                for i, v in enumerate(node):
+                    check(v, f"{path}[{i}]")
+            else:
+                self.assertIn(type(node), (str, int, float, bool, type(None)), f"{path} is a {type(node).__module__}.{type(node).__name__}")
+        check(result["metrics"])
+        self.assertEqual(result["metrics"]["versions"]["torch"], "2.11.0+cu130")
+        self.assertIs(type(result["metrics"]["versions"]["torch"]), str)
+
+    def test_a_model_failure_comes_back_as_readable_text_not_an_exception_object(self):
+        """A raised torch exception cannot be unpickled by a laptop without torch (seen on the first GPU run), so it must not escape."""
+        self.break_the_model(RuntimeError("CUDA out of memory. Tried to allocate 3.00 GiB"))
+        result = self.qualify(run_id="oom1")
+        self.assertEqual(set(result), {"run_id", "failed"})
+        self.assertEqual(result["failed"]["type"], "RuntimeError")
+        self.assertIn("CUDA out of memory", result["failed"]["message"])
+        self.assertIn("Traceback", result["failed"]["traceback"])
+        self.assertFalse((self.folder.parent.parent / "runs" / "oom1" / "esmfold2" / "model.cif").exists())
+
+    def test_entrypoint_turns_a_remote_failure_into_a_clear_error_and_saves_it(self):
+        import types
+        self.break_the_model(RuntimeError("CUDA out of memory"))
+        self.module.qualify_esmfold2 = types.SimpleNamespace(remote=self.module.qualify_esmfold2.local)
+        raw = self.module.main.info.raw_f
+        with self.assertRaisesRegex(RuntimeError, "qualification failed on the GPU: RuntimeError: CUDA out of memory"):
+            raw(stage="qualify", run_id="oom2")
+        saved = json.loads((self.dir / "results/oom2/esmfold2-qualify-failed.json").read_text())
+        self.assertEqual(saved["failed"]["type"], "RuntimeError")
+        self.assertFalse((self.dir / "results/oom2/esmfold2-qualify.tar.gz").exists())
+
     def test_a_used_run_id_is_refused(self):
         self.qualify()
         with self.assertRaisesRegex(ValueError, "already exists"):

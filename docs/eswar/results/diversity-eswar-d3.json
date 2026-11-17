@@ -1,0 +1,1766 @@
+{
+  "schema": 1,
+  "sources": {
+    "generator": {
+      "source": "generator",
+      "members": [
+        "il7ra-rfd4-232e2beaa213",
+        "il7ra-rfd4-36ac51c93f6f",
+        "il7ra-rfd4-8a71ff875483",
+        "il7ra-rfd4-9a3a923fbb19",
+        "il7ra-rfd4-f8f399f53f79",
+        "il7ra-rfd4-feb1ba5da81f"
+      ],
+      "excluded": [],
+      "pairs": [
+        {
+          "left": "il7ra-rfd4-232e2beaa213",
+          "right": "il7ra-rfd4-36ac51c93f6f",
+          "tm_left": 0.4044128540846978,
+          "tm_right": 0.444081822808857,
+          "aligned_length": 47,
+          "rmsd_A": 3.4663752647837267,
+          "site_jaccard": 0.782608695652174,
+          "shared_contact_residues": 18,
+          "sequence_identity": 0.36666666666666664
+        },
+        {
+          "left": "il7ra-rfd4-232e2beaa213",
+          "right": "il7ra-rfd4-8a71ff875483",
+          "tm_left": 0.4357807226749667,
+          "tm_right": 0.4880911832192536,
+          "aligned_length": 46,
+          "rmsd_A": 3.426493792656736,
+          "site_jaccard": 0.5454545454545454,
+          "shared_contact_residues": 12,
+          "sequence_identity": 0.3
+        },
+        {
+          "left": "il7ra-rfd4-232e2beaa213",
+          "right": "il7ra-rfd4-9a3a923fbb19",
+          "tm_left": 0.447968581723747,
+          "tm_right": 0.447968581723747,
+          "aligned_length": 47,
+          "rmsd_A": 3.4779829624948433,
+          "site_jaccard": 0.5384615384615384,
+          "shared_contact_residues": 14,
+          "sequence_identity": 0.21428571428571427
+        },
+        {
+          "left": "il7ra-rfd4-232e2beaa213",
+          "right": "il7ra-rfd4-f8f399f53f79",
+          "tm_left": 0.3917679554063905,
+          "tm_right": 0.4939928206927238,
+          "aligned_length": 36,
+          "rmsd_A": 2.3308399799900212,
+          "site_jaccard": 0.6,
+          "shared_contact_residues": 15,
+          "sequence_identity": 0.34
+        },
+        {
+          "left": "il7ra-rfd4-232e2beaa213",
+          "right": "il7ra-rfd4-feb1ba5da81f",
+          "tm_left": 0.40551494263630394,
+          "tm_right": 0.505052249528862,
+          "aligned_length": 44,
+          "rmsd_A": 3.3193547069947478,
+          "site_jaccard": 0.5217391304347826,
+          "shared_contact_residues": 12,
+          "sequence_identity": 0.34
+        },
+        {
+          "left": "il7ra-rfd4-36ac51c93f6f",
+          "right": "il7ra-rfd4-8a71ff875483",
+          "tm_left": 0.3909488203889727,
+          "tm_right": 0.3909488203889727,
+          "aligned_length": 35,
+          "rmsd_A": 2.349282314654454,
+          "site_jaccard": 0.6086956521739131,
+          "shared_contact_residues": 14,
+          "sequence_identity": 0.15
+        },
+        {
+          "left": "il7ra-rfd4-36ac51c93f6f",
+          "right": "il7ra-rfd4-9a3a923fbb19",
+          "tm_left": 0.5004015796014621,
+          "tm_right": 0.45741439076487,
+          "aligned_length": 48,
+          "rmsd_A": 2.6098366540890607,
+          "site_jaccard": 0.72,
+          "shared_contact_residues": 18,
+          "sequence_identity": 0.31666666666666665
+        },
+        {
+          "left": "il7ra-rfd4-36ac51c93f6f",
+          "right": "il7ra-rfd4-f8f399f53f79",
+          "tm_left": 0.36279394864593423,
+          "tm_right": 0.40272859088822976,
+          "aligned_length": 33,
+          "rmsd_A": 2.4162014708967416,
+          "site_jaccard": 0.72,
+          "shared_contact_residues": 18,
+          "sequence_identity": 0.3
+        },
+        {
+          "left": "il7ra-rfd4-36ac51c93f6f",
+          "right": "il7ra-rfd4-feb1ba5da81f",
+          "tm_left": 0.38156749630226283,
+          "tm_right": 0.4196544691681017,
+          "aligned_length": 37,
+          "rmsd_A": 2.8095993923763123,
+          "site_jaccard": 0.5833333333333334,
+          "shared_contact_residues": 14,
+          "sequence_identity": 0.24
+        },
+        {
+          "left": "il7ra-rfd4-8a71ff875483",
+          "right": "il7ra-rfd4-9a3a923fbb19",
+          "tm_left": 0.4770819760014551,
+          "tm_right": 0.43685951351946994,
+          "aligned_length": 50,
+          "rmsd_A": 3.1205490921732455,
+          "site_jaccard": 0.7142857142857143,
+          "shared_contact_residues": 15,
+          "sequence_identity": 0.4
+        },
+        {
+          "left": "il7ra-rfd4-8a71ff875483",
+          "right": "il7ra-rfd4-f8f399f53f79",
+          "tm_left": 0.4159058094014196,
+          "tm_right": 0.47683946626687385,
+          "aligned_length": 33,
+          "rmsd_A": 2.7887077079715445,
+          "site_jaccard": 0.6363636363636364,
+          "shared_contact_residues": 14,
+          "sequence_identity": 0.28
+        },
+        {
+          "left": "il7ra-rfd4-8a71ff875483",
+          "right": "il7ra-rfd4-feb1ba5da81f",
+          "tm_left": 0.665859833487512,
+          "tm_right": 0.7612984518339969,
+          "aligned_length": 50,
+          "rmsd_A": 1.7171234734499785,
+          "site_jaccard": 0.8235294117647058,
+          "shared_contact_residues": 14,
+          "sequence_identity": 0.3
+        },
+        {
+          "left": "il7ra-rfd4-9a3a923fbb19",
+          "right": "il7ra-rfd4-f8f399f53f79",
+          "tm_left": 0.37946109880893814,
+          "tm_right": 0.4684934056324679,
+          "aligned_length": 41,
+          "rmsd_A": 3.2953923636772084,
+          "site_jaccard": 0.75,
+          "shared_contact_residues": 18,
+          "sequence_identity": 0.38
+        },
+        {
+          "left": "il7ra-rfd4-9a3a923fbb19",
+          "right": "il7ra-rfd4-feb1ba5da81f",
+          "tm_left": 0.40541729079344674,
+          "tm_right": 0.49647484690805427,
+          "aligned_length": 45,
+          "rmsd_A": 3.310761745033006,
+          "site_jaccard": 0.6818181818181818,
+          "shared_contact_residues": 15,
+          "sequence_identity": 0.34
+        },
+        {
+          "left": "il7ra-rfd4-f8f399f53f79",
+          "right": "il7ra-rfd4-feb1ba5da81f",
+          "tm_left": 0.436341969988826,
+          "tm_right": 0.436341969988826,
+          "aligned_length": 43,
+          "rmsd_A": 3.3201538031289495,
+          "site_jaccard": 0.6818181818181818,
+          "shared_contact_residues": 15,
+          "sequence_identity": 0.16
+        }
+      ],
+      "groups": {
+        "fold": {
+          "0.5": {
+            "complete_link_greedy": [
+              [
+                "il7ra-rfd4-232e2beaa213"
+              ],
+              [
+                "il7ra-rfd4-36ac51c93f6f"
+              ],
+              [
+                "il7ra-rfd4-8a71ff875483",
+                "il7ra-rfd4-feb1ba5da81f"
+              ],
+              [
+                "il7ra-rfd4-9a3a923fbb19"
+              ],
+              [
+                "il7ra-rfd4-f8f399f53f79"
+              ]
+            ],
+            "connected_components": [
+              [
+                "il7ra-rfd4-232e2beaa213"
+              ],
+              [
+                "il7ra-rfd4-36ac51c93f6f"
+              ],
+              [
+                "il7ra-rfd4-8a71ff875483",
+                "il7ra-rfd4-feb1ba5da81f"
+              ],
+              [
+                "il7ra-rfd4-9a3a923fbb19"
+              ],
+              [
+                "il7ra-rfd4-f8f399f53f79"
+              ]
+            ]
+          },
+          "0.6": {
+            "complete_link_greedy": [
+              [
+                "il7ra-rfd4-232e2beaa213"
+              ],
+              [
+                "il7ra-rfd4-36ac51c93f6f"
+              ],
+              [
+                "il7ra-rfd4-8a71ff875483",
+                "il7ra-rfd4-feb1ba5da81f"
+              ],
+              [
+                "il7ra-rfd4-9a3a923fbb19"
+              ],
+              [
+                "il7ra-rfd4-f8f399f53f79"
+              ]
+            ],
+            "connected_components": [
+              [
+                "il7ra-rfd4-232e2beaa213"
+              ],
+              [
+                "il7ra-rfd4-36ac51c93f6f"
+              ],
+              [
+                "il7ra-rfd4-8a71ff875483",
+                "il7ra-rfd4-feb1ba5da81f"
+              ],
+              [
+                "il7ra-rfd4-9a3a923fbb19"
+              ],
+              [
+                "il7ra-rfd4-f8f399f53f79"
+              ]
+            ]
+          },
+          "0.7": {
+            "complete_link_greedy": [
+              [
+                "il7ra-rfd4-232e2beaa213"
+              ],
+              [
+                "il7ra-rfd4-36ac51c93f6f"
+              ],
+              [
+                "il7ra-rfd4-8a71ff875483"
+              ],
+              [
+                "il7ra-rfd4-9a3a923fbb19"
+              ],
+              [
+                "il7ra-rfd4-f8f399f53f79"
+              ],
+              [
+                "il7ra-rfd4-feb1ba5da81f"
+              ]
+            ],
+            "connected_components": [
+              [
+                "il7ra-rfd4-232e2beaa213"
+              ],
+              [
+                "il7ra-rfd4-36ac51c93f6f"
+              ],
+              [
+                "il7ra-rfd4-8a71ff875483"
+              ],
+              [
+                "il7ra-rfd4-9a3a923fbb19"
+              ],
+              [
+                "il7ra-rfd4-f8f399f53f79"
+              ],
+              [
+                "il7ra-rfd4-feb1ba5da81f"
+              ]
+            ]
+          }
+        },
+        "site": {
+          "0.3": {
+            "complete_link_greedy": [
+              [
+                "il7ra-rfd4-232e2beaa213",
+                "il7ra-rfd4-36ac51c93f6f",
+                "il7ra-rfd4-8a71ff875483",
+                "il7ra-rfd4-9a3a923fbb19",
+                "il7ra-rfd4-f8f399f53f79",
+                "il7ra-rfd4-feb1ba5da81f"
+              ]
+            ],
+            "connected_components": [
+              [
+                "il7ra-rfd4-232e2beaa213",
+                "il7ra-rfd4-36ac51c93f6f",
+                "il7ra-rfd4-8a71ff875483",
+                "il7ra-rfd4-9a3a923fbb19",
+                "il7ra-rfd4-f8f399f53f79",
+                "il7ra-rfd4-feb1ba5da81f"
+              ]
+            ]
+          },
+          "0.5": {
+            "complete_link_greedy": [
+              [
+                "il7ra-rfd4-232e2beaa213",
+                "il7ra-rfd4-36ac51c93f6f",
+                "il7ra-rfd4-8a71ff875483",
+                "il7ra-rfd4-9a3a923fbb19",
+                "il7ra-rfd4-f8f399f53f79",
+                "il7ra-rfd4-feb1ba5da81f"
+              ]
+            ],
+            "connected_components": [
+              [
+                "il7ra-rfd4-232e2beaa213",
+                "il7ra-rfd4-36ac51c93f6f",
+                "il7ra-rfd4-8a71ff875483",
+                "il7ra-rfd4-9a3a923fbb19",
+                "il7ra-rfd4-f8f399f53f79",
+                "il7ra-rfd4-feb1ba5da81f"
+              ]
+            ]
+          },
+          "0.7": {
+            "complete_link_greedy": [
+              [
+                "il7ra-rfd4-232e2beaa213",
+                "il7ra-rfd4-36ac51c93f6f"
+              ],
+              [
+                "il7ra-rfd4-8a71ff875483",
+                "il7ra-rfd4-9a3a923fbb19"
+              ],
+              [
+                "il7ra-rfd4-f8f399f53f79"
+              ],
+              [
+                "il7ra-rfd4-feb1ba5da81f"
+              ]
+            ],
+            "connected_components": [
+              [
+                "il7ra-rfd4-232e2beaa213",
+                "il7ra-rfd4-36ac51c93f6f",
+                "il7ra-rfd4-8a71ff875483",
+                "il7ra-rfd4-9a3a923fbb19",
+                "il7ra-rfd4-f8f399f53f79",
+                "il7ra-rfd4-feb1ba5da81f"
+              ]
+            ]
+          }
+        }
+      },
+      "summary": {
+        "fold": {
+          "0.5": {
+            "complete_link_greedy": {
+              "groups": 5,
+              "largest": 2,
+              "singletons": 4
+            },
+            "connected_components": {
+              "groups": 5,
+              "largest": 2,
+              "singletons": 4
+            }
+          },
+          "0.6": {
+            "complete_link_greedy": {
+              "groups": 5,
+              "largest": 2,
+              "singletons": 4
+            },
+            "connected_components": {
+              "groups": 5,
+              "largest": 2,
+              "singletons": 4
+            }
+          },
+          "0.7": {
+            "complete_link_greedy": {
+              "groups": 6,
+              "largest": 1,
+              "singletons": 6
+            },
+            "connected_components": {
+              "groups": 6,
+              "largest": 1,
+              "singletons": 6
+            }
+          }
+        },
+        "site": {
+          "0.3": {
+            "complete_link_greedy": {
+              "groups": 1,
+              "largest": 6,
+              "singletons": 0
+            },
+            "connected_components": {
+              "groups": 1,
+              "largest": 6,
+              "singletons": 0
+            }
+          },
+          "0.5": {
+            "complete_link_greedy": {
+              "groups": 1,
+              "largest": 6,
+              "singletons": 0
+            },
+            "connected_components": {
+              "groups": 1,
+              "largest": 6,
+              "singletons": 0
+            }
+          },
+          "0.7": {
+            "complete_link_greedy": {
+              "groups": 4,
+              "largest": 2,
+              "singletons": 2
+            },
+            "connected_components": {
+              "groups": 1,
+              "largest": 6,
+              "singletons": 0
+            }
+          }
+        }
+      },
+      "target_contacts": {
+        "il7ra-rfd4-232e2beaa213": [
+          100,
+          101,
+          102,
+          103,
+          104,
+          122,
+          124,
+          125,
+          158,
+          159,
+          160,
+          161,
+          162,
+          184,
+          210,
+          211,
+          212,
+          213,
+          214
+        ],
+        "il7ra-rfd4-36ac51c93f6f": [
+          77,
+          78,
+          79,
+          99,
+          100,
+          101,
+          102,
+          103,
+          104,
+          122,
+          124,
+          125,
+          158,
+          159,
+          160,
+          161,
+          162,
+          210,
+          211,
+          212,
+          213,
+          214
+        ],
+        "il7ra-rfd4-8a71ff875483": [
+          53,
+          78,
+          99,
+          100,
+          101,
+          102,
+          124,
+          158,
+          159,
+          160,
+          161,
+          162,
+          211,
+          212,
+          213
+        ],
+        "il7ra-rfd4-9a3a923fbb19": [
+          53,
+          77,
+          78,
+          79,
+          80,
+          97,
+          99,
+          100,
+          101,
+          102,
+          103,
+          122,
+          124,
+          158,
+          159,
+          160,
+          161,
+          162,
+          211,
+          212,
+          213
+        ],
+        "il7ra-rfd4-f8f399f53f79": [
+          76,
+          77,
+          78,
+          97,
+          99,
+          100,
+          101,
+          102,
+          103,
+          104,
+          120,
+          122,
+          124,
+          158,
+          159,
+          160,
+          161,
+          162,
+          211,
+          212,
+          213
+        ],
+        "il7ra-rfd4-feb1ba5da81f": [
+          78,
+          97,
+          99,
+          100,
+          101,
+          102,
+          124,
+          157,
+          158,
+          159,
+          160,
+          161,
+          162,
+          211,
+          212,
+          213
+        ]
+      }
+    },
+    "esmfold2": {
+      "source": "esmfold2",
+      "members": [
+        "il7ra-rfd4-232e2beaa213",
+        "il7ra-rfd4-36ac51c93f6f",
+        "il7ra-rfd4-8a71ff875483",
+        "il7ra-rfd4-9a3a923fbb19",
+        "il7ra-rfd4-f8f399f53f79",
+        "il7ra-rfd4-feb1ba5da81f"
+      ],
+      "excluded": [],
+      "pairs": [
+        {
+          "left": "il7ra-rfd4-232e2beaa213",
+          "right": "il7ra-rfd4-36ac51c93f6f",
+          "tm_left": 0.41132433187329925,
+          "tm_right": 0.45276631025529085,
+          "aligned_length": 47,
+          "rmsd_A": 3.4095329871355666,
+          "site_jaccard": 0.7391304347826086,
+          "shared_contact_residues": 17,
+          "sequence_identity": 0.36666666666666664
+        },
+        {
+          "left": "il7ra-rfd4-232e2beaa213",
+          "right": "il7ra-rfd4-8a71ff875483",
+          "tm_left": 0.42207637777336193,
+          "tm_right": 0.46835460233013737,
+          "aligned_length": 49,
+          "rmsd_A": 3.9310128725044557,
+          "site_jaccard": 0.5909090909090909,
+          "shared_contact_residues": 13,
+          "sequence_identity": 0.3
+        },
+        {
+          "left": "il7ra-rfd4-232e2beaa213",
+          "right": "il7ra-rfd4-9a3a923fbb19",
+          "tm_left": 0.4501003823378622,
+          "tm_right": 0.4501003823378622,
+          "aligned_length": 48,
+          "rmsd_A": 3.3990909058291328,
+          "site_jaccard": 0.5833333333333334,
+          "shared_contact_residues": 14,
+          "sequence_identity": 0.21428571428571427
+        },
+        {
+          "left": "il7ra-rfd4-232e2beaa213",
+          "right": "il7ra-rfd4-f8f399f53f79",
+          "tm_left": 0.39000609419652293,
+          "tm_right": 0.48897947969039746,
+          "aligned_length": 36,
+          "rmsd_A": 2.323191767565387,
+          "site_jaccard": 0.6,
+          "shared_contact_residues": 15,
+          "sequence_identity": 0.34
+        },
+        {
+          "left": "il7ra-rfd4-232e2beaa213",
+          "right": "il7ra-rfd4-feb1ba5da81f",
+          "tm_left": 0.4025772860641304,
+          "tm_right": 0.5016471081516333,
+          "aligned_length": 44,
+          "rmsd_A": 3.3619047451257837,
+          "site_jaccard": 0.5217391304347826,
+          "shared_contact_residues": 12,
+          "sequence_identity": 0.34
+        },
+        {
+          "left": "il7ra-rfd4-36ac51c93f6f",
+          "right": "il7ra-rfd4-8a71ff875483",
+          "tm_left": 0.39225199795593807,
+          "tm_right": 0.39225199795593807,
+          "aligned_length": 35,
+          "rmsd_A": 2.326146766703325,
+          "site_jaccard": 0.6956521739130435,
+          "shared_contact_residues": 16,
+          "sequence_identity": 0.15
+        },
+        {
+          "left": "il7ra-rfd4-36ac51c93f6f",
+          "right": "il7ra-rfd4-9a3a923fbb19",
+          "tm_left": 0.4968965304078428,
+          "tm_right": 0.45461184863261966,
+          "aligned_length": 48,
+          "rmsd_A": 2.610718223926991,
+          "site_jaccard": 0.75,
+          "shared_contact_residues": 18,
+          "sequence_identity": 0.31666666666666665
+        },
+        {
+          "left": "il7ra-rfd4-36ac51c93f6f",
+          "right": "il7ra-rfd4-f8f399f53f79",
+          "tm_left": 0.35308084016556784,
+          "tm_right": 0.3916066799662737,
+          "aligned_length": 33,
+          "rmsd_A": 2.496224041035877,
+          "site_jaccard": 0.8333333333333334,
+          "shared_contact_residues": 20,
+          "sequence_identity": 0.3
+        },
+        {
+          "left": "il7ra-rfd4-36ac51c93f6f",
+          "right": "il7ra-rfd4-feb1ba5da81f",
+          "tm_left": 0.3773728282958117,
+          "tm_right": 0.4150287290776851,
+          "aligned_length": 37,
+          "rmsd_A": 2.8896943620458644,
+          "site_jaccard": 0.56,
+          "shared_contact_residues": 14,
+          "sequence_identity": 0.24
+        },
+        {
+          "left": "il7ra-rfd4-8a71ff875483",
+          "right": "il7ra-rfd4-9a3a923fbb19",
+          "tm_left": 0.49943643404800897,
+          "tm_right": 0.45152667587810535,
+          "aligned_length": 50,
+          "rmsd_A": 3.5754767302722468,
+          "site_jaccard": 0.7619047619047619,
+          "shared_contact_residues": 16,
+          "sequence_identity": 0.4
+        },
+        {
+          "left": "il7ra-rfd4-8a71ff875483",
+          "right": "il7ra-rfd4-f8f399f53f79",
+          "tm_left": 0.4428527095337041,
+          "tm_right": 0.4938215495819695,
+          "aligned_length": 43,
+          "rmsd_A": 2.825949925275503,
+          "site_jaccard": 0.6956521739130435,
+          "shared_contact_residues": 16,
+          "sequence_identity": 0.28
+        },
+        {
+          "left": "il7ra-rfd4-8a71ff875483",
+          "right": "il7ra-rfd4-feb1ba5da81f",
+          "tm_left": 0.678042031807753,
+          "tm_right": 0.7798622208340724,
+          "aligned_length": 50,
+          "rmsd_A": 1.6658138146639847,
+          "site_jaccard": 0.7,
+          "shared_contact_residues": 14,
+          "sequence_identity": 0.3
+        },
+        {
+          "left": "il7ra-rfd4-9a3a923fbb19",
+          "right": "il7ra-rfd4-f8f399f53f79",
+          "tm_left": 0.3752142126940101,
+          "tm_right": 0.46523025803530943,
+          "aligned_length": 39,
+          "rmsd_A": 3.1573329343326098,
+          "site_jaccard": 0.8260869565217391,
+          "shared_contact_residues": 19,
+          "sequence_identity": 0.38
+        },
+        {
+          "left": "il7ra-rfd4-9a3a923fbb19",
+          "right": "il7ra-rfd4-feb1ba5da81f",
+          "tm_left": 0.41163829991624934,
+          "tm_right": 0.5059935694766033,
+          "aligned_length": 45,
+          "rmsd_A": 3.543992209701695,
+          "site_jaccard": 0.6086956521739131,
+          "shared_contact_residues": 14,
+          "sequence_identity": 0.34
+        },
+        {
+          "left": "il7ra-rfd4-f8f399f53f79",
+          "right": "il7ra-rfd4-feb1ba5da81f",
+          "tm_left": 0.4345323322848396,
+          "tm_right": 0.4345323322848396,
+          "aligned_length": 42,
+          "rmsd_A": 3.134011042108431,
+          "site_jaccard": 0.625,
+          "shared_contact_residues": 15,
+          "sequence_identity": 0.16
+        }
+      ],
+      "groups": {
+        "fold": {
+          "0.5": {
+            "complete_link_greedy": [
+              [
+                "il7ra-rfd4-232e2beaa213"
+              ],
+              [
+                "il7ra-rfd4-36ac51c93f6f"
+              ],
+              [
+                "il7ra-rfd4-8a71ff875483",
+                "il7ra-rfd4-feb1ba5da81f"
+              ],
+              [
+                "il7ra-rfd4-9a3a923fbb19"
+              ],
+              [
+                "il7ra-rfd4-f8f399f53f79"
+              ]
+            ],
+            "connected_components": [
+              [
+                "il7ra-rfd4-232e2beaa213"
+              ],
+              [
+                "il7ra-rfd4-36ac51c93f6f"
+              ],
+              [
+                "il7ra-rfd4-8a71ff875483",
+                "il7ra-rfd4-feb1ba5da81f"
+              ],
+              [
+                "il7ra-rfd4-9a3a923fbb19"
+              ],
+              [
+                "il7ra-rfd4-f8f399f53f79"
+              ]
+            ]
+          },
+          "0.6": {
+            "complete_link_greedy": [
+              [
+                "il7ra-rfd4-232e2beaa213"
+              ],
+              [
+                "il7ra-rfd4-36ac51c93f6f"
+              ],
+              [
+                "il7ra-rfd4-8a71ff875483",
+                "il7ra-rfd4-feb1ba5da81f"
+              ],
+              [
+                "il7ra-rfd4-9a3a923fbb19"
+              ],
+              [
+                "il7ra-rfd4-f8f399f53f79"
+              ]
+            ],
+            "connected_components": [
+              [
+                "il7ra-rfd4-232e2beaa213"
+              ],
+              [
+                "il7ra-rfd4-36ac51c93f6f"
+              ],
+              [
+                "il7ra-rfd4-8a71ff875483",
+                "il7ra-rfd4-feb1ba5da81f"
+              ],
+              [
+                "il7ra-rfd4-9a3a923fbb19"
+              ],
+              [
+                "il7ra-rfd4-f8f399f53f79"
+              ]
+            ]
+          },
+          "0.7": {
+            "complete_link_greedy": [
+              [
+                "il7ra-rfd4-232e2beaa213"
+              ],
+              [
+                "il7ra-rfd4-36ac51c93f6f"
+              ],
+              [
+                "il7ra-rfd4-8a71ff875483"
+              ],
+              [
+                "il7ra-rfd4-9a3a923fbb19"
+              ],
+              [
+                "il7ra-rfd4-f8f399f53f79"
+              ],
+              [
+                "il7ra-rfd4-feb1ba5da81f"
+              ]
+            ],
+            "connected_components": [
+              [
+                "il7ra-rfd4-232e2beaa213"
+              ],
+              [
+                "il7ra-rfd4-36ac51c93f6f"
+              ],
+              [
+                "il7ra-rfd4-8a71ff875483"
+              ],
+              [
+                "il7ra-rfd4-9a3a923fbb19"
+              ],
+              [
+                "il7ra-rfd4-f8f399f53f79"
+              ],
+              [
+                "il7ra-rfd4-feb1ba5da81f"
+              ]
+            ]
+          }
+        },
+        "site": {
+          "0.3": {
+            "complete_link_greedy": [
+              [
+                "il7ra-rfd4-232e2beaa213",
+                "il7ra-rfd4-36ac51c93f6f",
+                "il7ra-rfd4-8a71ff875483",
+                "il7ra-rfd4-9a3a923fbb19",
+                "il7ra-rfd4-f8f399f53f79",
+                "il7ra-rfd4-feb1ba5da81f"
+              ]
+            ],
+            "connected_components": [
+              [
+                "il7ra-rfd4-232e2beaa213",
+                "il7ra-rfd4-36ac51c93f6f",
+                "il7ra-rfd4-8a71ff875483",
+                "il7ra-rfd4-9a3a923fbb19",
+                "il7ra-rfd4-f8f399f53f79",
+                "il7ra-rfd4-feb1ba5da81f"
+              ]
+            ]
+          },
+          "0.5": {
+            "complete_link_greedy": [
+              [
+                "il7ra-rfd4-232e2beaa213",
+                "il7ra-rfd4-36ac51c93f6f",
+                "il7ra-rfd4-8a71ff875483",
+                "il7ra-rfd4-9a3a923fbb19",
+                "il7ra-rfd4-f8f399f53f79",
+                "il7ra-rfd4-feb1ba5da81f"
+              ]
+            ],
+            "connected_components": [
+              [
+                "il7ra-rfd4-232e2beaa213",
+                "il7ra-rfd4-36ac51c93f6f",
+                "il7ra-rfd4-8a71ff875483",
+                "il7ra-rfd4-9a3a923fbb19",
+                "il7ra-rfd4-f8f399f53f79",
+                "il7ra-rfd4-feb1ba5da81f"
+              ]
+            ]
+          },
+          "0.7": {
+            "complete_link_greedy": [
+              [
+                "il7ra-rfd4-232e2beaa213",
+                "il7ra-rfd4-36ac51c93f6f"
+              ],
+              [
+                "il7ra-rfd4-8a71ff875483",
+                "il7ra-rfd4-9a3a923fbb19"
+              ],
+              [
+                "il7ra-rfd4-f8f399f53f79"
+              ],
+              [
+                "il7ra-rfd4-feb1ba5da81f"
+              ]
+            ],
+            "connected_components": [
+              [
+                "il7ra-rfd4-232e2beaa213",
+                "il7ra-rfd4-36ac51c93f6f",
+                "il7ra-rfd4-8a71ff875483",
+                "il7ra-rfd4-9a3a923fbb19",
+                "il7ra-rfd4-f8f399f53f79",
+                "il7ra-rfd4-feb1ba5da81f"
+              ]
+            ]
+          }
+        }
+      },
+      "summary": {
+        "fold": {
+          "0.5": {
+            "complete_link_greedy": {
+              "groups": 5,
+              "largest": 2,
+              "singletons": 4
+            },
+            "connected_components": {
+              "groups": 5,
+              "largest": 2,
+              "singletons": 4
+            }
+          },
+          "0.6": {
+            "complete_link_greedy": {
+              "groups": 5,
+              "largest": 2,
+              "singletons": 4
+            },
+            "connected_components": {
+              "groups": 5,
+              "largest": 2,
+              "singletons": 4
+            }
+          },
+          "0.7": {
+            "complete_link_greedy": {
+              "groups": 6,
+              "largest": 1,
+              "singletons": 6
+            },
+            "connected_components": {
+              "groups": 6,
+              "largest": 1,
+              "singletons": 6
+            }
+          }
+        },
+        "site": {
+          "0.3": {
+            "complete_link_greedy": {
+              "groups": 1,
+              "largest": 6,
+              "singletons": 0
+            },
+            "connected_components": {
+              "groups": 1,
+              "largest": 6,
+              "singletons": 0
+            }
+          },
+          "0.5": {
+            "complete_link_greedy": {
+              "groups": 1,
+              "largest": 6,
+              "singletons": 0
+            },
+            "connected_components": {
+              "groups": 1,
+              "largest": 6,
+              "singletons": 0
+            }
+          },
+          "0.7": {
+            "complete_link_greedy": {
+              "groups": 4,
+              "largest": 2,
+              "singletons": 2
+            },
+            "connected_components": {
+              "groups": 1,
+              "largest": 6,
+              "singletons": 0
+            }
+          }
+        }
+      },
+      "target_contacts": {
+        "il7ra-rfd4-232e2beaa213": [
+          100,
+          101,
+          102,
+          103,
+          104,
+          122,
+          124,
+          125,
+          158,
+          159,
+          160,
+          161,
+          162,
+          184,
+          211,
+          212,
+          213,
+          214
+        ],
+        "il7ra-rfd4-36ac51c93f6f": [
+          77,
+          78,
+          79,
+          99,
+          100,
+          101,
+          102,
+          103,
+          104,
+          122,
+          124,
+          125,
+          158,
+          159,
+          160,
+          161,
+          162,
+          210,
+          211,
+          212,
+          213,
+          214
+        ],
+        "il7ra-rfd4-8a71ff875483": [
+          78,
+          79,
+          99,
+          100,
+          101,
+          102,
+          103,
+          124,
+          157,
+          158,
+          159,
+          160,
+          161,
+          162,
+          211,
+          212,
+          213
+        ],
+        "il7ra-rfd4-9a3a923fbb19": [
+          53,
+          77,
+          78,
+          79,
+          97,
+          99,
+          100,
+          101,
+          102,
+          103,
+          122,
+          124,
+          158,
+          159,
+          160,
+          161,
+          162,
+          211,
+          212,
+          213
+        ],
+        "il7ra-rfd4-f8f399f53f79": [
+          76,
+          77,
+          78,
+          79,
+          97,
+          99,
+          100,
+          101,
+          102,
+          103,
+          104,
+          122,
+          124,
+          158,
+          159,
+          160,
+          161,
+          162,
+          210,
+          211,
+          212,
+          213
+        ],
+        "il7ra-rfd4-feb1ba5da81f": [
+          51,
+          78,
+          97,
+          100,
+          101,
+          102,
+          124,
+          157,
+          158,
+          159,
+          160,
+          161,
+          162,
+          210,
+          211,
+          212,
+          213
+        ]
+      }
+    },
+    "boltz2": {
+      "source": "boltz2",
+      "members": [
+        "il7ra-rfd4-232e2beaa213",
+        "il7ra-rfd4-36ac51c93f6f",
+        "il7ra-rfd4-8a71ff875483",
+        "il7ra-rfd4-9a3a923fbb19",
+        "il7ra-rfd4-f8f399f53f79",
+        "il7ra-rfd4-feb1ba5da81f"
+      ],
+      "excluded": [],
+      "pairs": [
+        {
+          "left": "il7ra-rfd4-232e2beaa213",
+          "right": "il7ra-rfd4-36ac51c93f6f",
+          "tm_left": 0.4616785801864661,
+          "tm_right": 0.5090053856112557,
+          "aligned_length": 49,
+          "rmsd_A": 2.827677196571257,
+          "site_jaccard": 0.6818181818181818,
+          "shared_contact_residues": 15,
+          "sequence_identity": 0.36666666666666664
+        },
+        {
+          "left": "il7ra-rfd4-232e2beaa213",
+          "right": "il7ra-rfd4-8a71ff875483",
+          "tm_left": 0.4451020729220465,
+          "tm_right": 0.501141435328874,
+          "aligned_length": 47,
+          "rmsd_A": 3.6572804196688837,
+          "site_jaccard": 0.5416666666666666,
+          "shared_contact_residues": 13,
+          "sequence_identity": 0.3
+        },
+        {
+          "left": "il7ra-rfd4-232e2beaa213",
+          "right": "il7ra-rfd4-9a3a923fbb19",
+          "tm_left": 0.4343052424379147,
+          "tm_right": 0.4343052424379147,
+          "aligned_length": 47,
+          "rmsd_A": 3.1835605037951975,
+          "site_jaccard": 0.8260869565217391,
+          "shared_contact_residues": 19,
+          "sequence_identity": 0.21428571428571427
+        },
+        {
+          "left": "il7ra-rfd4-232e2beaa213",
+          "right": "il7ra-rfd4-f8f399f53f79",
+          "tm_left": 0.39660778151310594,
+          "tm_right": 0.4944464414594653,
+          "aligned_length": 36,
+          "rmsd_A": 1.9019836859098722,
+          "site_jaccard": 0.782608695652174,
+          "shared_contact_residues": 18,
+          "sequence_identity": 0.34
+        },
+        {
+          "left": "il7ra-rfd4-232e2beaa213",
+          "right": "il7ra-rfd4-feb1ba5da81f",
+          "tm_left": 0.397727015722886,
+          "tm_right": 0.5006244600982145,
+          "aligned_length": 43,
+          "rmsd_A": 3.4490400890176813,
+          "site_jaccard": 0.5217391304347826,
+          "shared_contact_residues": 12,
+          "sequence_identity": 0.34
+        },
+        {
+          "left": "il7ra-rfd4-36ac51c93f6f",
+          "right": "il7ra-rfd4-8a71ff875483",
+          "tm_left": 0.44716774487233457,
+          "tm_right": 0.44716774487233457,
+          "aligned_length": 39,
+          "rmsd_A": 2.437753609366735,
+          "site_jaccard": 0.5238095238095238,
+          "shared_contact_residues": 11,
+          "sequence_identity": 0.15
+        },
+        {
+          "left": "il7ra-rfd4-36ac51c93f6f",
+          "right": "il7ra-rfd4-9a3a923fbb19",
+          "tm_left": 0.4493770878443052,
+          "tm_right": 0.408046576201429,
+          "aligned_length": 42,
+          "rmsd_A": 2.4129396127437195,
+          "site_jaccard": 0.6086956521739131,
+          "shared_contact_residues": 14,
+          "sequence_identity": 0.31666666666666665
+        },
+        {
+          "left": "il7ra-rfd4-36ac51c93f6f",
+          "right": "il7ra-rfd4-f8f399f53f79",
+          "tm_left": 0.353801138562896,
+          "tm_right": 0.40774624227133693,
+          "aligned_length": 30,
+          "rmsd_A": 3.0182068523447896,
+          "site_jaccard": 0.5652173913043478,
+          "shared_contact_residues": 13,
+          "sequence_identity": 0.3
+        },
+        {
+          "left": "il7ra-rfd4-36ac51c93f6f",
+          "right": "il7ra-rfd4-feb1ba5da81f",
+          "tm_left": 0.42862839702360217,
+          "tm_right": 0.48310942978344484,
+          "aligned_length": 38,
+          "rmsd_A": 2.5723621618615695,
+          "site_jaccard": 0.42857142857142855,
+          "shared_contact_residues": 9,
+          "sequence_identity": 0.24
+        },
+        {
+          "left": "il7ra-rfd4-8a71ff875483",
+          "right": "il7ra-rfd4-9a3a923fbb19",
+          "tm_left": 0.5068162633679755,
+          "tm_right": 0.46225423192061066,
+          "aligned_length": 53,
+          "rmsd_A": 3.1978248906482385,
+          "site_jaccard": 0.5416666666666666,
+          "shared_contact_residues": 13,
+          "sequence_identity": 0.4
+        },
+        {
+          "left": "il7ra-rfd4-8a71ff875483",
+          "right": "il7ra-rfd4-f8f399f53f79",
+          "tm_left": 0.42619477629523145,
+          "tm_right": 0.49236470534326643,
+          "aligned_length": 32,
+          "rmsd_A": 2.4648039955848637,
+          "site_jaccard": 0.6363636363636364,
+          "shared_contact_residues": 14,
+          "sequence_identity": 0.28
+        },
+        {
+          "left": "il7ra-rfd4-8a71ff875483",
+          "right": "il7ra-rfd4-feb1ba5da81f",
+          "tm_left": 0.6735016662023676,
+          "tm_right": 0.7730646642021509,
+          "aligned_length": 50,
+          "rmsd_A": 1.5962865504138046,
+          "site_jaccard": 0.5789473684210527,
+          "shared_contact_residues": 11,
+          "sequence_identity": 0.3
+        },
+        {
+          "left": "il7ra-rfd4-9a3a923fbb19",
+          "right": "il7ra-rfd4-f8f399f53f79",
+          "tm_left": 0.36724737172113076,
+          "tm_right": 0.46271146727373236,
+          "aligned_length": 38,
+          "rmsd_A": 3.0471799936713273,
+          "site_jaccard": 0.782608695652174,
+          "shared_contact_residues": 18,
+          "sequence_identity": 0.38
+        },
+        {
+          "left": "il7ra-rfd4-9a3a923fbb19",
+          "right": "il7ra-rfd4-feb1ba5da81f",
+          "tm_left": 0.41071470098755264,
+          "tm_right": 0.5009898397096386,
+          "aligned_length": 46,
+          "rmsd_A": 3.50298994076404,
+          "site_jaccard": 0.5217391304347826,
+          "shared_contact_residues": 12,
+          "sequence_identity": 0.34
+        },
+        {
+          "left": "il7ra-rfd4-f8f399f53f79",
+          "right": "il7ra-rfd4-feb1ba5da81f",
+          "tm_left": 0.47511715607789284,
+          "tm_right": 0.47511715607789284,
+          "aligned_length": 38,
+          "rmsd_A": 2.544083090521863,
+          "site_jaccard": 0.6190476190476191,
+          "shared_contact_residues": 13,
+          "sequence_identity": 0.16
+        }
+      ],
+      "groups": {
+        "fold": {
+          "0.5": {
+            "complete_link_greedy": [
+              [
+                "il7ra-rfd4-232e2beaa213"
+              ],
+              [
+                "il7ra-rfd4-36ac51c93f6f"
+              ],
+              [
+                "il7ra-rfd4-8a71ff875483",
+                "il7ra-rfd4-feb1ba5da81f"
+              ],
+              [
+                "il7ra-rfd4-9a3a923fbb19"
+              ],
+              [
+                "il7ra-rfd4-f8f399f53f79"
+              ]
+            ],
+            "connected_components": [
+              [
+                "il7ra-rfd4-232e2beaa213"
+              ],
+              [
+                "il7ra-rfd4-36ac51c93f6f"
+              ],
+              [
+                "il7ra-rfd4-8a71ff875483",
+                "il7ra-rfd4-feb1ba5da81f"
+              ],
+              [
+                "il7ra-rfd4-9a3a923fbb19"
+              ],
+              [
+                "il7ra-rfd4-f8f399f53f79"
+              ]
+            ]
+          },
+          "0.6": {
+            "complete_link_greedy": [
+              [
+                "il7ra-rfd4-232e2beaa213"
+              ],
+              [
+                "il7ra-rfd4-36ac51c93f6f"
+              ],
+              [
+                "il7ra-rfd4-8a71ff875483",
+                "il7ra-rfd4-feb1ba5da81f"
+              ],
+              [
+                "il7ra-rfd4-9a3a923fbb19"
+              ],
+              [
+                "il7ra-rfd4-f8f399f53f79"
+              ]
+            ],
+            "connected_components": [
+              [
+                "il7ra-rfd4-232e2beaa213"
+              ],
+              [
+                "il7ra-rfd4-36ac51c93f6f"
+              ],
+              [
+                "il7ra-rfd4-8a71ff875483",
+                "il7ra-rfd4-feb1ba5da81f"
+              ],
+              [
+                "il7ra-rfd4-9a3a923fbb19"
+              ],
+              [
+                "il7ra-rfd4-f8f399f53f79"
+              ]
+            ]
+          },
+          "0.7": {
+            "complete_link_greedy": [
+              [
+                "il7ra-rfd4-232e2beaa213"
+              ],
+              [
+                "il7ra-rfd4-36ac51c93f6f"
+              ],
+              [
+                "il7ra-rfd4-8a71ff875483"
+              ],
+              [
+                "il7ra-rfd4-9a3a923fbb19"
+              ],
+              [
+                "il7ra-rfd4-f8f399f53f79"
+              ],
+              [
+                "il7ra-rfd4-feb1ba5da81f"
+              ]
+            ],
+            "connected_components": [
+              [
+                "il7ra-rfd4-232e2beaa213"
+              ],
+              [
+                "il7ra-rfd4-36ac51c93f6f"
+              ],
+              [
+                "il7ra-rfd4-8a71ff875483"
+              ],
+              [
+                "il7ra-rfd4-9a3a923fbb19"
+              ],
+              [
+                "il7ra-rfd4-f8f399f53f79"
+              ],
+              [
+                "il7ra-rfd4-feb1ba5da81f"
+              ]
+            ]
+          }
+        },
+        "site": {
+          "0.3": {
+            "complete_link_greedy": [
+              [
+                "il7ra-rfd4-232e2beaa213",
+                "il7ra-rfd4-36ac51c93f6f",
+                "il7ra-rfd4-8a71ff875483",
+                "il7ra-rfd4-9a3a923fbb19",
+                "il7ra-rfd4-f8f399f53f79",
+                "il7ra-rfd4-feb1ba5da81f"
+              ]
+            ],
+            "connected_components": [
+              [
+                "il7ra-rfd4-232e2beaa213",
+                "il7ra-rfd4-36ac51c93f6f",
+                "il7ra-rfd4-8a71ff875483",
+                "il7ra-rfd4-9a3a923fbb19",
+                "il7ra-rfd4-f8f399f53f79",
+                "il7ra-rfd4-feb1ba5da81f"
+              ]
+            ]
+          },
+          "0.5": {
+            "complete_link_greedy": [
+              [
+                "il7ra-rfd4-232e2beaa213",
+                "il7ra-rfd4-36ac51c93f6f",
+                "il7ra-rfd4-8a71ff875483",
+                "il7ra-rfd4-9a3a923fbb19",
+                "il7ra-rfd4-f8f399f53f79"
+              ],
+              [
+                "il7ra-rfd4-feb1ba5da81f"
+              ]
+            ],
+            "connected_components": [
+              [
+                "il7ra-rfd4-232e2beaa213",
+                "il7ra-rfd4-36ac51c93f6f",
+                "il7ra-rfd4-8a71ff875483",
+                "il7ra-rfd4-9a3a923fbb19",
+                "il7ra-rfd4-f8f399f53f79",
+                "il7ra-rfd4-feb1ba5da81f"
+              ]
+            ]
+          },
+          "0.7": {
+            "complete_link_greedy": [
+              [
+                "il7ra-rfd4-232e2beaa213",
+                "il7ra-rfd4-9a3a923fbb19",
+                "il7ra-rfd4-f8f399f53f79"
+              ],
+              [
+                "il7ra-rfd4-36ac51c93f6f"
+              ],
+              [
+                "il7ra-rfd4-8a71ff875483"
+              ],
+              [
+                "il7ra-rfd4-feb1ba5da81f"
+              ]
+            ],
+            "connected_components": [
+              [
+                "il7ra-rfd4-232e2beaa213",
+                "il7ra-rfd4-9a3a923fbb19",
+                "il7ra-rfd4-f8f399f53f79"
+              ],
+              [
+                "il7ra-rfd4-36ac51c93f6f"
+              ],
+              [
+                "il7ra-rfd4-8a71ff875483"
+              ],
+              [
+                "il7ra-rfd4-feb1ba5da81f"
+              ]
+            ]
+          }
+        }
+      },
+      "summary": {
+        "fold": {
+          "0.5": {
+            "complete_link_greedy": {
+              "groups": 5,
+              "largest": 2,
+              "singletons": 4
+            },
+            "connected_components": {
+              "groups": 5,
+              "largest": 2,
+              "singletons": 4
+            }
+          },
+          "0.6": {
+            "complete_link_greedy": {
+              "groups": 5,
+              "largest": 2,
+              "singletons": 4
+            },
+            "connected_components": {
+              "groups": 5,
+              "largest": 2,
+              "singletons": 4
+            }
+          },
+          "0.7": {
+            "complete_link_greedy": {
+              "groups": 6,
+              "largest": 1,
+              "singletons": 6
+            },
+            "connected_components": {
+              "groups": 6,
+              "largest": 1,
+              "singletons": 6
+            }
+          }
+        },
+        "site": {
+          "0.3": {
+            "complete_link_greedy": {
+              "groups": 1,
+              "largest": 6,
+              "singletons": 0
+            },
+            "connected_components": {
+              "groups": 1,
+              "largest": 6,
+              "singletons": 0
+            }
+          },
+          "0.5": {
+            "complete_link_greedy": {
+              "groups": 2,
+              "largest": 5,
+              "singletons": 1
+            },
+            "connected_components": {
+              "groups": 1,
+              "largest": 6,
+              "singletons": 0
+            }
+          },
+          "0.7": {
+            "complete_link_greedy": {
+              "groups": 4,
+              "largest": 3,
+              "singletons": 3
+            },
+            "connected_components": {
+              "groups": 4,
+              "largest": 3,
+              "singletons": 3
+            }
+          }
+        }
+      },
+      "target_contacts": {
+        "il7ra-rfd4-232e2beaa213": [
+          51,
+          53,
+          77,
+          78,
+          79,
+          97,
+          98,
+          99,
+          100,
+          101,
+          102,
+          103,
+          122,
+          158,
+          159,
+          160,
+          161,
+          162,
+          211,
+          212,
+          213
+        ],
+        "il7ra-rfd4-36ac51c93f6f": [
+          51,
+          53,
+          77,
+          78,
+          79,
+          97,
+          99,
+          100,
+          101,
+          102,
+          158,
+          159,
+          211,
+          212,
+          213,
+          214
+        ],
+        "il7ra-rfd4-8a71ff875483": [
+          78,
+          99,
+          100,
+          101,
+          102,
+          103,
+          122,
+          124,
+          125,
+          158,
+          159,
+          161,
+          211,
+          212,
+          213,
+          214
+        ],
+        "il7ra-rfd4-9a3a923fbb19": [
+          53,
+          76,
+          77,
+          78,
+          79,
+          80,
+          97,
+          99,
+          100,
+          101,
+          102,
+          103,
+          122,
+          158,
+          159,
+          160,
+          161,
+          162,
+          211,
+          212,
+          213
+        ],
+        "il7ra-rfd4-f8f399f53f79": [
+          77,
+          78,
+          79,
+          97,
+          99,
+          100,
+          101,
+          102,
+          103,
+          104,
+          122,
+          124,
+          158,
+          159,
+          160,
+          161,
+          162,
+          211,
+          212,
+          213
+        ],
+        "il7ra-rfd4-feb1ba5da81f": [
+          78,
+          100,
+          101,
+          102,
+          124,
+          157,
+          158,
+          159,
+          160,
+          161,
+          162,
+          211,
+          212,
+          213
+        ]
+      }
+    }
+  },
+  "left_out_as_flagged": [],
+  "include_flagged": true,
+  "fold_thresholds": [
+    0.5,
+    0.6,
+    0.7
+  ],
+  "site_thresholds": [
+    0.3,
+    0.5,
+    0.7
+  ],
+  "coverage_rule": "aligned length >= 80% of the shorter binder (48 of 60)",
+  "scope": "Descriptive similarity groups. Not SCOP/CATH classes, evolutionary families or binding predictions; the complete-link grouping depends on member order (sorted by id)."
+}
