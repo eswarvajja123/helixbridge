@@ -55,7 +55,7 @@
 
 | Task | What to do | Done when |
 |---|---|---|
-| 4.1 | Adapt `mosaic-il7ra.py`: it is hardwired to the historical manifest, first 128 MSA rows, 60 aa. Add a JAX image with the 3 pinned Mosaic revisions (not in `modal_app.py`). | Mosaic runs on current target. **Blocked on one input:** the repo records only commit hashes. `mosaic` and the `boltz` fork were found under `escalante-bio`; the `joltz` source URL is unknown — ask the captain. |
+| 4.1 | Adapt `mosaic-il7ra.py`: it is hardwired to the historical manifest, first 128 MSA rows, 60 aa. Add a JAX image with the 3 pinned Mosaic revisions (not in `modal_app.py`). | Mosaic runs on current target. **Blocker resolved 18 Nov (still to be confirmed by the captain):** the three pinned commits are all fetchable and MIT-licensed: `joltz` = `github.com/nboyd/joltz` @ `ed0f04257dac85bd4b7bf45521cc280f86d38ded` (this is its current latest commit, 'JAX translation of boltz'), `mosaic` = `github.com/escalante-bio/mosaic` @ `5937f37164bcb28bc6f1000f10134145438e5971`, boltz fork = `github.com/escalante-bio/boltz` @ `7ea718a1440ecbe8e2418317192b501544147edd`. Not yet built or run: the Modal JAX image, the adaptation of `mosaic-il7ra.py` to the current target, and the comparison itself. |
 | 4.2 | Raise the Modal timeout for Mosaic: one design took **~16 min** on L40S; the current limit is **15 min (900 s)**. | no timeout |
 | 4.3 | Compare RFD4 vs Mosaic at **matched GPU-hours, not matched count**: RFD4 ≈ 1 min/design, Mosaic ≈ 16 min/design. Metric: diverse, viable candidates per GPU-hour. ESMFold2 is the independent check (Mosaic optimizes through Boltz). | comparison table, failures kept |
 
