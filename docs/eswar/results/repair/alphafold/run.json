@@ -1,0 +1,60 @@
+{
+  "settings": {
+    "model_type": "alphafold2_multimer_v3",
+    "num_models": 2,
+    "num_recycle": 3,
+    "num_seeds": 1,
+    "rank": "iptm",
+    "msa_mode": "custom a3m: target-only MSA (1,022 rows) + binder single sequence; no MSA server",
+    "pair_mode": "unpaired_paired",
+    "templates": false,
+    "relax": false
+  },
+  "chunks": {
+    "c1": {
+      "ids": [
+        "il7ra-rfd4-bf3f3264bcd4-r1",
+        "il7ra-rfd4-2e2ec88e93b8-r1",
+        "il7ra-rfd4-8d368322e6bf-r1",
+        "il7ra-rfd4-1ce95bd8ae7b-r1"
+      ],
+      "attempts": [
+        "alphafold-eswar-a8-c1-1"
+      ],
+      "status": "done",
+      "seconds": 238.2,
+      "device": "NVIDIA A100-SXM4-80GB",
+      "run_id": "alphafold-eswar-a8-c1-1"
+    },
+    "c2": {
+      "ids": [
+        "il7ra-rfd4-b25d020a592d-r1",
+        "il7ra-rfd4-b25d020a592d-r2",
+        "il7ra-rfd4-9111856e8955-r1",
+        "il7ra-rfd4-9111856e8955-r2"
+      ],
+      "attempts": [
+        "alphafold-eswar-a8-c2-1"
+      ],
+      "status": "done",
+      "seconds": 166.1,
+      "device": "NVIDIA A100-SXM4-80GB",
+      "run_id": "alphafold-eswar-a8-c2-1"
+    },
+    "c3": {
+      "ids": [
+        "il7ra-rfd4-13af2bd8fd8a-r1",
+        "il7ra-rfd4-13af2bd8fd8a-r2",
+        "il7ra-rfd4-3d017821d726-r1",
+        "il7ra-rfd4-3d017821d726-r2"
+      ],
+      "attempts": [
+        "alphafold-eswar-a8-c3-1"
+      ],
+      "status": "done",
+      "seconds": 229.0,
+      "device": "NVIDIA A100-SXM4-80GB",
+      "run_id": "alphafold-eswar-a8-c3-1"
+    }
+  }
+}
