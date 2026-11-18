@@ -57,6 +57,40 @@ class Eligibility(unittest.TestCase):
         self.assertEqual(S.disagreement(rec("a", esm=(0.5, 0.5), boltz=(0.9, 0.5))), 0.4)
 
 
+def af(iptm=0.9, gen=1.0, esm=1.0, boltz=1.0):
+    return {"iptm": iptm, "pose_shift_A": {"generator": gen, "esmfold2": esm, "boltz2": boltz}}
+
+
+class AlphaFoldGate(unittest.TestCase):
+    def test_a_supported_design_passes_and_the_gate_is_off_by_default(self):
+        self.assertEqual(S.eligibility(rec("a"), {"a": af()}), [])
+        self.assertEqual(S.eligibility(rec("a")), [])                           # no AlphaFold input: unchanged behaviour
+
+    def test_reasons(self):
+        self.assertEqual(S.eligibility(rec("a"), {}), ["alphafold_missing"])
+        self.assertEqual(S.eligibility(rec("a"), {"a": af(iptm=0.61)}), ["alphafold_iptm:0.61<=0.61"])          # must be ABOVE the controls' maximum
+        self.assertEqual(S.eligibility(rec("a"), {"a": af(iptm=0.27)}), ["alphafold_iptm:0.27<=0.61"])
+        self.assertEqual(S.eligibility(rec("a"), {"a": af(gen=2.6)}), ["alphafold_pose_shift:generator:2.6A>2.5A"])
+        self.assertEqual(S.eligibility(rec("a"), {"a": af(gen=2.5, esm=3.0, boltz=3.0)}), [])                  # limits are inclusive
+        self.assertEqual(S.eligibility(rec("a"), {"a": af(esm=3.1)}), ["alphafold_pose_shift:esmfold2:3.1A>3.0A"])
+        r = af(); r["pose_shift_A"]["boltz2"] = None
+        self.assertEqual(S.eligibility(rec("a"), {"a": r}), ["alphafold_pose_unchecked:boltz2"])
+        self.assertEqual(S.eligibility(rec("a"), {"a": {"iptm": None, "pose_shift_A": af()["pose_shift_A"]}}), ["alphafold_iptm:None<=0.61"])
+
+    def test_the_floor_can_be_changed(self):
+        self.assertEqual(S.eligibility(rec("a"), {"a": af(iptm=0.7)}, min_iptm=0.8), ["alphafold_iptm:0.7<=0.8"])
+
+    def test_select_drops_unsupported_designs_and_reports_the_rule(self):
+        records = [rec("a", 1), rec("b", 2), rec("c", 3)]
+        div = diversity([["a"], ["b"], ["c"]], [["a"], ["b"], ["c"]])
+        chosen, report = S.select(records, div, alphafold={"a": af(), "b": af(iptm=0.3), "c": af()})
+        self.assertEqual(sorted(x["candidate_id"] for x in chosen), ["a", "c"])
+        self.assertEqual([e for e in report["excluded"] if e["candidate_id"] == "b"][0]["reasons"], ["alphafold_iptm:0.3<=0.61"])
+        self.assertEqual(report["alphafold_gate"]["min_iptm_exclusive"], 0.61)
+        _, plain = S.select(records, div)
+        self.assertIsNone(plain["alphafold_gate"])
+
+
 class Picking(unittest.TestCase):
     def ids(self, selected):
         return [s["candidate_id"] for s in selected]

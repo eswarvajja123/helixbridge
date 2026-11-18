@@ -31,6 +31,10 @@ PREDICTORS = ("esmfold2", "boltz2")
 REVIEW_FIELDS = {"novelty_review": {"passed"}, "independent_prediction_status": {"reviewed"},
                  "screen_status": {"approximation_reviewed", "official_protocol_reviewed"}}
 MAX_FINALISTS = 20
+# AlphaFold gate (optional). The ipTM floor is set by the shuffled negative controls run through the same AlphaFold settings: a design must
+# score ABOVE every control (the controls' maximum was 0.61). The pose limits are the team's own structure-QC limits.
+ALPHAFOLD_MIN_IPTM = 0.61
+ALPHAFOLD_MAX_SHIFT = {"generator": 2.5, "esmfold2": 3.0, "boltz2": 3.0}
 
 
 def _score_values(record):
@@ -51,8 +55,26 @@ def disagreement(record):
     return round(max(abs(a["iptm"] - b["iptm"]), abs(a["ipsae_max"] - b["ipsae_max"])), 6)
 
 
-def eligibility(record):
-    """The reasons a design cannot be selected; an empty list means eligible."""
+def alphafold_reasons(result, min_iptm=ALPHAFOLD_MIN_IPTM, max_shift=ALPHAFOLD_MAX_SHIFT):
+    """Why AlphaFold-Multimer does not support a design. `result` is one entry of alphafold-results.json, or None if it was not run."""
+    if result is None:
+        return ["alphafold_missing"]
+    reasons = []
+    iptm = result.get("iptm")
+    if iptm is None or iptm <= min_iptm:
+        reasons.append(f"alphafold_iptm:{iptm}<={min_iptm}")
+    shifts = result.get("pose_shift_A") or {}
+    for source, limit in max_shift.items():
+        value = shifts.get(source)
+        if value is None:
+            reasons.append(f"alphafold_pose_unchecked:{source}")
+        elif value > limit:
+            reasons.append(f"alphafold_pose_shift:{source}:{value}A>{limit}A")
+    return reasons
+
+
+def eligibility(record, alphafold=None, min_iptm=ALPHAFOLD_MIN_IPTM):
+    """The reasons a design cannot be selected; an empty list means eligible. With `alphafold` ({candidate_id: result}) its gate applies too."""
     reasons = [f"qc_reason:{r}" for r in record.get("qc_reasons") or []]
     qc = record.get("qc")
     if not qc:
@@ -68,6 +90,8 @@ def eligibility(record):
         reasons.append("not_scored_by_both_predictors")
     if not record.get("liabilities") or record["liabilities"].get("diagnostic") is None:
         reasons.append("liabilities_not_reviewed")
+    if alphafold is not None:
+        reasons += alphafold_reasons(alphafold.get(record["candidate_id"]), min_iptm)
     return list(dict.fromkeys(reasons))
 
 
@@ -86,7 +110,8 @@ def read_groups(diversity, source, fold_threshold, site_threshold, method="compl
     return (_labels(groups["fold"][str(fold_threshold)][method]), _labels(groups["site"][str(site_threshold)][method]))
 
 
-def select(records, diversity, limit=MAX_FINALISTS, source="generator", fold_threshold=0.5, site_threshold=0.5):
+def select(records, diversity, limit=MAX_FINALISTS, source="generator", fold_threshold=0.5, site_threshold=0.5, alphafold=None,
+           min_iptm=ALPHAFOLD_MIN_IPTM):
     """Return (selected, report). selected: [{candidate_id, pick_order, fold_group, site_group, ...}]."""
     if not isinstance(limit, int) or isinstance(limit, bool) or not 1 <= limit <= MAX_FINALISTS:
         raise ValueError(f"limit must be a whole number from 1 to {MAX_FINALISTS}")
@@ -96,7 +121,7 @@ def select(records, diversity, limit=MAX_FINALISTS, source="generator", fold_thr
         if record["candidate_id"] in by_id:
             raise ValueError("Duplicate candidate_id: " + record["candidate_id"])
         by_id[record["candidate_id"]] = record
-        reasons = eligibility(record)
+        reasons = eligibility(record, alphafold, min_iptm)
         if not reasons and record["candidate_id"] not in fold_of:
             reasons.append("not_in_the_diversity_report")
         if reasons:
@@ -137,6 +162,8 @@ def select(records, diversity, limit=MAX_FINALISTS, source="generator", fold_thr
     report = {"schema": SCHEMA_VERSION, "pool": len(records), "eligible": len(eligible_ids), "excluded": excluded,
               "selected": len(selected), "limit": limit, "source": source, "fold_threshold": fold_threshold,
               "site_threshold": site_threshold,
+              "alphafold_gate": None if alphafold is None else {"min_iptm_exclusive": min_iptm, "max_pose_shift_A": ALPHAFOLD_MAX_SHIFT,
+                                                                "basis": "ipTM above every shuffled control; the team's pose limits"},
               "fold_groups_available": len({fold_of[c] for c in eligible_ids}), "fold_groups_selected": len({s["fold_group"] for s in selected}),
               "site_groups_available": len({site_of[c] for c in eligible_ids}), "site_groups_selected": len({s["site_group"] for s in selected}),
               "scope": "A proposal by coverage, not a ranking: pick_order is the order of picking, no design is better than another, and "

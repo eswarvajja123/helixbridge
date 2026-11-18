@@ -1,0 +1,44 @@
+{
+  "settings": {
+    "model_type": "alphafold2_multimer_v3",
+    "num_models": 2,
+    "num_recycle": 3,
+    "num_seeds": 1,
+    "rank": "iptm",
+    "msa_mode": "custom a3m: target-only MSA (1,022 rows) + binder single sequence; no MSA server",
+    "pair_mode": "unpaired_paired",
+    "templates": false,
+    "relax": false
+  },
+  "chunks": {
+    "c1": {
+      "ids": [
+        "il7ra-rfd4-ee56c58e81b5",
+        "il7ra-rfd4-dbb68e85db49",
+        "il7ra-rfd4-f48ad0bc6f6d",
+        "il7ra-rfd4-a0f0f8c0cd1c"
+      ],
+      "attempts": [
+        "alphafold-eswar-a9-c1-1"
+      ],
+      "status": "done",
+      "seconds": 167.4,
+      "device": "NVIDIA L40S",
+      "run_id": "alphafold-eswar-a9-c1-1"
+    },
+    "c2": {
+      "ids": [
+        "il7ra-rfd4-3c415d9af3c0",
+        "il7ra-rfd4-65355a2ab485",
+        "il7ra-rfd4-154c11f68ccc"
+      ],
+      "attempts": [
+        "alphafold-eswar-a9-c2-1"
+      ],
+      "status": "done",
+      "seconds": 192.2,
+      "device": "NVIDIA L40S",
+      "run_id": "alphafold-eswar-a9-c2-1"
+    }
+  }
+}

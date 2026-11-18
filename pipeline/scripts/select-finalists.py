@@ -17,7 +17,7 @@ from pathlib import Path
 import sys
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
-from binder_campaign.selection import MAX_FINALISTS, apply_reviews, export_check, review_gaps, select, write_outputs
+from binder_campaign.selection import ALPHAFOLD_MIN_IPTM, MAX_FINALISTS, apply_reviews, export_check, review_gaps, select, write_outputs
 
 parser = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
 parser.add_argument("--records", type=Path, required=True)
@@ -27,6 +27,9 @@ parser.add_argument("--limit", type=int, default=MAX_FINALISTS)
 parser.add_argument("--source", default="generator", help="structure source whose groups are used: generator, esmfold2 or boltz2")
 parser.add_argument("--fold-threshold", type=float, default=0.5)
 parser.add_argument("--site-threshold", type=float, default=0.5)
+parser.add_argument("--alphafold-results", type=Path, nargs="+", default=None,
+                    help="alphafold-results.json files from review-alphafold.py; turns on the AlphaFold gate (ipTM above every control, pose limits)")
+parser.add_argument("--alphafold-min-iptm", type=float, default=ALPHAFOLD_MIN_IPTM)
 parser.add_argument("--reviews", type=Path, default=None, help="a person's review decisions (JSON); see binder_campaign/selection.py")
 args = parser.parse_args()
 try:
@@ -34,7 +37,15 @@ try:
         raise ValueError("Use a fresh output directory")
     records = json.loads(args.records.read_text())["candidates"]
     diversity = json.loads(args.diversity.read_text())
-    selected, report = select(records, diversity, args.limit, args.source, args.fold_threshold, args.site_threshold)
+    alphafold = None
+    if args.alphafold_results:
+        alphafold = {}
+        for path in args.alphafold_results:
+            for entry in json.loads(path.read_text())["results"]:
+                if entry["candidate_id"] in alphafold:
+                    raise ValueError("A design appears in two AlphaFold result files: " + entry["candidate_id"])
+                alphafold[entry["candidate_id"]] = entry
+    selected, report = select(records, diversity, args.limit, args.source, args.fold_threshold, args.site_threshold, alphafold, args.alphafold_min_iptm)
     ids = [s["candidate_id"] for s in selected]
     reviewed = apply_reviews(records, ids, json.loads(args.reviews.read_text())) if args.reviews else [r for r in records if r["candidate_id"] in ids]
     args.out.mkdir(parents=True)
