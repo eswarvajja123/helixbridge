@@ -1,0 +1,53 @@
+{
+  "settings": {
+    "model_type": "alphafold2_multimer_v3",
+    "num_models": 2,
+    "num_recycle": 3,
+    "num_seeds": 1,
+    "rank": "iptm",
+    "msa_mode": "mmseqs2_uniref_env",
+    "pair_mode": "unpaired_paired",
+    "templates": false,
+    "relax": false
+  },
+  "chunks": {
+    "c1": {
+      "ids": [
+        "il7ra-rfd4-08f9233a8a90",
+        "il7ra-rfd4-a9ca4147761f",
+        "il7ra-rfd4-8d368322e6bf",
+        "il7ra-rfd4-90b6d9399028"
+      ],
+      "attempts": [
+        "alphafold-eswar-a1-c1-1"
+      ],
+      "status": "failed",
+      "error": "TimeoutExpired: Command '['colabfold_batch', '/cache/runs/alphafold-eswar-a1-c1-1/input.csv', '/cache/runs/alphafold-eswar-a1-c1-1/out', '--model-type', 'alphafold2_multimer_v3', '--num-models', '2', '--num-recycle', '3', '--num-seeds', '1', '--rank', 'iptm', '--msa-mode', 'mmseqs2_uniref_env', '--pair-mode', 'unpaired_paired', '--num-relax', '0', '--data', '/cache/colabfold']' timed out after 310"
+    },
+    "c2": {
+      "ids": [
+        "il7ra-rfd4-67f05b49fd19",
+        "il7ra-rfd4-7fc8ab07c02f",
+        "il7ra-rfd4-13af2bd8fd8a",
+        "il7ra-rfd4-2e2ec88e93b8"
+      ],
+      "attempts": [
+        "alphafold-eswar-a1-c2-1"
+      ],
+      "status": "failed",
+      "error": "TimeoutExpired: Command '['colabfold_batch', '/cache/runs/alphafold-eswar-a1-c2-1/input.csv', '/cache/runs/alphafold-eswar-a1-c2-1/out', '--model-type', 'alphafold2_multimer_v3', '--num-models', '2', '--num-recycle', '3', '--num-seeds', '1', '--rank', 'iptm', '--msa-mode', 'mmseqs2_uniref_env', '--pair-mode', 'unpaired_paired', '--num-relax', '0', '--data', '/cache/colabfold']' timed out after 310"
+    },
+    "c3": {
+      "ids": [
+        "il7ra-rfd4-9111856e8955",
+        "il7ra-rfd4-b25d020a592d",
+        "il7ra-rfd4-b71bcf79d966",
+        "il7ra-rfd4-bf3f3264bcd4"
+      ],
+      "attempts": [
+        "alphafold-eswar-a1-c3-1"
+      ],
+      "status": "started"
+    }
+  }
+}

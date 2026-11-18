@@ -12,7 +12,7 @@ cd helixbridge-team
 git config core.autocrlf false
 git remote add eswar https://github.com/eswarvajja123/helixbridge
 git fetch eswar main
-git checkout eswar/main -- pipeline docs/eswar requirements-eswar.txt modal_current.py modal_esmfold2.py modal_evaluate.py modal_mosaic.py modal_repair.py
+git checkout eswar/main -- pipeline docs/eswar requirements-eswar.txt modal_current.py modal_esmfold2.py modal_evaluate.py modal_mosaic.py modal_repair.py modal_alphafold.py
 ```
 
 **On Windows, run `git config core.autocrlf false` first (it is the first line above).** Several input files are checked against a SHA-256, and Git's default of converting line endings to CRLF changes their bytes: the first laptop run failed with `Reference input changed after preparation` for exactly this reason (17 Nov). If you already cloned, set the option and re-run the `git checkout` line so the files are rewritten with Unix line endings.
@@ -295,6 +295,20 @@ python pipeline/scripts/repair-liabilities.py ingest --records results/liabiliti
 ```
 
 Then score and check the variants in `repair-1/repair-candidates.json` (Stages E and F); QC compares them with their parent's backbone.
+
+## Stage Q — AlphaFold-Multimer cross-check of the shortlist (Task 5.4), and shuffled negative controls
+
+**Status: not yet completed on a GPU.** Two cloud attempts produced no predictions (records in `results/alphafold-attempts/`): the first used the public ColabFold MSA server and sat in its queue for 52 minutes per chunk; the second used our own target alignment and went silent after the alignment step for 15+ minutes before I stopped it. The cause of the second stall is not yet known. `modal_alphafold.py` now streams the job's output live and stops it after 7 silent minutes with the last lines printed, so run one design first.
+
+```bash
+modal run modal_alphafold.py --stage prepare
+head -2 results/alphafold-handoff-eswar-h1/colabfold-batch.csv > one.csv        # the first design only (the full file is in docs/eswar/results/alphafold-handoff/)
+modal run modal_alphafold.py --stage predict --batch one.csv --out results/alphafold-one --chunk 1
+```
+
+Send me everything it printed. If it finishes, run the full file the same way with `--out results/alphafold-eswar-a4` and then `python pipeline/scripts/review-alphafold.py --records ... --selection ... --evaluation ... --alphafold results/alphafold-eswar-a4 --out ...` (see its `--help`). The alignment is the team's own 1,022-row target MSA with the binder as a single sequence (`docs/eswar/phase1-data/target.a3m`); no MSA server is used and no sequence leaves the container. This records AlphaFold's numbers only and never sets a review field.
+
+The shuffled-control experiment is done (`results/controls/`): 20 shuffled copies of the shortlisted sequences, scored and QC'd the same way. 0 of 20 controls pass QC (20 of 20 designs do). A design scores above a control in 100 % of ESMFold2 ipTM and ipSAE comparisons and 99.5 % of Boltz-2 comparisons. Boltz-2 gave one shuffled sequence an ipTM of 0.86, so Boltz-2 alone does not separate designs from scrambles; ESMFold2 does better. This says the scores respond to sequence, not that any design binds. The shortlist was chosen from designs that already passed QC, so the QC share is not an unbiased estimate.
 
 ## Optional: re-check the real ESMFold2 library on your machine (free, CPU)
 

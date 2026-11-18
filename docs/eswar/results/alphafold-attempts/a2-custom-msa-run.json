@@ -1,0 +1,80 @@
+{
+  "settings": {
+    "model_type": "alphafold2_multimer_v3",
+    "num_models": 2,
+    "num_recycle": 3,
+    "num_seeds": 1,
+    "rank": "iptm",
+    "msa_mode": "custom a3m: target-only MSA (1,022 rows) + binder single sequence; no MSA server",
+    "pair_mode": "unpaired_paired",
+    "templates": false,
+    "relax": false
+  },
+  "chunks": {
+    "c1": {
+      "ids": [
+        "il7ra-rfd4-08f9233a8a90",
+        "il7ra-rfd4-a9ca4147761f",
+        "il7ra-rfd4-8d368322e6bf",
+        "il7ra-rfd4-90b6d9399028"
+      ],
+      "attempts": [
+        "alphafold-eswar-a2-c1-1"
+      ],
+      "status": "failed",
+      "error": "RemoteError: "
+    },
+    "c2": {
+      "ids": [
+        "il7ra-rfd4-67f05b49fd19",
+        "il7ra-rfd4-7fc8ab07c02f",
+        "il7ra-rfd4-13af2bd8fd8a",
+        "il7ra-rfd4-2e2ec88e93b8"
+      ],
+      "attempts": [
+        "alphafold-eswar-a2-c2-1"
+      ],
+      "status": "failed",
+      "error": "ConflictError: function fu-zuOjkO6Rw7KqPi3ePMXC13 is stopped"
+    },
+    "c3": {
+      "ids": [
+        "il7ra-rfd4-9111856e8955",
+        "il7ra-rfd4-b25d020a592d",
+        "il7ra-rfd4-b71bcf79d966",
+        "il7ra-rfd4-bf3f3264bcd4"
+      ],
+      "attempts": [
+        "alphafold-eswar-a2-c3-1"
+      ],
+      "status": "failed",
+      "error": "ConflictError: function fu-zuOjkO6Rw7KqPi3ePMXC13 is stopped"
+    },
+    "c4": {
+      "ids": [
+        "il7ra-rfd4-c79f951a2a43",
+        "il7ra-rfd4-e45f4580e44e",
+        "il7ra-rfd4-fa91ad8e2470",
+        "il7ra-rfd4-798bb23118c0"
+      ],
+      "attempts": [
+        "alphafold-eswar-a2-c4-1"
+      ],
+      "status": "failed",
+      "error": "ConflictError: function fu-zuOjkO6Rw7KqPi3ePMXC13 is stopped"
+    },
+    "c5": {
+      "ids": [
+        "il7ra-rfd4-026e12ae07bc",
+        "il7ra-rfd4-3d017821d726",
+        "il7ra-rfd4-f5d48afb1a53",
+        "il7ra-rfd4-1ce95bd8ae7b"
+      ],
+      "attempts": [
+        "alphafold-eswar-a2-c5-1"
+      ],
+      "status": "failed",
+      "error": "ConflictError: function fu-zuOjkO6Rw7KqPi3ePMXC13 is stopped"
+    }
+  }
+}

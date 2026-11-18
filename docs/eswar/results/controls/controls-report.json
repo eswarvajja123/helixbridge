@@ -1,0 +1,86 @@
+{
+  "schema": 1,
+  "designs": 20,
+  "controls": 20,
+  "measures": {
+    "esmfold2_iptm": {
+      "designs": {
+        "n": 20,
+        "min": 0.852,
+        "median": 0.923,
+        "max": 0.966
+      },
+      "controls": {
+        "n": 20,
+        "min": 0.086,
+        "median": 0.184,
+        "max": 0.638
+      },
+      "p_design_above_control": 1.0,
+      "share_at_or_above": {
+        "0.8": {
+          "designs": 1.0,
+          "controls": 0.0
+        }
+      }
+    },
+    "esmfold2_ipsae_max": {
+      "designs": {
+        "n": 20,
+        "min": 0.617,
+        "median": 0.792,
+        "max": 0.88
+      },
+      "controls": {
+        "n": 20,
+        "min": 0.0,
+        "median": 0.0,
+        "max": 0.459
+      },
+      "p_design_above_control": 1.0
+    },
+    "boltz2_iptm": {
+      "designs": {
+        "n": 20,
+        "min": 0.823,
+        "median": 0.938,
+        "max": 0.961
+      },
+      "controls": {
+        "n": 20,
+        "min": 0.269,
+        "median": 0.607,
+        "max": 0.863
+      },
+      "p_design_above_control": 0.995,
+      "share_at_or_above": {
+        "0.8": {
+          "designs": 1.0,
+          "controls": 0.2
+        }
+      }
+    },
+    "boltz2_ipsae_max": {
+      "designs": {
+        "n": 20,
+        "min": 0.57,
+        "median": 0.826,
+        "max": 0.865
+      },
+      "controls": {
+        "n": 20,
+        "min": 0.0,
+        "median": 0.216,
+        "max": 0.742
+      },
+      "p_design_above_control": 0.995
+    }
+  },
+  "qc_clean": {
+    "designs": 20,
+    "controls": 0,
+    "design_share": 1.0,
+    "control_share": 0.0
+  },
+  "scope": "Shuffled-sequence negatives (same length and composition). An easy negative: it shows what the numbers cannot do, not that a design binds. Probability 0.5 means no separation; the QC compares the two predictors' poses and contacts only (no generator)."
+}
