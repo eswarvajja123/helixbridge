@@ -1,0 +1,111 @@
+{
+  "mode": "plan",
+  "settings": {
+    "temperature": 0.1,
+    "seed": 401,
+    "samples": 16,
+    "max_variants_per_design": 2
+  },
+  "designs": [
+    {
+      "candidate_id": "il7ra-rfd4-bf3f3264bcd4",
+      "types": [
+        "asp_pro"
+      ],
+      "redesign_positions": {
+        "38": "D"
+      },
+      "binder_chain": "B",
+      "binder_chain_index": 1
+    },
+    {
+      "candidate_id": "il7ra-rfd4-2e2ec88e93b8",
+      "types": [
+        "cysteine"
+      ],
+      "redesign_positions": {
+        "28": "C"
+      },
+      "binder_chain": "B",
+      "binder_chain_index": 1
+    },
+    {
+      "candidate_id": "il7ra-rfd4-8d368322e6bf",
+      "types": [
+        "cysteine"
+      ],
+      "redesign_positions": {
+        "31": "C"
+      },
+      "binder_chain": "B",
+      "binder_chain_index": 1
+    },
+    {
+      "candidate_id": "il7ra-rfd4-1ce95bd8ae7b",
+      "types": [
+        "asp_pro"
+      ],
+      "redesign_positions": {
+        "13": "D",
+        "47": "D"
+      },
+      "binder_chain": "B",
+      "binder_chain_index": 1
+    },
+    {
+      "candidate_id": "il7ra-rfd4-b25d020a592d",
+      "types": [
+        "sequon"
+      ],
+      "redesign_positions": {
+        "35": "N",
+        "55": "N"
+      },
+      "binder_chain": "B",
+      "binder_chain_index": 1
+    },
+    {
+      "candidate_id": "il7ra-rfd4-9111856e8955",
+      "types": [
+        "asn_gly",
+        "sequon"
+      ],
+      "redesign_positions": {
+        "6": "N",
+        "21": "N",
+        "34": "N",
+        "58": "N"
+      },
+      "binder_chain": "B",
+      "binder_chain_index": 1
+    },
+    {
+      "candidate_id": "il7ra-rfd4-13af2bd8fd8a",
+      "types": [
+        "asn_gly",
+        "asp_pro",
+        "sequon"
+      ],
+      "redesign_positions": {
+        "5": "N",
+        "17": "N",
+        "38": "N",
+        "75": "D"
+      },
+      "binder_chain": "B",
+      "binder_chain_index": 1
+    },
+    {
+      "candidate_id": "il7ra-rfd4-3d017821d726",
+      "types": [
+        "sequon"
+      ],
+      "redesign_positions": {
+        "43": "N"
+      },
+      "binder_chain": "B",
+      "binder_chain_index": 1
+    }
+  ],
+  "results": []
+}

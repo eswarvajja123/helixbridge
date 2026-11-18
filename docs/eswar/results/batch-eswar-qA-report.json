@@ -1,0 +1,426 @@
+{
+  "batch_id": "eswar-qA",
+  "stop_reason": "completed",
+  "planned": 16,
+  "done": 16,
+  "kept": 16,
+  "dropped_by_dedup": 0,
+  "dropped_by_reason": {},
+  "failed": [],
+  "interrupted": [],
+  "not_started": [],
+  "attempts": 16,
+  "failed_attempts": 0,
+  "gpu_seconds_reported": 1104.79,
+  "gpu_seconds_note": "Worker seconds as reported by the function; Modal bills container time, which is longer. Check billing.",
+  "budget": {
+    "max_designs": 16,
+    "max_gpu_seconds": 1800.0,
+    "max_failures": 3
+  },
+  "hotspots": [
+    100,
+    101,
+    102,
+    158,
+    159,
+    161,
+    211,
+    212,
+    213,
+    214
+  ],
+  "hotspot_source": "provisional_historical",
+  "thresholds": {
+    "identity": 0.8,
+    "contiguous": 0.9,
+    "tm": 0.9
+  },
+  "designs": {
+    "s106-l50": {
+      "status": "done",
+      "run_id": "eswar-qA-s106-l50-a1",
+      "attempts": 1,
+      "seed": 106,
+      "binder_length": [
+        50,
+        50
+      ],
+      "worker_seconds": 63.944667781,
+      "gpu": "NVIDIA A100-SXM4-80GB",
+      "candidate_id": "il7ra-rfd4-7410fd1427ae",
+      "dedup": {
+        "candidate_id": "eswar-qA-s106-l50-a1",
+        "kept": true,
+        "reason": "kept",
+        "nearest_id": null,
+        "identity": null,
+        "contiguous": null,
+        "tm": null
+      },
+      "error": null,
+      "earlier_attempts": []
+    },
+    "s106-l60": {
+      "status": "done",
+      "run_id": "eswar-qA-s106-l60-a1",
+      "attempts": 1,
+      "seed": 106,
+      "binder_length": [
+        60,
+        60
+      ],
+      "worker_seconds": 55.449612965,
+      "gpu": "NVIDIA A100-SXM4-80GB",
+      "candidate_id": "il7ra-rfd4-20bd38bc16e3",
+      "dedup": {
+        "candidate_id": "eswar-qA-s106-l60-a1",
+        "kept": true,
+        "reason": "kept",
+        "nearest_id": "eswar-qA-s106-l50-a1",
+        "identity": 0.32,
+        "contiguous": 0.04,
+        "tm": 0.5015981823175858
+      },
+      "error": null,
+      "earlier_attempts": []
+    },
+    "s106-l70": {
+      "status": "done",
+      "run_id": "eswar-qA-s106-l70-a1",
+      "attempts": 1,
+      "seed": 106,
+      "binder_length": [
+        70,
+        70
+      ],
+      "worker_seconds": 80.192858044,
+      "gpu": "NVIDIA A100-SXM4-80GB",
+      "candidate_id": "il7ra-rfd4-4299d00838fb",
+      "dedup": {
+        "candidate_id": "eswar-qA-s106-l70-a1",
+        "kept": true,
+        "reason": "kept",
+        "nearest_id": "eswar-qA-s106-l50-a1",
+        "identity": 0.32,
+        "contiguous": 0.06,
+        "tm": 0.44515687928116393
+      },
+      "error": null,
+      "earlier_attempts": []
+    },
+    "s106-l80": {
+      "status": "done",
+      "run_id": "eswar-qA-s106-l80-a1",
+      "attempts": 1,
+      "seed": 106,
+      "binder_length": [
+        80,
+        80
+      ],
+      "worker_seconds": 70.61781329700001,
+      "gpu": "NVIDIA A100-SXM4-80GB",
+      "candidate_id": "il7ra-rfd4-2054930b0dcd",
+      "dedup": {
+        "candidate_id": "eswar-qA-s106-l80-a1",
+        "kept": true,
+        "reason": "kept",
+        "nearest_id": "eswar-qA-s106-l50-a1",
+        "identity": 0.34,
+        "contiguous": 0.06,
+        "tm": 0.23895192160864448
+      },
+      "error": null,
+      "earlier_attempts": []
+    },
+    "s107-l50": {
+      "status": "done",
+      "run_id": "eswar-qA-s107-l50-a1",
+      "attempts": 1,
+      "seed": 107,
+      "binder_length": [
+        50,
+        50
+      ],
+      "worker_seconds": 65.97978558700001,
+      "gpu": "NVIDIA A100-SXM4-80GB",
+      "candidate_id": "il7ra-rfd4-90b6d9399028",
+      "dedup": {
+        "candidate_id": "eswar-qA-s107-l50-a1",
+        "kept": true,
+        "reason": "kept",
+        "nearest_id": "eswar-qA-s106-l60-a1",
+        "identity": 0.4,
+        "contiguous": 0.06,
+        "tm": 0.47336192201915867
+      },
+      "error": null,
+      "earlier_attempts": []
+    },
+    "s107-l60": {
+      "status": "done",
+      "run_id": "eswar-qA-s107-l60-a1",
+      "attempts": 1,
+      "seed": 107,
+      "binder_length": [
+        60,
+        60
+      ],
+      "worker_seconds": 72.41937598500002,
+      "gpu": "NVIDIA A100-SXM4-80GB",
+      "candidate_id": "il7ra-rfd4-6c750edc9d24",
+      "dedup": {
+        "candidate_id": "eswar-qA-s107-l60-a1",
+        "kept": true,
+        "reason": "kept",
+        "nearest_id": "eswar-qA-s106-l60-a1",
+        "identity": 0.25,
+        "contiguous": 0.05,
+        "tm": 0.41806627568012517
+      },
+      "error": null,
+      "earlier_attempts": []
+    },
+    "s107-l70": {
+      "status": "done",
+      "run_id": "eswar-qA-s107-l70-a1",
+      "attempts": 1,
+      "seed": 107,
+      "binder_length": [
+        70,
+        70
+      ],
+      "worker_seconds": 71.26777453699998,
+      "gpu": "NVIDIA A100-SXM4-80GB",
+      "candidate_id": "il7ra-rfd4-37bf87334140",
+      "dedup": {
+        "candidate_id": "eswar-qA-s107-l70-a1",
+        "kept": true,
+        "reason": "kept",
+        "nearest_id": "eswar-qA-s106-l60-a1",
+        "identity": 0.35,
+        "contiguous": 0.05,
+        "tm": 0.5009554244338924
+      },
+      "error": null,
+      "earlier_attempts": []
+    },
+    "s107-l80": {
+      "status": "done",
+      "run_id": "eswar-qA-s107-l80-a1",
+      "attempts": 1,
+      "seed": 107,
+      "binder_length": [
+        80,
+        80
+      ],
+      "worker_seconds": 73.07989158200002,
+      "gpu": "NVIDIA A100-SXM4-80GB",
+      "candidate_id": "il7ra-rfd4-800ab3709765",
+      "dedup": {
+        "candidate_id": "eswar-qA-s107-l80-a1",
+        "kept": true,
+        "reason": "kept",
+        "nearest_id": "eswar-qA-s106-l60-a1",
+        "identity": 0.48333333333333334,
+        "contiguous": 0.05,
+        "tm": 0.5342481757675872
+      },
+      "error": null,
+      "earlier_attempts": []
+    },
+    "s108-l50": {
+      "status": "done",
+      "run_id": "eswar-qA-s108-l50-a1",
+      "attempts": 1,
+      "seed": 108,
+      "binder_length": [
+        50,
+        50
+      ],
+      "worker_seconds": 65.06336681299996,
+      "gpu": "NVIDIA A100-SXM4-80GB",
+      "candidate_id": "il7ra-rfd4-30c2cd9e5c4f",
+      "dedup": {
+        "candidate_id": "eswar-qA-s108-l50-a1",
+        "kept": true,
+        "reason": "kept",
+        "nearest_id": "eswar-qA-s106-l60-a1",
+        "identity": 0.38,
+        "contiguous": 0.08,
+        "tm": 0.6082040431764246
+      },
+      "error": null,
+      "earlier_attempts": []
+    },
+    "s108-l60": {
+      "status": "done",
+      "run_id": "eswar-qA-s108-l60-a1",
+      "attempts": 1,
+      "seed": 108,
+      "binder_length": [
+        60,
+        60
+      ],
+      "worker_seconds": 65.60688371200001,
+      "gpu": "NVIDIA A100-SXM4-80GB",
+      "candidate_id": "il7ra-rfd4-31bc08d9dd8a",
+      "dedup": {
+        "candidate_id": "eswar-qA-s108-l60-a1",
+        "kept": true,
+        "reason": "kept",
+        "nearest_id": "eswar-qA-s106-l60-a1",
+        "identity": 0.5333333333333333,
+        "contiguous": 0.08333333333333333,
+        "tm": 0.8190386772444413
+      },
+      "error": null,
+      "earlier_attempts": []
+    },
+    "s108-l70": {
+      "status": "done",
+      "run_id": "eswar-qA-s108-l70-a1",
+      "attempts": 1,
+      "seed": 108,
+      "binder_length": [
+        70,
+        70
+      ],
+      "worker_seconds": 67.21416695300002,
+      "gpu": "NVIDIA A100-SXM4-80GB",
+      "candidate_id": "il7ra-rfd4-a9ca4147761f",
+      "dedup": {
+        "candidate_id": "eswar-qA-s108-l70-a1",
+        "kept": true,
+        "reason": "kept",
+        "nearest_id": "eswar-qA-s107-l50-a1",
+        "identity": 0.36,
+        "contiguous": 0.06,
+        "tm": 0.5165763649219346
+      },
+      "error": null,
+      "earlier_attempts": []
+    },
+    "s108-l80": {
+      "status": "done",
+      "run_id": "eswar-qA-s108-l80-a1",
+      "attempts": 1,
+      "seed": 108,
+      "binder_length": [
+        80,
+        80
+      ],
+      "worker_seconds": 69.83572119000007,
+      "gpu": "NVIDIA A100-SXM4-80GB",
+      "candidate_id": "il7ra-rfd4-e83591b129ad",
+      "dedup": {
+        "candidate_id": "eswar-qA-s108-l80-a1",
+        "kept": true,
+        "reason": "kept",
+        "nearest_id": "eswar-qA-s106-l60-a1",
+        "identity": 0.4,
+        "contiguous": 0.05,
+        "tm": 0.6182200541778384
+      },
+      "error": null,
+      "earlier_attempts": []
+    },
+    "s109-l50": {
+      "status": "done",
+      "run_id": "eswar-qA-s109-l50-a1",
+      "attempts": 1,
+      "seed": 109,
+      "binder_length": [
+        50,
+        50
+      ],
+      "worker_seconds": 72.598811867,
+      "gpu": "NVIDIA A100-SXM4-80GB",
+      "candidate_id": "il7ra-rfd4-cd795632b052",
+      "dedup": {
+        "candidate_id": "eswar-qA-s109-l50-a1",
+        "kept": true,
+        "reason": "kept",
+        "nearest_id": "eswar-qA-s107-l50-a1",
+        "identity": 0.36,
+        "contiguous": 0.06,
+        "tm": 0.6910594688673042
+      },
+      "error": null,
+      "earlier_attempts": []
+    },
+    "s109-l60": {
+      "status": "done",
+      "run_id": "eswar-qA-s109-l60-a1",
+      "attempts": 1,
+      "seed": 109,
+      "binder_length": [
+        60,
+        60
+      ],
+      "worker_seconds": 68.351683805,
+      "gpu": "NVIDIA A100-SXM4-80GB",
+      "candidate_id": "il7ra-rfd4-a0f0f8c0cd1c",
+      "dedup": {
+        "candidate_id": "eswar-qA-s109-l60-a1",
+        "kept": true,
+        "reason": "kept",
+        "nearest_id": "eswar-qA-s107-l50-a1",
+        "identity": 0.42,
+        "contiguous": 0.06,
+        "tm": 0.6607077082029716
+      },
+      "error": null,
+      "earlier_attempts": []
+    },
+    "s109-l70": {
+      "status": "done",
+      "run_id": "eswar-qA-s109-l70-a1",
+      "attempts": 1,
+      "seed": 109,
+      "binder_length": [
+        70,
+        70
+      ],
+      "worker_seconds": 67.16771363300006,
+      "gpu": "NVIDIA A100-SXM4-80GB",
+      "candidate_id": "il7ra-rfd4-b71bcf79d966",
+      "dedup": {
+        "candidate_id": "eswar-qA-s109-l70-a1",
+        "kept": true,
+        "reason": "kept",
+        "nearest_id": "eswar-qA-s109-l60-a1",
+        "identity": 0.26666666666666666,
+        "contiguous": 0.05,
+        "tm": 0.49159565822387086
+      },
+      "error": null,
+      "earlier_attempts": []
+    },
+    "s109-l80": {
+      "status": "done",
+      "run_id": "eswar-qA-s109-l80-a1",
+      "attempts": 1,
+      "seed": 109,
+      "binder_length": [
+        80,
+        80
+      ],
+      "worker_seconds": 76.000553491,
+      "gpu": "NVIDIA A100-SXM4-80GB",
+      "candidate_id": "il7ra-rfd4-8d13ed2d54d6",
+      "dedup": {
+        "candidate_id": "eswar-qA-s109-l80-a1",
+        "kept": true,
+        "reason": "kept",
+        "nearest_id": "eswar-qA-s109-l70-a1",
+        "identity": 0.2857142857142857,
+        "contiguous": 0.04285714285714286,
+        "tm": 0.5945386370624475
+      },
+      "error": null,
+      "earlier_attempts": []
+    }
+  },
+  "status_note": "None of these designs is a binding result or a submission entry."
+}

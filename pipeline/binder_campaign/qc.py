@@ -143,6 +143,8 @@ def _shift(fixed, moving, core):
 def check_candidate(record, structures, target, thresholds=None, expected=SOURCES):
     """QC one candidate.
 
+    A record may carry `generator_structure_sequence`: for a sequence-repaired variant the generator structure still holds the parent's
+    binder sequence, and that is what the generator source is checked against.
     `structures` maps a source name ('generator', 'esmfold2', 'boltz2') to {"path": ..., "sha256": ... or None}; a source that is
     absent counts as not checked. `target` is the target manifest (sequence, start, end, min_length, max_length).
     Returns the `qc` dict: measurements, reasons and a status of `flagged`, `no_flags` or `incomplete`.
@@ -171,7 +173,8 @@ def check_candidate(record, structures, target, thresholds=None, expected=SOURCE
                 continue
         else:
             seq, positions = target["sequence"], refold_positions
-        pose, problems = inspect_structure(info["path"], source, seq, sequence, positions, info.get("sha256"))
+        structure_binder = (record.get("generator_structure_sequence") or sequence) if source == "generator" else sequence
+        pose, problems = inspect_structure(info["path"], source, seq, structure_binder, positions, info.get("sha256"))
         if pose is None:
             sources[source] = {"status": "unreadable"}
             reasons += problems

@@ -1,0 +1,12 @@
+{
+  "schema": 1,
+  "candidates": 72,
+  "status_counts": {
+    "not_searched": 45,
+    "no_public_hit": 25,
+    "no_tripping_hit": 2
+  },
+  "rule": "flag when query coverage >= 0.8 and identity > 0.7",
+  "database": "/tmp/claude-0/-home-user-helixbridge/b5dcde54-d65c-53f6-99bf-3b6d55328bbf/scratchpad/pubdb/publicDB (/tmp/claude-0/-home-user-helixbridge/b5dcde54-d65c-53f6-99bf-3b6d55328bbf/scratchpad/pubdb/publicDB)",
+  "scope": "Public-database pre-screen only. A flag is informative; no flag proves nothing, because the organizers' database is private and their exact search settings are unconfirmed. novelty_review stays pending."
+}

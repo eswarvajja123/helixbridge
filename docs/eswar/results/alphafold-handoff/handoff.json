@@ -1,0 +1,33 @@
+{
+  "schema": 1,
+  "designs": [
+    "il7ra-rfd4-08f9233a8a90",
+    "il7ra-rfd4-a9ca4147761f",
+    "il7ra-rfd4-8d368322e6bf",
+    "il7ra-rfd4-90b6d9399028",
+    "il7ra-rfd4-67f05b49fd19",
+    "il7ra-rfd4-7fc8ab07c02f",
+    "il7ra-rfd4-13af2bd8fd8a",
+    "il7ra-rfd4-2e2ec88e93b8",
+    "il7ra-rfd4-9111856e8955",
+    "il7ra-rfd4-b25d020a592d",
+    "il7ra-rfd4-b71bcf79d966",
+    "il7ra-rfd4-bf3f3264bcd4",
+    "il7ra-rfd4-c79f951a2a43",
+    "il7ra-rfd4-e45f4580e44e",
+    "il7ra-rfd4-fa91ad8e2470",
+    "il7ra-rfd4-798bb23118c0",
+    "il7ra-rfd4-026e12ae07bc",
+    "il7ra-rfd4-3d017821d726",
+    "il7ra-rfd4-f5d48afb1a53",
+    "il7ra-rfd4-1ce95bd8ae7b"
+  ],
+  "target": {
+    "uniprot": "P16871-1",
+    "start": 21,
+    "end": 239,
+    "length": 219
+  },
+  "status": "inputs_only_no_results",
+  "note": "No AlphaFold result is recorded here and no review field was set."
+}

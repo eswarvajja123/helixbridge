@@ -1,0 +1,90 @@
+{
+  "schema": 1,
+  "batches": [
+    {
+      "batch_id": "eswar-pA",
+      "candidates": 20,
+      "hotspots": [
+        100,
+        101,
+        102,
+        158,
+        159,
+        161,
+        211,
+        212,
+        213,
+        214
+      ],
+      "hotspot_source": "provisional_historical"
+    },
+    {
+      "batch_id": "eswar-pB",
+      "candidates": 20,
+      "hotspots": [
+        78,
+        79,
+        98,
+        100,
+        102,
+        103,
+        158,
+        159,
+        211,
+        212
+      ],
+      "hotspot_source": "proposed_by_eswar_unreviewed"
+    },
+    {
+      "batch_id": "eswar-qA",
+      "candidates": 16,
+      "hotspots": [
+        100,
+        101,
+        102,
+        158,
+        159,
+        161,
+        211,
+        212,
+        213,
+        214
+      ],
+      "hotspot_source": "provisional_historical"
+    },
+    {
+      "batch_id": "eswar-qB",
+      "candidates": 16,
+      "hotspots": [
+        78,
+        79,
+        98,
+        100,
+        102,
+        103,
+        158,
+        159,
+        211,
+        212
+      ],
+      "hotspot_source": "proposed_by_eswar_unreviewed"
+    }
+  ],
+  "designs": 72,
+  "kept_by_gate": 71,
+  "dropped_by_gate": 1,
+  "dropped_only_across_batches": [
+    {
+      "candidate_id": "il7ra-rfd4-ab54a5c15f5d",
+      "batch": "eswar-pB",
+      "reason": "backbone_tm",
+      "nearest": "il7ra-rfd4-7fc8ab07c02f"
+    }
+  ],
+  "thresholds": {
+    "identity": 0.8,
+    "contiguous": 0.9,
+    "tm": 0.9
+  },
+  "scope": "Near-duplicate gate only; not a novelty check and not a quality ranking."
+}

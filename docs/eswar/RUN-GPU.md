@@ -243,6 +243,24 @@ It proposes at most 20 designs by **coverage** (round-robin over fold groups, pr
 
 Only record a decision you actually made. **Task 5.4** (the AlphaFold cross-check by Stefanos) is a person's step, not code.
 
+## Stage M — Task 5.2 (optional part): repair liabilities with SolubleMPNN
+
+Follows the team's lead101 protocol: for a design with a liability, redesign only the positions involved, forbid the offending residue there, keep everything else fixed, sample 16 sequences at temperature 0.1 (seed 401) from the design's own backbone and keep the best two unique valid ones by MPNN's own confidence. **The tool is built and tested, but the real SolubleMPNN has not been run** (it is third-party code that loads third-party pickled weights, and it needs `openfold`; run it only where you are comfortable doing that).
+
+```bash
+python pipeline/scripts/repair-liabilities.py plan --records results/liabilities-eswar-l2/liabilities-candidates.json --selection results/selection-eswar-s2/selection.json --out results/repair-eswar-r1
+```
+
+`plan` is free: it lists, per design, the positions to redesign and writes each design's backbone as `design.pdb`. On the first real shortlist, 6 of 13 designs had something to repair, each at one or two positions. To run SolubleMPNN, either use `run` (give it `--mpnn-code` for a checkout of github.com/dauparas/LigandMPNN, `--weights` for `solublempnn_v_48_020.pt` from files.ipd.uw.edu, and `--python` for an environment with torch, prody and openfold), or run it yourself on the `design.pdb` files and use `ingest --native-dir`. Either way you get `repair-candidates.json`: new records `<parent>-r1`, `-r2` that carry no evidence from the parent. **They must be scored again (Stage E on that file), checked (Stage F, which compares them with the parent's backbone) and reviewed before anyone trusts them.** A repair does not show a design binds.
+
+## Stage N — Task 5.4: hand-off for the AlphaFold cross-check (a person's step)
+
+```bash
+python pipeline/scripts/export-alphafold-inputs.py --records results/liabilities-eswar-l2/liabilities-candidates.json --selection results/selection-eswar-s2/selection.json --out results/alphafold-handoff-eswar-h1
+```
+
+Writes the target and binder sequences as AlphaFold-style complexes (`TARGET:BINDER`, plus ColabFold's batch CSV) and a **blank** results sheet. Nothing is run and no review field is set: whoever runs AlphaFold fills in the sheet, and a person then sets `independent_prediction_status` (Stage L).
+
 ## Optional: re-check the real ESMFold2 library on your machine (free, CPU)
 
 The test suite normally uses stand-ins for `esm`, `torch` and `huggingface_hub`. `pipeline/tests/test_real_esm.py` runs the **real** `esm` fold code with a tiny random-weight model instead (no GPU, no weights download, about 90 s), and checks that my validator and the real pinned ipSAE accept what it writes. It is skipped unless you point it at a Python that has the real libraries:

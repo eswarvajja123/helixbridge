@@ -26,7 +26,7 @@ Hotspot options B and C; binder length 80; `--length-min/--length-max` (53 resid
 
 | Path | Status |
 |---|---|
-| A real Ctrl-C mid-call | never run for real; covered by tests only |
+| A real Ctrl-C mid-call | never run for real; covered by tests only (a worker restart did cut calls off twice, and both were recovered) |
 | Batch `--retry-failed` (the generation engine) | never run for real; the evaluation engine's version was |
 | `--include-flagged` in evaluation | never run for real |
 | Another GPU type for ESMFold2 (L40S) | never run; A100-80GB only |
@@ -35,3 +35,7 @@ Hotspot options B and C; binder length 80; `--length-min/--length-max` (53 resid
 | A passing export guard | never reached: it needs a person's reviews |
 
 None of these blocks anything; they are the places a surprise could still hide.
+
+## Added 18 Nov
+
+The SolubleMPNN repair (`repair.py`) is built and tested, but the real upstream program has **not been run**: it is third-party code that loads third-party pickled weights and needs `openfold`, and the session's permission check did not allow running it. The wrapper, the redesign rules, the output parser and the selection rule are tested with a stand-in; the upstream output format was read from its source, not observed. `plan` mode ran on the real shortlist. The AlphaFold cross-check is a person's step; only its hand-off package exists.

@@ -156,3 +156,34 @@ Caveats: 12 of the 13 shortlisted designs come from options A and B, whose hotsp
 ## Cost
 
 From the billing summary's credits line: 2.01 at the start of the first GPU run to 9.25 at the end of the pool run, about $7.2 of credit in total (the pool run alone, from 3.16, about $6.1, slightly under the $7 cap set for it); billed cost is still $0.00.
+
+## 18 Nov 2026 — extending the pool to reach 20, and the final shortlist
+
+Superseded by this section: the 13-design shortlist above (`selection-eswar-s2`) is kept as history. All numbers are from the real files in `docs/eswar/results/`.
+
+**More designs:** 32 more on options A and B (seeds 106-109 x lengths 50-80, batches `eswar-qA` and `eswar-qB`): 32 of 32, 0 failures, 2,106 GPU seconds, about $1.8. Option C was dropped from the pool (all 20 of its designs failed QC; they stay in the earlier results as a negative result). Merged pool (`pool-eswar-p2`): 72 designs, 71 kept by the near-duplicate gate (the same one batch-B backbone duplicate).
+
+**Scoring (`eswar-e3`, 71 designs x 2 predictors = 142 predictions):** 25 calls, 4,424 GPU seconds, 0 failures remaining. It was interrupted twice by the environment (a worker restart dropped the proxy during Boltz-2 calls; the engine stopped at its failure cap with every finished score saved) and resumed with `--retry-failed --retry-interrupted --max-failures 12`; GPUs: A100-80GB, A100-PCIe, L40S, A10. Cost of this round about $6 of credit (more than my $4 estimate, because of the interrupted calls and re-scoring the 39 older designs on purpose).
+
+**Reproducibility, measured for the first time (39 designs scored in both `e2` and `e3`, same seed and settings, mostly different GPU types):**
+
+| predictor | median change in ipTM | 90th percentile | largest |
+|---|---|---|---|
+| ESMFold2 | 0.0015 | 0.025 | 0.29 (one design; ipTM 0.445 -> 0.153, a weak design that Boltz-2 also scores low) |
+| Boltz-2 | 0.0031 | 0.015 | 0.020 |
+
+Typical scores repeat to the second decimal across GPU types, but a weak design can swing a lot between runs, so a single ESMFold2 number for a low-confidence design should not be trusted. **Structure-QC status was identical in both runs for all 39 designs** (26 flagged, 13 not).
+
+**Structure QC (71 scored designs):** 27 no flags, 44 flagged, 1 incomplete. Pass rate by hotspot option: **B (exposed natural site) 17 of 35 (49%)**, **A (provisional historical) 10 of 36 (28%)**, C 0 of 20 (earlier run). Most common flags: Boltz-2 puts the binder far from the generated pose (33 designs) and ESMFold2 and Boltz-2 disagree on the pose (30).
+
+**Novelty pre-screen (public Swiss-Prot + PDB):** 27 designs searched; 25 have no public hit, 2 a weak hit; none flagged.
+
+**Liabilities (all 72):** 24 have an N-glycosylation sequon, 11 an Asp-Pro motif, 6 an odd cysteine count, 2 an Asn-Gly motif; 34 have none.
+
+**Diversity (27 unflagged designs):** at TM 0.5 there are 15 fold groups in the generator poses (14 in each refold source) and 3 site groups at Jaccard 0.5 in all three sources.
+
+**Shortlist (`selection-eswar-s3`): 20 designs, the target.** It covers all 15 fold groups and all 3 site groups; 11 come from option B and 9 from option A; lengths: 4 at 50, 7 at 60, 5 at 70, 4 at 80; 8 carry at least one liability flag (the repair plan, `repair-plan-eswar-r2.json`, lists exactly which positions would be redesigned; the real SolubleMPNN run is not done). `pick_order` is the order of picking, not a ranking. The export guard still refuses until a person records the three reviews for every design. Inputs for the AlphaFold cross-check are in `docs/eswar/results/alphafold-handoff/` (inputs and a blank results sheet only).
+
+## Cost summary
+
+Credits line from the first GPU run (2.01) to the end of this round (15.09): about $13.1 of credit in total across about 100 generated designs and 272 predictions (6 + 59 + 71 designs, two predictors each); billed cost is still $0.00. Roughly $0.10 per design from generation through both predictors.

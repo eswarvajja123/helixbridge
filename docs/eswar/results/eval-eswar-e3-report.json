@@ -1,0 +1,87 @@
+{
+  "eval_id": "eswar-e3",
+  "stop_reason": "completed",
+  "candidates_total": 72,
+  "candidates_evaluated": 71,
+  "candidates_skipped": [
+    {
+      "candidate_id": "il7ra-rfd4-ab54a5c15f5d",
+      "reasons": [
+        "near_duplicate:backbone_tm"
+      ]
+    }
+  ],
+  "by_predictor": {
+    "esmfold2": {
+      "done": 71,
+      "failed": 0,
+      "started": 0,
+      "not_started": 0
+    },
+    "boltz2": {
+      "done": 71,
+      "failed": 0,
+      "started": 0,
+      "not_started": 0
+    }
+  },
+  "failures": [],
+  "interrupted": [],
+  "calls": 25,
+  "failed_evaluations": 6,
+  "gpu_seconds_reported": 4423.51,
+  "gpu_seconds_note": "The function's own count; Modal bills container time, which is longer. Check billing.",
+  "budget": {
+    "max_calls": 40,
+    "max_gpu_seconds": 6000.0,
+    "max_failures": 12
+  },
+  "pool_summary": {
+    "by_predictor": {
+      "esmfold2": {
+        "iptm": {
+          "n": 71,
+          "min": 0.15332455933094025,
+          "median": 0.9174774885177612,
+          "max": 0.9659727215766907
+        },
+        "ipsae_max": {
+          "n": 71,
+          "min": 0.0,
+          "median": 0.787117,
+          "max": 0.880218
+        }
+      },
+      "boltz2": {
+        "iptm": {
+          "n": 71,
+          "min": 0.25429803133010864,
+          "median": 0.888778805732727,
+          "max": 0.9675829410552979
+        },
+        "ipsae_max": {
+          "n": 71,
+          "min": 0.0,
+          "median": 0.749413,
+          "max": 0.876958
+        }
+      }
+    },
+    "paired_difference": {
+      "esmfold2_minus_boltz2_iptm": {
+        "n": 71,
+        "min": -0.47396595776081085,
+        "median": 0.0035720467567443848,
+        "max": 0.5095361769199371
+      },
+      "esmfold2_minus_boltz2_ipsae_max": {
+        "n": 71,
+        "min": -0.39781299999999997,
+        "median": 0.015131000000000006,
+        "max": 0.806338
+      }
+    },
+    "note": "Descriptive spread over this pool only. There is no supportable pass/fail threshold: the team's public pilot (outputs/) found negative controls scoring as high as binders, and its numeric gates are relative to a parent design. Disagreement between the two predictors is a reason for a person to look, not a verdict."
+  },
+  "status_note": "Raw scores only. No threshold, ranking or combination; not a binding result."
+}
