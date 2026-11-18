@@ -150,7 +150,7 @@ def choose(parent, samples, edits, types, max_variants=MAX_VARIANTS):
 
 
 def run_native(pdb_path, edits, out_dir, code_dir, weights, python, binder_chain="B", seed=SEED, samples=SAMPLES,
-               temperature=TEMPERATURE, device="cpu"):
+               temperature=TEMPERATURE):
     """Run the unmodified upstream run.py. Returns the path of the sequences FASTA."""
     out_dir = Path(out_dir)
     out_dir.mkdir(parents=True, exist_ok=True)
@@ -160,7 +160,7 @@ def run_native(pdb_path, edits, out_dir, code_dir, weights, python, binder_chain
                "--pdb_path", str(pdb_path), "--out_folder", str(out_dir), "--redesigned_residues",
                " ".join(f"{binder_chain}{p}" for p in edits), "--omit_AA_per_residue", str(omit), "--temperature", str(temperature),
                "--seed", str(seed), "--batch_size", str(samples), "--number_of_batches", "1", "--save_stats", "1",
-               "--pack_side_chains", "0", "--device", device]
+               "--pack_side_chains", "0"]                   # upstream picks CUDA if present, else CPU: it has no device flag
     done = subprocess.run(command, capture_output=True, text=True, cwd=str(code_dir))
     (out_dir / "run.log").write_text(done.stdout + "\n" + done.stderr)
     if done.returncode != 0:

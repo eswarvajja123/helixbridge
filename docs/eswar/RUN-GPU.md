@@ -287,14 +287,16 @@ python pipeline/scripts/compare-generators.py --out results/compare-eswar-c1 \
 
 ## Stage P — optional repair of liabilities with native SolubleMPNN (Task 5.2), in a Modal container
 
-`modal_repair.py` runs the unmodified upstream LigandMPNN (pinned commit, original `solublempnn_v_48_020` weights, hash-checked and loaded in torch's safe mode at image build) on a CPU container, never on your machine. **Written and tested; not run** (see `docs/eswar/gpu-coverage.md`).
+`modal_repair.py` runs the unmodified upstream LigandMPNN (pinned commit, original `solublempnn_v_48_020` weights, hash-checked and loaded in torch's safe mode at image build) on a CPU container, never on your machine. **Run on 18 Nov with the owner's go-ahead (Modal, CPU container); results in `results/repair/`.** The first attempt failed because the command passed a `--device` option that upstream `run.py` does not have (it picks CUDA or CPU itself); that bug is fixed and a test now checks every option we pass against the pinned upstream `run.py`.
 
 ```bash
-modal run modal_repair.py --records results/liabilities-eswar-l3/liabilities-candidates.json --selection results/selection-eswar-s3/selection.json --out results/repair-native-1
-python pipeline/scripts/repair-liabilities.py ingest --records results/liabilities-eswar-l3/liabilities-candidates.json --selection results/selection-eswar-s3/selection.json --native-dir results/repair-native-1/native --out results/repair-1
+modal run modal_repair.py --records results/liabilities-eswar-l3/liabilities-candidates.json --selection results/selection-eswar-s3/selection.json --out results/repair-native-2
+python pipeline/scripts/repair-liabilities.py ingest --records results/liabilities-eswar-l3/liabilities-candidates.json --selection results/selection-eswar-s3/selection.json --native-dir results/repair-native-2/native --out results/repair-2
 ```
 
-Then score and check the variants in `repair-1/repair-candidates.json` (Stages E and F); QC compares them with their parent's backbone.
+Then score and check the variants in `repair-2/repair-candidates.json` (Stages E and F); QC compares them with their parent's backbone.
+
+**Result:** 8 of the 20 shortlisted designs had fixable liabilities (N-glycosylation sequons, Asn-Gly, Asp-Pro); SolubleMPNN gave 12 variants (up to 2 per parent, 16 samples each, 4 rejected samples for one parent). All 12 scored on both predictors with no failures; the variants score within 0.06 of their parent's ipTM except one (below). Structure QC: 10 of 12 clean, 2 flagged (`22e6bf-r1` pose 2.83 Å from the generator under Boltz-2; `d8ae7b-r1` Boltz-2 puts the binder 22 Å away and its Boltz-2 ipTM falls to 0.44). Each variant is a **new candidate that has not been through the novelty pre-screen or AlphaFold**, and three of the repaired parents (`6e8955`, `64bcd4`, `21d726`) are among the designs AlphaFold disagreed with, which repair does not change. Variants are not added to the shortlist automatically.
 
 ## Stage Q — AlphaFold-Multimer cross-check of the shortlist (Task 5.4), and shuffled negative controls
 

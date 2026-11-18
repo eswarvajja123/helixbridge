@@ -192,7 +192,7 @@ class NativeWrapper(unittest.TestCase):
             "import argparse, json, os, sys\n"
             "p = argparse.ArgumentParser()\n"
             "for k in ['model_type','checkpoint_soluble_mpnn','pdb_path','out_folder','redesigned_residues','omit_AA_per_residue','temperature','seed',"
-            "'batch_size','number_of_batches','save_stats','pack_side_chains','device']:\n"
+            "'batch_size','number_of_batches','save_stats','pack_side_chains']:\n"
             "    p.add_argument('--' + k)\n"
             "a = p.parse_args()\n"
             "if os.environ.get('FAKE_FAIL'): sys.exit('boom')\n"
@@ -202,6 +202,14 @@ class NativeWrapper(unittest.TestCase):
         (self.dir / "d.pdb").write_text("END\n")
         (self.dir / "w.pt").write_text("w")
 
+    UPSTREAM_FLAGS = ['--batch_size', '--bias_AA', '--bias_AA_per_residue', '--bias_AA_per_residue_multi', '--chains_to_design', '--checkpoint_global_label_membrane_mpnn', '--checkpoint_ligand_mpnn', '--checkpoint_path_sc', '--checkpoint_per_residue_label_membrane_mpnn', '--checkpoint_protein_mpnn', '--checkpoint_soluble_mpnn', '--fasta_seq_separation', '--file_ending', '--fixed_residues', '--fixed_residues_multi', '--force_hetatm', '--global_transmembrane_label', '--homo_oligomer', '--ligand_mpnn_cutoff_for_score', '--ligand_mpnn_use_atom_context', '--ligand_mpnn_use_side_chain_context', '--model_type', '--number_of_batches', '--number_of_packs_per_design', '--omit_AA', '--omit_AA_per_residue', '--omit_AA_per_residue_multi', '--out_folder', '--pack_side_chains', '--pack_with_ligand_context', '--packed_suffix', '--parse_atoms_with_zero_occupancy', '--parse_these_chains_only', '--pdb_path', '--pdb_path_multi', '--redesigned_residues', '--redesigned_residues_multi', '--repack_everything', '--save_stats', '--sc_num_denoising_steps', '--sc_num_samples', '--seed', '--symmetry_residues', '--symmetry_weights', '--temperature', '--transmembrane_buried', '--transmembrane_interface', '--verbose', '--zero_indexed']     # every option of the pinned upstream run.py (LigandMPNN 26ec57ac)
+
+    def test_every_option_we_pass_exists_in_the_pinned_upstream_run_py(self):
+        _, command = repair.run_native(self.dir / "d.pdb", {28: "C", 30: "N"}, self.dir / "outx", self.dir / "code", self.dir / "w.pt", sys.executable)
+        used = [c for c in command if isinstance(c, str) and c.startswith("--")]
+        self.assertTrue(used)
+        self.assertEqual([c for c in used if c not in self.UPSTREAM_FLAGS], [])          # a made-up option (--device) failed on the real GPU run
+
     def test_the_team_settings_are_passed_to_the_upstream_command(self):
         fasta, command = repair.run_native(self.dir / "d.pdb", {28: "C", 30: "N"}, self.dir / "out", self.dir / "code", self.dir / "w.pt", sys.executable)
         args = json.loads((self.dir / "out" / "args.json").read_text())
@@ -209,7 +217,7 @@ class NativeWrapper(unittest.TestCase):
                          ("soluble_mpnn", "0.1", "401", "16", "1"))
         self.assertEqual(args["redesigned_residues"], "B28 B30")
         self.assertEqual(json.loads((self.dir / "out" / "omit.json").read_text()), {"B28": "C", "B30": "N"})
-        self.assertEqual((args["save_stats"], args["pack_side_chains"], args["device"]), ("1", "0", "cpu"))
+        self.assertEqual((args["save_stats"], args["pack_side_chains"], "device" in args), ("1", "0", False))
         self.assertEqual(repair.parse_outputs(fasta, 1)[0]["sequence"], "CLC")
 
     def test_a_failing_run_is_an_error(self):
