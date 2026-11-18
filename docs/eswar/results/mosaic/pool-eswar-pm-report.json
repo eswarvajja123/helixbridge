@@ -1,0 +1,49 @@
+{
+  "schema": 1,
+  "batches": [
+    {
+      "batch_id": "eswar-mA",
+      "candidates": 4,
+      "hotspots": [
+        100,
+        101,
+        102,
+        158,
+        159,
+        161,
+        211,
+        212,
+        213,
+        214
+      ],
+      "hotspot_source": "provisional_historical"
+    },
+    {
+      "batch_id": "eswar-mB",
+      "candidates": 4,
+      "hotspots": [
+        78,
+        79,
+        98,
+        100,
+        102,
+        103,
+        158,
+        159,
+        211,
+        212
+      ],
+      "hotspot_source": "proposed_by_eswar_unreviewed"
+    }
+  ],
+  "designs": 8,
+  "kept_by_gate": 8,
+  "dropped_by_gate": 0,
+  "dropped_only_across_batches": [],
+  "thresholds": {
+    "identity": 0.8,
+    "contiguous": 0.9,
+    "tm": 0.9
+  },
+  "scope": "Near-duplicate gate only; not a novelty check and not a quality ranking."
+}

@@ -11,16 +11,22 @@ sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 from binder_campaign import comparison as C
 
 
-def batch(done, failed=0, interrupted=0, seconds=0.0):
-    return {"done": done, "failed": [{"x": 1}] * failed, "interrupted": [{"x": 1}] * interrupted, "gpu_seconds_reported": seconds}
+def batch(done, failed=0, interrupted=0, seconds=0.0, attempts=None):
+    r = {"done": done, "failed": [{"x": 1}] * failed, "interrupted": [{"x": 1}] * interrupted, "gpu_seconds_reported": seconds}
+    if attempts is not None:
+        r["attempts"] = attempts
+    return r
 
 
 def evaluation(done, seconds):
     return {"by_predictor": {"esmfold2": {"done": done}, "boltz2": {"done": done}}, "gpu_seconds_reported": seconds}
 
 
-def rec(status, reasons=()):
-    return {"qc": {"status": status, "reasons": list(reasons)}}
+def rec(status, reasons=(), esm=None, boltz=None):
+    r = {"qc": {"status": status, "reasons": list(reasons)}}
+    if esm is not None:
+        r["evaluations"] = {"esmfold2": {"status": "done", "score": {"iptm": esm}}, "boltz2": {"status": "done", "score": {"iptm": boltz}}}
+    return r
 
 
 def diversity(fold_groups, site_groups, members):
@@ -57,6 +63,24 @@ class Summaries(unittest.TestCase):
     def test_failures_are_kept_and_their_seconds_stay_in_the_total(self):
         r = self.row(batch_reports=[batch(5, 2, 1, 300.0), batch(5, 0, 0, 300.0)])
         self.assertEqual((r["designs_generated"], r["attempts_failed"], r["attempts_interrupted"], r["gpu_seconds_generation"]), (10, 2, 1, 600.0))
+
+    def test_attempts_that_made_no_design_are_shown(self):
+        r = self.row(batch_reports=[batch(4, 0, 0, 300.0, attempts=5), batch(4, 0, 0, 300.0, attempts=4)])
+        self.assertEqual((r["designs_generated"], r["attempts_total"], r["attempts_not_producing_a_design"]), (8, 9, 1))
+        old = self.row(batch_reports=[batch(5, 2, 1, 300.0)])                      # a report without an attempts count still adds up
+        self.assertEqual((old["attempts_total"], old["attempts_not_producing_a_design"]), (8, 3))
+
+    def test_score_spreads_are_described_per_predictor(self):
+        recs = [rec("no_flags", esm=0.9, boltz=0.8), rec("flagged", esm=0.1, boltz=0.7), rec("flagged", esm=0.5, boltz=0.9), rec("incomplete")]
+        r = self.row(qc_records=recs)
+        self.assertEqual(r["esmfold2_iptm"], {"n": 3, "min": 0.1, "median": 0.5, "max": 0.9})
+        self.assertEqual(r["boltz2_iptm"], {"n": 3, "min": 0.7, "median": 0.8, "max": 0.9})
+        self.assertIsNone(self.row(qc_records=[rec("flagged")])["esmfold2_iptm"])
+
+    def test_no_clean_design_means_zero_groups_not_unknown(self):
+        r = self.row(qc_records=[rec("flagged")] * 3, diversity=None)
+        self.assertEqual((r["distinct_fold_groups_among_clean"], r["distinct_site_groups_among_clean"]), (0, 0))
+        self.assertIsNone(self.row(diversity=None)["distinct_fold_groups_among_clean"])          # clean designs exist but no report was given
 
     def test_no_diversity_report_gives_none_not_zero(self):
         r = self.row(diversity=None)

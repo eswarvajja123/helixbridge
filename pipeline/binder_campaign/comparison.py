@@ -12,11 +12,14 @@ What the numbers are and are not:
     so the comparison can be read on the independent model alone;
   * small counts mean wide uncertainty; every figure is shown with its count, and failed attempts stay in the denominator of the GPU
     time (their seconds are in the reports) and in the failure counts;
-  * a design counts as generated only if the batch finished it; failed and interrupted attempts are listed, never dropped.
+  * a design counts as generated only if the batch finished it; failed and interrupted attempts are listed, never dropped. The GPU seconds
+    come from the function's own count for FINISHED designs, so the seconds of a failed or interrupted attempt are not in them: the number
+    of attempts that produced no design is reported so the reader can see how much time that may hide.
 """
 import csv
 import json
 from pathlib import Path
+import statistics
 
 from .runner import write_json
 
@@ -46,7 +49,9 @@ def summarize(label, batch_reports, evaluation_reports, qc_records, diversity=No
                        and not x.startswith("clash:generator")]
         if qc["status"] != "incomplete" and not independent:
             esm_only += 1                                   # clean when every Boltz-2-related flag is ignored
-    row = {"label": label, "designs_generated": designs, "attempts_failed": failed, "attempts_interrupted": interrupted,
+    attempts = sum(r.get("attempts", r["done"] + len(r["failed"]) + len(r["interrupted"])) for r in batch_reports)
+    row = {"label": label, "designs_generated": designs, "attempts_total": attempts, "attempts_not_producing_a_design": attempts - designs,
+           "attempts_failed": failed, "attempts_interrupted": interrupted,
            "designs_scored": scored, "gpu_seconds_generation": round(generation_s, 1), "gpu_seconds_scoring": round(scoring_s, 1),
            "gpu_seconds_total": round(total_s, 1), "gpu_seconds_per_design_generation": round(generation_s / designs, 1) if designs else None,
            "gpu_seconds_per_design_total": round(total_s / designs, 1) if designs else None,
@@ -60,6 +65,13 @@ def summarize(label, batch_reports, evaluation_reports, qc_records, diversity=No
         row["designs_in_diversity_report"] = len(diversity["sources"]["generator"]["members"])
     else:
         row["distinct_fold_groups_among_clean"] = row["distinct_site_groups_among_clean"] = row["designs_in_diversity_report"] = None
+    if row["qc_clean"] == 0 and row["distinct_fold_groups_among_clean"] is None:
+        row["distinct_fold_groups_among_clean"] = row["distinct_site_groups_among_clean"] = 0         # no clean design, so no groups
+    for predictor in ("esmfold2", "boltz2"):                                                           # raw scores, described, never ranked
+        values = [r["evaluations"][predictor]["score"]["iptm"] for r in qc_records
+                  if (r.get("evaluations") or {}).get(predictor, {}).get("status") == "done"]
+        row[f"{predictor}_iptm"] = ({"n": len(values), "min": round(min(values), 3), "median": round(statistics.median(values), 3),
+                                     "max": round(max(values), 3)} if values else None)
     hours = total_s / 3600.0
     if hours > 0:
         row["per_gpu_hour"] = {"designs": round(designs / hours, 2), "qc_clean": round(status["no_flags"] / hours, 2),
@@ -94,20 +106,25 @@ def compare(rows, out_dir):
     write_json(out_dir / "comparison.json", {"schema": SCHEMA_VERSION, "methods": rows, "at_the_other_methods_budget": scaled,
                                              "scope": "Counts of designs without structure-QC flags per GPU hour. Not binding, not a ranking of designs; "
                                                       "Boltz-2 based checks are not independent for a method that optimizes through Boltz-2."})
-    columns = ["label", "designs_generated", "attempts_failed", "attempts_interrupted", "designs_scored", "gpu_seconds_generation",
+    columns = ["label", "designs_generated", "attempts_total", "attempts_not_producing_a_design", "attempts_failed", "attempts_interrupted", "designs_scored", "gpu_seconds_generation",
                "gpu_seconds_scoring", "gpu_seconds_total", "gpu_seconds_per_design_generation", "gpu_seconds_per_design_total", "qc_clean",
                "qc_flagged", "qc_incomplete", "qc_clean_share", "clean_if_boltz2_flags_are_ignored", "distinct_fold_groups_among_clean",
                "distinct_site_groups_among_clean"]
+    extra = [("esmfold2_iptm_median", lambda r: (r["esmfold2_iptm"] or {}).get("median", "")),
+             ("boltz2_iptm_median", lambda r: (r["boltz2_iptm"] or {}).get("median", ""))]
     with (out_dir / "comparison.csv").open("w", newline="") as stream:
         writer = csv.writer(stream)
-        writer.writerow(columns + ["designs_per_gpu_hour", "qc_clean_per_gpu_hour", "fold_groups_per_gpu_hour"])
+        writer.writerow(columns + [n for n, _ in extra] + ["designs_per_gpu_hour", "qc_clean_per_gpu_hour", "fold_groups_per_gpu_hour"])
         for r in rows:
             p = r["per_gpu_hour"] or {}
-            writer.writerow([r[c] for c in columns] + [p.get("designs", ""), p.get("qc_clean", ""), p.get("distinct_fold_groups_among_clean", "")])
-    lines = ["| method | designs | failed | GPU s per design (total) | clean by QC | clean per GPU-hour | fold groups among clean |", "|---|---|---|---|---|---|---|"]
+            writer.writerow([r[c] for c in columns] + [f(r) for _, f in extra]
+                            + [p.get("designs", ""), p.get("qc_clean", ""), p.get("distinct_fold_groups_among_clean", "")])
+    lines = ["| method | designs | attempts that made no design | GPU s per design (total) | clean by QC | clean per GPU-hour | fold groups among clean | ESMFold2 ipTM median | Boltz-2 ipTM median |",
+             "|---|---|---|---|---|---|---|---|---|"]
     for r in rows:
         p = r["per_gpu_hour"] or {}
-        lines.append(f"| {r['label']} | {r['designs_generated']} | {r['attempts_failed']} | {r['gpu_seconds_per_design_total']} | "
-                     f"{r['qc_clean']} of {r['qc_clean'] + r['qc_flagged']} | {p.get('qc_clean', '')} | {r['distinct_fold_groups_among_clean']} |")
+        lines.append(f"| {r['label']} | {r['designs_generated']} | {r['attempts_not_producing_a_design']} | {r['gpu_seconds_per_design_total']} | "
+                     f"{r['qc_clean']} of {r['qc_clean'] + r['qc_flagged']} | {p.get('qc_clean', '')} | {r['distinct_fold_groups_among_clean']} | "
+                     f"{(r['esmfold2_iptm'] or {}).get('median', '')} | {(r['boltz2_iptm'] or {}).get('median', '')} |")
     (out_dir / "comparison.md").write_text("\n".join(lines) + "\n")
     return {"methods": rows, "at_the_other_methods_budget": scaled}

@@ -1,0 +1,104 @@
+{
+  "schema": 1,
+  "methods": [
+    {
+      "label": "RFD4 (options A and B)",
+      "designs_generated": 72,
+      "attempts_total": 72,
+      "attempts_not_producing_a_design": 0,
+      "attempts_failed": 0,
+      "attempts_interrupted": 0,
+      "designs_scored": 71,
+      "gpu_seconds_generation": 5032.4,
+      "gpu_seconds_scoring": 4423.5,
+      "gpu_seconds_total": 9455.9,
+      "gpu_seconds_per_design_generation": 69.9,
+      "gpu_seconds_per_design_total": 131.3,
+      "qc_clean": 27,
+      "qc_flagged": 44,
+      "qc_incomplete": 1,
+      "qc_clean_share": 0.38,
+      "clean_if_boltz2_flags_are_ignored": 60,
+      "distinct_fold_groups_among_clean": 15,
+      "distinct_site_groups_among_clean": 3,
+      "designs_in_diversity_report": 27,
+      "esmfold2_iptm": {
+        "n": 71,
+        "min": 0.153,
+        "median": 0.917,
+        "max": 0.966
+      },
+      "boltz2_iptm": {
+        "n": 71,
+        "min": 0.254,
+        "median": 0.889,
+        "max": 0.968
+      },
+      "per_gpu_hour": {
+        "designs": 27.41,
+        "qc_clean": 10.28,
+        "distinct_fold_groups_among_clean": 5.71
+      }
+    },
+    {
+      "label": "Mosaic (options A and B)",
+      "designs_generated": 8,
+      "attempts_total": 9,
+      "attempts_not_producing_a_design": 1,
+      "attempts_failed": 0,
+      "attempts_interrupted": 0,
+      "designs_scored": 8,
+      "gpu_seconds_generation": 4973.3,
+      "gpu_seconds_scoring": 586.6,
+      "gpu_seconds_total": 5559.9,
+      "gpu_seconds_per_design_generation": 621.7,
+      "gpu_seconds_per_design_total": 695.0,
+      "qc_clean": 0,
+      "qc_flagged": 8,
+      "qc_incomplete": 0,
+      "qc_clean_share": 0.0,
+      "clean_if_boltz2_flags_are_ignored": 0,
+      "distinct_fold_groups_among_clean": 0,
+      "distinct_site_groups_among_clean": 0,
+      "designs_in_diversity_report": null,
+      "esmfold2_iptm": {
+        "n": 8,
+        "min": 0.156,
+        "median": 0.229,
+        "max": 0.289
+      },
+      "boltz2_iptm": {
+        "n": 8,
+        "min": 0.517,
+        "median": 0.712,
+        "max": 0.865
+      },
+      "per_gpu_hour": {
+        "designs": 5.18,
+        "qc_clean": 0.0,
+        "distinct_fold_groups_among_clean": 0.0
+      }
+    }
+  ],
+  "at_the_other_methods_budget": {
+    "RFD4 (options A and B)": {
+      "Mosaic (options A and B)": {
+        "gpu_seconds": 5559.9,
+        "designs": 42.3,
+        "qc_clean": 15.9,
+        "distinct_fold_groups_among_clean": 8.8,
+        "note": "scaled from the measured rate; distinct-group counts do not scale linearly, so read this as an order of magnitude"
+      }
+    },
+    "Mosaic (options A and B)": {
+      "RFD4 (options A and B)": {
+        "gpu_seconds": 9455.9,
+        "designs": 13.6,
+        "qc_clean": 0.0,
+        "distinct_fold_groups_among_clean": 0.0,
+        "note": "scaled from the measured rate; distinct-group counts do not scale linearly, so read this as an order of magnitude"
+      }
+    }
+  },
+  "scope": "Counts of designs without structure-QC flags per GPU hour. Not binding, not a ranking of designs; Boltz-2 based checks are not independent for a method that optimizes through Boltz-2."
+}

@@ -187,3 +187,35 @@ Typical scores repeat to the second decimal across GPU types, but a weak design 
 ## Cost summary
 
 Credits line from the first GPU run (2.01) to the end of this round (15.09): about $13.1 of credit in total across about 100 generated designs and 272 predictions (6 + 59 + 71 designs, two predictors each); billed cost is still $0.00. Roughly $0.10 per design from generation through both predictors.
+
+## 18 Nov 2026 — Phase 4: Mosaic on the current target, and RFD4 vs Mosaic per GPU-hour
+
+All numbers are from the real files in `docs/eswar/results/mosaic/` and `docs/eswar/results/`.
+
+**Source of the missing `joltz`:** `github.com/nboyd/joltz` at commit `ed0f042` is exactly the commit the team pinned; with `mosaic` (escalante-bio, `5937f37`) and the Boltz fork (escalante-bio, `7ea718a`) all three pinned commits are fetchable and MIT-licensed. The captain should still confirm these are the intended sources.
+
+**Task 4.1 — Mosaic on the current target (done, on a real GPU).** `modal_mosaic.py` clones the three sources at the pinned commits (refusing any other or modified revision), installs the team's scoped stack, and runs the team's optimizer settings unchanged on the current construct (UniProt 21-239, first 128 MSA rows, hotspot options as indices from the construct start). The image built and passed its Boltz-2 and ProteinMPNN imports on the first try (46 s); the resolved 124 packages were frozen (`docs/eswar/mosaic-image-constraints.txt`) and the frozen image rebuilt in 57 s. Smoke test (one loss and gradient evaluation on the real Boltz-2 weights): loss 15.05, gradient norm 5.64, finite, 144 s. First design (option A, 60 aa, seed 101): 555 s on an A100-80GB (60 s load, 434 s optimizing, 49 s predicting); the binder touches 27 target residues including 8 of the 10 hotspots with no close atom pairs, but its own Boltz-2 interface PAE averages 16 Å and the binder pLDDT 0.60. The structure writer's reported ipTM was exactly 0.0, which I treat as an unreliable field, not a measurement (the independent scores below are the measurement).
+
+**Task 4.2 — timeout (done).** The function timeout is one hour. Eight designs took 493 to 835 s (mean 622 s) of worker time on A100-80GB (7) and L40S (1); the old 900 s limit would have been close to the slowest, and the team's 16 minutes on an L40S would have exceeded it.
+
+**Task 4.3 — comparison at matched GPU time (done, with a small Mosaic sample).** Eight Mosaic designs (options A and B, lengths 50/60/70/80, seed 102): 8 of 8 produced, 0 failures; one attempt was cut off by a container restart and retried (9 attempts), so the batch cap had to be raised by one to finish the last design. Scored with ESMFold2 and Boltz-2 (16 of 16 predictions, 587 GPU s, 0 failures) and put through the same structure QC.
+
+| | RFD4 (options A and B) | Mosaic (options A and B) |
+|---|---|---|
+| designs | 72 | 8 |
+| GPU seconds per design (generation + scoring) | 131 | 695 |
+| designs per GPU-hour | 27.4 | 5.2 |
+| clean in structure QC | 27 of 71 (38%) | **0 of 8** |
+| clean per GPU-hour | 10.3 | 0 |
+| clean if every Boltz-2 flag is ignored | 60 of 71 (85%) | **0 of 8** |
+| distinct fold groups among the clean designs | 15 | 0 |
+| ESMFold2 ipTM (min / median / max) | 0.153 / 0.917 / 0.966 | 0.156 / 0.229 / 0.289 |
+| Boltz-2 ipTM (min / median / max) | 0.254 / 0.889 / 0.968 | 0.517 / 0.712 / 0.865 |
+
+At Mosaic's GPU budget (5,560 s) the measured RFD4 rate would give about 42 designs, 16 clean, and around 9 fold groups (a scaling, not a run).
+
+**What the Mosaic result shows.** Mosaic optimizes THROUGH Boltz-2, and the designs look good to Boltz-2 (median ipTM 0.71) but not to ESMFold2, the independent model: ESMFold2 gives them ipTM 0.16 to 0.29 and ipSAE at most 0.017, and places the binder 8 to 31 Å from where Mosaic's own structure put it. All 8 are QC-flagged even when the Boltz-2 flags are ignored. That is the classic result of optimizing against one predictor: the sequences are specific to that model. The same ESMFold2 pipeline gives RFD4 designs a median ipTM of 0.92, so the independent check is not simply harsh. It does not mean Mosaic can never work here.
+
+**Limits of this comparison.** Only 8 Mosaic designs (the tool prints counts with every figure); one seed per length; the optimizer settings are the team's, untuned (125 steps, 128-row MSA, MPNN-recovery weight 5), and the designs are low-complexity and rich in lysine and glutamate; two hotspot sets only. Seconds of the interrupted attempt are not in the reported GPU seconds (Modal billed it). Nothing here says any design binds.
+
+**Cost:** Phase 4 (image builds, smoke, first design, 8 designs with the retry, scoring): credits line 15.00 to 21.05, about $6.1. Total across the whole project so far: about $19 of credit (2.01 to 21.05); billed cost $0.00.

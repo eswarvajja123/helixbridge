@@ -39,3 +39,7 @@ None of these blocks anything; they are the places a surprise could still hide.
 ## Added 18 Nov
 
 The SolubleMPNN repair (`repair.py`) is built and tested, but the real upstream program has **not been run**: it is third-party code that loads third-party pickled weights and needs `openfold`, and the session's permission check did not allow running it. The wrapper, the redesign rules, the output parser and the selection rule are tested with a stand-in; the upstream output format was read from its source, not observed. `plan` mode ran on the real shortlist. The AlphaFold cross-check is a person's step; only its hand-off package exists.
+
+## Added 18 Nov (Phase 4)
+
+Now run on a real GPU: the whole Mosaic path (image with the pinned JAX stack, smoke test, a design, two batches, scoring, QC, comparison), the generation batch cap being raised on resume to finish a design after an interrupted attempt, and the near-duplicate gate on a second generator. Still not run: **`modal_repair.py` (the native SolubleMPNN repair in a Modal container)**. It is written and tested with a stand-in; the permission check denied running it twice (once in the session, once as a Modal job), so I did not retry or work around it. Running it needs your explicit go-ahead to execute third-party code and weights, and it is one command (Stage P in `RUN-GPU.md`).

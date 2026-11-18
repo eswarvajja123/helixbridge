@@ -1,0 +1,80 @@
+{
+  "eval_id": "eswar-em",
+  "stop_reason": "completed",
+  "candidates_total": 8,
+  "candidates_evaluated": 8,
+  "candidates_skipped": [],
+  "by_predictor": {
+    "esmfold2": {
+      "done": 8,
+      "failed": 0,
+      "started": 0,
+      "not_started": 0
+    },
+    "boltz2": {
+      "done": 8,
+      "failed": 0,
+      "started": 0,
+      "not_started": 0
+    }
+  },
+  "failures": [],
+  "interrupted": [],
+  "calls": 4,
+  "failed_evaluations": 0,
+  "gpu_seconds_reported": 586.58,
+  "gpu_seconds_note": "The function's own count; Modal bills container time, which is longer. Check billing.",
+  "budget": {
+    "max_calls": 12,
+    "max_gpu_seconds": 2500.0,
+    "max_failures": 4
+  },
+  "pool_summary": {
+    "by_predictor": {
+      "esmfold2": {
+        "iptm": {
+          "n": 8,
+          "min": 0.15594995021820068,
+          "median": 0.22912240773439407,
+          "max": 0.2888149619102478
+        },
+        "ipsae_max": {
+          "n": 8,
+          "min": 0.0,
+          "median": 0.0,
+          "max": 0.016839
+        }
+      },
+      "boltz2": {
+        "iptm": {
+          "n": 8,
+          "min": 0.5165939927101135,
+          "median": 0.7117739021778107,
+          "max": 0.8654547929763794
+        },
+        "ipsae_max": {
+          "n": 8,
+          "min": 0.015825,
+          "median": 0.3098025,
+          "max": 0.6409
+        }
+      }
+    },
+    "paired_difference": {
+      "esmfold2_minus_boltz2_iptm": {
+        "n": 8,
+        "min": -0.7095048427581787,
+        "median": -0.4292723387479782,
+        "max": -0.28956885635852814
+      },
+      "esmfold2_minus_boltz2_ipsae_max": {
+        "n": 8,
+        "min": -0.6409,
+        "median": -0.30799750000000004,
+        "max": -0.015825
+      }
+    },
+    "note": "Descriptive spread over this pool only. There is no supportable pass/fail threshold: the team's public pilot (outputs/) found negative controls scoring as high as binders, and its numeric gates are relative to a parent design. Disagreement between the two predictors is a reason for a person to look, not a verdict."
+  },
+  "status_note": "Raw scores only. No threshold, ranking or combination; not a binding result."
+}

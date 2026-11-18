@@ -1,0 +1,144 @@
+{
+  "batch_id": "eswar-mA",
+  "stop_reason": "completed",
+  "planned": 4,
+  "done": 4,
+  "kept": 4,
+  "dropped_by_dedup": 0,
+  "dropped_by_reason": {},
+  "failed": [],
+  "interrupted": [],
+  "not_started": [],
+  "attempts": 5,
+  "failed_attempts": 0,
+  "gpu_seconds_reported": 2703.1,
+  "gpu_seconds_note": "Worker seconds as reported by the function; Modal bills container time, which is longer. Check billing.",
+  "budget": {
+    "max_designs": 5,
+    "max_gpu_seconds": 4000.0,
+    "max_failures": 2
+  },
+  "hotspots": [
+    100,
+    101,
+    102,
+    158,
+    159,
+    161,
+    211,
+    212,
+    213,
+    214
+  ],
+  "hotspot_source": "provisional_historical",
+  "thresholds": {
+    "identity": 0.8,
+    "contiguous": 0.9,
+    "tm": 0.9
+  },
+  "designs": {
+    "s102-l50": {
+      "status": "done",
+      "run_id": "eswar-mA-s102-l50-a1",
+      "attempts": 1,
+      "seed": 102,
+      "binder_length": [
+        50,
+        50
+      ],
+      "worker_seconds": 493.081364314,
+      "gpu": "NVIDIA A100-SXM4-80GB",
+      "candidate_id": "il7ra-mosaic-2da130419918",
+      "dedup": {
+        "candidate_id": "eswar-mA-s102-l50-a1",
+        "kept": true,
+        "reason": "kept",
+        "nearest_id": null,
+        "identity": null,
+        "contiguous": null,
+        "tm": null
+      },
+      "error": null,
+      "earlier_attempts": []
+    },
+    "s102-l60": {
+      "status": "done",
+      "run_id": "eswar-mA-s102-l60-a2",
+      "attempts": 2,
+      "seed": 102,
+      "binder_length": [
+        60,
+        60
+      ],
+      "worker_seconds": 690.15560592,
+      "gpu": "NVIDIA A100-SXM4-80GB",
+      "candidate_id": "il7ra-mosaic-ec18ab1f32a6",
+      "dedup": {
+        "candidate_id": "eswar-mA-s102-l60-a2",
+        "kept": true,
+        "reason": "kept",
+        "nearest_id": "eswar-mA-s102-l50-a1",
+        "identity": 0.3,
+        "contiguous": 0.06,
+        "tm": 0.4212574775910039
+      },
+      "error": null,
+      "earlier_attempts": [
+        {
+          "run_id": "eswar-mA-s102-l60-a1",
+          "status": "started",
+          "error": null
+        }
+      ]
+    },
+    "s102-l70": {
+      "status": "done",
+      "run_id": "eswar-mA-s102-l70-a1",
+      "attempts": 1,
+      "seed": 102,
+      "binder_length": [
+        70,
+        70
+      ],
+      "worker_seconds": 684.678955008,
+      "gpu": "NVIDIA A100-SXM4-80GB",
+      "candidate_id": "il7ra-mosaic-cdcc49ae8170",
+      "dedup": {
+        "candidate_id": "eswar-mA-s102-l70-a1",
+        "kept": true,
+        "reason": "kept",
+        "nearest_id": "eswar-mA-s102-l50-a1",
+        "identity": 0.38,
+        "contiguous": 0.06,
+        "tm": 0.4993972193774347
+      },
+      "error": null,
+      "earlier_attempts": []
+    },
+    "s102-l80": {
+      "status": "done",
+      "run_id": "eswar-mA-s102-l80-a1",
+      "attempts": 1,
+      "seed": 102,
+      "binder_length": [
+        80,
+        80
+      ],
+      "worker_seconds": 835.182589648,
+      "gpu": "NVIDIA L40S",
+      "candidate_id": "il7ra-mosaic-99498d6d6765",
+      "dedup": {
+        "candidate_id": "eswar-mA-s102-l80-a1",
+        "kept": true,
+        "reason": "kept",
+        "nearest_id": "eswar-mA-s102-l70-a1",
+        "identity": 0.35714285714285715,
+        "contiguous": 0.05714285714285714,
+        "tm": 0.6336551399777482
+      },
+      "error": null,
+      "earlier_attempts": []
+    }
+  },
+  "status_note": "None of these designs is a binding result or a submission entry."
+}

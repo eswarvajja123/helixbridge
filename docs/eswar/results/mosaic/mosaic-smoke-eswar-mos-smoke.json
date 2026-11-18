@@ -1,0 +1,37 @@
+{
+ "run_id": "eswar-mos-smoke",
+ "mode": "smoke",
+ "result": {
+  "mode": "smoke",
+  "timings": {
+   "load_seconds": 53.982436447,
+   "total_seconds": 137.13481054599998
+  },
+  "memory_stats": {
+   "num_allocs": 31650,
+   "bytes_in_use": 2164611072,
+   "peak_bytes_in_use": 9850241280,
+   "largest_alloc_size": 6577286656,
+   "bytes_limit": 35773218816,
+   "bytes_reserved": 0,
+   "peak_bytes_reserved": 0,
+   "largest_free_block_bytes": 31311262208,
+   "pool_bytes": 35773218816,
+   "peak_pool_bytes": 35773218816
+  },
+  "device": "cuda:0",
+  "host_peak_rss_mib": 10858.4140625,
+  "jax_version": "0.11.1",
+  "loss": 15.047917366027832,
+  "gradient_norm": 5.640254974365234
+ },
+ "worker_seconds": 144.369785892,
+ "gpu": "cuda:0",
+ "revisions": {
+  "mosaic-runtime": "5937f37164bcb28bc6f1000f10134145438e5971",
+  "joltz": "ed0f04257dac85bd4b7bf45521cc280f86d38ded",
+  "mosaic-boltz": "7ea718a1440ecbe8e2418317192b501544147edd"
+ },
+ "environment_sha256": "ff237ca02fa81450e4d622908f18948a54183734e586693370bfb02946eb6e7e",
+ "modal_profile": "active CLI profile"
+}

@@ -6,7 +6,7 @@
 
 - **The target.** IL-7Rα (UniProt P16871-1), residues 21-239 (219 aa), with a 1,022-row target-only MSA. The shipped reference core (residues 37-231) has the same fold as 3DI3 chain B (CA RMSD 0.78 Å over 193 shared residues), so it is a sound conditioning input.
 - **Three hotspot sets** (`docs/eswar/hotspot-decision.md`): A, the provisional historical set (100-102, 158, 159, 161, 211-214); B, an exposed set on the natural IL-7 site (78, 79, 98, 100, 102, 103, 158, 159, 211, 212); C, an off-site exploratory set (170-179, 200). All three are still **unreviewed**.
-- **One generator, RFD4-Proteina** at the pinned commit, with the team's qualified settings, binder lengths 50-80, and a model-chosen length range as one extra test. Mosaic was not explored: its `joltz` source is unknown.
+- **One generator, RFD4-Proteina** at the pinned commit, with the team's qualified settings, binder lengths 50-80, and a model-chosen length range as one extra test. Mosaic, a second method that optimizes a sequence through Boltz-2, was also run (8 designs); its `joltz` source turned out to be `nboyd/joltz` at the team's pinned commit.
 - **Two independent predictors** for checking designs, ESMFold2 (the competition's screening model, approximated locally) and Boltz-2, plus the team's ipSAE scorer.
 - **What a design must survive before shortlisting:** structure QC (clash, contact, hotspot contact, pose shift, the team's own checks), a near-duplicate gate, diversity of fold and site, a public-database novelty pre-screen, and a sequence-liability review.
 
@@ -26,7 +26,8 @@
 4. **Scores repeat well but not always:** typical ipTM changes between runs are about 0.002 (ESMFold2) and 0.003 (Boltz-2) across GPU types, and structure-QC outcomes were identical for all 39 designs scored twice. One weak design swung by 0.29 in ESMFold2, so single numbers for low-confidence designs are unreliable.
 5. **Diversity:** designs are different folds (15 groups among the 27 that pass QC) but only three distinct binding sites: a fixed hotspot set gives different folds on the same site.
 6. **Shortlist of 20:** 11 from option B, 9 from option A; lengths 50 (4), 60 (7), 70 (5), 80 (4); all 15 fold groups and 3 site groups covered; 8 carry at least one sequence flag (N-glycosylation sequon, odd cysteine, Asp-Pro). No design was flagged by the public-database novelty pre-screen.
-7. **Seed 43 reproduces across two A100 sizes** (same binder), differs by one residue on an A10, and does **not** reproduce the binder recorded in the team's earlier verified run. I could not explain that difference.
+7. **Mosaic does not hold up against an independent predictor.** Eight Mosaic designs on the same target gave 0 clean designs in structure QC; ESMFold2 scored them ipTM 0.16 to 0.29 (median 0.23) while Boltz-2, which Mosaic optimizes through, scored them 0.52 to 0.87. RFD4 gave 10.3 clean designs per GPU-hour and 15 fold groups; Mosaic took about 5 times longer per design. Small sample and untuned settings, so this is evidence about this setup, not a verdict on the method.
+8. **Seed 43 reproduces across two A100 sizes** (same binder), differs by one residue on an A10, and does **not** reproduce the binder recorded in the team's earlier verified run. I could not explain that difference.
 
 **What this does not show:** that any design binds. Every design scores high on ESMFold2 and Boltz-2, and the team's own pilot found negative controls scoring as high as binders, so the scores cannot separate good from bad designs. The novelty check used a public database, not the organizers' private one. No design has been reviewed.
 
@@ -34,7 +35,8 @@
 
 - **Put controls through the same pipeline** (a known binder, the natural IL-7 pair, scrambled negatives). Without them the QC limits and scores cannot be calibrated; the limits used are the team's provisional ones.
 - **Settle the epitope** (Samyuktha). Option B looks best, but its hotspots and A's are unreviewed, and the 20 designs all sit on three sites.
-- **Run the sequence repair for real** (the tool is built, the plan lists the 8 shortlisted designs and the exact positions; the real SolubleMPNN run was not done, see `docs/eswar/gpu-coverage.md`).
+- **Run the sequence repair for real.** The tool and a Modal app that runs the upstream code inside a container are built and tested, and the plan lists the 8 shortlisted designs and the exact positions, but the real SolubleMPNN run was not allowed to start in this session (it runs third-party code and weights), so it needs your go-ahead: one command, Stage P in `docs/eswar/RUN-GPU.md`.
+- **Retry Mosaic only with changes**, not the same settings: more optimizer steps or a different objective, and an independent predictor inside the loop; and score any new Mosaic design with ESMFold2 first.
 - **Make the scoring more robust:** score weak or borderline designs more than once, and keep both models' scores visible instead of one number.
 - Run the new tools on a laptop (Windows) once; they were tested on Linux.
 
@@ -42,6 +44,6 @@
 
 1. **AlphaFold cross-check of the 20** (Stefanos): inputs and a blank results sheet are in `docs/eswar/results/alphafold-handoff/`. This is the independent check the plan calls for, and nothing in the pipeline sets its review field.
 2. **Controls run:** the same stages on a few known binders and negatives, to learn what the scores and QC flags mean on this target.
-3. **Repair run:** SolubleMPNN on the 8 flagged shortlisted designs (temperature 0.1, seed 401, top two by MPNN confidence), then re-score and re-check the variants.
+3. **Repair run (needs your go-ahead):** native SolubleMPNN in a Modal container on the 8 flagged shortlisted designs (temperature 0.1, seed 401, top two by MPNN confidence), then re-score and re-check the variants.
 4. **After the epitope decision:** regenerate on the agreed hotspots, with a larger pool aimed at the chosen site, and repeat the selection.
 5. A person records the novelty, structure and screen reviews, and only then can the team's export guard pass.

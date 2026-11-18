@@ -12,7 +12,7 @@ cd helixbridge-team
 git config core.autocrlf false
 git remote add eswar https://github.com/eswarvajja123/helixbridge
 git fetch eswar main
-git checkout eswar/main -- pipeline docs/eswar requirements-eswar.txt modal_current.py modal_esmfold2.py modal_evaluate.py
+git checkout eswar/main -- pipeline docs/eswar requirements-eswar.txt modal_current.py modal_esmfold2.py modal_evaluate.py modal_mosaic.py modal_repair.py
 ```
 
 **On Windows, run `git config core.autocrlf false` first (it is the first line above).** Several input files are checked against a SHA-256, and Git's default of converting line endings to CRLF changes their bytes: the first laptop run failed with `Reference input changed after preparation` for exactly this reason (17 Nov). If you already cloned, set the option and re-run the `git checkout` line so the files are rewritten with Unix line endings.
@@ -260,6 +260,41 @@ python pipeline/scripts/export-alphafold-inputs.py --records results/liabilities
 ```
 
 Writes the target and binder sequences as AlphaFold-style complexes (`TARGET:BINDER`, plus ColabFold's batch CSV) and a **blank** results sheet. Nothing is run and no review field is set: whoever runs AlphaFold fills in the sheet, and a person then sets `independent_prediction_status` (Stage L).
+
+## Stage O — Phase 4: Mosaic, a second design method (and the comparison with RFD4)
+
+Mosaic designs a binder by optimizing a sequence through a differentiable Boltz-2 (JAX), then folds it once. Sources, all pinned and MIT-licensed: `mosaic` = github.com/escalante-bio/mosaic @ 5937f37, `joltz` = github.com/nboyd/joltz @ ed0f042, Boltz fork = github.com/escalante-bio/boltz @ 7ea718a. The optimizer settings are the team's, unchanged (`pipeline/binder_campaign/mosaic_input.py` and a test compare them with `mosaic-il7ra.py`). The Boltz-2 weights come from `modal run modal_app.py --stage prepare` (Stage A), the same Volume.
+
+```bash
+modal run modal_mosaic.py --stage plan --option A --length 60 --seed 101          # free local input checks (starts the app; the image builds on the first real run)
+modal run modal_mosaic.py --stage smoke --run-id eswar-mos-smoke --option A --length 60   # one loss and gradient evaluation, no design
+modal run modal_mosaic.py --stage generate --run-id eswar-mos-001 --option A --length 60 --seed 101
+modal run modal_mosaic.py --stage batch --batch-id eswar-mA --seeds 102 --lengths 50,60,70,80 --option A --max-designs 4 --max-gpu-seconds 4000
+```
+
+- One design takes about 9 minutes on an A100-80GB (the team measured about 16 on an L40S), so the function timeout is one hour (Task 4.2).
+- Mosaic needs one fixed length per design (no ranges). A batch is budget-capped and resumable exactly like the RFD4 batch, because a Mosaic result is wrapped in the same audit shape.
+- The image installs from a frozen list (`docs/eswar/mosaic-image-constraints.txt`, 120 packages).
+- **Mosaic optimizes THROUGH Boltz-2**, so Boltz-2 agreement on a Mosaic design is not independent evidence. ESMFold2 is the check; `compare-generators.py` also reports how many designs are clean when every Boltz-2 flag is ignored.
+
+Then score, check and compare as for RFD4: merge the Mosaic batches with `merge-pool.py` (it refuses to mix generators), run Stage E, F and G, and compare per GPU hour:
+
+```bash
+python pipeline/scripts/compare-generators.py --out results/compare-eswar-c1 \
+  --method "RFD4=<batch reports, comma separated>|<evaluation report>|<qc-candidates.json>|<diversity.json>" \
+  --method "Mosaic=<batch reports>|<evaluation report>|<qc-candidates.json>|<diversity.json>"
+```
+
+## Stage P — optional repair of liabilities with native SolubleMPNN (Task 5.2), in a Modal container
+
+`modal_repair.py` runs the unmodified upstream LigandMPNN (pinned commit, original `solublempnn_v_48_020` weights, hash-checked and loaded in torch's safe mode at image build) on a CPU container, never on your machine. **Written and tested; not run** (see `docs/eswar/gpu-coverage.md`).
+
+```bash
+modal run modal_repair.py --records results/liabilities-eswar-l3/liabilities-candidates.json --selection results/selection-eswar-s3/selection.json --out results/repair-native-1
+python pipeline/scripts/repair-liabilities.py ingest --records results/liabilities-eswar-l3/liabilities-candidates.json --selection results/selection-eswar-s3/selection.json --native-dir results/repair-native-1/native --out results/repair-1
+```
+
+Then score and check the variants in `repair-1/repair-candidates.json` (Stages E and F); QC compares them with their parent's backbone.
 
 ## Optional: re-check the real ESMFold2 library on your machine (free, CPU)
 
