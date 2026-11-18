@@ -122,3 +122,37 @@ ESMFold2 kept the generated binder pose within 0.8-1.7 Å for all six; every fla
 ## Totals
 
 Cost for everything above, from the billing summary's credits line: 2.01 to 3.28, about $1.27 of credit; billed cost stays $0.00. Includes the first (failed-to-download) scoring call, three ESMFold2 qualify attempts, the weight download and image builds.
+
+## 17-18 Nov 2026 — the larger pool: Tasks 2.5, 3.2 to 3.4 and 5.1 to 5.3 on real candidates (run from the cloud session)
+
+All numbers below are read from the real result files in `docs/eswar/results/`.
+
+**Generation (Task 2.5, three batches of 20):** seeds 101-105 x lengths 50/60/70/80, one batch per hotspot option (A `provisional_historical`, B `proposed_by_eswar_unreviewed`, C `proposed_by_eswar_unreviewed_exploratory`). All three completed: 60 of 60 designs, 0 failures, 0 interrupted, 3,912 GPU seconds reported (A 1,792; B 1,135; C 985). GPUs used: A10G and A10 (batch A, mostly), A100-80GB and **L40S** (batch B), A100-80GB PCIe (batch C). Lengths 50 to 80 and options B and C ran on a GPU for the first time. A single extra design with a length range (`--length-min 50 --length-max 80`) also ran: the model chose 53 residues.
+
+**Pool merge (new `pool.py`):** 60 designs, 59 kept. One design from batch B was dropped as a backbone duplicate of an earlier design (reason `backbone_tm`), the first time the near-duplicate gate dropped a real design.
+
+**Scoring (Task 3.2):** ESMFold2 and Boltz-2 on the 59 kept designs: 118 of 118 predictions, 21 calls, 3,758 GPU seconds, 0 failures. The run was cut off after call 12 when the container paused overnight (state intact: all 59 ESMFold2 scores and 6 Boltz-2 scores saved, 6 marked started); resuming the same evaluation with `--retry-interrupted` finished it. That is the first real use of the interrupted-call path.
+
+**Structure QC (Task 3.3):** 13 of 59 designs have no flags, 46 are flagged, 1 is incomplete (the merged duplicate was never scored).
+
+| batch (hotspot option) | no flags | flagged | generated pose vs ESMFold2 / Boltz-2 (median) |
+|---|---|---|---|
+| A (provisional historical) | 6 of 20 | 14 | 1.3 Å / 3.4 Å |
+| B (exposed natural site) | 7 of 19 | 12 | 0.9 Å / 1.5 Å |
+| **C (off-site, exploratory)** | **0 of 20** | **20** | **54.9 Å / 59.3 Å** |
+
+Option C is the clear result: both independent predictors place every one of those binders about 55 Å from where the generator put them, so the designed off-site binding is not supported by either model. That is a reason to drop option C, not a statement about the generator. Across all flagged designs the most common flags are a Boltz-2 pose far from the generated one (37 designs) and no contact with a design hotspot (21 for Boltz-2, 18 for ESMFold2). The limits are the team's provisional ones.
+
+**Novelty pre-screen (Task 5.1):** public database = Swiss-Prot (576,073 entries) + unique PDB protein chains (180,353); 13 designs searched (the rest already carry QC reasons): 12 have no public hit at all, 1 has a weak hit, **none is flagged**. This says nothing about the organizers' private database.
+
+**Liabilities (Task 5.2), all 60 designs:** 23 have an N-glycosylation sequon (N-X-S/T), 12 an Asp-Pro motif, 7 an odd number of cysteines, 1 an Asn-Gly motif; 23 have none of the four. Whether a sequon matters depends on how the binders will be expressed, which this project has not decided.
+
+**Diversity (Task 3.4) on the 13 unflagged designs:** 7 fold groups at TM 0.5 (8 at 0.6, 10 at 0.7) and 2 site groups at Jaccard 0.5 (1 at 0.3, 7 at 0.7) in all three structure sources.
+
+**Selection (Task 5.3):** the proposal holds **13** designs (all that pass every earlier check, so the limit of 20 is not reached): all 7 fold groups and both site groups are covered. `pick_order` is the order of picking, not a ranking. The team's export guard refuses the selection with "Required novelty/structure review is incomplete": for every design a person still has to record the novelty review, the independent (AlphaFold) structure review (Task 5.4) and the screen review. Nothing was set automatically.
+
+Caveats: 12 of the 13 shortlisted designs come from options A and B, whose hotspot sets are still unreviewed (Samyuktha's decision); this is a small pool at one site; and none of this shows that any design binds.
+
+## Cost
+
+From the billing summary's credits line: 2.01 at the start of the first GPU run to 9.25 at the end of the pool run, about $7.2 of credit in total (the pool run alone, from 3.16, about $6.1, slightly under the $7 cap set for it); billed cost is still $0.00.

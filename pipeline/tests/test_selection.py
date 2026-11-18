@@ -116,6 +116,16 @@ class Picking(unittest.TestCase):
         self.assertEqual(self.ids(selected), ["a", "c"])
         self.assertIn({"candidate_id": "b", "reasons": ["exact_duplicate_sequence_of_an_earlier_design"]}, report["excluded"])
 
+    def test_the_shortlist_carries_each_designs_sequence_and_the_csv_matches(self):
+        recs = [rec(c) for c in "abc"]
+        selected, report = S.select(recs, diversity([list("abc")], [list("abc")]), limit=3)
+        self.assertEqual({s["candidate_id"]: s["sequence"] for s in selected}, {r["candidate_id"]: r["sequence"] for r in recs})
+        with tempfile.TemporaryDirectory() as t:
+            S.write_outputs(Path(t), selected, report, recs, {"check": {"passes": False, "message": "x"}, "gaps": {}})
+            rows = list(csv.DictReader(io.StringIO((Path(t) / "selection.csv").read_text())))
+        self.assertEqual({r["candidate_id"]: r["sequence"] for r in rows}, {r["candidate_id"]: r["sequence"] for r in recs})
+        self.assertEqual(list(rows[0])[:3], ["pick_order", "candidate_id", "sequence"])
+
     def test_limits_and_inputs_are_validated(self):
         d = diversity([["a"]], [["a"]])
         for bad in (0, 21, True, 2.5, -1):

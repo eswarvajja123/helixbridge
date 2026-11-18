@@ -1,0 +1,522 @@
+{
+  "batch_id": "eswar-pC",
+  "stop_reason": "completed",
+  "planned": 20,
+  "done": 20,
+  "kept": 20,
+  "dropped_by_dedup": 0,
+  "dropped_by_reason": {},
+  "failed": [],
+  "interrupted": [],
+  "not_started": [],
+  "attempts": 20,
+  "failed_attempts": 0,
+  "gpu_seconds_reported": 985.14,
+  "gpu_seconds_note": "Worker seconds as reported by the function; Modal bills container time, which is longer. Check billing.",
+  "budget": {
+    "max_designs": 20,
+    "max_gpu_seconds": 2400.0,
+    "max_failures": 3
+  },
+  "hotspots": [
+    170,
+    172,
+    173,
+    174,
+    175,
+    176,
+    177,
+    178,
+    179,
+    200
+  ],
+  "hotspot_source": "proposed_by_eswar_unreviewed_exploratory",
+  "thresholds": {
+    "identity": 0.8,
+    "contiguous": 0.9,
+    "tm": 0.9
+  },
+  "designs": {
+    "s101-l50": {
+      "status": "done",
+      "run_id": "eswar-pC-s101-l50-a1",
+      "attempts": 1,
+      "seed": 101,
+      "binder_length": [
+        50,
+        50
+      ],
+      "worker_seconds": 53.614077866,
+      "gpu": "NVIDIA A100 80GB PCIe",
+      "candidate_id": "il7ra-rfd4-9fc50fe8fbea",
+      "dedup": {
+        "candidate_id": "eswar-pC-s101-l50-a1",
+        "kept": true,
+        "reason": "kept",
+        "nearest_id": null,
+        "identity": null,
+        "contiguous": null,
+        "tm": null
+      },
+      "error": null,
+      "earlier_attempts": []
+    },
+    "s101-l60": {
+      "status": "done",
+      "run_id": "eswar-pC-s101-l60-a1",
+      "attempts": 1,
+      "seed": 101,
+      "binder_length": [
+        60,
+        60
+      ],
+      "worker_seconds": 47.92759789,
+      "gpu": "NVIDIA A100 80GB PCIe",
+      "candidate_id": "il7ra-rfd4-3ed257c58da6",
+      "dedup": {
+        "candidate_id": "eswar-pC-s101-l60-a1",
+        "kept": true,
+        "reason": "kept",
+        "nearest_id": "eswar-pC-s101-l50-a1",
+        "identity": 0.36,
+        "contiguous": 0.06,
+        "tm": 0.3482407644945314
+      },
+      "error": null,
+      "earlier_attempts": []
+    },
+    "s101-l70": {
+      "status": "done",
+      "run_id": "eswar-pC-s101-l70-a1",
+      "attempts": 1,
+      "seed": 101,
+      "binder_length": [
+        70,
+        70
+      ],
+      "worker_seconds": 49.457550278000014,
+      "gpu": "NVIDIA A100 80GB PCIe",
+      "candidate_id": "il7ra-rfd4-1050d7fbc494",
+      "dedup": {
+        "candidate_id": "eswar-pC-s101-l70-a1",
+        "kept": true,
+        "reason": "kept",
+        "nearest_id": "eswar-pC-s101-l60-a1",
+        "identity": 0.2833333333333333,
+        "contiguous": 0.05,
+        "tm": 0.41000810187815595
+      },
+      "error": null,
+      "earlier_attempts": []
+    },
+    "s101-l80": {
+      "status": "done",
+      "run_id": "eswar-pC-s101-l80-a1",
+      "attempts": 1,
+      "seed": 101,
+      "binder_length": [
+        80,
+        80
+      ],
+      "worker_seconds": 51.255558522,
+      "gpu": "NVIDIA A100 80GB PCIe",
+      "candidate_id": "il7ra-rfd4-4ad3bdddf1f3",
+      "dedup": {
+        "candidate_id": "eswar-pC-s101-l80-a1",
+        "kept": true,
+        "reason": "kept",
+        "nearest_id": "eswar-pC-s101-l50-a1",
+        "identity": 0.42,
+        "contiguous": 0.08,
+        "tm": 0.29479187161479914
+      },
+      "error": null,
+      "earlier_attempts": []
+    },
+    "s102-l50": {
+      "status": "done",
+      "run_id": "eswar-pC-s102-l50-a1",
+      "attempts": 1,
+      "seed": 102,
+      "binder_length": [
+        50,
+        50
+      ],
+      "worker_seconds": 45.490948032999995,
+      "gpu": "NVIDIA A100 80GB PCIe",
+      "candidate_id": "il7ra-rfd4-3f893046cb8b",
+      "dedup": {
+        "candidate_id": "eswar-pC-s102-l50-a1",
+        "kept": true,
+        "reason": "kept",
+        "nearest_id": "eswar-pC-s101-l80-a1",
+        "identity": 0.44,
+        "contiguous": 0.08,
+        "tm": 0.3562567194176969
+      },
+      "error": null,
+      "earlier_attempts": []
+    },
+    "s102-l60": {
+      "status": "done",
+      "run_id": "eswar-pC-s102-l60-a1",
+      "attempts": 1,
+      "seed": 102,
+      "binder_length": [
+        60,
+        60
+      ],
+      "worker_seconds": 48.035965839,
+      "gpu": "NVIDIA A100 80GB PCIe",
+      "candidate_id": "il7ra-rfd4-1605d0a5b9f4",
+      "dedup": {
+        "candidate_id": "eswar-pC-s102-l60-a1",
+        "kept": true,
+        "reason": "kept",
+        "nearest_id": "eswar-pC-s101-l60-a1",
+        "identity": 0.15,
+        "contiguous": 0.03333333333333333,
+        "tm": 0.38723363892614354
+      },
+      "error": null,
+      "earlier_attempts": []
+    },
+    "s102-l70": {
+      "status": "done",
+      "run_id": "eswar-pC-s102-l70-a1",
+      "attempts": 1,
+      "seed": 102,
+      "binder_length": [
+        70,
+        70
+      ],
+      "worker_seconds": 54.39824596300002,
+      "gpu": "NVIDIA A100 80GB PCIe",
+      "candidate_id": "il7ra-rfd4-b7345543648e",
+      "dedup": {
+        "candidate_id": "eswar-pC-s102-l70-a1",
+        "kept": true,
+        "reason": "kept",
+        "nearest_id": "eswar-pC-s101-l70-a1",
+        "identity": 0.21428571428571427,
+        "contiguous": 0.05714285714285714,
+        "tm": 0.5145993615953591
+      },
+      "error": null,
+      "earlier_attempts": []
+    },
+    "s102-l80": {
+      "status": "done",
+      "run_id": "eswar-pC-s102-l80-a1",
+      "attempts": 1,
+      "seed": 102,
+      "binder_length": [
+        80,
+        80
+      ],
+      "worker_seconds": 50.21774100499999,
+      "gpu": "NVIDIA A100 80GB PCIe",
+      "candidate_id": "il7ra-rfd4-1a7edaead609",
+      "dedup": {
+        "candidate_id": "eswar-pC-s102-l80-a1",
+        "kept": true,
+        "reason": "kept",
+        "nearest_id": "eswar-pC-s101-l70-a1",
+        "identity": 0.37142857142857144,
+        "contiguous": 0.05714285714285714,
+        "tm": 0.5114748641950392
+      },
+      "error": null,
+      "earlier_attempts": []
+    },
+    "s103-l50": {
+      "status": "done",
+      "run_id": "eswar-pC-s103-l50-a1",
+      "attempts": 1,
+      "seed": 103,
+      "binder_length": [
+        50,
+        50
+      ],
+      "worker_seconds": 45.16531651299999,
+      "gpu": "NVIDIA A100 80GB PCIe",
+      "candidate_id": "il7ra-rfd4-acb826f96036",
+      "dedup": {
+        "candidate_id": "eswar-pC-s103-l50-a1",
+        "kept": true,
+        "reason": "kept",
+        "nearest_id": "eswar-pC-s101-l80-a1",
+        "identity": 0.42,
+        "contiguous": 0.08,
+        "tm": 0.3629990581653174
+      },
+      "error": null,
+      "earlier_attempts": []
+    },
+    "s103-l60": {
+      "status": "done",
+      "run_id": "eswar-pC-s103-l60-a1",
+      "attempts": 1,
+      "seed": 103,
+      "binder_length": [
+        60,
+        60
+      ],
+      "worker_seconds": 46.59970044299996,
+      "gpu": "NVIDIA A100 80GB PCIe",
+      "candidate_id": "il7ra-rfd4-49ffd467cc18",
+      "dedup": {
+        "candidate_id": "eswar-pC-s103-l60-a1",
+        "kept": true,
+        "reason": "kept",
+        "nearest_id": "eswar-pC-s102-l60-a1",
+        "identity": 0.16666666666666666,
+        "contiguous": 0.03333333333333333,
+        "tm": 0.5265595275758499
+      },
+      "error": null,
+      "earlier_attempts": []
+    },
+    "s103-l70": {
+      "status": "done",
+      "run_id": "eswar-pC-s103-l70-a1",
+      "attempts": 1,
+      "seed": 103,
+      "binder_length": [
+        70,
+        70
+      ],
+      "worker_seconds": 49.19955349000003,
+      "gpu": "NVIDIA A100 80GB PCIe",
+      "candidate_id": "il7ra-rfd4-2eebb6b0a332",
+      "dedup": {
+        "candidate_id": "eswar-pC-s103-l70-a1",
+        "kept": true,
+        "reason": "kept",
+        "nearest_id": "eswar-pC-s101-l60-a1",
+        "identity": 0.35,
+        "contiguous": 0.03333333333333333,
+        "tm": 0.5235904566741484
+      },
+      "error": null,
+      "earlier_attempts": []
+    },
+    "s103-l80": {
+      "status": "done",
+      "run_id": "eswar-pC-s103-l80-a1",
+      "attempts": 1,
+      "seed": 103,
+      "binder_length": [
+        80,
+        80
+      ],
+      "worker_seconds": 54.49764217200004,
+      "gpu": "NVIDIA A100 80GB PCIe",
+      "candidate_id": "il7ra-rfd4-ed3064a7840f",
+      "dedup": {
+        "candidate_id": "eswar-pC-s103-l80-a1",
+        "kept": true,
+        "reason": "kept",
+        "nearest_id": "eswar-pC-s102-l50-a1",
+        "identity": 0.32,
+        "contiguous": 0.06,
+        "tm": 0.21454997247813368
+      },
+      "error": null,
+      "earlier_attempts": []
+    },
+    "s104-l50": {
+      "status": "done",
+      "run_id": "eswar-pC-s104-l50-a1",
+      "attempts": 1,
+      "seed": 104,
+      "binder_length": [
+        50,
+        50
+      ],
+      "worker_seconds": 46.05486720199997,
+      "gpu": "NVIDIA A100 80GB PCIe",
+      "candidate_id": "il7ra-rfd4-e07a9eddb956",
+      "dedup": {
+        "candidate_id": "eswar-pC-s104-l50-a1",
+        "kept": true,
+        "reason": "kept",
+        "nearest_id": "eswar-pC-s101-l80-a1",
+        "identity": 0.44,
+        "contiguous": 0.08,
+        "tm": 0.3171375706082523
+      },
+      "error": null,
+      "earlier_attempts": []
+    },
+    "s104-l60": {
+      "status": "done",
+      "run_id": "eswar-pC-s104-l60-a1",
+      "attempts": 1,
+      "seed": 104,
+      "binder_length": [
+        60,
+        60
+      ],
+      "worker_seconds": 47.657055134000075,
+      "gpu": "NVIDIA A100 80GB PCIe",
+      "candidate_id": "il7ra-rfd4-a9d9d90e56ed",
+      "dedup": {
+        "candidate_id": "eswar-pC-s104-l60-a1",
+        "kept": true,
+        "reason": "kept",
+        "nearest_id": "eswar-pC-s103-l60-a1",
+        "identity": 0.31666666666666665,
+        "contiguous": 0.03333333333333333,
+        "tm": 0.5736279423126763
+      },
+      "error": null,
+      "earlier_attempts": []
+    },
+    "s104-l70": {
+      "status": "done",
+      "run_id": "eswar-pC-s104-l70-a1",
+      "attempts": 1,
+      "seed": 104,
+      "binder_length": [
+        70,
+        70
+      ],
+      "worker_seconds": 49.55544664800004,
+      "gpu": "NVIDIA A100 80GB PCIe",
+      "candidate_id": "il7ra-rfd4-52374c33ee29",
+      "dedup": {
+        "candidate_id": "eswar-pC-s104-l70-a1",
+        "kept": true,
+        "reason": "kept",
+        "nearest_id": "eswar-pC-s101-l60-a1",
+        "identity": 0.21666666666666667,
+        "contiguous": 0.05,
+        "tm": 0.4168885831186302
+      },
+      "error": null,
+      "earlier_attempts": []
+    },
+    "s104-l80": {
+      "status": "done",
+      "run_id": "eswar-pC-s104-l80-a1",
+      "attempts": 1,
+      "seed": 104,
+      "binder_length": [
+        80,
+        80
+      ],
+      "worker_seconds": 52.188316741999984,
+      "gpu": "NVIDIA A100 80GB PCIe",
+      "candidate_id": "il7ra-rfd4-cd9c34a6b62f",
+      "dedup": {
+        "candidate_id": "eswar-pC-s104-l80-a1",
+        "kept": true,
+        "reason": "kept",
+        "nearest_id": "eswar-pC-s101-l50-a1",
+        "identity": 0.52,
+        "contiguous": 0.1,
+        "tm": 0.33712409566732016
+      },
+      "error": null,
+      "earlier_attempts": []
+    },
+    "s105-l50": {
+      "status": "done",
+      "run_id": "eswar-pC-s105-l50-a1",
+      "attempts": 1,
+      "seed": 105,
+      "binder_length": [
+        50,
+        50
+      ],
+      "worker_seconds": 45.7485124750001,
+      "gpu": "NVIDIA A100 80GB PCIe",
+      "candidate_id": "il7ra-rfd4-765923ba576b",
+      "dedup": {
+        "candidate_id": "eswar-pC-s105-l50-a1",
+        "kept": true,
+        "reason": "kept",
+        "nearest_id": "eswar-pC-s104-l50-a1",
+        "identity": 0.24,
+        "contiguous": 0.04,
+        "tm": 0.4523924370409137
+      },
+      "error": null,
+      "earlier_attempts": []
+    },
+    "s105-l60": {
+      "status": "done",
+      "run_id": "eswar-pC-s105-l60-a1",
+      "attempts": 1,
+      "seed": 105,
+      "binder_length": [
+        60,
+        60
+      ],
+      "worker_seconds": 47.440049990000034,
+      "gpu": "NVIDIA A100 80GB PCIe",
+      "candidate_id": "il7ra-rfd4-9f0092090d8c",
+      "dedup": {
+        "candidate_id": "eswar-pC-s105-l60-a1",
+        "kept": true,
+        "reason": "kept",
+        "nearest_id": "eswar-pC-s103-l50-a1",
+        "identity": 0.36,
+        "contiguous": 0.06,
+        "tm": 0.5050685736214349
+      },
+      "error": null,
+      "earlier_attempts": []
+    },
+    "s105-l70": {
+      "status": "done",
+      "run_id": "eswar-pC-s105-l70-a1",
+      "attempts": 1,
+      "seed": 105,
+      "binder_length": [
+        70,
+        70
+      ],
+      "worker_seconds": 49.10415892100002,
+      "gpu": "NVIDIA A100 80GB PCIe",
+      "candidate_id": "il7ra-rfd4-0f5fd1dfe3df",
+      "dedup": {
+        "candidate_id": "eswar-pC-s105-l70-a1",
+        "kept": true,
+        "reason": "kept",
+        "nearest_id": "eswar-pC-s101-l80-a1",
+        "identity": 0.24285714285714285,
+        "contiguous": 0.04285714285714286,
+        "tm": 0.47059077769346125
+      },
+      "error": null,
+      "earlier_attempts": []
+    },
+    "s105-l80": {
+      "status": "done",
+      "run_id": "eswar-pC-s105-l80-a1",
+      "attempts": 1,
+      "seed": 105,
+      "binder_length": [
+        80,
+        80
+      ],
+      "worker_seconds": 51.52828218399998,
+      "gpu": "NVIDIA A100 80GB PCIe",
+      "candidate_id": "il7ra-rfd4-aa5bc3c00d49",
+      "dedup": {
+        "candidate_id": "eswar-pC-s105-l80-a1",
+        "kept": true,
+        "reason": "kept",
+        "nearest_id": "eswar-pC-s102-l50-a1",
+        "identity": 0.36,
+        "contiguous": 0.06,
+        "tm": 0.48205615526764917
+      },
+      "error": null,
+      "earlier_attempts": []
+    }
+  },
+  "status_note": "None of these designs is a binding result or a submission entry."
+}

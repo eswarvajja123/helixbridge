@@ -1,0 +1,898 @@
+{
+  "selected": [
+    {
+      "pick_order": 1,
+      "candidate_id": "il7ra-rfd4-08f9233a8a90",
+      "fold_group": "1",
+      "site_group": "1",
+      "liability_flags": [],
+      "predictor_disagreement": 0.004897,
+      "hotspot_source": "proposed_by_eswar_unreviewed",
+      "seed": 105,
+      "length": 70,
+      "sequence": "SPFEQISSLLKKALSAAEEENFDKALDLFNQASTIFDENQDSFTPSQTRTIKTLVDDFLETYSTKMFENS",
+      "scores": {
+        "esmfold2": {
+          "iptm": 0.949738621711731,
+          "ipsae_max": 0.854231
+        },
+        "boltz2": {
+          "iptm": 0.9527641534805298,
+          "ipsae_max": 0.849334
+        }
+      }
+    },
+    {
+      "pick_order": 2,
+      "candidate_id": "il7ra-rfd4-67f05b49fd19",
+      "fold_group": "2",
+      "site_group": "1",
+      "liability_flags": [],
+      "predictor_disagreement": 0.048193,
+      "hotspot_source": "provisional_historical",
+      "seed": 102,
+      "length": 50,
+      "sequence": "SKFLEYVEEGIALAGEGKYDEAIEKFEKALEYATPEQKEMVEEKIAELKE",
+      "scores": {
+        "esmfold2": {
+          "iptm": 0.9165267944335938,
+          "ipsae_max": 0.774767
+        },
+        "boltz2": {
+          "iptm": 0.9420647025108337,
+          "ipsae_max": 0.82296
+        }
+      }
+    },
+    {
+      "pick_order": 3,
+      "candidate_id": "il7ra-rfd4-7fc8ab07c02f",
+      "fold_group": "4",
+      "site_group": "1",
+      "liability_flags": [],
+      "predictor_disagreement": 0.023979,
+      "hotspot_source": "provisional_historical",
+      "seed": 104,
+      "length": 50,
+      "sequence": "SEEERLLKEQLEALLEHAEKVIEESTNTEQIEEAEKLREELEEKLKELEE",
+      "scores": {
+        "esmfold2": {
+          "iptm": 0.8897421360015869,
+          "ipsae_max": 0.767287
+        },
+        "boltz2": {
+          "iptm": 0.91372150182724,
+          "ipsae_max": 0.787937
+        }
+      }
+    },
+    {
+      "pick_order": 4,
+      "candidate_id": "il7ra-rfd4-b25d020a592d",
+      "fold_group": "5",
+      "site_group": "2",
+      "liability_flags": [
+        "n_glycosylation_sequon"
+      ],
+      "predictor_disagreement": 0.006763,
+      "hotspot_source": "proposed_by_eswar_unreviewed",
+      "seed": 104,
+      "length": 80,
+      "sequence": "STAEDVVTELTDNFIKSLKYPEELYESLDVTYGDNDTLIDKFLTTLKSLLEEQYNLSDTTINTLLSTSKTRLETALTEDE",
+      "scores": {
+        "esmfold2": {
+          "iptm": 0.9317577481269836,
+          "ipsae_max": 0.835667
+        },
+        "boltz2": {
+          "iptm": 0.9350396394729614,
+          "ipsae_max": 0.84243
+        }
+      }
+    },
+    {
+      "pick_order": 5,
+      "candidate_id": "il7ra-rfd4-2e2ec88e93b8",
+      "fold_group": "3",
+      "site_group": "1",
+      "liability_flags": [
+        "odd_cysteine_count"
+      ],
+      "predictor_disagreement": 0.016,
+      "hotspot_source": "provisional_historical",
+      "seed": 102,
+      "length": 70,
+      "sequence": "LTDEEVKEVATAVKDIVENHFLEMVAACTDLTEDEAKALSLEEKIKLILDTLAPFLSDEDKERILEEALK",
+      "scores": {
+        "esmfold2": {
+          "iptm": 0.9193477034568787,
+          "ipsae_max": 0.770513
+        },
+        "boltz2": {
+          "iptm": 0.9182670712471008,
+          "ipsae_max": 0.786513
+        }
+      }
+    },
+    {
+      "pick_order": 6,
+      "candidate_id": "il7ra-rfd4-bf3f3264bcd4",
+      "fold_group": "6",
+      "site_group": "1",
+      "liability_flags": [
+        "asp_pro_motif"
+      ],
+      "predictor_disagreement": 0.067575,
+      "hotspot_source": "provisional_historical",
+      "seed": 101,
+      "length": 70,
+      "sequence": "SSVSDLLDRAKNLLETVTDSEVKTFLSNLITAVEENQDPSLVEDLSLVVDVLETEPPEEWKLKIHEALSS",
+      "scores": {
+        "esmfold2": {
+          "iptm": 0.8538140654563904,
+          "ipsae_max": 0.622195
+        },
+        "boltz2": {
+          "iptm": 0.87617427110672,
+          "ipsae_max": 0.68977
+        }
+      }
+    },
+    {
+      "pick_order": 7,
+      "candidate_id": "il7ra-rfd4-f48ad0bc6f6d",
+      "fold_group": "7",
+      "site_group": "1",
+      "liability_flags": [
+        "odd_cysteine_count"
+      ],
+      "predictor_disagreement": 0.138972,
+      "hotspot_source": "proposed_by_eswar_unreviewed",
+      "seed": 104,
+      "length": 60,
+      "sequence": "SLEDKINDKIDECLSATTPDEFDTALDELAELLEQLEPEDTIKFQDDLEKVVEHGEELYS",
+      "scores": {
+        "esmfold2": {
+          "iptm": 0.8858478665351868,
+          "ipsae_max": 0.683434
+        },
+        "boltz2": {
+          "iptm": 0.9403254985809326,
+          "ipsae_max": 0.822406
+        }
+      }
+    },
+    {
+      "pick_order": 8,
+      "candidate_id": "il7ra-rfd4-798bb23118c0",
+      "fold_group": "1",
+      "site_group": "1",
+      "liability_flags": [],
+      "predictor_disagreement": 0.015679,
+      "hotspot_source": "proposed_by_eswar_unreviewed",
+      "seed": 101,
+      "length": 60,
+      "sequence": "DDDLLDDALSSYEHYMEALENADSEEHIESLRETTLSYFDKLKEHNLYDEFTEMVAESRE",
+      "scores": {
+        "esmfold2": {
+          "iptm": 0.932526707649231,
+          "ipsae_max": 0.845402
+        },
+        "boltz2": {
+          "iptm": 0.9279526472091675,
+          "ipsae_max": 0.829723
+        }
+      }
+    },
+    {
+      "pick_order": 9,
+      "candidate_id": "il7ra-rfd4-1ce95bd8ae7b",
+      "fold_group": "2",
+      "site_group": "1",
+      "liability_flags": [
+        "asp_pro_motif"
+      ],
+      "predictor_disagreement": 0.091055,
+      "hotspot_source": "provisional_historical",
+      "seed": 105,
+      "length": 60,
+      "sequence": "SALELAEKMLEEDPNDYEALFFLLRHYYLNEEYDKALEVAEKMLELDPNDYLANYLVEKL",
+      "scores": {
+        "esmfold2": {
+          "iptm": 0.8824816942214966,
+          "ipsae_max": 0.719265
+        },
+        "boltz2": {
+          "iptm": 0.9205873012542725,
+          "ipsae_max": 0.81032
+        }
+      }
+    },
+    {
+      "pick_order": 10,
+      "candidate_id": "il7ra-rfd4-fa91ad8e2470",
+      "fold_group": "4",
+      "site_group": "1",
+      "liability_flags": [],
+      "predictor_disagreement": 0.135965,
+      "hotspot_source": "proposed_by_eswar_unreviewed",
+      "seed": 105,
+      "length": 60,
+      "sequence": "SELEELADEILELQDKMGEISNQEEADEALEEHESLEEKIEALSEEEQMELSKIIKEKLE",
+      "scores": {
+        "esmfold2": {
+          "iptm": 0.8824182152748108,
+          "ipsae_max": 0.679371
+        },
+        "boltz2": {
+          "iptm": 0.9402498602867126,
+          "ipsae_max": 0.815336
+        }
+      }
+    },
+    {
+      "pick_order": 11,
+      "candidate_id": "il7ra-rfd4-8d368322e6bf",
+      "fold_group": "5",
+      "site_group": "1",
+      "liability_flags": [
+        "odd_cysteine_count"
+      ],
+      "predictor_disagreement": 0.213536,
+      "hotspot_source": "provisional_historical",
+      "seed": 103,
+      "length": 60,
+      "sequence": "SSKDETYDSLLEKINNAESEEELQNIFDEICEASSEEKLTDEQVDELKDALNDKLEELQS",
+      "scores": {
+        "esmfold2": {
+          "iptm": 0.9113917946815491,
+          "ipsae_max": 0.770023
+        },
+        "boltz2": {
+          "iptm": 0.8166600465774536,
+          "ipsae_max": 0.556487
+        }
+      }
+    },
+    {
+      "pick_order": 12,
+      "candidate_id": "il7ra-rfd4-dbb68e85db49",
+      "fold_group": "1",
+      "site_group": "1",
+      "liability_flags": [],
+      "predictor_disagreement": 0.027178,
+      "hotspot_source": "proposed_by_eswar_unreviewed",
+      "seed": 102,
+      "length": 60,
+      "sequence": "SEDKLNHLLSVYKDYQNALANSDTEKANELKTEFLEGYDELSDEEKDDLSEMIGEYLDSS",
+      "scores": {
+        "esmfold2": {
+          "iptm": 0.918560802936554,
+          "ipsae_max": 0.80448
+        },
+        "boltz2": {
+          "iptm": 0.91209477186203,
+          "ipsae_max": 0.777302
+        }
+      }
+    },
+    {
+      "pick_order": 13,
+      "candidate_id": "il7ra-rfd4-ee56c58e81b5",
+      "fold_group": "1",
+      "site_group": "1",
+      "liability_flags": [],
+      "predictor_disagreement": 0.038143,
+      "hotspot_source": "proposed_by_eswar_unreviewed",
+      "seed": 102,
+      "length": 50,
+      "sequence": "EEEWEELQEEAEEVVVEMEEAHEENDMEKIEELEEKQDEIFEKANELSEE",
+      "scores": {
+        "esmfold2": {
+          "iptm": 0.9366444945335388,
+          "ipsae_max": 0.85372
+        },
+        "boltz2": {
+          "iptm": 0.9365625381469727,
+          "ipsae_max": 0.815577
+        }
+      }
+    }
+  ],
+  "report": {
+    "schema": 1,
+    "pool": 60,
+    "eligible": 13,
+    "excluded": [
+      {
+        "candidate_id": "il7ra-rfd4-befe47e7d3eb",
+        "reasons": [
+          "qc_reason:pose_shift:generator_vs_esmfold2:23.60A>2.5A",
+          "qc_reason:pose_shift:generator_vs_boltz2:26.37A>2.5A",
+          "qc_reason:pose_shift:esmfold2_vs_boltz2:10.70A>3.0A",
+          "structure_qc_flagged",
+          "novelty_prescreen_not_searched"
+        ]
+      },
+      {
+        "candidate_id": "il7ra-rfd4-11a204956320",
+        "reasons": [
+          "qc_reason:pose_shift:generator_vs_boltz2:3.12A>2.5A",
+          "structure_qc_flagged",
+          "novelty_prescreen_not_searched"
+        ]
+      },
+      {
+        "candidate_id": "il7ra-rfd4-88b5b1829c1f",
+        "reasons": [
+          "qc_reason:pose_shift:generator_vs_boltz2:21.93A>2.5A",
+          "qc_reason:pose_shift:esmfold2_vs_boltz2:21.38A>3.0A",
+          "structure_qc_flagged",
+          "novelty_prescreen_not_searched"
+        ]
+      },
+      {
+        "candidate_id": "il7ra-rfd4-ca029019e879",
+        "reasons": [
+          "qc_reason:clash:boltz2:2_heavy_atom_pairs_lt_2A",
+          "structure_qc_flagged",
+          "novelty_prescreen_not_searched"
+        ]
+      },
+      {
+        "candidate_id": "il7ra-rfd4-2a9a819f98ca",
+        "reasons": [
+          "qc_reason:no_hotspot_contact:esmfold2",
+          "qc_reason:clash:boltz2:1_heavy_atom_pairs_lt_2A",
+          "qc_reason:no_hotspot_contact:boltz2",
+          "qc_reason:pose_shift:generator_vs_esmfold2:40.72A>2.5A",
+          "qc_reason:pose_shift:generator_vs_boltz2:53.75A>2.5A",
+          "qc_reason:pose_shift:esmfold2_vs_boltz2:57.49A>3.0A",
+          "structure_qc_flagged",
+          "novelty_prescreen_not_searched"
+        ]
+      },
+      {
+        "candidate_id": "il7ra-rfd4-c099fddd0568",
+        "reasons": [
+          "qc_reason:pose_shift:generator_vs_esmfold2:6.71A>2.5A",
+          "qc_reason:pose_shift:generator_vs_boltz2:10.05A>2.5A",
+          "qc_reason:pose_shift:esmfold2_vs_boltz2:16.02A>3.0A",
+          "structure_qc_flagged",
+          "novelty_prescreen_not_searched"
+        ]
+      },
+      {
+        "candidate_id": "il7ra-rfd4-10b9561e3790",
+        "reasons": [
+          "qc_reason:pose_shift:generator_vs_boltz2:13.07A>2.5A",
+          "qc_reason:pose_shift:esmfold2_vs_boltz2:12.64A>3.0A",
+          "structure_qc_flagged",
+          "novelty_prescreen_not_searched"
+        ]
+      },
+      {
+        "candidate_id": "il7ra-rfd4-3dd03e7b74b2",
+        "reasons": [
+          "qc_reason:pose_shift:generator_vs_boltz2:14.47A>2.5A",
+          "qc_reason:pose_shift:esmfold2_vs_boltz2:14.23A>3.0A",
+          "structure_qc_flagged",
+          "novelty_prescreen_not_searched"
+        ]
+      },
+      {
+        "candidate_id": "il7ra-rfd4-a7ec7bcf4054",
+        "reasons": [
+          "qc_reason:pose_shift:generator_vs_boltz2:9.47A>2.5A",
+          "qc_reason:pose_shift:esmfold2_vs_boltz2:8.88A>3.0A",
+          "structure_qc_flagged",
+          "novelty_prescreen_not_searched"
+        ]
+      },
+      {
+        "candidate_id": "il7ra-rfd4-d009432d6cfc",
+        "reasons": [
+          "qc_reason:clash:boltz2:1_heavy_atom_pairs_lt_2A",
+          "structure_qc_flagged",
+          "novelty_prescreen_not_searched"
+        ]
+      },
+      {
+        "candidate_id": "il7ra-rfd4-c1028562b167",
+        "reasons": [
+          "qc_reason:clash:generator:1_heavy_atom_pairs_lt_2A",
+          "qc_reason:clash:esmfold2:1_heavy_atom_pairs_lt_2A",
+          "qc_reason:pose_shift:generator_vs_boltz2:3.47A>2.5A",
+          "qc_reason:pose_shift:esmfold2_vs_boltz2:3.92A>3.0A",
+          "structure_qc_flagged",
+          "novelty_prescreen_not_searched"
+        ]
+      },
+      {
+        "candidate_id": "il7ra-rfd4-065c167bd616",
+        "reasons": [
+          "qc_reason:clash:boltz2:1_heavy_atom_pairs_lt_2A",
+          "qc_reason:pose_shift:generator_vs_boltz2:9.86A>2.5A",
+          "qc_reason:pose_shift:esmfold2_vs_boltz2:10.93A>3.0A",
+          "structure_qc_flagged",
+          "novelty_prescreen_not_searched"
+        ]
+      },
+      {
+        "candidate_id": "il7ra-rfd4-ae0d69ce4267",
+        "reasons": [
+          "qc_reason:clash:generator:1_heavy_atom_pairs_lt_2A",
+          "qc_reason:pose_shift:generator_vs_esmfold2:14.55A>2.5A",
+          "qc_reason:pose_shift:generator_vs_boltz2:3.41A>2.5A",
+          "qc_reason:pose_shift:esmfold2_vs_boltz2:13.71A>3.0A",
+          "structure_qc_flagged",
+          "novelty_prescreen_not_searched"
+        ]
+      },
+      {
+        "candidate_id": "il7ra-rfd4-20b5cd2be58c",
+        "reasons": [
+          "qc_reason:pose_shift:generator_vs_boltz2:3.64A>2.5A",
+          "qc_reason:pose_shift:esmfold2_vs_boltz2:3.29A>3.0A",
+          "structure_qc_flagged",
+          "novelty_prescreen_not_searched"
+        ]
+      },
+      {
+        "candidate_id": "il7ra-rfd4-4d756cbcfbfa",
+        "reasons": [
+          "qc_reason:clash:generator:1_heavy_atom_pairs_lt_2A",
+          "structure_qc_flagged",
+          "novelty_prescreen_not_searched"
+        ]
+      },
+      {
+        "candidate_id": "il7ra-rfd4-5af8db19d24d",
+        "reasons": [
+          "qc_reason:clash:boltz2:1_heavy_atom_pairs_lt_2A",
+          "structure_qc_flagged",
+          "novelty_prescreen_not_searched"
+        ]
+      },
+      {
+        "candidate_id": "il7ra-rfd4-a52ab184ad13",
+        "reasons": [
+          "qc_reason:no_hotspot_contact:esmfold2",
+          "qc_reason:pose_shift:generator_vs_esmfold2:45.52A>2.5A",
+          "qc_reason:pose_shift:esmfold2_vs_boltz2:46.56A>3.0A",
+          "structure_qc_flagged",
+          "novelty_prescreen_not_searched"
+        ]
+      },
+      {
+        "candidate_id": "il7ra-rfd4-ea365f006edb",
+        "reasons": [
+          "qc_reason:clash:generator:1_heavy_atom_pairs_lt_2A",
+          "qc_reason:clash:boltz2:1_heavy_atom_pairs_lt_2A",
+          "structure_qc_flagged",
+          "novelty_prescreen_not_searched"
+        ]
+      },
+      {
+        "candidate_id": "il7ra-rfd4-feec47be892c",
+        "reasons": [
+          "qc_reason:clash:generator:1_heavy_atom_pairs_lt_2A",
+          "qc_reason:clash:boltz2:1_heavy_atom_pairs_lt_2A",
+          "structure_qc_flagged",
+          "novelty_prescreen_not_searched"
+        ]
+      },
+      {
+        "candidate_id": "il7ra-rfd4-ab54a5c15f5d",
+        "reasons": [
+          "qc_reason:near_duplicate:backbone_tm",
+          "structure_qc_incomplete",
+          "novelty_prescreen_not_searched",
+          "not_scored_by_both_predictors"
+        ]
+      },
+      {
+        "candidate_id": "il7ra-rfd4-4d8e406177a3",
+        "reasons": [
+          "qc_reason:clash:boltz2:1_heavy_atom_pairs_lt_2A",
+          "structure_qc_flagged",
+          "novelty_prescreen_not_searched"
+        ]
+      },
+      {
+        "candidate_id": "il7ra-rfd4-0c2c782b5ce3",
+        "reasons": [
+          "qc_reason:pose_shift:generator_vs_esmfold2:17.65A>2.5A",
+          "qc_reason:pose_shift:generator_vs_boltz2:19.67A>2.5A",
+          "qc_reason:pose_shift:esmfold2_vs_boltz2:5.79A>3.0A",
+          "structure_qc_flagged",
+          "novelty_prescreen_not_searched"
+        ]
+      },
+      {
+        "candidate_id": "il7ra-rfd4-30e28a0d5b5e",
+        "reasons": [
+          "qc_reason:pose_shift:generator_vs_boltz2:3.11A>2.5A",
+          "qc_reason:pose_shift:esmfold2_vs_boltz2:3.31A>3.0A",
+          "structure_qc_flagged",
+          "novelty_prescreen_not_searched"
+        ]
+      },
+      {
+        "candidate_id": "il7ra-rfd4-5df5871d401d",
+        "reasons": [
+          "qc_reason:clash:boltz2:1_heavy_atom_pairs_lt_2A",
+          "structure_qc_flagged",
+          "novelty_prescreen_not_searched"
+        ]
+      },
+      {
+        "candidate_id": "il7ra-rfd4-dffe3d63a688",
+        "reasons": [
+          "qc_reason:pose_shift:generator_vs_boltz2:25.84A>2.5A",
+          "qc_reason:pose_shift:esmfold2_vs_boltz2:25.56A>3.0A",
+          "structure_qc_flagged",
+          "novelty_prescreen_not_searched"
+        ]
+      },
+      {
+        "candidate_id": "il7ra-rfd4-8536d4522c61",
+        "reasons": [
+          "qc_reason:pose_shift:generator_vs_boltz2:8.77A>2.5A",
+          "qc_reason:pose_shift:esmfold2_vs_boltz2:10.32A>3.0A",
+          "structure_qc_flagged",
+          "novelty_prescreen_not_searched"
+        ]
+      },
+      {
+        "candidate_id": "il7ra-rfd4-22998e74e474",
+        "reasons": [
+          "qc_reason:pose_shift:generator_vs_boltz2:18.28A>2.5A",
+          "qc_reason:pose_shift:esmfold2_vs_boltz2:17.75A>3.0A",
+          "structure_qc_flagged",
+          "novelty_prescreen_not_searched"
+        ]
+      },
+      {
+        "candidate_id": "il7ra-rfd4-9fc50fe8fbea",
+        "reasons": [
+          "qc_reason:clash:esmfold2:2_heavy_atom_pairs_lt_2A",
+          "qc_reason:no_hotspot_contact:esmfold2",
+          "qc_reason:clash:boltz2:1_heavy_atom_pairs_lt_2A",
+          "qc_reason:no_hotspot_contact:boltz2",
+          "qc_reason:pose_shift:generator_vs_esmfold2:33.80A>2.5A",
+          "qc_reason:pose_shift:generator_vs_boltz2:48.44A>2.5A",
+          "qc_reason:pose_shift:esmfold2_vs_boltz2:34.73A>3.0A",
+          "structure_qc_flagged",
+          "novelty_prescreen_not_searched"
+        ]
+      },
+      {
+        "candidate_id": "il7ra-rfd4-3ed257c58da6",
+        "reasons": [
+          "qc_reason:no_hotspot_contact:esmfold2",
+          "qc_reason:clash:boltz2:1_heavy_atom_pairs_lt_2A",
+          "qc_reason:no_hotspot_contact:boltz2",
+          "qc_reason:pose_shift:generator_vs_esmfold2:55.19A>2.5A",
+          "qc_reason:pose_shift:generator_vs_boltz2:58.85A>2.5A",
+          "qc_reason:pose_shift:esmfold2_vs_boltz2:21.04A>3.0A",
+          "structure_qc_flagged",
+          "novelty_prescreen_not_searched"
+        ]
+      },
+      {
+        "candidate_id": "il7ra-rfd4-1050d7fbc494",
+        "reasons": [
+          "qc_reason:clash:esmfold2:1_heavy_atom_pairs_lt_2A",
+          "qc_reason:no_hotspot_contact:esmfold2",
+          "qc_reason:no_hotspot_contact:boltz2",
+          "qc_reason:pose_shift:generator_vs_esmfold2:59.39A>2.5A",
+          "qc_reason:pose_shift:generator_vs_boltz2:48.52A>2.5A",
+          "qc_reason:pose_shift:esmfold2_vs_boltz2:46.46A>3.0A",
+          "structure_qc_flagged",
+          "novelty_prescreen_not_searched"
+        ]
+      },
+      {
+        "candidate_id": "il7ra-rfd4-4ad3bdddf1f3",
+        "reasons": [
+          "qc_reason:clash:generator:1_heavy_atom_pairs_lt_2A",
+          "qc_reason:clash:esmfold2:2_heavy_atom_pairs_lt_2A",
+          "qc_reason:no_hotspot_contact:esmfold2",
+          "qc_reason:clash:boltz2:2_heavy_atom_pairs_lt_2A",
+          "qc_reason:no_hotspot_contact:boltz2",
+          "qc_reason:pose_shift:generator_vs_esmfold2:54.66A>2.5A",
+          "qc_reason:pose_shift:generator_vs_boltz2:59.81A>2.5A",
+          "qc_reason:pose_shift:esmfold2_vs_boltz2:24.10A>3.0A",
+          "structure_qc_flagged",
+          "novelty_prescreen_not_searched"
+        ]
+      },
+      {
+        "candidate_id": "il7ra-rfd4-3f893046cb8b",
+        "reasons": [
+          "qc_reason:no_hotspot_contact:esmfold2",
+          "qc_reason:clash:boltz2:1_heavy_atom_pairs_lt_2A",
+          "qc_reason:no_hotspot_contact:boltz2",
+          "qc_reason:pose_shift:generator_vs_esmfold2:60.54A>2.5A",
+          "qc_reason:pose_shift:generator_vs_boltz2:57.03A>2.5A",
+          "qc_reason:pose_shift:esmfold2_vs_boltz2:19.71A>3.0A",
+          "structure_qc_flagged",
+          "novelty_prescreen_not_searched"
+        ]
+      },
+      {
+        "candidate_id": "il7ra-rfd4-1605d0a5b9f4",
+        "reasons": [
+          "qc_reason:no_hotspot_contact:boltz2",
+          "qc_reason:pose_shift:generator_vs_esmfold2:32.35A>2.5A",
+          "qc_reason:pose_shift:generator_vs_boltz2:59.36A>2.5A",
+          "qc_reason:pose_shift:esmfold2_vs_boltz2:42.34A>3.0A",
+          "structure_qc_flagged",
+          "novelty_prescreen_not_searched"
+        ]
+      },
+      {
+        "candidate_id": "il7ra-rfd4-b7345543648e",
+        "reasons": [
+          "qc_reason:clash:esmfold2:1_heavy_atom_pairs_lt_2A",
+          "qc_reason:no_hotspot_contact:esmfold2",
+          "qc_reason:no_hotspot_contact:boltz2",
+          "qc_reason:pose_shift:generator_vs_esmfold2:65.60A>2.5A",
+          "qc_reason:pose_shift:generator_vs_boltz2:70.79A>2.5A",
+          "qc_reason:pose_shift:esmfold2_vs_boltz2:13.36A>3.0A",
+          "structure_qc_flagged",
+          "novelty_prescreen_not_searched"
+        ]
+      },
+      {
+        "candidate_id": "il7ra-rfd4-1a7edaead609",
+        "reasons": [
+          "qc_reason:clash:esmfold2:1_heavy_atom_pairs_lt_2A",
+          "qc_reason:no_hotspot_contact:boltz2",
+          "qc_reason:pose_shift:generator_vs_esmfold2:55.91A>2.5A",
+          "qc_reason:pose_shift:generator_vs_boltz2:52.01A>2.5A",
+          "qc_reason:pose_shift:esmfold2_vs_boltz2:43.34A>3.0A",
+          "structure_qc_flagged",
+          "novelty_prescreen_not_searched"
+        ]
+      },
+      {
+        "candidate_id": "il7ra-rfd4-acb826f96036",
+        "reasons": [
+          "qc_reason:clash:esmfold2:4_heavy_atom_pairs_lt_2A",
+          "qc_reason:no_hotspot_contact:esmfold2",
+          "qc_reason:no_hotspot_contact:boltz2",
+          "qc_reason:pose_shift:generator_vs_esmfold2:49.57A>2.5A",
+          "qc_reason:pose_shift:generator_vs_boltz2:59.80A>2.5A",
+          "qc_reason:pose_shift:esmfold2_vs_boltz2:36.70A>3.0A",
+          "structure_qc_flagged",
+          "novelty_prescreen_not_searched"
+        ]
+      },
+      {
+        "candidate_id": "il7ra-rfd4-49ffd467cc18",
+        "reasons": [
+          "qc_reason:clash:esmfold2:1_heavy_atom_pairs_lt_2A",
+          "qc_reason:no_hotspot_contact:esmfold2",
+          "qc_reason:no_hotspot_contact:boltz2",
+          "qc_reason:pose_shift:generator_vs_esmfold2:56.40A>2.5A",
+          "qc_reason:pose_shift:generator_vs_boltz2:61.08A>2.5A",
+          "qc_reason:pose_shift:esmfold2_vs_boltz2:24.12A>3.0A",
+          "structure_qc_flagged",
+          "novelty_prescreen_not_searched"
+        ]
+      },
+      {
+        "candidate_id": "il7ra-rfd4-2eebb6b0a332",
+        "reasons": [
+          "qc_reason:clash:generator:1_heavy_atom_pairs_lt_2A",
+          "qc_reason:no_hotspot_contact:esmfold2",
+          "qc_reason:clash:boltz2:3_heavy_atom_pairs_lt_2A",
+          "qc_reason:no_hotspot_contact:boltz2",
+          "qc_reason:pose_shift:generator_vs_esmfold2:64.07A>2.5A",
+          "qc_reason:pose_shift:generator_vs_boltz2:64.58A>2.5A",
+          "qc_reason:pose_shift:esmfold2_vs_boltz2:3.12A>3.0A",
+          "structure_qc_flagged",
+          "novelty_prescreen_not_searched"
+        ]
+      },
+      {
+        "candidate_id": "il7ra-rfd4-ed3064a7840f",
+        "reasons": [
+          "qc_reason:clash:esmfold2:1_heavy_atom_pairs_lt_2A",
+          "qc_reason:no_hotspot_contact:esmfold2",
+          "qc_reason:no_hotspot_contact:boltz2",
+          "qc_reason:pose_shift:generator_vs_esmfold2:47.32A>2.5A",
+          "qc_reason:pose_shift:generator_vs_boltz2:68.39A>2.5A",
+          "qc_reason:pose_shift:esmfold2_vs_boltz2:39.13A>3.0A",
+          "structure_qc_flagged",
+          "novelty_prescreen_not_searched"
+        ]
+      },
+      {
+        "candidate_id": "il7ra-rfd4-e07a9eddb956",
+        "reasons": [
+          "qc_reason:clash:esmfold2:2_heavy_atom_pairs_lt_2A",
+          "qc_reason:clash:boltz2:1_heavy_atom_pairs_lt_2A",
+          "qc_reason:no_hotspot_contact:boltz2",
+          "qc_reason:pose_shift:generator_vs_esmfold2:26.16A>2.5A",
+          "qc_reason:pose_shift:generator_vs_boltz2:61.10A>2.5A",
+          "qc_reason:pose_shift:esmfold2_vs_boltz2:45.60A>3.0A",
+          "structure_qc_flagged",
+          "novelty_prescreen_not_searched"
+        ]
+      },
+      {
+        "candidate_id": "il7ra-rfd4-a9d9d90e56ed",
+        "reasons": [
+          "qc_reason:clash:esmfold2:2_heavy_atom_pairs_lt_2A",
+          "qc_reason:clash:boltz2:1_heavy_atom_pairs_lt_2A",
+          "qc_reason:no_hotspot_contact:boltz2",
+          "qc_reason:pose_shift:generator_vs_esmfold2:18.44A>2.5A",
+          "qc_reason:pose_shift:generator_vs_boltz2:59.19A>2.5A",
+          "qc_reason:pose_shift:esmfold2_vs_boltz2:51.82A>3.0A",
+          "structure_qc_flagged",
+          "novelty_prescreen_not_searched"
+        ]
+      },
+      {
+        "candidate_id": "il7ra-rfd4-52374c33ee29",
+        "reasons": [
+          "qc_reason:no_hotspot_contact:esmfold2",
+          "qc_reason:no_hotspot_contact:boltz2",
+          "qc_reason:pose_shift:generator_vs_esmfold2:55.96A>2.5A",
+          "qc_reason:pose_shift:generator_vs_boltz2:60.28A>2.5A",
+          "qc_reason:pose_shift:esmfold2_vs_boltz2:17.93A>3.0A",
+          "structure_qc_flagged",
+          "novelty_prescreen_not_searched"
+        ]
+      },
+      {
+        "candidate_id": "il7ra-rfd4-cd9c34a6b62f",
+        "reasons": [
+          "qc_reason:no_hotspot_contact:esmfold2",
+          "qc_reason:clash:boltz2:2_heavy_atom_pairs_lt_2A",
+          "qc_reason:no_hotspot_contact:boltz2",
+          "qc_reason:pose_shift:generator_vs_esmfold2:47.27A>2.5A",
+          "qc_reason:pose_shift:generator_vs_boltz2:38.27A>2.5A",
+          "qc_reason:pose_shift:esmfold2_vs_boltz2:64.17A>3.0A",
+          "structure_qc_flagged",
+          "novelty_prescreen_not_searched"
+        ]
+      },
+      {
+        "candidate_id": "il7ra-rfd4-765923ba576b",
+        "reasons": [
+          "qc_reason:no_hotspot_contact:esmfold2",
+          "qc_reason:no_hotspot_contact:boltz2",
+          "qc_reason:pose_shift:generator_vs_esmfold2:42.38A>2.5A",
+          "qc_reason:pose_shift:generator_vs_boltz2:67.65A>2.5A",
+          "qc_reason:pose_shift:esmfold2_vs_boltz2:35.81A>3.0A",
+          "structure_qc_flagged",
+          "novelty_prescreen_not_searched"
+        ]
+      },
+      {
+        "candidate_id": "il7ra-rfd4-9f0092090d8c",
+        "reasons": [
+          "qc_reason:clash:esmfold2:5_heavy_atom_pairs_lt_2A",
+          "qc_reason:no_hotspot_contact:esmfold2",
+          "qc_reason:no_hotspot_contact:boltz2",
+          "qc_reason:pose_shift:generator_vs_esmfold2:49.09A>2.5A",
+          "qc_reason:pose_shift:generator_vs_boltz2:54.21A>2.5A",
+          "qc_reason:pose_shift:esmfold2_vs_boltz2:8.58A>3.0A",
+          "structure_qc_flagged",
+          "novelty_prescreen_not_searched"
+        ]
+      },
+      {
+        "candidate_id": "il7ra-rfd4-0f5fd1dfe3df",
+        "reasons": [
+          "qc_reason:no_hotspot_contact:esmfold2",
+          "qc_reason:clash:boltz2:1_heavy_atom_pairs_lt_2A",
+          "qc_reason:no_hotspot_contact:boltz2",
+          "qc_reason:pose_shift:generator_vs_esmfold2:58.37A>2.5A",
+          "qc_reason:pose_shift:generator_vs_boltz2:57.59A>2.5A",
+          "qc_reason:pose_shift:esmfold2_vs_boltz2:22.29A>3.0A",
+          "structure_qc_flagged",
+          "novelty_prescreen_not_searched"
+        ]
+      },
+      {
+        "candidate_id": "il7ra-rfd4-aa5bc3c00d49",
+        "reasons": [
+          "qc_reason:clash:esmfold2:2_heavy_atom_pairs_lt_2A",
+          "qc_reason:no_hotspot_contact:esmfold2",
+          "qc_reason:no_hotspot_contact:boltz2",
+          "qc_reason:pose_shift:generator_vs_esmfold2:69.99A>2.5A",
+          "qc_reason:pose_shift:generator_vs_boltz2:57.15A>2.5A",
+          "qc_reason:pose_shift:esmfold2_vs_boltz2:29.58A>3.0A",
+          "structure_qc_flagged",
+          "novelty_prescreen_not_searched"
+        ]
+      }
+    ],
+    "selected": 13,
+    "limit": 20,
+    "source": "generator",
+    "fold_threshold": 0.5,
+    "site_threshold": 0.5,
+    "fold_groups_available": 7,
+    "fold_groups_selected": 7,
+    "site_groups_available": 2,
+    "site_groups_selected": 2,
+    "scope": "A proposal by coverage, not a ranking: pick_order is the order of picking, no design is better than another, and scores were not used to rank. Review fields are untouched, so the export guard still needs a person's reviews."
+  },
+  "export_check": {
+    "passes": false,
+    "message": "Required novelty/structure review is incomplete"
+  },
+  "review_gaps": {
+    "il7ra-rfd4-bf3f3264bcd4": [
+      "novelty_review (pre-screen is public-database only; needs the organizers' check or your own judgement)",
+      "independent_prediction_status (the AlphaFold cross-check, Task 5.4)",
+      "screen_status (a person reviews the ESMFold2 screen)"
+    ],
+    "il7ra-rfd4-67f05b49fd19": [
+      "novelty_review (pre-screen is public-database only; needs the organizers' check or your own judgement)",
+      "independent_prediction_status (the AlphaFold cross-check, Task 5.4)",
+      "screen_status (a person reviews the ESMFold2 screen)"
+    ],
+    "il7ra-rfd4-2e2ec88e93b8": [
+      "novelty_review (pre-screen is public-database only; needs the organizers' check or your own judgement)",
+      "independent_prediction_status (the AlphaFold cross-check, Task 5.4)",
+      "screen_status (a person reviews the ESMFold2 screen)"
+    ],
+    "il7ra-rfd4-8d368322e6bf": [
+      "novelty_review (pre-screen is public-database only; needs the organizers' check or your own judgement)",
+      "independent_prediction_status (the AlphaFold cross-check, Task 5.4)",
+      "screen_status (a person reviews the ESMFold2 screen)"
+    ],
+    "il7ra-rfd4-7fc8ab07c02f": [
+      "novelty_review (pre-screen is public-database only; needs the organizers' check or your own judgement)",
+      "independent_prediction_status (the AlphaFold cross-check, Task 5.4)",
+      "screen_status (a person reviews the ESMFold2 screen)"
+    ],
+    "il7ra-rfd4-1ce95bd8ae7b": [
+      "novelty_review (pre-screen is public-database only; needs the organizers' check or your own judgement)",
+      "independent_prediction_status (the AlphaFold cross-check, Task 5.4)",
+      "screen_status (a person reviews the ESMFold2 screen)"
+    ],
+    "il7ra-rfd4-798bb23118c0": [
+      "novelty_review (pre-screen is public-database only; needs the organizers' check or your own judgement)",
+      "independent_prediction_status (the AlphaFold cross-check, Task 5.4)",
+      "screen_status (a person reviews the ESMFold2 screen)"
+    ],
+    "il7ra-rfd4-ee56c58e81b5": [
+      "novelty_review (pre-screen is public-database only; needs the organizers' check or your own judgement)",
+      "independent_prediction_status (the AlphaFold cross-check, Task 5.4)",
+      "screen_status (a person reviews the ESMFold2 screen)"
+    ],
+    "il7ra-rfd4-dbb68e85db49": [
+      "novelty_review (pre-screen is public-database only; needs the organizers' check or your own judgement)",
+      "independent_prediction_status (the AlphaFold cross-check, Task 5.4)",
+      "screen_status (a person reviews the ESMFold2 screen)"
+    ],
+    "il7ra-rfd4-f48ad0bc6f6d": [
+      "novelty_review (pre-screen is public-database only; needs the organizers' check or your own judgement)",
+      "independent_prediction_status (the AlphaFold cross-check, Task 5.4)",
+      "screen_status (a person reviews the ESMFold2 screen)"
+    ],
+    "il7ra-rfd4-b25d020a592d": [
+      "novelty_review (pre-screen is public-database only; needs the organizers' check or your own judgement)",
+      "independent_prediction_status (the AlphaFold cross-check, Task 5.4)",
+      "screen_status (a person reviews the ESMFold2 screen)"
+    ],
+    "il7ra-rfd4-fa91ad8e2470": [
+      "novelty_review (pre-screen is public-database only; needs the organizers' check or your own judgement)",
+      "independent_prediction_status (the AlphaFold cross-check, Task 5.4)",
+      "screen_status (a person reviews the ESMFold2 screen)"
+    ],
+    "il7ra-rfd4-08f9233a8a90": [
+      "novelty_review (pre-screen is public-database only; needs the organizers' check or your own judgement)",
+      "independent_prediction_status (the AlphaFold cross-check, Task 5.4)",
+      "screen_status (a person reviews the ESMFold2 screen)"
+    ]
+  }
+}

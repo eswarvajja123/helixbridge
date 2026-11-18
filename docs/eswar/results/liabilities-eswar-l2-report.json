@@ -1,0 +1,45 @@
+{
+  "schema": 1,
+  "candidates": 60,
+  "flag_counts": {
+    "odd_cysteine_count": 7,
+    "n_glycosylation_sequon": 23,
+    "asn_gly_motif": 1,
+    "asp_pro_motif": 12,
+    "not_diagnosable": 0
+  },
+  "designs_with_no_flags": 23,
+  "spread": {
+    "DE_fraction": {
+      "n": 60,
+      "min": 0.0375,
+      "median": 0.3,
+      "max": 0.52
+    },
+    "KR_fraction": {
+      "n": 60,
+      "min": 0.025,
+      "median": 0.1,
+      "max": 0.2
+    },
+    "hydrophobic_AVILMFWY_fraction": {
+      "n": 60,
+      "min": 0.2,
+      "median": 0.3464285714285714,
+      "max": 0.5166666666666667
+    },
+    "longest_identical_run": {
+      "n": 60,
+      "min": 2,
+      "median": 2.5,
+      "max": 4
+    },
+    "whole_sequence_shannon_entropy_bits": {
+      "n": 60,
+      "min": 2.6022921890824144,
+      "median": 3.492315957340802,
+      "max": 4.156297888280895
+    }
+  },
+  "scope": "Descriptive motifs and counts only. No numeric pass/fail thresholds, and no repair was attempted."
+}

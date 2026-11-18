@@ -131,7 +131,7 @@ def select(records, diversity, limit=MAX_FINALISTS, source="generator", fold_thr
             r = by_id[pick]
             selected.append({"pick_order": len(selected) + 1, "candidate_id": pick, "fold_group": fold_of[pick], "site_group": site_of[pick],
                              "liability_flags": r["liabilities"]["flags"], "predictor_disagreement": disagreement(r),
-                             "hotspot_source": r.get("hotspot_source"), "seed": r.get("seed"), "length": len(r["sequence"]),
+                             "hotspot_source": r.get("hotspot_source"), "seed": r.get("seed"), "length": len(r["sequence"]), "sequence": r["sequence"],
                              "scores": _score_values(r)})
     eligible_ids = [c for c in by_id if c not in {e["candidate_id"] for e in excluded}]
     report = {"schema": SCHEMA_VERSION, "pool": len(records), "eligible": len(eligible_ids), "excluded": excluded,
@@ -202,10 +202,10 @@ def write_outputs(out_dir, selected, report, records, exported):
                                             "review_gaps": exported["gaps"]})
     with (out_dir / "selection.csv").open("w", newline="") as stream:
         writer = csv.writer(stream)
-        writer.writerow(["pick_order", "candidate_id", "length", "seed", "hotspot_source", "fold_group", "site_group", "liability_flags",
+        writer.writerow(["pick_order", "candidate_id", "sequence", "length", "seed", "hotspot_source", "fold_group", "site_group", "liability_flags",
                          "predictor_disagreement", "esmfold2_iptm", "esmfold2_ipsae_max", "boltz2_iptm", "boltz2_ipsae_max"])
         for s in selected:
             sc = s["scores"]
-            writer.writerow([s["pick_order"], s["candidate_id"], s["length"], s["seed"], s["hotspot_source"], s["fold_group"], s["site_group"],
+            writer.writerow([s["pick_order"], s["candidate_id"], s["sequence"], s["length"], s["seed"], s["hotspot_source"], s["fold_group"], s["site_group"],
                              ";".join(s["liability_flags"]), s["predictor_disagreement"], sc["esmfold2"]["iptm"], sc["esmfold2"]["ipsae_max"],
                              sc["boltz2"]["iptm"], sc["boltz2"]["ipsae_max"]])
