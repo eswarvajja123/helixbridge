@@ -1,0 +1,90 @@
+{
+  "settings": {
+    "model_type": "alphafold2_multimer_v3",
+    "num_models": 2,
+    "num_recycle": 3,
+    "num_seeds": 1,
+    "rank": "iptm",
+    "msa_mode": "custom a3m: target-only MSA (1,022 rows) + binder single sequence; no MSA server",
+    "pair_mode": "unpaired_paired",
+    "templates": false,
+    "relax": false
+  },
+  "chunks": {
+    "c1": {
+      "ids": [
+        "il7ra-shuf-08f9233a8a90",
+        "il7ra-shuf-a9ca4147761f",
+        "il7ra-shuf-8d368322e6bf",
+        "il7ra-shuf-90b6d9399028"
+      ],
+      "attempts": [
+        "alphafold-eswar-a7-c1-1"
+      ],
+      "status": "done",
+      "seconds": 214.5,
+      "device": "NVIDIA L40S",
+      "run_id": "alphafold-eswar-a7-c1-1"
+    },
+    "c2": {
+      "ids": [
+        "il7ra-shuf-67f05b49fd19",
+        "il7ra-shuf-7fc8ab07c02f",
+        "il7ra-shuf-13af2bd8fd8a",
+        "il7ra-shuf-2e2ec88e93b8"
+      ],
+      "attempts": [
+        "alphafold-eswar-a7-c2-1"
+      ],
+      "status": "done",
+      "seconds": 210.6,
+      "device": "NVIDIA L40S",
+      "run_id": "alphafold-eswar-a7-c2-1"
+    },
+    "c3": {
+      "ids": [
+        "il7ra-shuf-9111856e8955",
+        "il7ra-shuf-b25d020a592d",
+        "il7ra-shuf-b71bcf79d966",
+        "il7ra-shuf-bf3f3264bcd4"
+      ],
+      "attempts": [
+        "alphafold-eswar-a7-c3-1"
+      ],
+      "status": "done",
+      "seconds": 169.9,
+      "device": "NVIDIA L40S",
+      "run_id": "alphafold-eswar-a7-c3-1"
+    },
+    "c4": {
+      "ids": [
+        "il7ra-shuf-c79f951a2a43",
+        "il7ra-shuf-e45f4580e44e",
+        "il7ra-shuf-fa91ad8e2470",
+        "il7ra-shuf-798bb23118c0"
+      ],
+      "attempts": [
+        "alphafold-eswar-a7-c4-1"
+      ],
+      "status": "done",
+      "seconds": 167.9,
+      "device": "NVIDIA L40S",
+      "run_id": "alphafold-eswar-a7-c4-1"
+    },
+    "c5": {
+      "ids": [
+        "il7ra-shuf-026e12ae07bc",
+        "il7ra-shuf-3d017821d726",
+        "il7ra-shuf-f5d48afb1a53",
+        "il7ra-shuf-1ce95bd8ae7b"
+      ],
+      "attempts": [
+        "alphafold-eswar-a7-c5-1"
+      ],
+      "status": "done",
+      "seconds": 161.4,
+      "device": "NVIDIA L40S",
+      "run_id": "alphafold-eswar-a7-c5-1"
+    }
+  }
+}

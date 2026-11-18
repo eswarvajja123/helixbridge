@@ -1,0 +1,26 @@
+{
+  "settings": {
+    "model_type": "alphafold2_multimer_v3",
+    "num_models": 2,
+    "num_recycle": 3,
+    "num_seeds": 1,
+    "rank": "iptm",
+    "msa_mode": "custom a3m: target-only MSA (1,022 rows) + binder single sequence; no MSA server",
+    "pair_mode": "unpaired_paired",
+    "templates": false,
+    "relax": false
+  },
+  "chunks": {
+    "c1": {
+      "ids": [
+        "il7ra-rfd4-08f9233a8a90"
+      ],
+      "attempts": [
+        "alphafold-eswar-a3-c1-1",
+        "alphafold-eswar-a3-c1-2"
+      ],
+      "status": "failed",
+      "error": "RuntimeError: Stopped: no output for 420 s. Last output:  | nvidia-smi: 0 %, 4 MiB"
+    }
+  }
+}

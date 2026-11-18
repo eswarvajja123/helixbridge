@@ -298,17 +298,17 @@ Then score and check the variants in `repair-1/repair-candidates.json` (Stages E
 
 ## Stage Q — AlphaFold-Multimer cross-check of the shortlist (Task 5.4), and shuffled negative controls
 
-**Status: not yet completed on a GPU.** Two cloud attempts produced no predictions (records in `results/alphafold-attempts/`): the first used the public ColabFold MSA server and sat in its queue for 52 minutes per chunk; the second used our own target alignment and went silent after the alignment step for 15+ minutes before I stopped it. The cause of the second stall is not yet known. `modal_alphafold.py` now streams the job's output live and stops it after 7 silent minutes with the last lines printed, so run one design first.
+**Status: run on a GPU (Modal, A100/L40S) on 18 Nov; results in `results/alphafold/`.** Three earlier attempts failed and are kept in `results/alphafold-attempts/`: the first waited 52 minutes per chunk in the public ColabFold MSA server's queue (and would have sent unpublished binder sequences to a third party); the next two hung on the first transfer to the GPU. A stack dump (`--trace`) showed the cause: ColabFold's default CUDA unified-memory setting (a 4x memory fraction) hangs on the first GPU transfer inside Modal. `modal_alphafold.py` now passes `--disable-unified-memory`, uses our own 1,022-row target alignment with the binder as a single sequence (no MSA server, so no sequence leaves the container), and stops a job that is silent for 7 minutes.
 
 ```bash
 modal run modal_alphafold.py --stage prepare
-head -2 results/alphafold-handoff-eswar-h1/colabfold-batch.csv > one.csv        # the first design only (the full file is in docs/eswar/results/alphafold-handoff/)
-modal run modal_alphafold.py --stage predict --batch one.csv --out results/alphafold-one --chunk 1
+modal run modal_alphafold.py --stage predict --batch results/alphafold-handoff-eswar-h1/colabfold-batch.csv --out results/alphafold-x   # 20 designs, ~17 min
+python pipeline/scripts/review-alphafold.py --records results/liabilities-eswar-l3/liabilities-candidates.json --selection results/selection-eswar-s3/selection.json --evaluation results/eval-eswar-e3 --batch-dir results/pool-eswar-p2 --alphafold results/alphafold-x --out results/alphafold-review-x
 ```
 
-Send me everything it printed. If it finishes, run the full file the same way with `--out results/alphafold-eswar-a4` and then `python pipeline/scripts/review-alphafold.py --records ... --selection ... --evaluation ... --alphafold results/alphafold-eswar-a4 --out ...` (see its `--help`). The alignment is the team's own 1,022-row target MSA with the binder as a single sequence (`docs/eswar/phase1-data/target.a3m`); no MSA server is used and no sequence leaves the container. This records AlphaFold's numbers only and never sets a review field.
+`review-alphafold.py` records AlphaFold's numbers and the pose agreement and never sets a review field: `independent_prediction_status` stays for a person (Stefanos) to set.
 
-The shuffled-control experiment is done (`results/controls/`): 20 shuffled copies of the shortlisted sequences, scored and QC'd the same way. 0 of 20 controls pass QC (20 of 20 designs do). A design scores above a control in 100 % of ESMFold2 ipTM and ipSAE comparisons and 99.5 % of Boltz-2 comparisons. Boltz-2 gave one shuffled sequence an ipTM of 0.86, so Boltz-2 alone does not separate designs from scrambles; ESMFold2 does better. This says the scores respond to sequence, not that any design binds. The shortlist was chosen from designs that already passed QC, so the QC share is not an unbiased estimate.
+**Result (20 shortlisted designs):** AlphaFold ipTM median 0.91 (range 0.27 to 0.93); 16 of 20 agree with the generator, ESMFold2 and Boltz-2 on the binder pose (within 2.5 / 3.0 Å); 4 place the binder elsewhere (15 to 25 Å shifts, two of them with low confidence (ipTM 0.27 and 0.53), the other two with high confidence in a different pose). **Controls:** the same run on the 20 shuffled controls gives a median ipTM of 0.28 (max 0.61, none at 0.8 or above); a design beats a control in 96 % of pairs. Two designs (ipTM 0.27 and 0.53) are inside the control range. This says AlphaFold responds to sequence, not that any design binds. Calibration for the shuffled controls themselves: `results/controls/`.
 
 ## Optional: re-check the real ESMFold2 library on your machine (free, CPU)
 

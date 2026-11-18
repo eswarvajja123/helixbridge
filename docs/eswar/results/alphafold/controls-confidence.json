@@ -1,0 +1,165 @@
+{
+ "controls": {
+  "il7ra-shuf-08f9233a8a90": {
+   "ptm": 0.73,
+   "iptm": 0.54,
+   "plddt_target_mean": 85.15,
+   "plddt_binder_mean": 43.85,
+   "interface_pae_mean_A": 17.71,
+   "interface_pae_min_A": 2.53
+  },
+  "il7ra-shuf-a9ca4147761f": {
+   "ptm": 0.69,
+   "iptm": 0.25,
+   "plddt_target_mean": 85.18,
+   "plddt_binder_mean": 32.84,
+   "interface_pae_mean_A": 22.53,
+   "interface_pae_min_A": 6.61
+  },
+  "il7ra-shuf-8d368322e6bf": {
+   "ptm": 0.72,
+   "iptm": 0.46,
+   "plddt_target_mean": 86.64,
+   "plddt_binder_mean": 38.86,
+   "interface_pae_mean_A": 20.95,
+   "interface_pae_min_A": 2.86
+  },
+  "il7ra-shuf-90b6d9399028": {
+   "ptm": 0.73,
+   "iptm": 0.3,
+   "plddt_target_mean": 87.36,
+   "plddt_binder_mean": 40.68,
+   "interface_pae_mean_A": 22.17,
+   "interface_pae_min_A": 4.33
+  },
+  "il7ra-shuf-67f05b49fd19": {
+   "ptm": 0.7,
+   "iptm": 0.27,
+   "plddt_target_mean": 83.48,
+   "plddt_binder_mean": 30.92,
+   "interface_pae_mean_A": 21.98,
+   "interface_pae_min_A": 8.22
+  },
+  "il7ra-shuf-7fc8ab07c02f": {
+   "ptm": 0.72,
+   "iptm": 0.29,
+   "plddt_target_mean": 85.09,
+   "plddt_binder_mean": 38.84,
+   "interface_pae_mean_A": 21.1,
+   "interface_pae_min_A": 6.62
+  },
+  "il7ra-shuf-13af2bd8fd8a": {
+   "ptm": 0.67,
+   "iptm": 0.22,
+   "plddt_target_mean": 84.78,
+   "plddt_binder_mean": 28.6,
+   "interface_pae_mean_A": 23.49,
+   "interface_pae_min_A": 8.66
+  },
+  "il7ra-shuf-2e2ec88e93b8": {
+   "ptm": 0.7,
+   "iptm": 0.28,
+   "plddt_target_mean": 84.81,
+   "plddt_binder_mean": 33.63,
+   "interface_pae_mean_A": 21.55,
+   "interface_pae_min_A": 6.11
+  },
+  "il7ra-shuf-9111856e8955": {
+   "ptm": 0.7,
+   "iptm": 0.33,
+   "plddt_target_mean": 85.0,
+   "plddt_binder_mean": 38.13,
+   "interface_pae_mean_A": 20.58,
+   "interface_pae_min_A": 5.88
+  },
+  "il7ra-shuf-b25d020a592d": {
+   "ptm": 0.67,
+   "iptm": 0.21,
+   "plddt_target_mean": 86.78,
+   "plddt_binder_mean": 35.32,
+   "interface_pae_mean_A": 24.79,
+   "interface_pae_min_A": 7.53
+  },
+  "il7ra-shuf-b71bcf79d966": {
+   "ptm": 0.7,
+   "iptm": 0.34,
+   "plddt_target_mean": 87.95,
+   "plddt_binder_mean": 36.23,
+   "interface_pae_mean_A": 23.85,
+   "interface_pae_min_A": 3.87
+  },
+  "il7ra-shuf-bf3f3264bcd4": {
+   "ptm": 0.7,
+   "iptm": 0.27,
+   "plddt_target_mean": 84.57,
+   "plddt_binder_mean": 32.96,
+   "interface_pae_mean_A": 22.13,
+   "interface_pae_min_A": 7.22
+  },
+  "il7ra-shuf-c79f951a2a43": {
+   "ptm": 0.68,
+   "iptm": 0.25,
+   "plddt_target_mean": 84.55,
+   "plddt_binder_mean": 32.09,
+   "interface_pae_mean_A": 22.8,
+   "interface_pae_min_A": 6.99
+  },
+  "il7ra-shuf-e45f4580e44e": {
+   "ptm": 0.71,
+   "iptm": 0.28,
+   "plddt_target_mean": 85.48,
+   "plddt_binder_mean": 34.2,
+   "interface_pae_mean_A": 21.93,
+   "interface_pae_min_A": 5.95
+  },
+  "il7ra-shuf-fa91ad8e2470": {
+   "ptm": 0.71,
+   "iptm": 0.28,
+   "plddt_target_mean": 85.88,
+   "plddt_binder_mean": 39.37,
+   "interface_pae_mean_A": 21.73,
+   "interface_pae_min_A": 6.42
+  },
+  "il7ra-shuf-798bb23118c0": {
+   "ptm": 0.71,
+   "iptm": 0.27,
+   "plddt_target_mean": 86.74,
+   "plddt_binder_mean": 36.72,
+   "interface_pae_mean_A": 22.07,
+   "interface_pae_min_A": 5.0
+  },
+  "il7ra-shuf-026e12ae07bc": {
+   "ptm": 0.73,
+   "iptm": 0.61,
+   "plddt_target_mean": 88.02,
+   "plddt_binder_mean": 42.82,
+   "interface_pae_mean_A": 20.48,
+   "interface_pae_min_A": 2.16
+  },
+  "il7ra-shuf-3d017821d726": {
+   "ptm": 0.72,
+   "iptm": 0.28,
+   "plddt_target_mean": 85.59,
+   "plddt_binder_mean": 34.65,
+   "interface_pae_mean_A": 21.85,
+   "interface_pae_min_A": 5.66
+  },
+  "il7ra-shuf-f5d48afb1a53": {
+   "ptm": 0.72,
+   "iptm": 0.26,
+   "plddt_target_mean": 86.3,
+   "plddt_binder_mean": 30.48,
+   "interface_pae_mean_A": 22.54,
+   "interface_pae_min_A": 7.6
+  },
+  "il7ra-shuf-1ce95bd8ae7b": {
+   "ptm": 0.76,
+   "iptm": 0.6,
+   "plddt_target_mean": 86.48,
+   "plddt_binder_mean": 58.98,
+   "interface_pae_mean_A": 15.6,
+   "interface_pae_min_A": 2.13
+  }
+ },
+ "p_design_above_control_iptm": 0.95875
+}

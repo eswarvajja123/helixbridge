@@ -82,7 +82,7 @@ def prepare_alphafold():
 
 
 @app.function(image=image, gpu=GPU, cpu=4, memory=32768, volumes={str(CACHE): cache}, timeout=3300, retries=0, max_containers=1, scaledown_window=2)
-def predict_chunk(run_id: str, rows: list, target_a3m: str):
+def predict_chunk(run_id: str, rows: list, target_a3m: str, trace_seconds: int = 0):
     """Predict one chunk of complexes. `rows` is [{"id", "sequence"}] with sequence 'TARGET:BINDER'; `target_a3m` is the target-only MSA.
     Returns an archive of the best models."""
     import io
@@ -111,9 +111,15 @@ def predict_chunk(run_id: str, rows: list, target_a3m: str):
             path = work / "msa" / f"{r['id']}.a3m"
             path.write_text(complex_a3m(target_a3m, target, binder))
             w.writerow([r["id"], r["sequence"], str(path)])
-    command = ["colabfold_batch", str(work / "input.csv"), str(work / "out"), "--model-type", SETTINGS["model_type"], "--num-models",
+    # Run ColabFold's own entry point unbuffered (so progress is visible) and, when `--trace SECONDS` is given, have Python
+    # print every thread's stack once and exit after that long: a diagnostic for a job that hangs before it reaches the GPU.
+    trace = float(trace_seconds or 0)
+    bootstrap = ("import faulthandler,sys\n" + (f"faulthandler.dump_traceback_later({trace}, exit=True)\n" if trace > 0 else "") +
+                 "sys.argv[0]='colabfold_batch'\nfrom colabfold.batch import main\nmain()\n")
+    command = [sys.executable, "-u", "-X", "faulthandler", "-c", bootstrap, str(work / "input.csv"), str(work / "out"), "--model-type", SETTINGS["model_type"], "--num-models",
                str(SETTINGS["num_models"]), "--num-recycle", str(SETTINGS["num_recycle"]), "--num-seeds", str(SETTINGS["num_seeds"]),
                "--rank", SETTINGS["rank"], "--pair-mode", SETTINGS["pair_mode"], "--num-relax", "0",
+               "--disable-unified-memory",                              # ColabFold's default (CUDA unified memory, 4x fraction) hangs on the first GPU transfer in Modal
                "--data", str(CACHE / "colabfold")]
     from binder_campaign.watchdog import Stalled, run_watched
     try:                                                              # live output; a silent job is stopped, not left to burn GPU time
@@ -144,7 +150,7 @@ def predict_chunk(run_id: str, rows: list, target_a3m: str):
 
 
 @app.local_entrypoint()
-def main(stage: str = "predict", batch: str = "", out: str = "", chunk: int = CHUNK):
+def main(stage: str = "predict", batch: str = "", out: str = "", chunk: int = CHUNK, trace: int = 0):
     """Stages: prepare (cache the parameters) or predict (every row of a colabfold-batch.csv, in chunks; rerun to resume)."""
     if stage not in {"prepare", "predict"}:
         raise ValueError("Choose prepare or predict")
@@ -174,7 +180,7 @@ def main(stage: str = "predict", batch: str = "", out: str = "", chunk: int = CH
         entry["status"] = "started"
         manifest_path.write_text(json.dumps(state, indent=2))
         try:
-            result = predict_chunk.remote(run_id, [{"id": r["id"], "sequence": r["sequence"]} for r in part], target_a3m)
+            result = predict_chunk.remote(run_id, [{"id": r["id"], "sequence": r["sequence"]} for r in part], target_a3m, trace)
         except Exception as error:                              # a failed chunk is kept on record and the others still run
             entry.update(status="failed", error=f"{type(error).__name__}: {error}"[:400])
             manifest_path.write_text(json.dumps(state, indent=2))

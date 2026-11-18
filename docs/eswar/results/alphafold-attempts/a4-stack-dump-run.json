@@ -1,0 +1,25 @@
+{
+  "settings": {
+    "model_type": "alphafold2_multimer_v3",
+    "num_models": 2,
+    "num_recycle": 3,
+    "num_seeds": 1,
+    "rank": "iptm",
+    "msa_mode": "custom a3m: target-only MSA (1,022 rows) + binder single sequence; no MSA server",
+    "pair_mode": "unpaired_paired",
+    "templates": false,
+    "relax": false
+  },
+  "chunks": {
+    "c1": {
+      "ids": [
+        "il7ra-rfd4-08f9233a8a90"
+      ],
+      "attempts": [
+        "alphafold-eswar-a4-c1-1"
+      ],
+      "status": "failed",
+      "error": "RuntimeError: colabfold_batch failed: packages/jax/_src/numpy/array.py\", line 268 in array\n  File \"/usr/local/lib/python3.12/site-packages/alphafold/model/utils.py\", line 110 in flat_params_to_haiku\n  File \"/usr/local/lib/python3.12/site-packages/colabfold/alphafold/models.py\", line 61 in get_model_haiku_params\n  File \"/usr/local/lib/python3.12/site-packages/colabfold/alphafold/models.py\", line 23"
+    }
+  }
+}

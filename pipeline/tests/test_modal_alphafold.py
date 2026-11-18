@@ -27,6 +27,9 @@ class Static(unittest.TestCase):
                          "'jax[cuda12]>=0.6.2,<0.7'", "timeout=3300"):
             self.assertIn(fragment, s, fragment)
 
+    def test_unified_memory_is_disabled(self):
+        self.assertIn("--disable-unified-memory", MODULE.read_text())       # without it the job hangs on the first GPU transfer
+
     def test_no_public_msa_server_is_requested(self):
         s = MODULE.read_text()
         self.assertNotIn("--msa-mode", s)                       # a custom a3m per design is given instead, so no server is asked
@@ -66,7 +69,7 @@ class Entrypoint(unittest.TestCase):
 
     def fake(self, fail=()):
         calls = []
-        def remote(run_id, rows, target_a3m):
+        def remote(run_id, rows, target_a3m, trace=0):
             calls.append([r["id"] for r in rows])
             if any(r["id"] in fail for r in rows):
                 raise RuntimeError("container died")
