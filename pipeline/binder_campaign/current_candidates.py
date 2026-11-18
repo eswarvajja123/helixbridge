@@ -9,6 +9,7 @@ Lives in its own module so the team's candidates.py stays untouched.
 """
 import json
 from pathlib import Path
+import re
 
 from .generation_input import ALLOWED_ROLES, check_generated_chains
 from .runner import digest, write_json
@@ -64,11 +65,14 @@ def import_current(audit_path, target_manifest, output, dedup_decision=None, req
     if require_reviewed_hotspots and hotspot_review != "reviewed":
         reasons.append("hotspots_not_reviewed")
     identity = digest(audit_path)[:12]
+    family = audit.get("generator_family", "rfd4")              # a Mosaic design says "mosaic"; the default keeps every RFD4 id unchanged
+    if not re.fullmatch(r"[a-z0-9]{2,12}", str(family)):
+        raise ValueError("generator_family must be 2 to 12 lowercase letters or digits")
     record = {
         "schema_version": SCHEMA_VERSION,
-        "candidate_id": f"{target['id']}-rfd4-{identity}",
+        "candidate_id": f"{target['id']}-{family}-{identity}",
         "target_id": target["id"], "sequence": sequence, "format": target["format"],
-        "generator": "RFD4-Proteina", "generator_revision": audit["code_revision"],
+        "generator": audit.get("generator_name", "RFD4-Proteina"), "generator_revision": audit["code_revision"],
         "campaign_kind": "competition_campaign", "seed": audit["seed"],
         "binder_length_requested": audit["binder_length_requested"],
         "hotspots_uniprot": reference["hotspots_uniprot"], "hotspot_source": source,
@@ -80,7 +84,7 @@ def import_current(audit_path, target_manifest, output, dedup_decision=None, req
         "generator_audit": audit, "generator_structure": str(structure.resolve()),
         "generator_structure_sha256": digest(structure),
         "generator_target_chain": audit["target_chain"], "generator_binder_chain": audit["binder_chain"],
-        "backbone_family_id": f"{target['id']}-rfd4-seed{audit['seed']}-{identity}",
+        "backbone_family_id": f"{target['id']}-{family}-seed{audit['seed']}-{identity}",
         "dedup": decision, "source_audit": str(audit_path.resolve()), "source_sha256": digest(audit_path),
         "qc_reasons": reasons, "screen_status": "not_run", "independent_prediction_status": "not_run",
         "novelty_review": "pending", "submission_eligible": False,

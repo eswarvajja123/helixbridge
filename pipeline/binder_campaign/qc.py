@@ -143,6 +143,8 @@ def _shift(fixed, moving, core):
 def check_candidate(record, structures, target, thresholds=None, expected=SOURCES):
     """QC one candidate.
 
+    A reference audit may carry `alignment_positions`: the core to align on when its structure holds more of the target than the core
+    (a Mosaic generator structure holds the whole target; the pose shift is still measured on the shared reference core 37-231).
     A record may carry `generator_structure_sequence`: for a sequence-repaired variant the generator structure still holds the parent's
     binder sequence, and that is what the generator source is checked against.
     `structures` maps a source name ('generator', 'esmfold2', 'boltz2') to {"path": ..., "sha256": ... or None}; a source that is
@@ -182,7 +184,7 @@ def check_candidate(record, structures, target, thresholds=None, expected=SOURCE
         sources[source] = _measure(pose, hotspots)
         poses[source] = pose
         reasons += _flags(source, sources[source], thresholds)
-    core = sorted(set(reference.get("positions") or []) & set(refold_positions))
+    core = sorted(set(reference.get("alignment_positions") or reference.get("positions") or []) & set(refold_positions))
     shifts = {}
     if poses and core:
         if len(core) < 30:
