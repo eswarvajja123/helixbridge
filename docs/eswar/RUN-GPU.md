@@ -312,6 +312,17 @@ python pipeline/scripts/review-alphafold.py --records results/liabilities-eswar-
 
 **Result (20 shortlisted designs):** AlphaFold ipTM median 0.91 (range 0.27 to 0.93); 16 of 20 agree with the generator, ESMFold2 and Boltz-2 on the binder pose (within 2.5 / 3.0 Å); 4 place the binder elsewhere (15 to 25 Å shifts, two of them with low confidence (ipTM 0.27 and 0.53), the other two with high confidence in a different pose). **Controls:** the same run on the 20 shuffled controls gives a median ipTM of 0.28 (max 0.61, none at 0.8 or above); a design beats a control in 96 % of pairs. Two designs (ipTM 0.27 and 0.53) are inside the control range. This says AlphaFold responds to sequence, not that any design binds. Calibration for the shuffled controls themselves: `results/controls/`.
 
+### Stage Q2 - harder controls: a real binder and decoy targets (AlphaFold)
+
+```bash
+modal run modal_alphafold.py --stage msa --batch decoy-proteins.csv --out results/decoy-msas        # id,sequence per protein; only these sequences go to the public server
+modal run modal_alphafold.py --stage predict --batch af-decoys.csv --out results/alphafold-decoys --alignments-dir results/decoy-msas
+python pipeline/scripts/review-decoys.py --alphafold results/alphafold-decoys --decoys gfp,lyz --out results/decoys.json
+python pipeline/scripts/select-finalists.py --records ... --diversity ... --alphafold-results results/alphafold-review-1/alphafold-results.json --decoy-results results/decoys.json --out results/selection-x
+```
+
+Sequences: IL-7 = UniProt P13232 residues 26 to 177, GFP = P42212, lysozyme = P00698 residues 19 to 147. `af-decoys.csv` has one row per design and decoy, id `gfp-<design id without the il7ra-rfd4- prefix>`, sequence `DECOYSEQ:BINDERSEQ`. Give every protein in a comparison its own alignment (without one AlphaFold cannot fold even the real target). Use a **new `--out` name each time**: run folders are kept on the Modal volume and a reused name fails with "run id already exists". Scripts that chain GPU stages should stop at the first failure (`set -e`).
+
 ## Optional: re-check the real ESMFold2 library on your machine (free, CPU)
 
 The test suite normally uses stand-ins for `esm`, `torch` and `huggingface_hub`. `pipeline/tests/test_real_esm.py` runs the **real** `esm` fold code with a tiny random-weight model instead (no GPU, no weights download, about 90 s), and checks that my validator and the real pinned ipSAE accept what it writes. It is skipped unless you point it at a Python that has the real libraries:

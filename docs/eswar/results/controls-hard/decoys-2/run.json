@@ -1,0 +1,136 @@
+{
+  "settings": {
+    "model_type": "alphafold2_multimer_v3",
+    "num_models": 2,
+    "num_recycle": 3,
+    "num_seeds": 1,
+    "rank": "iptm",
+    "msa_mode": "custom a3m: target-only MSA (1,022 rows) + binder single sequence; no MSA server",
+    "pair_mode": "unpaired_paired",
+    "templates": false,
+    "relax": false
+  },
+  "target_msa": "deep",
+  "chunks": {
+    "c1": {
+      "ids": [
+        "gfp-ee56c58e81b5",
+        "lyz-ee56c58e81b5",
+        "gfp-3c415d9af3c0",
+        "lyz-3c415d9af3c0"
+      ],
+      "attempts": [
+        "alphafold-eswar-p6-c1-1"
+      ],
+      "status": "done",
+      "seconds": 187.5,
+      "device": "NVIDIA A100-SXM4-80GB",
+      "run_id": "alphafold-eswar-p6-c1-1"
+    },
+    "c2": {
+      "ids": [
+        "gfp-246e59d61754",
+        "lyz-246e59d61754",
+        "gfp-f5206fc1de1f",
+        "lyz-f5206fc1de1f"
+      ],
+      "attempts": [
+        "alphafold-eswar-p6-c2-1"
+      ],
+      "status": "done",
+      "seconds": 300.1,
+      "device": "NVIDIA A100-SXM4-80GB",
+      "run_id": "alphafold-eswar-p6-c2-1"
+    },
+    "c3": {
+      "ids": [
+        "gfp-5094a0d5dad8",
+        "lyz-5094a0d5dad8",
+        "gfp-32fb546d40cc",
+        "lyz-32fb546d40cc"
+      ],
+      "attempts": [
+        "alphafold-eswar-p6-c3-1"
+      ],
+      "status": "done",
+      "seconds": 281.1,
+      "device": "NVIDIA A100-SXM4-80GB",
+      "run_id": "alphafold-eswar-p6-c3-1"
+    },
+    "c4": {
+      "ids": [
+        "gfp-1fea9fc40149",
+        "lyz-1fea9fc40149",
+        "gfp-acae291febf6",
+        "lyz-acae291febf6"
+      ],
+      "attempts": [
+        "alphafold-eswar-p6-c4-1"
+      ],
+      "status": "done",
+      "seconds": 298.5,
+      "device": "NVIDIA A100-SXM4-80GB",
+      "run_id": "alphafold-eswar-p6-c4-1"
+    },
+    "c5": {
+      "ids": [
+        "gfp-f49e60a8d7a3",
+        "lyz-f49e60a8d7a3",
+        "gfp-3dbfb374de02",
+        "lyz-3dbfb374de02"
+      ],
+      "attempts": [
+        "alphafold-eswar-p6-c5-1"
+      ],
+      "status": "done",
+      "seconds": 280.5,
+      "device": "NVIDIA A100-SXM4-80GB",
+      "run_id": "alphafold-eswar-p6-c5-1"
+    },
+    "c6": {
+      "ids": [
+        "gfp-b6eedc7da36b",
+        "lyz-b6eedc7da36b",
+        "gfp-786d8064543a",
+        "lyz-786d8064543a"
+      ],
+      "attempts": [
+        "alphafold-eswar-p6-c6-1"
+      ],
+      "status": "done",
+      "seconds": 294.4,
+      "device": "NVIDIA A100-SXM4-80GB",
+      "run_id": "alphafold-eswar-p6-c6-1"
+    },
+    "c7": {
+      "ids": [
+        "gfp-c14adbbcb210",
+        "lyz-c14adbbcb210",
+        "gfp-7ec112a2ac7a",
+        "lyz-7ec112a2ac7a"
+      ],
+      "attempts": [
+        "alphafold-eswar-p6-c7-1"
+      ],
+      "status": "done",
+      "seconds": 297.9,
+      "device": "NVIDIA A100-SXM4-80GB",
+      "run_id": "alphafold-eswar-p6-c7-1"
+    },
+    "c8": {
+      "ids": [
+        "gfp-8d97a2261301",
+        "lyz-8d97a2261301",
+        "gfp-a216d64dea48",
+        "lyz-a216d64dea48"
+      ],
+      "attempts": [
+        "alphafold-eswar-p6-c8-1"
+      ],
+      "status": "done",
+      "seconds": 286.6,
+      "device": "NVIDIA A100-SXM4-80GB",
+      "run_id": "alphafold-eswar-p6-c8-1"
+    }
+  }
+}

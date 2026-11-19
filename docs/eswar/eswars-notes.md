@@ -1,6 +1,6 @@
 # Eswar's notes: candidate generation and design approaches (IL-7Rα minibinders)
 
-*Draft prepared with Claude from the real result files in this repo (`docs/eswar/gpu-runs.md`, `docs/eswar/results/`). Check the numbers and edit the wording before you send it. Written 18 Nov 2026 for the team discussion; updated 19 Nov with the final results (controls, AlphaFold, repair, final shortlist).*
+*Draft prepared with Claude from the real result files in this repo (`docs/eswar/gpu-runs.md`, `docs/eswar/results/`). Check the numbers and edit the wording before you send it. Written 18 Nov 2026 for the team discussion; updated 19 Nov with the final results (controls incl. harder ones, AlphaFold, repair, larger pool, final shortlist).*
 
 ## 1. What I explored
 
@@ -12,7 +12,7 @@
 
 ## 2. What I tried
 
-- Built the whole pipeline as tested code (511 tests, each module also checked by deliberately planting bugs) and ran every stage on real Modal GPUs, not only on a CPU with stand-ins.
+- Built the whole pipeline as tested code (529 tests, each module also checked by deliberately planting bugs) and ran every stage on real Modal GPUs, not only on a CPU with stand-ins.
 - **About 100 designs** generated (first design, 6, then 60 across options A, B, C, then 32 more on A and B, plus one length-range design), **272 predictions** scored (ESMFold2 and Boltz-2 on 6 + 59 + 71 designs), on A100-40GB, A100-80GB, A100-PCIe, L40S, A10G and A10 GPUs.
 - Checked ESMFold2 on Modal with all three kernel backends (they agree: ipTM 0.9492, 0.9492, 0.9493), and scored 39 designs twice to measure repeatability.
 - Selected a shortlist of 20 by coverage of distinct folds and sites, not by score. Then ran AlphaFold-Multimer on every eligible design and on 20 shuffled negative controls, ran the native SolubleMPNN repair (12 variants from 8 designs), and rebuilt the shortlist with an AlphaFold rule (final list `selection-eswar-s4`).
@@ -31,15 +31,17 @@
 
 9. **Negative controls (done).** 20 shuffled copies of the shortlisted sequences, scored and QC'd the same way: 0 of 20 pass QC (20 of 20 designs do); a design scores above a control in 100 % of ESMFold2 and 99.5 % of Boltz-2 comparisons. But Boltz-2 gave one shuffled sequence an ipTM of 0.86, so Boltz-2 alone is easily fooled; ESMFold2 separates better. The shortlist was already QC-filtered, so the QC comparison favours the designs.
 10. **AlphaFold-Multimer (own target alignment, no server).** Shortlisted designs: ipTM median 0.91 (0.27 to 0.93); 16 of 20 agree with the generator and both other predictors on the binder pose, 4 do not (15 to 25 Å shifts; two with ipTM 0.27 and 0.53, inside the control range of 0.21 to 0.61). Shuffled controls: ipTM median 0.28, max 0.61; a design beats a control in 96 % of pairs. **Repair (12 variants from 8 designs):** variants keep their parent's ESMFold2/Boltz-2 scores to within 0.06 ipTM, but repair broke both variants of `d8fd8a` under AlphaFold (ipTM 0.87 → 0.31/0.36, binder 20 to 42 Å away) while ESMFold2 and Boltz-2 scored them like the parent. Only 3 variants (`8e93b8-r1`, `0a592d-r1`, `0a592d-r2`) are clean on QC, novelty and AlphaFold together.
-11. **Final shortlist (`selection-eswar-s4`, AlphaFold gate).** Rule set before looking: ipTM above every control (> 0.61) and the pose within the team's QC limits. 22 of the 72 designs are eligible; 20 selected: 16 from `s3` plus 4 new (`f68ccc`, `2ab485`, `85db49`, `c0cd1c`); the 4 AlphaFold did not support are out. 12 from option B, 8 from option A; lengths 50 (4), 60 (8), 70 (4), 80 (4); 7 with a sequence flag. Coverage is lower than `s3`: 13 of 13 fold groups and 2 of 2 site groups among the eligible designs, against 15 and 3 before. The team's export guard still refuses the list until the three human reviews are recorded.
+11. **Harder controls (AlphaFold).** The natural IL-7 + IL-7Rα pair scores ipTM **0.79**, *below* the designs' median 0.91, so a high ipTM does not mean strong binding. Against two unrelated proteins (GFP, lysozyme) most designs score low (medians 0.17 and 0.20), but **4 designs dock confidently to a decoy** (ipTM 0.68 to 0.90) and are removed by a decoy rule (> 0.61). Every protein in such a comparison needs its own alignment: without one AlphaFold cannot even fold the real target (pLDDT about 38).
+12. **Larger pool and a better repair.** 48 more RFD4 designs (120 in total): option B passes structure QC for 32 of 60 designs (53 %), option A for 15 of 60 (25 %). A second full scoring agrees with the first (Boltz-2 ipTM median difference 0.0002). A wider, warmer repair screen (temperature 0.3, seed 402, a recorded deviation from the team's 0.1) gives 24 variants of which 15 pass QC, novelty and AlphaFold, from 4 of 7 parents (the team's protocol gave only 3 variants from 2 parents).
+13. **Final shortlist (`selection-eswar-s5`, AlphaFold and decoy gates).** Rules set before looking: ipTM above every shuffled control (> 0.61), pose within the team's limits, and no decoy above 0.61. 32 of 120 designs are eligible; 20 selected (10 also in the previous list `s4`): 15 from option B, 5 from A; lengths 50 (4), 60 (6), 70 (6), 80 (4); 7 with a sequence flag; 18 of 18 fold groups and 2 of 2 site groups among the eligible designs, but **all on only two binding sites**. The team's export guard still refuses the list until the three human reviews are recorded.
 
 **What this does not show:** that any design binds. Every design scores high on ESMFold2 and Boltz-2, and the team's own pilot found negative controls scoring as high as binders, so the scores cannot separate good from bad designs (shuffled sequences did score lower here, which shows the scores respond to sequence, not that anything binds). The novelty check used a public database, not the organizers' private one. No design has been reviewed by a person, and the AlphaFold run is a measurement, not Stefanos's check.
 
 ## 4. What I would improve
 
-- **Controls beyond shuffles.** Shuffled copies are an easy negative. A known binder, the natural IL-7 pair and designs for a different target would show what the scores mean; the QC limits are still the team's provisional ones.
+- **Controls still missing.** Done: shuffled sequences, the natural IL-7 pair, two unrelated decoy proteins. Not done: a known *designed* IL-7Rα binder from the literature, and designs made for a different target run through the same pipeline; the QC limits are still the team's provisional ones.
 - **Settle the epitope** (Samyuktha). Option B looks best, but its hotspots and A's are unreviewed, and the final 20 designs sit on only two sites.
-- **Treat the repaired variants with care.** Only 3 of 12 are clean everywhere; repair can break a design that ESMFold2 and Boltz-2 still score well, so AlphaFold (or another independent model) must be rerun after any sequence change.
+- **Treat the repaired variants with care.** Repair can break a design that ESMFold2 and Boltz-2 still score well (both variants of `d8fd8a` collapsed under AlphaFold), so AlphaFold (or another independent model) must be rerun after any sequence change. The wider screen helps: 15 of 24 variants pass everything, from 4 of 7 parents.
 - **Retry Mosaic only with changes**, not the same settings: more optimizer steps or a different objective, and an independent predictor inside the loop; and score any new Mosaic design with ESMFold2 first.
 - **Make the scoring more robust:** score weak or borderline designs more than once, and keep both models' scores visible instead of one number.
 - Run the new tools on a laptop (Windows) once; they were tested on Linux. Rotate the Modal tokens that were pasted in chat (revoke the old ones).
@@ -48,6 +50,6 @@
 
 1. **Stefanos's own AlphaFold check** of the final 20 (`docs/eswar/results/selection-final/`; inputs and a blank results sheet are in `docs/eswar/results/alphafold-handoff/` for the earlier list). The cloud AlphaFold run only recorded measurements and set no review field.
 2. **A person records the novelty, structure and screen reviews** for each of the 20, and only then can the team's export guard pass.
-3. **Decide about the repaired variants:** offer `8e93b8-r1`, `0a592d-r1`, `0a592d-r2` in place of their parents, or leave the list as it is.
+3. **Decide about the repaired variants:** the 15 passing variants (`results/repair-wide/`) are available as replacements for their parents (`8e93b8`, `0a592d`, `2ab485`, `f68ccc`); only the parents are in the list.
 4. **After the epitope decision:** regenerate on the agreed hotspots, with a larger pool aimed at the chosen site, and repeat the selection (the AlphaFold gate is one flag).
 5. The captain confirms the `joltz` source (found at `nboyd/joltz`, pinned commit `ed0f042`).
