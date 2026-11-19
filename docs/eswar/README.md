@@ -131,6 +131,8 @@ Hotspot option A = provisional historical, B = proposed by Eswar (both **unrevie
 | 19 | `dbb68e85db49` | 60 | B | F2 / S1 | 0.92 | 0.92 | 0.91 | none |
 | 20 | `a0f0f8c0cd1c` | 60 | A | F8 / S1 | 0.90 | 0.93 | 0.90 | none |
 
+Group numbers come from the diversity report of the whole pool (15 folds, 3 sites); two fold numbers and one site number are absent because every design in those groups was excluded.
+
 Sequences, ipSAE values and per-design details: `docs/eswar/results/selection-final/selection.csv` and `selection.json`.
 
 ---
