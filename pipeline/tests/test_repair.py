@@ -316,6 +316,58 @@ class Script(unittest.TestCase):
         summary = json.loads(done.stdout)["results"][0]
         self.assertEqual((summary["status"], summary["samples"], summary["rejected"], summary["variants"]), ("repaired", 3, 1, 2))
 
+    def test_max_variants_widens_the_screen_and_is_recorded(self):
+        native = self.dir / "native" / "a" / "seqs"
+        native.mkdir(parents=True)
+        lines = [">a, T=0.1, seed=401", "T:" + self.sequence]
+        for i, letter in enumerate("LKMIVAQ"):
+            lines += [f">a, id={i}, T=0.1, seed=401, overall_confidence=0.{50 + i}, ligand_confidence=0.0, seq_rec=0.9", "T:" + self.sequence[:9] + letter + self.sequence[10:]]
+        (native / "a.fa").write_text("\n".join(lines) + "\n")
+        done = self.call("ingest", "--records", str(self.dir / "r.json"), "--native-dir", str(self.dir / "native"), "--max-variants", "5", "--out", str(self.dir / "o6"))
+        self.assertEqual(done.returncode, 0, done.stderr)
+        self.assertEqual(len(json.loads((self.dir / "o6" / "repair-candidates.json").read_text())["candidates"]), 5)
+        self.assertEqual(json.loads((self.dir / "o6" / "repair-plan.json").read_text())["settings"]["max_variants_per_design"], 5)
+        default = self.call("ingest", "--records", str(self.dir / "r.json"), "--native-dir", str(self.dir / "native"), "--out", str(self.dir / "o7"))
+        self.assertEqual(len(json.loads((self.dir / "o7" / "repair-candidates.json").read_text())["candidates"]), 2)     # the team's default is unchanged
+        for bad in ("0", "9", "x"):
+            refused = self.call("ingest", "--records", str(self.dir / "r.json"), "--native-dir", str(self.dir / "native"), "--max-variants", bad, "--out", str(self.dir / ("b" + bad)))
+            self.assertNotEqual(refused.returncode, 0)
+
+    def test_a_tag_and_the_recorded_run_settings_reach_the_variant_records(self):
+        run = self.dir / "run2"
+        native = run / "native" / "a" / "seqs"
+        native.mkdir(parents=True)
+        v = self.sequence[:9] + "L" + self.sequence[10:]
+        (native / "a.fa").write_text("\n".join([">a, T=0.3, seed=402", "T:" + self.sequence,
+            ">a, id=0, T=0.3, seed=402, overall_confidence=0.6, ligand_confidence=0.0, seq_rec=0.9", "T:" + v]) + "\n")
+        (run / "native-run.json").write_text(json.dumps({"temperature": 0.3, "seed": 402, "designs": []}))
+        done = self.call("ingest", "--records", str(self.dir / "r.json"), "--native-dir", str(run / "native"), "--tag", "t03", "--out", str(self.dir / "o9"))
+        self.assertEqual(done.returncode, 0, done.stderr)
+        out = json.loads((self.dir / "o9" / "repair-candidates.json").read_text())["candidates"]
+        self.assertEqual([c["candidate_id"] for c in out], ["a-t03r1"])
+        self.assertEqual((out[0]["repair"]["temperature"], out[0]["repair"]["seed"]), (0.3, 402))
+        self.assertEqual(json.loads((self.dir / "o9" / "repair-plan.json").read_text())["settings"]["temperature"], 0.3)
+        bad = self.call("ingest", "--records", str(self.dir / "r.json"), "--native-dir", str(run / "native"), "--tag", "bad tag!", "--out", str(self.dir / "o10"))
+        self.assertNotEqual(bad.returncode, 0)
+
+    def test_the_local_run_mode_works_with_a_stand_in_for_the_upstream_program(self):
+        code = self.dir / "code"
+        code.mkdir()
+        (code / "run.py").write_text(
+            "import argparse, os\n"
+            "p = argparse.ArgumentParser()\n"
+            "for k in ['model_type','checkpoint_soluble_mpnn','pdb_path','out_folder','redesigned_residues','omit_AA_per_residue','temperature','seed',"
+            "'batch_size','number_of_batches','save_stats','pack_side_chains']:\n"
+            "    p.add_argument('--' + k)\n"
+            "a = p.parse_args()\n"
+            "os.makedirs(a.out_folder + '/seqs', exist_ok=True)\n"
+            "open(a.out_folder + '/seqs/design.fa', 'w').write('>design, T=0.1\\nAAA:CCC\\n')\n")
+        (self.dir / "w.pt").write_text("w")
+        done = self.call("run", "--records", str(self.dir / "r.json"), "--selection", str(self.dir / "sel.json"), "--mpnn-code", str(code),
+                         "--weights", str(self.dir / "w.pt"), "--python", sys.executable, "--out", str(self.dir / "o8"))
+        self.assertEqual(done.returncode, 0, done.stderr)                       # this used to fail with an unexpected 'device' argument
+        self.assertNotIn("Traceback", done.stderr)
+
     def test_missing_native_output_is_reported_not_invented(self):
         done = self.call("ingest", "--records", str(self.dir / "r.json"), "--native-dir", str(self.dir / "nothing"), "--out", str(self.dir / "o3"))
         self.assertEqual(done.returncode, 0, done.stderr)

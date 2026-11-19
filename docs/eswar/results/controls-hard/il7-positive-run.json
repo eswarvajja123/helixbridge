@@ -1,0 +1,30 @@
+{
+  "settings": {
+    "model_type": "alphafold2_multimer_v3",
+    "num_models": 2,
+    "num_recycle": 3,
+    "num_seeds": 1,
+    "rank": "iptm",
+    "msa_mode": "custom a3m: target-only MSA (1,022 rows) + binder single sequence; no MSA server",
+    "pair_mode": "unpaired_paired",
+    "templates": false,
+    "relax": false
+  },
+  "target_msa": "deep",
+  "chunks": {
+    "c1": {
+      "ids": [
+        "il7-both"
+      ],
+      "attempts": [
+        "alphafold-eswar-p5-c1-1",
+        "alphafold-eswar-p5-c1-2"
+      ],
+      "status": "done",
+      "error": "ValueError: This run id already exists",
+      "seconds": 91.7,
+      "device": "NVIDIA A100 80GB PCIe",
+      "run_id": "alphafold-eswar-p5-c1-2"
+    }
+  }
+}

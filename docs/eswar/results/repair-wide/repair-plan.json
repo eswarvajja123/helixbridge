@@ -1,0 +1,177 @@
+{
+  "mode": "ingest",
+  "settings": {
+    "temperature": 0.3,
+    "seed": 402,
+    "samples": 16,
+    "max_variants_per_design": 6
+  },
+  "designs": [
+    {
+      "candidate_id": "il7ra-rfd4-2e2ec88e93b8",
+      "types": [
+        "cysteine"
+      ],
+      "redesign_positions": {
+        "28": "C"
+      },
+      "binder_chain": "B",
+      "binder_chain_index": 1
+    },
+    {
+      "candidate_id": "il7ra-rfd4-8d368322e6bf",
+      "types": [
+        "cysteine"
+      ],
+      "redesign_positions": {
+        "31": "C"
+      },
+      "binder_chain": "B",
+      "binder_chain_index": 1
+    },
+    {
+      "candidate_id": "il7ra-rfd4-1ce95bd8ae7b",
+      "types": [
+        "asp_pro"
+      ],
+      "redesign_positions": {
+        "13": "D",
+        "47": "D"
+      },
+      "binder_chain": "B",
+      "binder_chain_index": 1
+    },
+    {
+      "candidate_id": "il7ra-rfd4-b25d020a592d",
+      "types": [
+        "sequon"
+      ],
+      "redesign_positions": {
+        "35": "N",
+        "55": "N"
+      },
+      "binder_chain": "B",
+      "binder_chain_index": 1
+    },
+    {
+      "candidate_id": "il7ra-rfd4-13af2bd8fd8a",
+      "types": [
+        "asn_gly",
+        "asp_pro",
+        "sequon"
+      ],
+      "redesign_positions": {
+        "5": "N",
+        "17": "N",
+        "38": "N",
+        "75": "D"
+      },
+      "binder_chain": "B",
+      "binder_chain_index": 1
+    },
+    {
+      "candidate_id": "il7ra-rfd4-65355a2ab485",
+      "types": [
+        "sequon"
+      ],
+      "redesign_positions": {
+        "37": "N",
+        "40": "N"
+      },
+      "binder_chain": "B",
+      "binder_chain_index": 1
+    },
+    {
+      "candidate_id": "il7ra-rfd4-154c11f68ccc",
+      "types": [
+        "sequon"
+      ],
+      "redesign_positions": {
+        "68": "N"
+      },
+      "binder_chain": "B",
+      "binder_chain_index": 1
+    }
+  ],
+  "results": [
+    {
+      "candidate_id": "il7ra-rfd4-2e2ec88e93b8",
+      "status": "repaired",
+      "types": [
+        "cysteine"
+      ],
+      "samples": 16,
+      "rejected": 0,
+      "variants": 2,
+      "shortfall": 4
+    },
+    {
+      "candidate_id": "il7ra-rfd4-8d368322e6bf",
+      "status": "repaired",
+      "types": [
+        "cysteine"
+      ],
+      "samples": 16,
+      "rejected": 0,
+      "variants": 1,
+      "shortfall": 5
+    },
+    {
+      "candidate_id": "il7ra-rfd4-1ce95bd8ae7b",
+      "status": "repaired",
+      "types": [
+        "asp_pro"
+      ],
+      "samples": 16,
+      "rejected": 0,
+      "variants": 2,
+      "shortfall": 4
+    },
+    {
+      "candidate_id": "il7ra-rfd4-b25d020a592d",
+      "status": "repaired",
+      "types": [
+        "sequon"
+      ],
+      "samples": 16,
+      "rejected": 0,
+      "variants": 5,
+      "shortfall": 1
+    },
+    {
+      "candidate_id": "il7ra-rfd4-13af2bd8fd8a",
+      "status": "repaired",
+      "types": [
+        "asn_gly",
+        "asp_pro",
+        "sequon"
+      ],
+      "samples": 16,
+      "rejected": 0,
+      "variants": 6,
+      "shortfall": 0
+    },
+    {
+      "candidate_id": "il7ra-rfd4-65355a2ab485",
+      "status": "repaired",
+      "types": [
+        "sequon"
+      ],
+      "samples": 16,
+      "rejected": 0,
+      "variants": 6,
+      "shortfall": 0
+    },
+    {
+      "candidate_id": "il7ra-rfd4-154c11f68ccc",
+      "status": "repaired",
+      "types": [
+        "sequon"
+      ],
+      "samples": 16,
+      "rejected": 0,
+      "variants": 2,
+      "shortfall": 4
+    }
+  ]
+}

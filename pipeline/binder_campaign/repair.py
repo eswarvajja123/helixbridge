@@ -171,16 +171,16 @@ def run_native(pdb_path, edits, out_dir, code_dir, weights, python, binder_chain
     return fastas[0], command
 
 
-def variant_record(parent, sample, number, edits, types):
+def variant_record(parent, sample, number, edits, types, temperature=TEMPERATURE, seed=SEED, tag=""):
     """A candidate record for a repaired variant. Evidence about the parent (scores, QC, novelty) is NOT carried over: it must be redone."""
     keep = ("schema_version", "target_id", "format", "generator", "generator_revision", "campaign_kind", "seed", "binder_length_requested",
             "hotspots_uniprot", "hotspot_source", "hotspot_review", "construct", "target_manifest_sha256", "generator_audit",
             "generator_structure", "generator_structure_sha256", "generator_target_chain", "generator_binder_chain", "source_audit")
     record = {k: parent[k] for k in keep if k in parent}
-    record.update({"candidate_id": f"{parent['candidate_id']}-r{number}", "sequence": sample["sequence"],
+    record.update({"candidate_id": f"{parent['candidate_id']}-{tag}r{number}", "sequence": sample["sequence"],
                    "parent_candidate_id": parent["candidate_id"], "generator_structure_sequence": parent["sequence"],
                    "backbone_family_id": parent.get("backbone_family_id"), "qc_reasons": [],
-                   "repair": {"method": "SolubleMPNN native, solublempnn_v_48_020", "temperature": TEMPERATURE, "seed": SEED,
+                   "repair": {"method": "SolubleMPNN native, solublempnn_v_48_020", "temperature": temperature, "seed": seed,
                               "samples": SAMPLES, "redesigned_positions": sorted(edits), "forbidden": edits, "addressed": types,
                               "overall_confidence": sample["overall_confidence"], "sample": sample["sample"],
                               "rank_within_parent": number,

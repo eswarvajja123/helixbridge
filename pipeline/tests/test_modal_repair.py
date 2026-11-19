@@ -93,7 +93,32 @@ class BodyLocally(unittest.TestCase):
         self.assertEqual(result["command"][result["command"].index("--redesigned_residues") + 1], "B28 B30")
         self.assertEqual(result["command"][result["command"].index("--seed") + 1], "401")
 
+    def test_temperature_and_seed_are_passed_to_the_upstream_command(self):
+        result = self.module.native_repair.local("x", "END\n", {"28": "C"}, "B", 0.3, 402)
+        cmd = result["command"]
+        self.assertEqual((cmd[cmd.index("--temperature") + 1], cmd[cmd.index("--seed") + 1]), ("0.3", "402"))
+
+    def test_the_entrypoint_sends_the_chosen_temperature_and_seed(self):
+        core, binder = S.real_sequences()
+        sequence = binder[:9] + "C" + binder[10:]
+        gen = self.dir / "gen3.cif"
+        gen.write_bytes(S.generator_structure(sequence))
+        records = self.dir / "r3.json"
+        records.write_text(json.dumps({"candidates": [{"candidate_id": "a", "sequence": sequence, "generator_structure": str(gen), "generator_binder_chain": "B"}]}))
+        seen = []
+        def fake_remote(parent_id, pdb_text, edits, binder_chain, temperature=0.1, seed=401):
+            seen.append((temperature, seed))
+            return {"parent": parent_id, "fasta_name": "design.fa", "fasta": ">x\nAAA:CCC\n", "command": ["run.py"], "seconds": 1.0}
+        self.module.native_repair = types.SimpleNamespace(remote=fake_remote)
+        self.module.main.info.raw_f(records=str(records), out=str(self.dir / "out3"), temperature=0.3, seed=402)
+        self.assertEqual(seen, [(0.3, 402)])
+        doc = json.loads((self.dir / "out3" / "native-run.json").read_text())
+        self.assertEqual((doc["temperature"], doc["seed"]), (0.3, 402))
+
     def test_bad_requests_are_refused_before_anything_runs(self):
+        for bad in ({"temperature": 0}, {"temperature": 1.5}, {"temperature": True}, {"seed": -1}, {"seed": 1.5}):
+            with self.subTest(bad=bad), self.assertRaises(ValueError):
+                self.module.native_repair.local("x", "END\n", {"5": "C"}, "B", **bad)
         for edits in ({}, {"5": ""}, {"5": "Z"}, {"5": "c"}):
             with self.subTest(edits=edits), self.assertRaises(ValueError):
                 self.module.native_repair.local("x", "END\n", edits, "B")
@@ -108,7 +133,7 @@ class BodyLocally(unittest.TestCase):
             {"candidate_id": "a", "sequence": sequence, "generator_structure": str(gen), "generator_binder_chain": "B"},
             {"candidate_id": "b", "sequence": binder[:9] + "L" + binder[10:], "generator_structure": str(gen), "generator_binder_chain": "B"}]}))
         calls = []
-        def fake_remote(parent_id, pdb_text, edits, binder_chain):
+        def fake_remote(parent_id, pdb_text, edits, binder_chain, temperature=0.1, seed=401):
             calls.append((parent_id, edits, binder_chain, pdb_text.count("ATOM")))
             return {"parent": parent_id, "fasta_name": "design.fa", "fasta": ">x\nAAA:CCC\n", "command": ["run.py"], "seconds": 1.0}
         self.module.native_repair = types.SimpleNamespace(remote=fake_remote)
@@ -131,7 +156,7 @@ class BodyLocally(unittest.TestCase):
         records.write_text(json.dumps({"candidates": [
             {"candidate_id": "a", "sequence": binder[:9] + "C" + binder[10:], "generator_structure": str(gen), "generator_binder_chain": "B"},
             {"candidate_id": "b", "sequence": binder[:20] + "C" + binder[21:], "generator_structure": str(gen2), "generator_binder_chain": "B"}]}))
-        def fake_remote(parent_id, pdb_text, edits, binder_chain):
+        def fake_remote(parent_id, pdb_text, edits, binder_chain, temperature=0.1, seed=401):
             if parent_id == "a":
                 raise RuntimeError("container died")
             return {"parent": parent_id, "fasta_name": "design.fa", "fasta": ">x\nAAA:CCC\n", "command": ["run.py"], "seconds": 1.0}

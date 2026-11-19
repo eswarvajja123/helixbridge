@@ -13,6 +13,9 @@ The alignment is the team's own 1,022-row target-only MSA (docs/eswar/phase1-dat
 written per design by binder_campaign.alphafold_msa. No public MSA server is used: a first attempt that used the ColabFold server sat
 in its queue for 52 minutes per chunk without reaching the GPU, and it would also have sent the unpublished binder sequences to a
 third party. Predictions are run in chunks so an interrupted run can be resumed.
+
+For decoy-target controls (`--stage msa`) a deep alignment of each decoy protein is built from the public server: only that one public protein
+sequence is sent, never a binder, and `--stage predict --alignments-dir` then gives the decoy its alignment like the real target.
 """
 from pathlib import Path
 import csv
@@ -81,8 +84,27 @@ def prepare_alphafold():
             "bytes": sum(p.stat().st_size for p in (target / "params").glob("*"))}
 
 
+@app.function(image=image, cpu=2, memory=8192, timeout=1800, retries=0, max_containers=1, scaledown_window=2)
+def build_msa(name: str, sequence: str):
+    """A deep alignment for ONE protein (a decoy target) from the public ColabFold server. Only this one sequence is sent: no binder is."""
+    import subprocess
+    import tempfile
+    from pathlib import Path as P
+    if not name.replace("-", "").replace("_", "").isalnum() or not sequence or set(sequence) - set("ACDEFGHIKLMNPQRSTVWY"):
+        raise ValueError("Give an alphanumeric name and a canonical amino-acid sequence")
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp = P(tmp)
+        (tmp / "in.fasta").write_text(f">{name}\n{sequence}\n")
+        done = subprocess.run(["colabfold_batch", str(tmp / "in.fasta"), str(tmp / "out"), "--msa-only", "--msa-mode", "mmseqs2_uniref_env"],
+                              capture_output=True, text=True, timeout=1500)
+        found = sorted((tmp / "out").glob(f"{name}.a3m"))
+        if done.returncode != 0 or len(found) != 1:
+            raise RuntimeError("MSA failed: " + (done.stderr or done.stdout).strip()[-400:])
+        return {"name": name, "a3m": found[0].read_text()}
+
+
 @app.function(image=image, gpu=GPU, cpu=4, memory=32768, volumes={str(CACHE): cache}, timeout=3300, retries=0, max_containers=1, scaledown_window=2)
-def predict_chunk(run_id: str, rows: list, target_a3m: str, trace_seconds: int = 0):
+def predict_chunk(run_id: str, rows: list, target_a3m: str, trace_seconds: int = 0, target_msa: str = "deep", extra_alignments: dict = None):
     """Predict one chunk of complexes. `rows` is [{"id", "sequence"}] with sequence 'TARGET:BINDER'; `target_a3m` is the target-only MSA.
     Returns an archive of the best models."""
     import io
@@ -101,7 +123,12 @@ def predict_chunk(run_id: str, rows: list, target_a3m: str, trace_seconds: int =
         raise ValueError("This run id already exists")
     (work / "out").mkdir(parents=True)
     sys.path.insert(0, str(OPT / "pipeline"))
-    from binder_campaign.alphafold_msa import complex_a3m
+    from binder_campaign.alphafold_msa import alignment_for, complex_a3m, read_rows
+    if target_msa not in ("deep", "single"):
+        raise ValueError("target_msa must be 'deep' or 'single'")
+    alignments = {read_rows(target_a3m)[0][1]: target_a3m}
+    for text in (extra_alignments or {}).values():
+        alignments[read_rows(text)[0][1]] = text
     (work / "msa").mkdir()
     with (work / "input.csv").open("w", newline="") as f:
         w = csv.writer(f)
@@ -109,7 +136,8 @@ def predict_chunk(run_id: str, rows: list, target_a3m: str, trace_seconds: int =
         for r in rows:
             target, binder = r["sequence"].split(":")
             path = work / "msa" / f"{r['id']}.a3m"
-            path.write_text(complex_a3m(target_a3m, target, binder))
+            path.write_text(complex_a3m(alignment_for(alignments, target, target_msa), target, binder,
+                                         alignments.get(binder) if target_msa == "deep" else None))
             w.writerow([r["id"], r["sequence"], str(path)])
     # Run ColabFold's own entry point unbuffered (so progress is visible) and, when `--trace SECONDS` is given, have Python
     # print every thread's stack once and exit after that long: a diagnostic for a job that hangs before it reaches the GPU.
@@ -150,10 +178,25 @@ def predict_chunk(run_id: str, rows: list, target_a3m: str, trace_seconds: int =
 
 
 @app.local_entrypoint()
-def main(stage: str = "predict", batch: str = "", out: str = "", chunk: int = CHUNK, trace: int = 0):
-    """Stages: prepare (cache the parameters) or predict (every row of a colabfold-batch.csv, in chunks; rerun to resume)."""
-    if stage not in {"prepare", "predict"}:
-        raise ValueError("Choose prepare or predict")
+def main(stage: str = "predict", batch: str = "", out: str = "", chunk: int = CHUNK, trace: int = 0, target_msa: str = "deep", alignments_dir: str = ""):
+    """Stages: prepare (cache the parameters), msa (a deep alignment for each protein in an id,sequence CSV, into --out; only those sequences are
+    sent to the public server) or predict (every row of a colabfold-batch.csv, in chunks; rerun to resume; --alignments-dir gives the extra
+    targets their alignments)."""
+    if stage not in {"prepare", "msa", "predict"}:
+        raise ValueError("Choose prepare, msa or predict")
+    if stage == "msa":
+        rows = list(csv.DictReader(open(batch)))
+        if not rows or not out:
+            raise ValueError("Give --batch (an id,sequence CSV of proteins) and --out")
+        folder = Path(out)
+        folder.mkdir(parents=True, exist_ok=True)
+        for r in rows:
+            if (folder / f"{r['id']}.a3m").is_file():
+                continue                                                # already built: a rerun resumes
+            result = build_msa.remote(r["id"], r["sequence"])
+            (folder / f"{r['id']}.a3m").write_text(result["a3m"])
+            print(json.dumps({"msa": r["id"], "rows": result["a3m"].count(">")}))
+        return
     if stage == "prepare":
         print(json.dumps(prepare_alphafold.remote(), indent=2))
         return
@@ -163,10 +206,15 @@ def main(stage: str = "predict", batch: str = "", out: str = "", chunk: int = CH
     if not rows or not out or chunk < 1:
         raise ValueError("Give --batch (a colabfold-batch.csv), --out and a positive --chunk")
     target_a3m = (HERE / "docs" / "eswar" / "phase1-data" / "target.a3m").read_text()
+    extra = {p.stem: p.read_text() for p in sorted(Path(alignments_dir).glob("*.a3m"))} if alignments_dir else {}
     folder = Path(out)
     folder.mkdir(parents=True, exist_ok=True)
     manifest_path = folder / "run.json"
-    state = json.loads(manifest_path.read_text()) if manifest_path.is_file() else {"settings": SETTINGS, "chunks": {}}
+    if target_msa not in ("deep", "single"):
+        raise ValueError("--target-msa must be 'deep' or 'single'")
+    state = json.loads(manifest_path.read_text()) if manifest_path.is_file() else {"settings": SETTINGS, "target_msa": target_msa, "chunks": {}}
+    if state.get("target_msa", "deep") != target_msa:
+        raise ValueError("The target alignment mode changed since this run began; use a new --out")
     if state["settings"] != SETTINGS:
         raise ValueError("The settings changed since this run began; use a new --out")
     for n in range(0, len(rows), chunk):
@@ -180,7 +228,7 @@ def main(stage: str = "predict", batch: str = "", out: str = "", chunk: int = CH
         entry["status"] = "started"
         manifest_path.write_text(json.dumps(state, indent=2))
         try:
-            result = predict_chunk.remote(run_id, [{"id": r["id"], "sequence": r["sequence"]} for r in part], target_a3m, trace)
+            result = predict_chunk.remote(run_id, [{"id": r["id"], "sequence": r["sequence"]} for r in part], target_a3m, trace, target_msa, extra)
         except Exception as error:                              # a failed chunk is kept on record and the others still run
             entry.update(status="failed", error=f"{type(error).__name__}: {error}"[:400])
             manifest_path.write_text(json.dumps(state, indent=2))

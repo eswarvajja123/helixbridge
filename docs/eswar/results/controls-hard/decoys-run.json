@@ -1,0 +1,168 @@
+{
+  "settings": {
+    "model_type": "alphafold2_multimer_v3",
+    "num_models": 2,
+    "num_recycle": 3,
+    "num_seeds": 1,
+    "rank": "iptm",
+    "msa_mode": "custom a3m: target-only MSA (1,022 rows) + binder single sequence; no MSA server",
+    "pair_mode": "unpaired_paired",
+    "templates": false,
+    "relax": false
+  },
+  "target_msa": "deep",
+  "chunks": {
+    "c1": {
+      "ids": [
+        "gfp-08f9233a8a90",
+        "lyz-08f9233a8a90",
+        "gfp-90b6d9399028",
+        "lyz-90b6d9399028"
+      ],
+      "attempts": [
+        "alphafold-eswar-p4-c1-1",
+        "alphafold-eswar-p4-c1-2"
+      ],
+      "status": "done",
+      "error": "ValueError: This run id already exists",
+      "seconds": 389.5,
+      "device": "NVIDIA A100-SXM4-80GB",
+      "run_id": "alphafold-eswar-p4-c1-2"
+    },
+    "c2": {
+      "ids": [
+        "gfp-026e12ae07bc",
+        "lyz-026e12ae07bc",
+        "gfp-67f05b49fd19",
+        "lyz-67f05b49fd19"
+      ],
+      "attempts": [
+        "alphafold-eswar-p4-c2-1"
+      ],
+      "status": "done",
+      "seconds": 275.8,
+      "device": "NVIDIA A100 80GB PCIe",
+      "run_id": "alphafold-eswar-p4-c2-1"
+    },
+    "c3": {
+      "ids": [
+        "gfp-7fc8ab07c02f",
+        "lyz-7fc8ab07c02f",
+        "gfp-13af2bd8fd8a",
+        "lyz-13af2bd8fd8a"
+      ],
+      "attempts": [
+        "alphafold-eswar-p4-c3-1"
+      ],
+      "status": "done",
+      "seconds": 270.2,
+      "device": "NVIDIA A100 80GB PCIe",
+      "run_id": "alphafold-eswar-p4-c3-1"
+    },
+    "c4": {
+      "ids": [
+        "gfp-2e2ec88e93b8",
+        "lyz-2e2ec88e93b8",
+        "gfp-8d368322e6bf",
+        "lyz-8d368322e6bf"
+      ],
+      "attempts": [
+        "alphafold-eswar-p4-c4-1"
+      ],
+      "status": "done",
+      "seconds": 276.9,
+      "device": "NVIDIA A100 80GB PCIe",
+      "run_id": "alphafold-eswar-p4-c4-1"
+    },
+    "c5": {
+      "ids": [
+        "gfp-b25d020a592d",
+        "lyz-b25d020a592d",
+        "gfp-b71bcf79d966",
+        "lyz-b71bcf79d966"
+      ],
+      "attempts": [
+        "alphafold-eswar-p4-c5-1"
+      ],
+      "status": "done",
+      "seconds": 279.4,
+      "device": "NVIDIA A100 80GB PCIe",
+      "run_id": "alphafold-eswar-p4-c5-1"
+    },
+    "c6": {
+      "ids": [
+        "gfp-c79f951a2a43",
+        "lyz-c79f951a2a43",
+        "gfp-e45f4580e44e",
+        "lyz-e45f4580e44e"
+      ],
+      "attempts": [
+        "alphafold-eswar-p4-c6-1"
+      ],
+      "status": "done",
+      "seconds": 286.4,
+      "device": "NVIDIA A100 80GB PCIe",
+      "run_id": "alphafold-eswar-p4-c6-1"
+    },
+    "c7": {
+      "ids": [
+        "gfp-fa91ad8e2470",
+        "lyz-fa91ad8e2470",
+        "gfp-798bb23118c0",
+        "lyz-798bb23118c0"
+      ],
+      "attempts": [
+        "alphafold-eswar-p4-c7-1"
+      ],
+      "status": "done",
+      "seconds": 178.1,
+      "device": "NVIDIA A100 80GB PCIe",
+      "run_id": "alphafold-eswar-p4-c7-1"
+    },
+    "c8": {
+      "ids": [
+        "gfp-f5d48afb1a53",
+        "lyz-f5d48afb1a53",
+        "gfp-154c11f68ccc",
+        "lyz-154c11f68ccc"
+      ],
+      "attempts": [
+        "alphafold-eswar-p4-c8-1"
+      ],
+      "status": "done",
+      "seconds": 260.6,
+      "device": "NVIDIA A100 80GB PCIe",
+      "run_id": "alphafold-eswar-p4-c8-1"
+    },
+    "c9": {
+      "ids": [
+        "gfp-1ce95bd8ae7b",
+        "lyz-1ce95bd8ae7b",
+        "gfp-65355a2ab485",
+        "lyz-65355a2ab485"
+      ],
+      "attempts": [
+        "alphafold-eswar-p4-c9-1"
+      ],
+      "status": "done",
+      "seconds": 296.4,
+      "device": "NVIDIA L40S",
+      "run_id": "alphafold-eswar-p4-c9-1"
+    },
+    "c10": {
+      "ids": [
+        "gfp-dbb68e85db49",
+        "lyz-dbb68e85db49",
+        "gfp-a0f0f8c0cd1c",
+        "lyz-a0f0f8c0cd1c"
+      ],
+      "attempts": [
+        "alphafold-eswar-p4-c10-1"
+      ],
+      "status": "done",
+      "seconds": 179.5,
+      "device": "NVIDIA L40S",
+      "run_id": "alphafold-eswar-p4-c10-1"
+    }
+  }
+}

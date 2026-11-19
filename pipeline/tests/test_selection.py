@@ -91,6 +91,25 @@ class AlphaFoldGate(unittest.TestCase):
         self.assertIsNone(plain["alphafold_gate"])
 
 
+class DecoyGate(unittest.TestCase):
+    summary = {"a": {"iptm": {"gfp": 0.2, "lyz": 0.3}, "max_iptm": 0.3, "max_decoy": "lyz"},
+               "b": {"iptm": {"gfp": 0.7, "lyz": 0.3}, "max_iptm": 0.7, "max_decoy": "gfp"}}
+
+    def test_a_design_that_binds_an_unrelated_protein_is_not_eligible(self):
+        self.assertEqual(S.eligibility(rec("a"), decoys=self.summary, decoy_names=("gfp", "lyz")), [])
+        self.assertEqual(S.eligibility(rec("b"), decoys=self.summary, decoy_names=("gfp", "lyz")), ["decoy_binding:gfp:0.7>0.61"])
+        self.assertEqual(S.eligibility(rec("c"), decoys=self.summary, decoy_names=("gfp",)), ["decoy_missing"])
+        self.assertEqual(S.eligibility(rec("b")), [])                                    # off by default
+
+    def test_select_excludes_it_and_reports_the_rule(self):
+        records = [rec("a", 1), rec("b", 2)]
+        div = diversity([["a"], ["b"]], [["a"], ["b"]])
+        chosen, report = S.select(records, div, decoys=self.summary, decoy_names=("gfp", "lyz"))
+        self.assertEqual([c["candidate_id"] for c in chosen], ["a"])
+        self.assertEqual(report["decoy_gate"], {"decoys": ["gfp", "lyz"], "max_iptm_allowed": 0.61})
+        self.assertIsNone(S.select(records, div)[1]["decoy_gate"])
+
+
 class Picking(unittest.TestCase):
     def ids(self, selected):
         return [s["candidate_id"] for s in selected]

@@ -1,0 +1,80 @@
+{
+  "eval_id": "eswar-er4",
+  "stop_reason": "completed",
+  "candidates_total": 24,
+  "candidates_evaluated": 24,
+  "candidates_skipped": [],
+  "by_predictor": {
+    "esmfold2": {
+      "done": 24,
+      "failed": 0,
+      "started": 0,
+      "not_started": 0
+    },
+    "boltz2": {
+      "done": 24,
+      "failed": 0,
+      "started": 0,
+      "not_started": 0
+    }
+  },
+  "failures": [],
+  "interrupted": [],
+  "calls": 9,
+  "failed_evaluations": 6,
+  "gpu_seconds_reported": 1660.25,
+  "gpu_seconds_note": "The function's own count; Modal bills container time, which is longer. Check billing.",
+  "budget": {
+    "max_calls": 20,
+    "max_gpu_seconds": 4500.0,
+    "max_failures": 14
+  },
+  "pool_summary": {
+    "by_predictor": {
+      "esmfold2": {
+        "iptm": {
+          "n": 24,
+          "min": 0.8414943814277649,
+          "median": 0.9064677953720093,
+          "max": 0.9523692727088928
+        },
+        "ipsae_max": {
+          "n": 24,
+          "min": 0.614769,
+          "median": 0.779163,
+          "max": 0.848563
+        }
+      },
+      "boltz2": {
+        "iptm": {
+          "n": 24,
+          "min": 0.44892579317092896,
+          "median": 0.9351536929607391,
+          "max": 0.9437025785446167
+        },
+        "ipsae_max": {
+          "n": 24,
+          "min": 0.035775,
+          "median": 0.8237495,
+          "max": 0.85711
+        }
+      }
+    },
+    "paired_difference": {
+      "esmfold2_minus_boltz2_iptm": {
+        "n": 24,
+        "min": -0.07691359519958496,
+        "median": -0.03125596046447754,
+        "max": 0.44545823335647583
+      },
+      "esmfold2_minus_boltz2_ipsae_max": {
+        "n": 24,
+        "min": -0.160945,
+        "median": -0.06850100000000003,
+        "max": 0.716562
+      }
+    },
+    "note": "Descriptive spread over this pool only. There is no supportable pass/fail threshold: the team's public pilot (outputs/) found negative controls scoring as high as binders, and its numeric gates are relative to a parent design. Disagreement between the two predictors is a reason for a person to look, not a verdict."
+  },
+  "status_note": "Raw scores only. No threshold, ranking or combination; not a binding result."
+}

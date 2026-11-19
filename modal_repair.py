@@ -47,7 +47,7 @@ image = (
 
 
 @app.function(image=image, cpu=4, memory=8192, timeout=1800, retries=0, max_containers=2, scaledown_window=2)
-def native_repair(parent_id: str, pdb_text: str, edits: dict, binder_chain: str = "B"):
+def native_repair(parent_id: str, pdb_text: str, edits: dict, binder_chain: str = "B", temperature: float = 0.1, seed: int = 401):
     """Run native SolubleMPNN on one design's backbone. `edits` maps a 1-based binder position to the residue letters to forbid there."""
     import subprocess
     import tempfile
@@ -55,13 +55,18 @@ def native_repair(parent_id: str, pdb_text: str, edits: dict, binder_chain: str 
     sys.path.insert(0, str(OPT / "pipeline"))
     from binder_campaign import repair
     edits = {int(k): str(v) for k, v in edits.items()}
+    if isinstance(temperature, bool) or not isinstance(temperature, (int, float)) or not 0 < temperature <= 1.0:
+        raise ValueError("temperature must be above 0 and at most 1.0")
+    if isinstance(seed, bool) or not isinstance(seed, int) or seed < 0:
+        raise ValueError("seed must be a whole number, 0 or more")
     if not edits or any(not v or set(v) - set("ACDEFGHIKLMNPQRSTVWY") for v in edits.values()):
         raise ValueError("Give at least one position and the residue letters to forbid there")
     started = time.monotonic()
     with tempfile.TemporaryDirectory() as tmp:
         tmp = Path(tmp)
         (tmp / "design.pdb").write_text(pdb_text)
-        fasta, command = repair.run_native(tmp / "design.pdb", edits, tmp / "native", MPNN_CODE, MPNN_WEIGHTS, sys.executable, binder_chain)
+        fasta, command = repair.run_native(tmp / "design.pdb", edits, tmp / "native", MPNN_CODE, MPNN_WEIGHTS, sys.executable, binder_chain, seed=seed,
+                                        temperature=temperature)
         versions = subprocess.run([sys.executable, "-c", "import torch, numpy, prody; print(torch.__version__, numpy.__version__, prody.__version__)"],
                                   capture_output=True, text=True).stdout.strip()
         return {"parent": parent_id, "fasta_name": fasta.name, "fasta": fasta.read_text(), "command": [str(c) for c in command],
@@ -70,7 +75,7 @@ def native_repair(parent_id: str, pdb_text: str, edits: dict, binder_chain: str 
 
 
 @app.local_entrypoint()
-def main(records: str, selection: str = "", out: str = ""):
+def main(records: str, selection: str = "", out: str = "", temperature: float = 0.1, seed: int = 401):
     """Run native SolubleMPNN for every chosen design that has a liability; writes native outputs for repair-liabilities.py ingest."""
     sys.path.insert(0, str(HERE / "pipeline"))
     from binder_campaign import repair
@@ -91,7 +96,7 @@ def main(records: str, selection: str = "", out: str = ""):
     summary = []
     for parent, edits, types, pdb, chains in jobs:
         try:
-            result = native_repair.remote(parent["candidate_id"], pdb, {str(k): v for k, v in edits.items()}, parent["generator_binder_chain"])
+            result = native_repair.remote(parent["candidate_id"], pdb, {str(k): v for k, v in edits.items()}, parent["generator_binder_chain"], temperature, seed)
         except Exception as error:                       # one failed design must not hide the others
             summary.append({"candidate_id": parent["candidate_id"], "status": "failed", "error": f"{type(error).__name__}: {error}"[:300]})
             continue
@@ -100,5 +105,5 @@ def main(records: str, selection: str = "", out: str = ""):
         (target / result["fasta_name"]).write_text(result["fasta"])
         (folder / "native" / parent["candidate_id"] / "run.json").write_text(json.dumps({k: v for k, v in result.items() if k != "fasta"}, indent=2))
         summary.append({"candidate_id": parent["candidate_id"], "status": "ran", "types": types, "positions": edits, "seconds": round(result["seconds"], 1)})
-    (folder / "native-run.json").write_text(json.dumps({"revision": REVISION, "weights_sha256": WEIGHTS_SHA256, "designs": summary}, indent=2) + "\n")
+    (folder / "native-run.json").write_text(json.dumps({"revision": REVISION, "weights_sha256": WEIGHTS_SHA256, "temperature": temperature, "seed": seed, "designs": summary}, indent=2) + "\n")
     print(json.dumps({"output_folder": str(folder), "designs_with_liabilities": len(jobs), "results": summary}, indent=2))

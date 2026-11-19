@@ -1,0 +1,170 @@
+{
+ "decoys": [
+  "gfp",
+  "lyz"
+ ],
+ "max_iptm_allowed": 0.61,
+ "designs": {
+  "il7ra-rfd4-026e12ae07bc": {
+   "iptm": {
+    "gfp": 0.48,
+    "lyz": 0.19
+   },
+   "max_iptm": 0.48,
+   "max_decoy": "gfp"
+  },
+  "il7ra-rfd4-08f9233a8a90": {
+   "iptm": {
+    "gfp": 0.28,
+    "lyz": 0.32
+   },
+   "max_iptm": 0.32,
+   "max_decoy": "lyz"
+  },
+  "il7ra-rfd4-13af2bd8fd8a": {
+   "iptm": {
+    "gfp": 0.14,
+    "lyz": 0.22
+   },
+   "max_iptm": 0.22,
+   "max_decoy": "lyz"
+  },
+  "il7ra-rfd4-154c11f68ccc": {
+   "iptm": {
+    "gfp": 0.34,
+    "lyz": 0.27
+   },
+   "max_iptm": 0.34,
+   "max_decoy": "gfp"
+  },
+  "il7ra-rfd4-1ce95bd8ae7b": {
+   "iptm": {
+    "gfp": 0.18,
+    "lyz": 0.86
+   },
+   "max_iptm": 0.86,
+   "max_decoy": "lyz"
+  },
+  "il7ra-rfd4-2e2ec88e93b8": {
+   "iptm": {
+    "gfp": 0.2,
+    "lyz": 0.23
+   },
+   "max_iptm": 0.23,
+   "max_decoy": "lyz"
+  },
+  "il7ra-rfd4-65355a2ab485": {
+   "iptm": {
+    "gfp": 0.15,
+    "lyz": 0.2
+   },
+   "max_iptm": 0.2,
+   "max_decoy": "lyz"
+  },
+  "il7ra-rfd4-67f05b49fd19": {
+   "iptm": {
+    "gfp": 0.15,
+    "lyz": 0.23
+   },
+   "max_iptm": 0.23,
+   "max_decoy": "lyz"
+  },
+  "il7ra-rfd4-798bb23118c0": {
+   "iptm": {
+    "gfp": 0.15,
+    "lyz": 0.19
+   },
+   "max_iptm": 0.19,
+   "max_decoy": "lyz"
+  },
+  "il7ra-rfd4-7fc8ab07c02f": {
+   "iptm": {
+    "gfp": 0.68,
+    "lyz": 0.22
+   },
+   "max_iptm": 0.68,
+   "max_decoy": "gfp"
+  },
+  "il7ra-rfd4-8d368322e6bf": {
+   "iptm": {
+    "gfp": 0.17,
+    "lyz": 0.22
+   },
+   "max_iptm": 0.22,
+   "max_decoy": "lyz"
+  },
+  "il7ra-rfd4-90b6d9399028": {
+   "iptm": {
+    "gfp": 0.16,
+    "lyz": 0.19
+   },
+   "max_iptm": 0.19,
+   "max_decoy": "lyz"
+  },
+  "il7ra-rfd4-a0f0f8c0cd1c": {
+   "iptm": {
+    "gfp": 0.15,
+    "lyz": 0.17
+   },
+   "max_iptm": 0.17,
+   "max_decoy": "lyz"
+  },
+  "il7ra-rfd4-b25d020a592d": {
+   "iptm": {
+    "gfp": 0.23,
+    "lyz": 0.22
+   },
+   "max_iptm": 0.23,
+   "max_decoy": "gfp"
+  },
+  "il7ra-rfd4-b71bcf79d966": {
+   "iptm": {
+    "gfp": 0.48,
+    "lyz": 0.2
+   },
+   "max_iptm": 0.48,
+   "max_decoy": "gfp"
+  },
+  "il7ra-rfd4-c79f951a2a43": {
+   "iptm": {
+    "gfp": 0.16,
+    "lyz": 0.17
+   },
+   "max_iptm": 0.17,
+   "max_decoy": "lyz"
+  },
+  "il7ra-rfd4-dbb68e85db49": {
+   "iptm": {
+    "gfp": 0.14,
+    "lyz": 0.17
+   },
+   "max_iptm": 0.17,
+   "max_decoy": "lyz"
+  },
+  "il7ra-rfd4-e45f4580e44e": {
+   "iptm": {
+    "gfp": 0.29,
+    "lyz": 0.18
+   },
+   "max_iptm": 0.29,
+   "max_decoy": "gfp"
+  },
+  "il7ra-rfd4-f5d48afb1a53": {
+   "iptm": {
+    "gfp": 0.26,
+    "lyz": 0.17
+   },
+   "max_iptm": 0.26,
+   "max_decoy": "gfp"
+  },
+  "il7ra-rfd4-fa91ad8e2470": {
+   "iptm": {
+    "gfp": 0.16,
+    "lyz": 0.2
+   },
+   "max_iptm": 0.2,
+   "max_decoy": "lyz"
+  }
+ },
+ "note": "ipTM with unrelated proteins; a high value means the design is not specific"
+}

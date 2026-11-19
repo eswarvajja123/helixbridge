@@ -32,7 +32,14 @@ class Static(unittest.TestCase):
 
     def test_no_public_msa_server_is_requested(self):
         s = MODULE.read_text()
-        self.assertNotIn("--msa-mode", s)                       # a custom a3m per design is given instead, so no server is asked
+        start = s.index("command = [sys.executable")
+        predict_command = s[start:s.index("from binder_campaign.watchdog", start)]
+        self.assertNotIn("--msa-mode", predict_command)         # a custom a3m per design is given instead, so no server is asked
+        build = s[s.index("def build_msa"):s.index("def predict_chunk")]
+        self.assertIn("--msa-only", build)                      # the real option (--num-models 0 is refused by ColabFold 1.6.3)
+        self.assertNotIn('"--num-models", "0"', build)
+        self.assertIn("--msa-mode", build)                      # only the separate alignment stage, and it sends one decoy protein at a time
+        self.assertNotIn("binder", build.replace("no binder is", ""))
         self.assertIn("contacted the MSA server", s)            # and a run that did contact it is rejected
 
     def test_it_never_sets_a_review_field(self):
@@ -69,7 +76,7 @@ class Entrypoint(unittest.TestCase):
 
     def fake(self, fail=()):
         calls = []
-        def remote(run_id, rows, target_a3m, trace=0):
+        def remote(run_id, rows, target_a3m, trace=0, target_msa="deep", extra=None):
             calls.append([r["id"] for r in rows])
             if any(r["id"] in fail for r in rows):
                 raise RuntimeError("container died")
@@ -115,6 +122,48 @@ class Entrypoint(unittest.TestCase):
         (self.dir / "empty.csv").write_text("id,sequence\n")
         with self.assertRaises(ValueError):
             self.module.main.info.raw_f(stage="predict", batch=str(self.dir / "empty.csv"), out=str(self.dir / "o2"))
+
+    def test_the_alignment_mode_is_passed_recorded_and_cannot_change_on_resume(self):
+        seen = []
+        def remote(run_id, rows, target_a3m, trace=0, target_msa="deep", extra=None):
+            seen.append(target_msa)
+            return {"run_id": run_id, "ids": [r["id"] for r in rows], "settings": self.module.SETTINGS, "command": ["x"], "device": "Fake",
+                    "seconds": 1.0, "archive": b"tar"}
+        self.module.predict_chunk = types.SimpleNamespace(remote=remote)
+        self.run_main(target_msa="single")
+        self.assertEqual(set(seen), {"single"})
+        self.assertEqual(json.loads((self.dir / "out/run.json").read_text())["target_msa"], "single")
+        with self.assertRaisesRegex(ValueError, "alignment mode changed"):
+            self.run_main(target_msa="deep")
+        with self.assertRaisesRegex(ValueError, "'deep' or 'single'"):
+            self.module.main.info.raw_f(stage="predict", batch=str(self.csv), out=str(self.dir / "o3"), target_msa="x")
+
+    def test_the_msa_stage_builds_one_alignment_per_protein_and_resumes(self):
+        calls = []
+        def remote(name, sequence):
+            calls.append(name)
+            return {"name": name, "a3m": f">{name}\n{sequence}\n>h\n{sequence}\n"}
+        self.module.build_msa = types.SimpleNamespace(remote=remote)
+        (self.dir / "p.csv").write_text("id,sequence\ngfp,ACDEFGHIKL\nlyz,MNPQRSTVWY\n")
+        out = self.dir / "msas"
+        self.module.main.info.raw_f(stage="msa", batch=str(self.dir / "p.csv"), out=str(out))
+        self.assertEqual(sorted(p.name for p in out.glob("*.a3m")), ["gfp.a3m", "lyz.a3m"])
+        calls.clear()
+        self.module.main.info.raw_f(stage="msa", batch=str(self.dir / "p.csv"), out=str(out))
+        self.assertEqual(calls, [])                                              # a rerun builds nothing again
+
+    def test_extra_alignments_are_read_from_a_folder_and_passed_on(self):
+        seen = []
+        def remote(run_id, rows, target_a3m, trace=0, target_msa="deep", extra=None):
+            seen.append(sorted((extra or {}).keys()))
+            return {"run_id": run_id, "ids": [r["id"] for r in rows], "settings": self.module.SETTINGS, "command": ["x"], "device": "Fake",
+                    "seconds": 1.0, "archive": b"tar"}
+        self.module.predict_chunk = types.SimpleNamespace(remote=remote)
+        folder = self.dir / "al"
+        folder.mkdir()
+        (folder / "gfp.a3m").write_text(">q\nACDEFGHIKL\n")
+        self.run_main(alignments_dir=str(folder))
+        self.assertEqual(seen[0], ["gfp"])
 
     def test_changed_settings_are_refused_on_resume(self):
         self.fake()

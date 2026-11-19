@@ -30,6 +30,8 @@ parser.add_argument("--site-threshold", type=float, default=0.5)
 parser.add_argument("--alphafold-results", type=Path, nargs="+", default=None,
                     help="alphafold-results.json files from review-alphafold.py; turns on the AlphaFold gate (ipTM above every control, pose limits)")
 parser.add_argument("--alphafold-min-iptm", type=float, default=ALPHAFOLD_MIN_IPTM)
+parser.add_argument("--decoy-results", type=Path, default=None,
+                    help="a decoy summary from review-decoys.py; designs that bind an unrelated protein confidently (ipTM above the controls) are excluded")
 parser.add_argument("--reviews", type=Path, default=None, help="a person's review decisions (JSON); see binder_campaign/selection.py")
 args = parser.parse_args()
 try:
@@ -45,7 +47,12 @@ try:
                 if entry["candidate_id"] in alphafold:
                     raise ValueError("A design appears in two AlphaFold result files: " + entry["candidate_id"])
                 alphafold[entry["candidate_id"]] = entry
-    selected, report = select(records, diversity, args.limit, args.source, args.fold_threshold, args.site_threshold, alphafold, args.alphafold_min_iptm)
+    decoys, decoy_names = None, ()
+    if args.decoy_results:
+        doc = json.loads(args.decoy_results.read_text())
+        decoys, decoy_names = doc["designs"], tuple(doc["decoys"])
+    selected, report = select(records, diversity, args.limit, args.source, args.fold_threshold, args.site_threshold, alphafold, args.alphafold_min_iptm,
+                              decoys, decoy_names)
     ids = [s["candidate_id"] for s in selected]
     reviewed = apply_reviews(records, ids, json.loads(args.reviews.read_text())) if args.reviews else [r for r in records if r["candidate_id"] in ids]
     args.out.mkdir(parents=True)
