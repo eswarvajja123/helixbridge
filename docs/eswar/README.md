@@ -14,7 +14,7 @@
 
 | Question | Answer |
 |---|---|
-| Is the pipeline built and tested? | **Yes.** Phases 1–5, 529 automated tests (each module also checked by deliberately planting bugs). |
+| Is the pipeline built and tested? | **Yes.** Phases 1–5, 546 automated tests (each module also checked by deliberately planting bugs). |
 | Was it run on real GPUs? | **Yes**, on Modal (A100, L40S, A10G). RFD4, Boltz-2, ESMFold2, Mosaic, AlphaFold-Multimer, SolubleMPNN repair. |
 | How many designs? | **120** in the final pool (RFD4: 72 first, 48 added later), 8 more from Mosaic. **32** pass every check, including AlphaFold and the decoy check. |
 | What is the proposed shortlist? | **20 designs** (`selection-eswar-s5`), table in section 5. File: `docs/eswar/results/selection-final/selection.csv`. |

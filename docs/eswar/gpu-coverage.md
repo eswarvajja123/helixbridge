@@ -26,8 +26,8 @@ Hotspot options B and C; binder length 80; `--length-min/--length-max` (53 resid
 
 | Path | Status |
 |---|---|
-| A real Ctrl-C mid-call | never run for real; covered by tests only (a worker restart did cut calls off twice, and both were recovered) |
-| Batch `--retry-failed` (the generation engine) | never run for real; the evaluation engine's version was |
+| A real Ctrl-C mid-call | not as such; covered by tests (a worker restart cut calls off twice, and on 19 Nov I stopped a running generation batch by stopping its Modal app; it resumed and finished with `--retry-interrupted`) |
+| Batch `--retry-failed` (the generation engine) | **run for real on 19 Nov**: the two larger-pool batches stopped at their failure cap (missing `tmtools` in my launch environment), and were resumed with `--retry-failed --retry-interrupted` and finished (24 of 24 each) |
 | `--include-flagged` in evaluation | never run for real |
 | Another GPU type for ESMFold2 (L40S) | never run; A100-80GB only |
 | Chunk sizes above 6 | never run |
