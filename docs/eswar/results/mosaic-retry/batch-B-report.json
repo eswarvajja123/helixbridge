@@ -1,0 +1,138 @@
+{
+  "batch_id": "eswar-nB",
+  "stop_reason": "completed",
+  "planned": 4,
+  "done": 4,
+  "kept": 4,
+  "dropped_by_dedup": 0,
+  "dropped_by_reason": {},
+  "failed": [],
+  "interrupted": [],
+  "not_started": [],
+  "attempts": 4,
+  "failed_attempts": 0,
+  "gpu_seconds_reported": 5136.34,
+  "gpu_seconds_note": "Worker seconds as reported by the function; Modal bills container time, which is longer. Check billing.",
+  "budget": {
+    "max_designs": 4,
+    "max_gpu_seconds": 9000.0,
+    "max_failures": 2
+  },
+  "hotspots": [
+    78,
+    79,
+    98,
+    100,
+    102,
+    103,
+    158,
+    159,
+    211,
+    212
+  ],
+  "hotspot_source": "proposed_by_eswar_unreviewed",
+  "thresholds": {
+    "identity": 0.8,
+    "contiguous": 0.9,
+    "tm": 0.9
+  },
+  "designs": {
+    "s102-l50": {
+      "status": "done",
+      "run_id": "eswar-nB-s102-l50-a1",
+      "attempts": 1,
+      "seed": 102,
+      "binder_length": [
+        50,
+        50
+      ],
+      "worker_seconds": 1150.463734063,
+      "gpu": "NVIDIA L40S",
+      "candidate_id": "il7ra-mosaic-5ff8fdc49e32",
+      "dedup": {
+        "candidate_id": "eswar-nB-s102-l50-a1",
+        "kept": true,
+        "reason": "kept",
+        "nearest_id": null,
+        "identity": null,
+        "contiguous": null,
+        "tm": null
+      },
+      "error": null,
+      "earlier_attempts": []
+    },
+    "s102-l60": {
+      "status": "done",
+      "run_id": "eswar-nB-s102-l60-a1",
+      "attempts": 1,
+      "seed": 102,
+      "binder_length": [
+        60,
+        60
+      ],
+      "worker_seconds": 1240.5065407150003,
+      "gpu": "NVIDIA L40S",
+      "candidate_id": "il7ra-mosaic-fbdfab80ef3c",
+      "dedup": {
+        "candidate_id": "eswar-nB-s102-l60-a1",
+        "kept": true,
+        "reason": "kept",
+        "nearest_id": "eswar-nB-s102-l50-a1",
+        "identity": 0.32,
+        "contiguous": 0.06,
+        "tm": 0.3687916113024879
+      },
+      "error": null,
+      "earlier_attempts": []
+    },
+    "s102-l70": {
+      "status": "done",
+      "run_id": "eswar-nB-s102-l70-a1",
+      "attempts": 1,
+      "seed": 102,
+      "binder_length": [
+        70,
+        70
+      ],
+      "worker_seconds": 1331.7446662920001,
+      "gpu": "NVIDIA L40S",
+      "candidate_id": "il7ra-mosaic-7cfcb5bb783e",
+      "dedup": {
+        "candidate_id": "eswar-nB-s102-l70-a1",
+        "kept": true,
+        "reason": "kept",
+        "nearest_id": "eswar-nB-s102-l60-a1",
+        "identity": 0.48333333333333334,
+        "contiguous": 0.1,
+        "tm": 0.32059044816571525
+      },
+      "error": null,
+      "earlier_attempts": []
+    },
+    "s102-l80": {
+      "status": "done",
+      "run_id": "eswar-nB-s102-l80-a1",
+      "attempts": 1,
+      "seed": 102,
+      "binder_length": [
+        80,
+        80
+      ],
+      "worker_seconds": 1413.6258554380006,
+      "gpu": "NVIDIA L40S",
+      "candidate_id": "il7ra-mosaic-7f55fcc7ee0a",
+      "dedup": {
+        "candidate_id": "eswar-nB-s102-l80-a1",
+        "kept": true,
+        "reason": "kept",
+        "nearest_id": "eswar-nB-s102-l70-a1",
+        "identity": 0.44285714285714284,
+        "contiguous": 0.05714285714285714,
+        "tm": 0.6897386901131946
+      },
+      "error": null,
+      "earlier_attempts": []
+    }
+  },
+  "status_note": "None of these designs is a binding result or a submission entry."
+}

@@ -1,0 +1,80 @@
+{
+  "eval_id": "eswar-enB",
+  "stop_reason": "completed",
+  "candidates_total": 4,
+  "candidates_evaluated": 4,
+  "candidates_skipped": [],
+  "by_predictor": {
+    "esmfold2": {
+      "done": 4,
+      "failed": 0,
+      "started": 0,
+      "not_started": 0
+    },
+    "boltz2": {
+      "done": 4,
+      "failed": 0,
+      "started": 0,
+      "not_started": 0
+    }
+  },
+  "failures": [],
+  "interrupted": [],
+  "calls": 2,
+  "failed_evaluations": 0,
+  "gpu_seconds_reported": 302.23,
+  "gpu_seconds_note": "The function's own count; Modal bills container time, which is longer. Check billing.",
+  "budget": {
+    "max_calls": 6,
+    "max_gpu_seconds": 3000.0,
+    "max_failures": 4
+  },
+  "pool_summary": {
+    "by_predictor": {
+      "esmfold2": {
+        "iptm": {
+          "n": 4,
+          "min": 0.05257873609662056,
+          "median": 0.285280704498291,
+          "max": 0.7959643602371216
+        },
+        "ipsae_max": {
+          "n": 4,
+          "min": 0.0,
+          "median": 0.0055555,
+          "max": 0.606936
+        }
+      },
+      "boltz2": {
+        "iptm": {
+          "n": 4,
+          "min": 0.21088756620883942,
+          "median": 0.5129937678575516,
+          "max": 0.6382907032966614
+        },
+        "ipsae_max": {
+          "n": 4,
+          "min": 0.0,
+          "median": 0.015393500000000001,
+          "max": 0.18121
+        }
+      }
+    },
+    "paired_difference": {
+      "esmfold2_minus_boltz2_iptm": {
+        "n": 4,
+        "min": -0.25950050354003906,
+        "median": -0.17711722664535046,
+        "max": 0.1576736569404602
+      },
+      "esmfold2_minus_boltz2_ipsae_max": {
+        "n": 4,
+        "min": -0.018197,
+        "median": -0.0007395000000000006,
+        "max": 0.42572600000000005
+      }
+    },
+    "note": "Descriptive spread over this pool only. There is no supportable pass/fail threshold: the team's public pilot (outputs/) found negative controls scoring as high as binders, and its numeric gates are relative to a parent design. Disagreement between the two predictors is a reason for a person to look, not a verdict."
+  },
+  "status_note": "Raw scores only. No threshold, ranking or combination; not a binding result."
+}

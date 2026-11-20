@@ -79,6 +79,8 @@ Extras added for calibration: shuffled **negative controls**, **AlphaFold gate**
 
 Mosaic's designs look fine to Boltz-2 (it optimizes through Boltz-2) but not to ESMFold2. Small sample, untuned settings: this says "do not use Mosaic as is", not "Mosaic cannot work".
 
+**Retry with doubled optimizer steps** (`results/mosaic-retry/`; soft steps 75 → 150 and sharp steps 50 → 100, the only change; same seed and lengths as the first attempt, 4 designs for each hotspot option; the change is recorded in every design's audit): **0 of 8 clean in structure QC** again; ESMFold2 ipTM median 0.32 (range 0.05–0.80; first attempt 0.23), Boltz-2 median 0.60 (first attempt 0.71); 1,106 GPU seconds per design (first attempt 695). One design (length 80) reached ESMFold2 ipTM 0.80 but fails QC on a close atom pair. More steps did not fix the disagreement between Boltz-2 and ESMFold2.
+
 ### 3.4 Negative controls (shuffled sequences)
 20 shuffled copies of the shortlisted sequences, scored and QC'd exactly like the designs (`results/controls/`):
 - **Structure QC:** 0 of 20 controls pass; 20 of 20 designs pass. *(Biased: the shortlist was already QC-filtered.)*
@@ -99,6 +101,7 @@ Native SolubleMPNN (upstream `26ec57ac`, hash-checked weights `7af52d09…`) run
 - Structure QC: **10 of 12 clean**, 2 flagged (`22e6bf-r1`, `d8ae7b-r1`). Novelty pre-screen: no hit for the 10 searched.
 - **AlphaFold caught a failure the other two predictors missed:** both variants of `d8fd8a` (parent ipTM 0.87) fall to 0.31 and 0.36 with the binder 20–42 Å away, yet ESMFold2 and Boltz-2 scored them like the parent. Lesson: **rerun an independent predictor after any sequence change.**
 - Only **3 variants** are clean on QC, novelty and AlphaFold together: `8e93b8-r1`, `0a592d-r1`, `0a592d-r2`. They are offered as replacements for their parents, **not** in the list.
+- **`d8fd8a` is repaired with a targeted option** (`results/repair-d8fd8a/`): repairing only its N-glycosylation sequon (`--only-types sequon`, temperature 0.3, seed 403) gives 6 variants; 4 are clean on QC and the novelty pre-screen (the other 2 have one close atom pair under Boltz-2) and **all 4 pass AlphaFold** (ipTM 0.83–0.91, binder within 1.9 Å of the other predictors' poses; ESMFold2 ipTM 0.88–0.89, Boltz-2 0.91–0.92). Its Asn-Gly and Asp-Pro motifs are left as they are. These variants are not in the shortlist.
 - **A wider, warmer second screen worked much better** (`results/repair-wide/`). The team's protocol (temperature 0.1) keeps proposing the same few sequences, so I re-ran SolubleMPNN at **temperature 0.3, seed 402** (a deliberate, recorded deviation) and kept up to 6 variants per parent, for the 7 flagged designs of the previous shortlist: 24 variants, all scored on both predictors; **19 clean on QC and the novelty pre-screen; 15 pass the AlphaFold gate, from 4 of the 7 parents**. All variants of `d8fd8a` (three liabilities at once) still fail under AlphaFold. These variants are **not** in the shortlist: they are available as replacements for their parents, and each needs its own reviews.
 
 ---
@@ -116,6 +119,12 @@ PDB **7OPB** is a published, experimentally confirmed de novo antagonist of IL-7
 - **Pose reproduced:** the predicted binder is within **1.2–1.35 Å** (C-alpha RMSD) of the crystal binder after superposing the target, and 13–14 of its 14–15 crystal contact residues are predicted contacts.
 - **Same site as our hotspots:** the crystal binder touches 9 of the 10 residues of option A and 7 of the 10 of option B. **Our 20 designs touch 9–13 of the 14 residues it touches (17 of 20 touch at least 10).** So the unreviewed hotspot sets and the designs lie on the site where a published antagonist is known to bind; this supports the site choice but is **not** the epitope decision (Samyuktha).
 - Not done for lack of a suitable setup: antibody Fabs (PDB 6P50, 6P67) need a three-chain input the tools do not have; TSLP (5J11) needs its receptor TSLPR.
+
+### 3.9 A designed binder for another target, and the known binder against decoys (`results/other-target-control/`)
+- **LCB1** (PDB 7JZL; a published de novo binder of the SARS-CoV-2 spike, 55 aa, same design style and length as 7OPB) with IL-7Rα: **AlphaFold ipTM 0.78, ipSAE 0.52, pLDDT 87**. AlphaFold puts it in the **same IL-7 groove** our designs use (17 contacts, 9 of the 10 residues of option A and 9 of the 10 of option B). So AlphaFold's score can be confidently wrong for a binder that was not designed for this target, and the 0.61 floor set by shuffled sequences is **too low as a null**.
+- Margin: our 20 final designs have AlphaFold ipTM 0.86–0.94 and ipSAE 0.65–0.82 — all above LCB1 on both. The shortlist is **unchanged** if the ipTM floor is raised to LCB1's level (0.78): the same 20 designs are selected. The margin is real but modest, and ipSAE separates the designs from LCB1 (0.52) at least as well as ipTM.
+- The known binder 7OPB against GFP and lysozyme: ipTM **0.26 and 0.26** — a real binder does not dock to unrelated proteins.
+- Not done: designs made *for another target* by this pipeline (needs a new target prepared). LCB1 is a binder for another target, but it was designed elsewhere.
 
 ---
 
@@ -162,6 +171,7 @@ Sequences, ipSAE values and per-design details: `docs/eswar/results/selection-fi
 - **Repair command bug:** my first repair run passed a `--device` option upstream does not have. Fixed; a test now checks every option against the pinned upstream `run.py` (the old test's fake program had invented the option).
 - **Earlier bugs found only on real GPUs:** an unpicklable torch version string, blocked storage hosts, Windows line endings breaking checksum checks, a Modal proxy package missing. All fixed and tested.
 - A committed `__pycache__` folder was removed from the repository.
+- **Disclosure:** the first AlphaFold attempt used ColabFold's default alignment setting, which sends each chain to a public server; I chose that default without weighing that the binder sequences are unpublished. At least 3, and up to 12, designs were sent (`results/alphafold-attempts/EXPOSURE.md`); it cannot be undone. All later runs send no binder sequence anywhere.
 - **More slips in the last round (all fixed, none changed a result):** the local `run` mode of the repair script still passed the removed `--device` option (found by reading, now tested); a launch environment missing `tmtools` made 8 generation designs fail until I installed it and resumed; two run-ID clashes on the Modal volume; I stopped every running app once, which also stopped a generation batch (it was resumable and finished); a first decoy run used single-sequence alignments after the alignment stage failed, because my launch script did not stop on error (it cost seconds and was discarded; the scripts now stop at the first failure).
 - One unexplained item: seed 43 reproduces across two A100 sizes, differs by one residue on an A10, and does **not** reproduce the binder in the team's earlier verified run.
 
@@ -177,7 +187,8 @@ Sequences, ipSAE values and per-design details: `docs/eswar/results/selection-fi
 | 5 | Decide about the repaired variants (3 clean ones offered as replacements) | team |
 | 6 | **Replace and revoke the Modal tokens** that were pasted in chat (they are not in this repository) | Eswar |
 | 7 | After the epitope decision: regenerate on the agreed hotspots and repeat the selection (the AlphaFold gate and the decoy gate are one flag each) | Eswar |
-| 8 | Mosaic was **not** retried (see 3.3): more optimizer steps through Boltz-2 would likely overfit Boltz-2; a real fix needs an independent predictor inside the loop | team decision |
+| 8 | Mosaic was retried once with **twice the optimizer steps** (see 3.3 and the table below) and is still negative; a real fix needs an independent predictor inside the loop, which the Mosaic framework does not offer here | team decision |
+| 9 | **Decide whether designs whose sequences may have reached the public ColabFold server count as disclosed** (`results/alphafold-attempts/EXPOSURE.md`: 12 designs, at least 3 certain; 6 of them are in `s5`). An alternative shortlist without all 12 is `results/selection-s7/` | team |
 
 ---
 

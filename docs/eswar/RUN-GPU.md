@@ -323,6 +323,13 @@ python pipeline/scripts/select-finalists.py --records ... --diversity ... --alph
 
 Sequences: IL-7 = UniProt P13232 residues 26 to 177, GFP = P42212, lysozyme = P00698 residues 19 to 147. `af-decoys.csv` has one row per design and decoy, id `gfp-<design id without the il7ra-rfd4- prefix>`, sequence `DECOYSEQ:BINDERSEQ`. Give every protein in a comparison its own alignment (without one AlphaFold cannot fold even the real target). Use a **new `--out` name each time**: run folders are kept on the Modal volume and a reused name fails with "run id already exists". Scripts that chain GPU stages should stop at the first failure (`set -e`).
 
+### Stage Q3 - options added on 20 Nov
+
+- `modal_mosaic.py ... --soft-steps N --sharp-steps N`: change only the optimizer step counts (1 to 400); everything else stays the team's, and every design records what changed.
+- `modal_repair.py ... --only-types sequon` (and `repair-liabilities.py plan|run|ingest --only-types sequon`): repair only the named kinds (cysteine, sequon, asn_gly, asp_pro); `--temperature` and `--seed` set the sampling, `ingest --tag` keeps variant ids from two runs apart, `ingest --max-variants N` keeps up to N per parent.
+- `select-finalists.py --exclude file.json` (an object of candidate id to reason): leave designs out, for example sequences that must stay unpublished (`results/selection-s7/` was built this way).
+- `compare` a prediction with a crystal structure of a known binder: `pipeline/binder_campaign/pose_compare.py` (tested functions: Kabsch superposition, binder RMSD, contact sets).
+
 ## Optional: re-check the real ESMFold2 library on your machine (free, CPU)
 
 The test suite normally uses stand-ins for `esm`, `torch` and `huggingface_hub`. `pipeline/tests/test_real_esm.py` runs the **real** `esm` fold code with a tiny random-weight model instead (no GPU, no weights download, about 90 s), and checks that my validator and the real pinned ipSAE accept what it writes. It is skipped unless you point it at a Python that has the real libraries:

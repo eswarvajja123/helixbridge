@@ -1,0 +1,36 @@
+{
+  "candidates": 4,
+  "status_counts": {
+    "flagged": 4,
+    "no_flags": 0,
+    "incomplete": 0
+  },
+  "reason_counts": {
+    "clash:boltz2": 1,
+    "clash:esmfold2": 1,
+    "clash:generator": 1,
+    "no_hotspot_contact:esmfold2": 1,
+    "no_hotspot_contact:generator": 2,
+    "pose_shift:esmfold2_vs_boltz2": 4,
+    "pose_shift:generator_vs_boltz2": 3,
+    "pose_shift:generator_vs_esmfold2": 4
+  },
+  "thresholds": {
+    "max_close_pairs": 0,
+    "min_target_contact_residues": 1,
+    "require_hotspot_contact": true,
+    "max_pose_shift_generator_A": 2.5,
+    "max_pose_shift_between_predictors_A": 3.0
+  },
+  "target_length_range": [
+    40,
+    100
+  ],
+  "sources_expected": [
+    "generator",
+    "esmfold2",
+    "boltz2"
+  ],
+  "pose_review_sha256": "5c3e38481c41ec9c3ac4e5cb932e54557106c085113f93452d7b8378ea0c3f70",
+  "scope": "Geometric consistency flags only. Provisional limits from the team's own consistency screen, not validated thresholds; no flags is not evidence that a design is good (the team's pilot had high-scoring non-binders with zero close pairs). Nothing is ranked or promoted."
+}
