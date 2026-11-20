@@ -24,12 +24,13 @@
 ### What the evidence does show
 1. The designs fold into the intended complex in **three independent predictors** (ESMFold2, Boltz-2, AlphaFold-Multimer): for the final 20, ipTM is 0.77–0.97 in each.
 2. **Shuffled copies of the same sequences do not.** Over 20 controls, 0 pass structure QC; AlphaFold ipTM is 0.28 median (max 0.61) against 0.91 for the designs.
-3. **They are mostly specific.** Against two unrelated proteins (GFP and lysozyme) the designs score low (median ipTM 0.17 and 0.20); the 4 designs that confidently docked to an unrelated protein (ipTM 0.68–0.90) were removed from the shortlist.
-4. The result does **not depend on one score**: designs were chosen for coverage of distinct folds and binding sites, not for the highest number.
+3. **A known designed binder behaves the same way.** The published IL-7Rα antagonist 7OPB gets AlphaFold ipTM 0.90 and is placed within 1.2–1.35 Å of its crystal pose; our designs touch the same site.
+4. **They are mostly specific.** Against two unrelated proteins (GFP and lysozyme) the designs score low (median ipTM 0.17 and 0.20); the 4 designs that confidently docked to an unrelated protein (ipTM 0.68–0.90) were removed from the shortlist.
+5. The result does **not depend on one score**: designs were chosen for coverage of distinct folds and binding sites, not for the highest number.
 
 ### What this does not show
 - That any design binds. A prediction of a complex is not an experiment. AlphaFold gives the **natural IL-7 / IL-7Rα complex an ipTM of 0.79**, lower than the designs' 0.91, so a high ipTM is not a measure of how strongly something binds.
-- That the targeted epitope is the right one. All three hotspot sets are **unreviewed** (Samyuktha decides).
+- That the targeted epitope is the right one. All three hotspot sets are **unreviewed** (Samyuktha decides). What is known: options A and B lie on the site where a published designed antagonist (PDB 7OPB) binds, and our 20 designs touch most of that site (section 3.8).
 - Novelty against the organizers' private database. Only a **public** database was searched.
 - That ESMFold2 as run here equals the organizers' screen (it is an approximation, same weights).
 
@@ -106,6 +107,15 @@ Native SolubleMPNN (upstream `26ec57ac`, hash-checked weights `7af52d09…`) run
 Shuffled sequences are an easy negative, so two harder tests were run with AlphaFold-Multimer (same settings; every protein got its own deep alignment):
 - **Positive control, IL-7 + IL-7Rα** (the natural pair): ipTM **0.79**, ipSAE 0.76. AlphaFold does recognise a real complex, but scores it *lower* than our designs (median 0.91) — designs are idealized helical bundles that AlphaFold finds easy, so **a high ipTM does not mean strong binding**. (IL-7 with no alignment of its own gave only 0.24, and the real target with no alignment cannot be folded at all, pLDDT about 38: alignments matter for every protein in a comparison.)
 - **Decoy targets, GFP and chicken lysozyme:** every design was predicted with each. Medians: GFP 0.17, lysozyme 0.20 — most designs do not dock to unrelated proteins. **4 of the 36 AlphaFold-supported designs do**: `1febf6` (GFP, ipTM 0.90), `d8ae7b` (lysozyme, 0.86), `4dea48` (lysozyme, 0.82), `07c02f` (GFP, 0.68). They are excluded by a decoy rule (ipTM above the shuffled-control maximum, 0.61). Two further designs sit at 0.48 and are kept.
+
+---
+
+### 3.8 A known designed IL-7Rα binder as a real positive control (`results/known-binder/`)
+PDB **7OPB** is a published, experimentally confirmed de novo antagonist of IL-7Rα (55 aa, 2.14 Å crystal structure; Cao et al., Nature 605:551, 2022). It was run through the same AlphaFold setup as our designs and compared with its crystal structure:
+- **AlphaFold ipTM 0.898**, pLDDT 89.9 — the same range as our designs (median 0.91).
+- **Pose reproduced:** the predicted binder is within **1.2–1.35 Å** (C-alpha RMSD) of the crystal binder after superposing the target, and 13–14 of its 14–15 crystal contact residues are predicted contacts.
+- **Same site as our hotspots:** the crystal binder touches 9 of the 10 residues of option A and 7 of the 10 of option B. **Our 20 designs touch 9–13 of the 14 residues it touches (17 of 20 touch at least 10).** So the unreviewed hotspot sets and the designs lie on the site where a published antagonist is known to bind; this supports the site choice but is **not** the epitope decision (Samyuktha).
+- Not done for lack of a suitable setup: antibody Fabs (PDB 6P50, 6P67) need a three-chain input the tools do not have; TSLP (5J11) needs its receptor TSLPR.
 
 ---
 

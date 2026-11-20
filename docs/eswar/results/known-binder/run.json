@@ -1,0 +1,28 @@
+{
+  "settings": {
+    "model_type": "alphafold2_multimer_v3",
+    "num_models": 2,
+    "num_recycle": 3,
+    "num_seeds": 1,
+    "rank": "iptm",
+    "msa_mode": "custom a3m: target-only MSA (1,022 rows) + binder single sequence; no MSA server",
+    "pair_mode": "unpaired_paired",
+    "templates": false,
+    "relax": false
+  },
+  "target_msa": "deep",
+  "chunks": {
+    "c1": {
+      "ids": [
+        "known-7opb"
+      ],
+      "attempts": [
+        "alphafold-eswar-k1-c1-1"
+      ],
+      "status": "done",
+      "seconds": 90.0,
+      "device": "NVIDIA A100-SXM4-80GB",
+      "run_id": "alphafold-eswar-k1-c1-1"
+    }
+  }
+}

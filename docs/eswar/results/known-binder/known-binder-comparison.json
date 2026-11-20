@@ -1,0 +1,50 @@
+{
+ "AD": {
+  "target_rmsd_A": 0.62,
+  "binder_ca_rmsd_A": 1.3,
+  "crystal_contacts": 14,
+  "predicted_contacts": 16,
+  "shared": 13,
+  "jaccard": 0.76,
+  "only_crystal": [
+   210
+  ],
+  "only_predicted": [
+   78,
+   101,
+   104
+  ]
+ },
+ "BE": {
+  "target_rmsd_A": 0.56,
+  "binder_ca_rmsd_A": 1.35,
+  "crystal_contacts": 15,
+  "predicted_contacts": 16,
+  "shared": 13,
+  "jaccard": 0.72,
+  "only_crystal": [
+   79,
+   210
+  ],
+  "only_predicted": [
+   78,
+   101,
+   104
+  ]
+ },
+ "CF": {
+  "target_rmsd_A": 0.62,
+  "binder_ca_rmsd_A": 1.2,
+  "crystal_contacts": 15,
+  "predicted_contacts": 16,
+  "shared": 14,
+  "jaccard": 0.82,
+  "only_crystal": [
+   79
+  ],
+  "only_predicted": [
+   101,
+   104
+  ]
+ }
+}
