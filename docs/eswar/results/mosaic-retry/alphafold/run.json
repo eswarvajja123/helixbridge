@@ -1,0 +1,76 @@
+{
+  "settings": {
+    "model_type": "alphafold2_multimer_v3",
+    "num_models": 2,
+    "num_recycle": 3,
+    "num_seeds": 1,
+    "rank": "iptm",
+    "msa_mode": "custom a3m: target-only MSA (1,022 rows) + binder single sequence; no MSA server",
+    "pair_mode": "unpaired_paired",
+    "templates": false,
+    "relax": false
+  },
+  "target_msa": "deep",
+  "chunks": {
+    "c1": {
+      "ids": [
+        "il7ra-mosaic-2da130419918",
+        "il7ra-mosaic-ec18ab1f32a6",
+        "il7ra-mosaic-cdcc49ae8170",
+        "il7ra-mosaic-99498d6d6765"
+      ],
+      "attempts": [
+        "alphafold-eswar-m1-c1-1"
+      ],
+      "status": "done",
+      "seconds": 331.5,
+      "device": "NVIDIA A100-SXM4-80GB",
+      "run_id": "alphafold-eswar-m1-c1-1"
+    },
+    "c2": {
+      "ids": [
+        "il7ra-mosaic-17751d914170",
+        "il7ra-mosaic-a521999d32be",
+        "il7ra-mosaic-2194f0323ab0",
+        "il7ra-mosaic-6f20c2183cde"
+      ],
+      "attempts": [
+        "alphafold-eswar-m1-c2-1"
+      ],
+      "status": "done",
+      "seconds": 280.6,
+      "device": "NVIDIA A100-SXM4-80GB",
+      "run_id": "alphafold-eswar-m1-c2-1"
+    },
+    "c3": {
+      "ids": [
+        "il7ra-mosaic-14a78c20495f",
+        "il7ra-mosaic-dbb89eda952c",
+        "il7ra-mosaic-b221d282f414",
+        "il7ra-mosaic-36d8a9f8d2cf"
+      ],
+      "attempts": [
+        "alphafold-eswar-m1-c3-1"
+      ],
+      "status": "done",
+      "seconds": 283.9,
+      "device": "NVIDIA A100-SXM4-80GB",
+      "run_id": "alphafold-eswar-m1-c3-1"
+    },
+    "c4": {
+      "ids": [
+        "il7ra-mosaic-5ff8fdc49e32",
+        "il7ra-mosaic-fbdfab80ef3c",
+        "il7ra-mosaic-7cfcb5bb783e",
+        "il7ra-mosaic-7f55fcc7ee0a"
+      ],
+      "attempts": [
+        "alphafold-eswar-m1-c4-1"
+      ],
+      "status": "done",
+      "seconds": 273.2,
+      "device": "NVIDIA A100-SXM4-80GB",
+      "run_id": "alphafold-eswar-m1-c4-1"
+    }
+  }
+}

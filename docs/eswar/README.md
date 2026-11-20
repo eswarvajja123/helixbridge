@@ -81,6 +81,8 @@ Mosaic's designs look fine to Boltz-2 (it optimizes through Boltz-2) but not to 
 
 **Retry with doubled optimizer steps** (`results/mosaic-retry/`; soft steps 75 → 150 and sharp steps 50 → 100, the only change; same seed and lengths as the first attempt, 4 designs for each hotspot option; the change is recorded in every design's audit): **0 of 8 clean in structure QC** again; ESMFold2 ipTM median 0.32 (range 0.05–0.80; first attempt 0.23), Boltz-2 median 0.60 (first attempt 0.71); 1,106 GPU seconds per design (first attempt 695). One design (length 80) reached ESMFold2 ipTM 0.80 but fails QC on a close atom pair. More steps did not fix the disagreement between Boltz-2 and ESMFold2.
 
+**AlphaFold as the third opinion on all 16 Mosaic designs** (`results/mosaic-retry/alphafold/`): it sides with ESMFold2, not with Boltz-2. First attempt: AlphaFold ipTM 0.29–0.79 (median 0.61), ipSAE at most 0.60; only 2 of 8 reach ipTM 0.78, and their ipSAE (0.54–0.60) is at the level of the wrong-target binder LCB1 (0.52), far below our designs (at least 0.65). **Retry with doubled steps: AlphaFold ipTM 0.15–0.36 (median 0.27), ipSAE at most 0.08, all 8 unsupported** — so the extra steps made the independent agreement *worse* while Boltz-2 (the model inside Mosaic's loop) stayed high. This confirms the mechanism: Mosaic overfits the predictor it optimizes through. Two of three predictors reject these designs, so none was added to the shortlist.
+
 ### 3.4 Negative controls (shuffled sequences)
 20 shuffled copies of the shortlisted sequences, scored and QC'd exactly like the designs (`results/controls/`):
 - **Structure QC:** 0 of 20 controls pass; 20 of 20 designs pass. *(Biased: the shortlist was already QC-filtered.)*
@@ -187,7 +189,7 @@ Sequences, ipSAE values and per-design details: `docs/eswar/results/selection-fi
 | 5 | Decide about the repaired variants (3 clean ones offered as replacements) | team |
 | 6 | **Replace and revoke the Modal tokens** that were pasted in chat (they are not in this repository) | Eswar |
 | 7 | After the epitope decision: regenerate on the agreed hotspots and repeat the selection (the AlphaFold gate and the decoy gate are one flag each) | Eswar |
-| 8 | Mosaic was retried once with **twice the optimizer steps** (see 3.3 and the table below) and is still negative; a real fix needs an independent predictor inside the loop, which the Mosaic framework does not offer here | team decision |
+| 8 | Mosaic was retried with **twice the optimizer steps** (see 3.3) and is still negative, now also by AlphaFold (retry: ipTM 0.15–0.36); a real fix needs an independent predictor inside the loop, which the Mosaic framework does not offer here | team decision |
 | 9 | **Decide whether designs whose sequences may have reached the public ColabFold server count as disclosed** (`results/alphafold-attempts/EXPOSURE.md`: 12 designs, at least 3 certain; 6 of them are in `s5`). An alternative shortlist without all 12 is `results/selection-s7/` | team |
 
 ---
