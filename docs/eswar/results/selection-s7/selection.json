@@ -1,0 +1,1633 @@
+{
+  "selected": [
+    {
+      "pick_order": 1,
+      "candidate_id": "il7ra-rfd4-7ec112a2ac7a",
+      "fold_group": "11",
+      "site_group": "1",
+      "liability_flags": [],
+      "predictor_disagreement": 0.008105,
+      "hotspot_source": "proposed_by_eswar_unreviewed",
+      "seed": 114,
+      "length": 60,
+      "sequence": "SYEDTLSEIKSLAEKAIEAAQNKDLEAALSYRDQLFEKIEELPDEHLDEVRELLQDVYDS",
+      "scores": {
+        "esmfold2": {
+          "iptm": 0.9581728577613831,
+          "ipsae_max": 0.85003
+        },
+        "boltz2": {
+          "iptm": 0.959820568561554,
+          "ipsae_max": 0.841925
+        }
+      }
+    },
+    {
+      "pick_order": 2,
+      "candidate_id": "il7ra-rfd4-026e12ae07bc",
+      "fold_group": "1",
+      "site_group": "1",
+      "liability_flags": [],
+      "predictor_disagreement": 0.034173,
+      "hotspot_source": "proposed_by_eswar_unreviewed",
+      "seed": 106,
+      "length": 60,
+      "sequence": "SFVTSEQAETLHDYVALLESKVASGELTDEEATEIHDTAATLIDEGKIDEAISYLKDKLS",
+      "scores": {
+        "esmfold2": {
+          "iptm": 0.9521868228912354,
+          "ipsae_max": 0.876315
+        },
+        "boltz2": {
+          "iptm": 0.9533898830413818,
+          "ipsae_max": 0.842142
+        }
+      }
+    },
+    {
+      "pick_order": 3,
+      "candidate_id": "il7ra-rfd4-1fea9fc40149",
+      "fold_group": "2",
+      "site_group": "1",
+      "liability_flags": [],
+      "predictor_disagreement": 0.083133,
+      "hotspot_source": "proposed_by_eswar_unreviewed",
+      "seed": 111,
+      "length": 60,
+      "sequence": "YEAVSPELAEKIHEAIALVSEKKYDEAIALLEEILEEAPDFLKTDLEETLAKVKELKEES",
+      "scores": {
+        "esmfold2": {
+          "iptm": 0.962397575378418,
+          "ipsae_max": 0.888707
+        },
+        "boltz2": {
+          "iptm": 0.9312002062797546,
+          "ipsae_max": 0.805574
+        }
+      }
+    },
+    {
+      "pick_order": 4,
+      "candidate_id": "il7ra-rfd4-ee56c58e81b5",
+      "fold_group": "10",
+      "site_group": "1",
+      "liability_flags": [],
+      "predictor_disagreement": 0.040097,
+      "hotspot_source": "proposed_by_eswar_unreviewed",
+      "seed": 102,
+      "length": 50,
+      "sequence": "EEEWEELQEEAEEVVVEMEEAHEENDMEKIEELEEKQDEIFEKANELSEE",
+      "scores": {
+        "esmfold2": {
+          "iptm": 0.9366231560707092,
+          "ipsae_max": 0.853588
+        },
+        "boltz2": {
+          "iptm": 0.9361245632171631,
+          "ipsae_max": 0.813491
+        }
+      }
+    },
+    {
+      "pick_order": 5,
+      "candidate_id": "il7ra-rfd4-f5d48afb1a53",
+      "fold_group": "13",
+      "site_group": "1",
+      "liability_flags": [],
+      "predictor_disagreement": 0.028795,
+      "hotspot_source": "proposed_by_eswar_unreviewed",
+      "seed": 106,
+      "length": 50,
+      "sequence": "DDDYIDFTKDLKEKFEDKYDEISKIDDLDLRDEKLHELHDELSDEYDDFL",
+      "scores": {
+        "esmfold2": {
+          "iptm": 0.9251458644866943,
+          "ipsae_max": 0.781951
+        },
+        "boltz2": {
+          "iptm": 0.9392868876457214,
+          "ipsae_max": 0.810746
+        }
+      }
+    },
+    {
+      "pick_order": 6,
+      "candidate_id": "il7ra-rfd4-f5206fc1de1f",
+      "fold_group": "8",
+      "site_group": "2",
+      "liability_flags": [
+        "asp_pro_motif"
+      ],
+      "predictor_disagreement": 0.199679,
+      "hotspot_source": "provisional_historical",
+      "seed": 113,
+      "length": 70,
+      "sequence": "SSLFEEAKTFALEVIEKYSDDFGQYKDYLESLTDVDDLIDLLELMADALLFSDPDTAAKLEDFISKLKDS",
+      "scores": {
+        "esmfold2": {
+          "iptm": 0.8418797254562378,
+          "ipsae_max": 0.632193
+        },
+        "boltz2": {
+          "iptm": 0.7663373947143555,
+          "ipsae_max": 0.432514
+        }
+      }
+    },
+    {
+      "pick_order": 7,
+      "candidate_id": "il7ra-rfd4-246e59d61754",
+      "fold_group": "5",
+      "site_group": "1",
+      "liability_flags": [],
+      "predictor_disagreement": 0.013263,
+      "hotspot_source": "provisional_historical",
+      "seed": 111,
+      "length": 60,
+      "sequence": "EKSNLINEIKELINSLPSKYEITKEELLSILNDAVNSNSITLEQLEEFKNSVLEFIEEIN",
+      "scores": {
+        "esmfold2": {
+          "iptm": 0.9396286010742188,
+          "ipsae_max": 0.828767
+        },
+        "boltz2": {
+          "iptm": 0.9528913497924805,
+          "ipsae_max": 0.839954
+        }
+      }
+    },
+    {
+      "pick_order": 8,
+      "candidate_id": "il7ra-rfd4-32fb546d40cc",
+      "fold_group": "7",
+      "site_group": "1",
+      "liability_flags": [
+        "n_glycosylation_sequon"
+      ],
+      "predictor_disagreement": 0.009767,
+      "hotspot_source": "proposed_by_eswar_unreviewed",
+      "seed": 110,
+      "length": 70,
+      "sequence": "EEKELKSLTFDSVISGENSTITLTLYYDSSSNTYFFKAETSSGDTAYFGPYSSRSEAESAMNFFKEMNKK",
+      "scores": {
+        "esmfold2": {
+          "iptm": 0.9486163258552551,
+          "ipsae_max": 0.850226
+        },
+        "boltz2": {
+          "iptm": 0.9449071884155273,
+          "ipsae_max": 0.840459
+        }
+      }
+    },
+    {
+      "pick_order": 9,
+      "candidate_id": "il7ra-rfd4-3dbfb374de02",
+      "fold_group": "9",
+      "site_group": "1",
+      "liability_flags": [
+        "n_glycosylation_sequon",
+        "asn_gly_motif"
+      ],
+      "predictor_disagreement": 0.034473,
+      "hotspot_source": "proposed_by_eswar_unreviewed",
+      "seed": 112,
+      "length": 70,
+      "sequence": "DSEFNHLMTFVESADFFITDNSDGTYSAYVEFTLKNGTKLKTSTHTASTREELQSKLKTEMTSLLKTALS",
+      "scores": {
+        "esmfold2": {
+          "iptm": 0.9340566396713257,
+          "ipsae_max": 0.782808
+        },
+        "boltz2": {
+          "iptm": 0.9424423575401306,
+          "ipsae_max": 0.817281
+        }
+      }
+    },
+    {
+      "pick_order": 10,
+      "candidate_id": "il7ra-rfd4-5094a0d5dad8",
+      "fold_group": "4",
+      "site_group": "1",
+      "liability_flags": [],
+      "predictor_disagreement": 0.017244,
+      "hotspot_source": "proposed_by_eswar_unreviewed",
+      "seed": 110,
+      "length": 50,
+      "sequence": "SIEEVLHEANTAYEEGDKEKALTLTKEYAELDGTFSVDEYLESLEKLFEE",
+      "scores": {
+        "esmfold2": {
+          "iptm": 0.9607579708099365,
+          "ipsae_max": 0.825619
+        },
+        "boltz2": {
+          "iptm": 0.9548817276954651,
+          "ipsae_max": 0.808375
+        }
+      }
+    },
+    {
+      "pick_order": 11,
+      "candidate_id": "il7ra-rfd4-b6eedc7da36b",
+      "fold_group": "19",
+      "site_group": "1",
+      "liability_flags": [],
+      "predictor_disagreement": 0.024506,
+      "hotspot_source": "proposed_by_eswar_unreviewed",
+      "seed": 112,
+      "length": 80,
+      "sequence": "SVLDDFKTELKDSLESSEPSHYLDTLADLYDKYKDKLSEDDIFDAMHDELNKHVKISVSKEDIKYHVKEYYKYKQKVASL",
+      "scores": {
+        "esmfold2": {
+          "iptm": 0.9607076644897461,
+          "ipsae_max": 0.888625
+        },
+        "boltz2": {
+          "iptm": 0.9403950572013855,
+          "ipsae_max": 0.864119
+        }
+      }
+    },
+    {
+      "pick_order": 12,
+      "candidate_id": "il7ra-rfd4-c79f951a2a43",
+      "fold_group": "21",
+      "site_group": "1",
+      "liability_flags": [],
+      "predictor_disagreement": 0.127293,
+      "hotspot_source": "proposed_by_eswar_unreviewed",
+      "seed": 109,
+      "length": 80,
+      "sequence": "SATEVTTEIKTFLSEFKEEVESKTFEELQDLFQTKMQEIFDKYGTHWIDSTLADKLHDIIAALSLRDRTSLKEAINSILS",
+      "scores": {
+        "esmfold2": {
+          "iptm": 0.8990923762321472,
+          "ipsae_max": 0.732317
+        },
+        "boltz2": {
+          "iptm": 0.945679783821106,
+          "ipsae_max": 0.85961
+        }
+      }
+    },
+    {
+      "pick_order": 13,
+      "candidate_id": "il7ra-rfd4-e45f4580e44e",
+      "fold_group": "22",
+      "site_group": "1",
+      "liability_flags": [],
+      "predictor_disagreement": 0.013916,
+      "hotspot_source": "proposed_by_eswar_unreviewed",
+      "seed": 107,
+      "length": 60,
+      "sequence": "SLTDKIKSVANKIANHPLVLDEDKQNIHDDVTEKLETLDETDLEHYLTTLENVLSDLNNW",
+      "scores": {
+        "esmfold2": {
+          "iptm": 0.965759813785553,
+          "ipsae_max": 0.878622
+        },
+        "boltz2": {
+          "iptm": 0.9605038166046143,
+          "ipsae_max": 0.864706
+        }
+      }
+    },
+    {
+      "pick_order": 14,
+      "candidate_id": "il7ra-rfd4-f49e60a8d7a3",
+      "fold_group": "23",
+      "site_group": "1",
+      "liability_flags": [
+        "n_glycosylation_sequon"
+      ],
+      "predictor_disagreement": 0.014107,
+      "hotspot_source": "proposed_by_eswar_unreviewed",
+      "seed": 112,
+      "length": 50,
+      "sequence": "SEWDTKKLEAIEEFEKNPNLTEEEKKQIKFIKLVDFENVSEEEAYKMVYE",
+      "scores": {
+        "esmfold2": {
+          "iptm": 0.9448795318603516,
+          "ipsae_max": 0.853064
+        },
+        "boltz2": {
+          "iptm": 0.9496523141860962,
+          "ipsae_max": 0.838957
+        }
+      }
+    },
+    {
+      "pick_order": 15,
+      "candidate_id": "il7ra-rfd4-dbb68e85db49",
+      "fold_group": "11",
+      "site_group": "1",
+      "liability_flags": [],
+      "predictor_disagreement": 0.01615,
+      "hotspot_source": "proposed_by_eswar_unreviewed",
+      "seed": 102,
+      "length": 60,
+      "sequence": "SEDKLNHLLSVYKDYQNALANSDTEKANELKTEFLEGYDELSDEEKDDLSEMIGEYLDSS",
+      "scores": {
+        "esmfold2": {
+          "iptm": 0.9179701209068298,
+          "ipsae_max": 0.803889
+        },
+        "boltz2": {
+          "iptm": 0.9180275201797485,
+          "ipsae_max": 0.787739
+        }
+      }
+    },
+    {
+      "pick_order": 16,
+      "candidate_id": "il7ra-rfd4-154c11f68ccc",
+      "fold_group": "1",
+      "site_group": "1",
+      "liability_flags": [
+        "n_glycosylation_sequon"
+      ],
+      "predictor_disagreement": 0.021135,
+      "hotspot_source": "proposed_by_eswar_unreviewed",
+      "seed": 109,
+      "length": 70,
+      "sequence": "SSDETLNFADDLADDVVDKYNDLPEDKQQEFKDAVNNYVDDNYENQAINNDQLTEIENFVNDKYNELNNS",
+      "scores": {
+        "esmfold2": {
+          "iptm": 0.9502159953117371,
+          "ipsae_max": 0.843764
+        },
+        "boltz2": {
+          "iptm": 0.943361222743988,
+          "ipsae_max": 0.822629
+        }
+      }
+    },
+    {
+      "pick_order": 17,
+      "candidate_id": "il7ra-rfd4-3c415d9af3c0",
+      "fold_group": "2",
+      "site_group": "1",
+      "liability_flags": [
+        "odd_cysteine_count"
+      ],
+      "predictor_disagreement": 0.002645,
+      "hotspot_source": "proposed_by_eswar_unreviewed",
+      "seed": 108,
+      "length": 50,
+      "sequence": "SYVEETQELKEKADELIPKLETCTDSEELEELEEQKEELEEELEEIEEKY",
+      "scores": {
+        "esmfold2": {
+          "iptm": 0.9466953873634338,
+          "ipsae_max": 0.83283
+        },
+        "boltz2": {
+          "iptm": 0.9493408799171448,
+          "ipsae_max": 0.831919
+        }
+      }
+    },
+    {
+      "pick_order": 18,
+      "candidate_id": "il7ra-rfd4-65355a2ab485",
+      "fold_group": "10",
+      "site_group": "1",
+      "liability_flags": [
+        "n_glycosylation_sequon"
+      ],
+      "predictor_disagreement": 0.082755,
+      "hotspot_source": "proposed_by_eswar_unreviewed",
+      "seed": 108,
+      "length": 80,
+      "sequence": "SLTLEQLETYLHELKTIKHLIESSEDDDEMNTNLLENKSNFSPEMQELIDYLTKLNKEDALSVVEDLISRVEKQIDFLKS",
+      "scores": {
+        "esmfold2": {
+          "iptm": 0.9072517156600952,
+          "ipsae_max": 0.768829
+        },
+        "boltz2": {
+          "iptm": 0.9390729069709778,
+          "ipsae_max": 0.851584
+        }
+      }
+    },
+    {
+      "pick_order": 19,
+      "candidate_id": "il7ra-rfd4-a0f0f8c0cd1c",
+      "fold_group": "13",
+      "site_group": "1",
+      "liability_flags": [],
+      "predictor_disagreement": 0.046675,
+      "hotspot_source": "provisional_historical",
+      "seed": 109,
+      "length": 60,
+      "sequence": "SEKEELVESFNEKKEEVAKSLGFSSWSEFSSTPDSELTSEQLAVRETLLDLESRLNTYLS",
+      "scores": {
+        "esmfold2": {
+          "iptm": 0.8987411260604858,
+          "ipsae_max": 0.763787
+        },
+        "boltz2": {
+          "iptm": 0.9276538491249084,
+          "ipsae_max": 0.810462
+        }
+      }
+    },
+    {
+      "pick_order": 20,
+      "candidate_id": "il7ra-rfd4-c14adbbcb210",
+      "fold_group": "8",
+      "site_group": "1",
+      "liability_flags": [
+        "odd_cysteine_count",
+        "n_glycosylation_sequon"
+      ],
+      "predictor_disagreement": 0.011268,
+      "hotspot_source": "proposed_by_eswar_unreviewed",
+      "seed": 113,
+      "length": 80,
+      "sequence": "FSSLINEVKTFAEENLSESNSSEVSSLLNELNSTSDYSEQTKILKQIFDICYDELNEKEEYDKIEELHDLLSKILDHIES",
+      "scores": {
+        "esmfold2": {
+          "iptm": 0.9359090924263,
+          "ipsae_max": 0.836104
+        },
+        "boltz2": {
+          "iptm": 0.9453485608100891,
+          "ipsae_max": 0.847372
+        }
+      }
+    }
+  ],
+  "report": {
+    "schema": 1,
+    "pool": 120,
+    "eligible": 24,
+    "excluded": [
+      {
+        "candidate_id": "il7ra-rfd4-befe47e7d3eb",
+        "reasons": [
+          "qc_reason:pose_shift:generator_vs_esmfold2:24.58A>2.5A",
+          "qc_reason:pose_shift:generator_vs_boltz2:26.38A>2.5A",
+          "qc_reason:pose_shift:esmfold2_vs_boltz2:9.33A>3.0A",
+          "structure_qc_flagged",
+          "novelty_prescreen_not_searched",
+          "alphafold_missing",
+          "decoy_missing"
+        ]
+      },
+      {
+        "candidate_id": "il7ra-rfd4-11a204956320",
+        "reasons": [
+          "qc_reason:pose_shift:generator_vs_boltz2:2.90A>2.5A",
+          "structure_qc_flagged",
+          "novelty_prescreen_not_searched",
+          "alphafold_missing",
+          "decoy_missing"
+        ]
+      },
+      {
+        "candidate_id": "il7ra-rfd4-bf3f3264bcd4",
+        "reasons": [
+          "excluded_by_request:sequence may have reached the public ColabFold server in the first AlphaFold attempt",
+          "alphafold_iptm:0.53<=0.61",
+          "alphafold_pose_shift:generator:15.1302A>2.5A",
+          "alphafold_pose_shift:esmfold2:14.9895A>3.0A",
+          "alphafold_pose_shift:boltz2:14.6932A>3.0A",
+          "decoy_missing"
+        ]
+      },
+      {
+        "candidate_id": "il7ra-rfd4-88b5b1829c1f",
+        "reasons": [
+          "qc_reason:pose_shift:generator_vs_boltz2:21.94A>2.5A",
+          "qc_reason:pose_shift:esmfold2_vs_boltz2:21.65A>3.0A",
+          "structure_qc_flagged",
+          "novelty_prescreen_not_searched",
+          "alphafold_missing",
+          "decoy_missing"
+        ]
+      },
+      {
+        "candidate_id": "il7ra-rfd4-67f05b49fd19",
+        "reasons": [
+          "excluded_by_request:sequence may have reached the public ColabFold server in the first AlphaFold attempt"
+        ]
+      },
+      {
+        "candidate_id": "il7ra-rfd4-ca029019e879",
+        "reasons": [
+          "qc_reason:clash:boltz2:2_heavy_atom_pairs_lt_2A",
+          "structure_qc_flagged",
+          "novelty_prescreen_not_searched",
+          "alphafold_missing",
+          "decoy_missing"
+        ]
+      },
+      {
+        "candidate_id": "il7ra-rfd4-2e2ec88e93b8",
+        "reasons": [
+          "excluded_by_request:sequence may have reached the public ColabFold server in the first AlphaFold attempt"
+        ]
+      },
+      {
+        "candidate_id": "il7ra-rfd4-2a9a819f98ca",
+        "reasons": [
+          "qc_reason:clash:esmfold2:1_heavy_atom_pairs_lt_2A",
+          "qc_reason:no_hotspot_contact:esmfold2",
+          "qc_reason:clash:boltz2:1_heavy_atom_pairs_lt_2A",
+          "qc_reason:no_hotspot_contact:boltz2",
+          "qc_reason:pose_shift:generator_vs_esmfold2:40.99A>2.5A",
+          "qc_reason:pose_shift:generator_vs_boltz2:53.75A>2.5A",
+          "qc_reason:pose_shift:esmfold2_vs_boltz2:57.24A>3.0A",
+          "structure_qc_flagged",
+          "novelty_prescreen_not_searched",
+          "alphafold_missing",
+          "decoy_missing"
+        ]
+      },
+      {
+        "candidate_id": "il7ra-rfd4-c099fddd0568",
+        "reasons": [
+          "qc_reason:pose_shift:generator_vs_esmfold2:5.42A>2.5A",
+          "qc_reason:pose_shift:generator_vs_boltz2:10.05A>2.5A",
+          "qc_reason:pose_shift:esmfold2_vs_boltz2:14.95A>3.0A",
+          "structure_qc_flagged",
+          "novelty_prescreen_not_searched",
+          "alphafold_missing",
+          "decoy_missing"
+        ]
+      },
+      {
+        "candidate_id": "il7ra-rfd4-8d368322e6bf",
+        "reasons": [
+          "excluded_by_request:sequence may have reached the public ColabFold server in the first AlphaFold attempt"
+        ]
+      },
+      {
+        "candidate_id": "il7ra-rfd4-10b9561e3790",
+        "reasons": [
+          "qc_reason:pose_shift:generator_vs_boltz2:13.08A>2.5A",
+          "qc_reason:pose_shift:esmfold2_vs_boltz2:12.75A>3.0A",
+          "structure_qc_flagged",
+          "novelty_prescreen_not_searched",
+          "alphafold_missing",
+          "decoy_missing"
+        ]
+      },
+      {
+        "candidate_id": "il7ra-rfd4-3dd03e7b74b2",
+        "reasons": [
+          "qc_reason:pose_shift:generator_vs_boltz2:14.50A>2.5A",
+          "qc_reason:pose_shift:esmfold2_vs_boltz2:14.19A>3.0A",
+          "structure_qc_flagged",
+          "novelty_prescreen_not_searched",
+          "alphafold_missing",
+          "decoy_missing"
+        ]
+      },
+      {
+        "candidate_id": "il7ra-rfd4-7fc8ab07c02f",
+        "reasons": [
+          "excluded_by_request:sequence may have reached the public ColabFold server in the first AlphaFold attempt",
+          "decoy_binding:gfp:0.68>0.61"
+        ]
+      },
+      {
+        "candidate_id": "il7ra-rfd4-a7ec7bcf4054",
+        "reasons": [
+          "qc_reason:pose_shift:generator_vs_boltz2:9.14A>2.5A",
+          "qc_reason:pose_shift:esmfold2_vs_boltz2:8.54A>3.0A",
+          "structure_qc_flagged",
+          "novelty_prescreen_not_searched",
+          "alphafold_missing",
+          "decoy_missing"
+        ]
+      },
+      {
+        "candidate_id": "il7ra-rfd4-d009432d6cfc",
+        "reasons": [
+          "qc_reason:clash:boltz2:1_heavy_atom_pairs_lt_2A",
+          "structure_qc_flagged",
+          "novelty_prescreen_not_searched",
+          "alphafold_missing",
+          "decoy_missing"
+        ]
+      },
+      {
+        "candidate_id": "il7ra-rfd4-c1028562b167",
+        "reasons": [
+          "qc_reason:clash:generator:1_heavy_atom_pairs_lt_2A",
+          "qc_reason:pose_shift:generator_vs_boltz2:3.47A>2.5A",
+          "qc_reason:pose_shift:esmfold2_vs_boltz2:4.04A>3.0A",
+          "structure_qc_flagged",
+          "novelty_prescreen_not_searched",
+          "alphafold_missing",
+          "decoy_missing"
+        ]
+      },
+      {
+        "candidate_id": "il7ra-rfd4-065c167bd616",
+        "reasons": [
+          "qc_reason:clash:boltz2:1_heavy_atom_pairs_lt_2A",
+          "qc_reason:pose_shift:generator_vs_boltz2:9.87A>2.5A",
+          "qc_reason:pose_shift:esmfold2_vs_boltz2:10.83A>3.0A",
+          "structure_qc_flagged",
+          "novelty_prescreen_not_searched",
+          "alphafold_missing",
+          "decoy_missing"
+        ]
+      },
+      {
+        "candidate_id": "il7ra-rfd4-1ce95bd8ae7b",
+        "reasons": [
+          "decoy_binding:lyz:0.86>0.61"
+        ]
+      },
+      {
+        "candidate_id": "il7ra-rfd4-ae0d69ce4267",
+        "reasons": [
+          "qc_reason:clash:generator:1_heavy_atom_pairs_lt_2A",
+          "qc_reason:pose_shift:generator_vs_esmfold2:14.56A>2.5A",
+          "qc_reason:pose_shift:generator_vs_boltz2:3.36A>2.5A",
+          "qc_reason:pose_shift:esmfold2_vs_boltz2:13.74A>3.0A",
+          "structure_qc_flagged",
+          "novelty_prescreen_not_searched",
+          "alphafold_missing",
+          "decoy_missing"
+        ]
+      },
+      {
+        "candidate_id": "il7ra-rfd4-20b5cd2be58c",
+        "reasons": [
+          "qc_reason:pose_shift:generator_vs_boltz2:3.58A>2.5A",
+          "qc_reason:pose_shift:esmfold2_vs_boltz2:3.24A>3.0A",
+          "structure_qc_flagged",
+          "novelty_prescreen_not_searched",
+          "alphafold_missing",
+          "decoy_missing"
+        ]
+      },
+      {
+        "candidate_id": "il7ra-rfd4-4d756cbcfbfa",
+        "reasons": [
+          "qc_reason:clash:generator:1_heavy_atom_pairs_lt_2A",
+          "structure_qc_flagged",
+          "novelty_prescreen_not_searched",
+          "alphafold_missing",
+          "decoy_missing"
+        ]
+      },
+      {
+        "candidate_id": "il7ra-rfd4-5af8db19d24d",
+        "reasons": [
+          "qc_reason:clash:boltz2:1_heavy_atom_pairs_lt_2A",
+          "structure_qc_flagged",
+          "novelty_prescreen_not_searched",
+          "alphafold_missing",
+          "decoy_missing"
+        ]
+      },
+      {
+        "candidate_id": "il7ra-rfd4-a52ab184ad13",
+        "reasons": [
+          "qc_reason:no_hotspot_contact:esmfold2",
+          "qc_reason:pose_shift:generator_vs_esmfold2:45.53A>2.5A",
+          "qc_reason:pose_shift:esmfold2_vs_boltz2:46.61A>3.0A",
+          "structure_qc_flagged",
+          "novelty_prescreen_not_searched",
+          "alphafold_missing",
+          "decoy_missing"
+        ]
+      },
+      {
+        "candidate_id": "il7ra-rfd4-ea365f006edb",
+        "reasons": [
+          "qc_reason:clash:generator:1_heavy_atom_pairs_lt_2A",
+          "qc_reason:clash:boltz2:1_heavy_atom_pairs_lt_2A",
+          "structure_qc_flagged",
+          "novelty_prescreen_not_searched",
+          "alphafold_missing",
+          "decoy_missing"
+        ]
+      },
+      {
+        "candidate_id": "il7ra-rfd4-feec47be892c",
+        "reasons": [
+          "qc_reason:clash:generator:1_heavy_atom_pairs_lt_2A",
+          "qc_reason:clash:boltz2:1_heavy_atom_pairs_lt_2A",
+          "structure_qc_flagged",
+          "novelty_prescreen_not_searched",
+          "alphafold_missing",
+          "decoy_missing"
+        ]
+      },
+      {
+        "candidate_id": "il7ra-rfd4-ab54a5c15f5d",
+        "reasons": [
+          "qc_reason:near_duplicate:backbone_tm",
+          "structure_qc_incomplete",
+          "novelty_prescreen_not_searched",
+          "not_scored_by_both_predictors",
+          "alphafold_missing",
+          "decoy_missing"
+        ]
+      },
+      {
+        "candidate_id": "il7ra-rfd4-4d8e406177a3",
+        "reasons": [
+          "qc_reason:clash:boltz2:1_heavy_atom_pairs_lt_2A",
+          "structure_qc_flagged",
+          "novelty_prescreen_not_searched",
+          "alphafold_missing",
+          "decoy_missing"
+        ]
+      },
+      {
+        "candidate_id": "il7ra-rfd4-0c2c782b5ce3",
+        "reasons": [
+          "qc_reason:pose_shift:generator_vs_esmfold2:17.64A>2.5A",
+          "qc_reason:pose_shift:generator_vs_boltz2:19.67A>2.5A",
+          "qc_reason:pose_shift:esmfold2_vs_boltz2:5.79A>3.0A",
+          "structure_qc_flagged",
+          "novelty_prescreen_not_searched",
+          "alphafold_missing",
+          "decoy_missing"
+        ]
+      },
+      {
+        "candidate_id": "il7ra-rfd4-30e28a0d5b5e",
+        "reasons": [
+          "qc_reason:pose_shift:generator_vs_boltz2:3.15A>2.5A",
+          "qc_reason:pose_shift:esmfold2_vs_boltz2:3.29A>3.0A",
+          "structure_qc_flagged",
+          "novelty_prescreen_not_searched",
+          "alphafold_missing",
+          "decoy_missing"
+        ]
+      },
+      {
+        "candidate_id": "il7ra-rfd4-5df5871d401d",
+        "reasons": [
+          "qc_reason:clash:boltz2:1_heavy_atom_pairs_lt_2A",
+          "structure_qc_flagged",
+          "novelty_prescreen_not_searched",
+          "alphafold_missing",
+          "decoy_missing"
+        ]
+      },
+      {
+        "candidate_id": "il7ra-rfd4-f48ad0bc6f6d",
+        "reasons": [
+          "alphafold_iptm:0.44<=0.61",
+          "alphafold_pose_shift:generator:5.6814A>2.5A",
+          "alphafold_pose_shift:esmfold2:5.6598A>3.0A",
+          "alphafold_pose_shift:boltz2:6.4025A>3.0A",
+          "decoy_missing"
+        ]
+      },
+      {
+        "candidate_id": "il7ra-rfd4-dffe3d63a688",
+        "reasons": [
+          "qc_reason:pose_shift:generator_vs_boltz2:25.90A>2.5A",
+          "qc_reason:pose_shift:esmfold2_vs_boltz2:25.60A>3.0A",
+          "structure_qc_flagged",
+          "novelty_prescreen_not_searched",
+          "alphafold_missing",
+          "decoy_missing"
+        ]
+      },
+      {
+        "candidate_id": "il7ra-rfd4-b25d020a592d",
+        "reasons": [
+          "excluded_by_request:sequence may have reached the public ColabFold server in the first AlphaFold attempt"
+        ]
+      },
+      {
+        "candidate_id": "il7ra-rfd4-8536d4522c61",
+        "reasons": [
+          "qc_reason:pose_shift:generator_vs_boltz2:8.89A>2.5A",
+          "qc_reason:pose_shift:esmfold2_vs_boltz2:9.34A>3.0A",
+          "structure_qc_flagged",
+          "novelty_prescreen_not_searched",
+          "alphafold_missing",
+          "decoy_missing"
+        ]
+      },
+      {
+        "candidate_id": "il7ra-rfd4-08f9233a8a90",
+        "reasons": [
+          "excluded_by_request:sequence may have reached the public ColabFold server in the first AlphaFold attempt"
+        ]
+      },
+      {
+        "candidate_id": "il7ra-rfd4-22998e74e474",
+        "reasons": [
+          "qc_reason:pose_shift:generator_vs_boltz2:18.27A>2.5A",
+          "qc_reason:pose_shift:esmfold2_vs_boltz2:17.68A>3.0A",
+          "structure_qc_flagged",
+          "novelty_prescreen_not_searched",
+          "alphafold_missing",
+          "decoy_missing"
+        ]
+      },
+      {
+        "candidate_id": "il7ra-rfd4-7410fd1427ae",
+        "reasons": [
+          "qc_reason:pose_shift:generator_vs_esmfold2:10.81A>2.5A",
+          "qc_reason:pose_shift:generator_vs_boltz2:9.56A>2.5A",
+          "structure_qc_flagged",
+          "novelty_prescreen_not_searched",
+          "alphafold_missing",
+          "decoy_missing"
+        ]
+      },
+      {
+        "candidate_id": "il7ra-rfd4-20bd38bc16e3",
+        "reasons": [
+          "qc_reason:clash:esmfold2:1_heavy_atom_pairs_lt_2A",
+          "qc_reason:pose_shift:generator_vs_esmfold2:23.36A>2.5A",
+          "qc_reason:pose_shift:generator_vs_boltz2:15.71A>2.5A",
+          "qc_reason:pose_shift:esmfold2_vs_boltz2:21.02A>3.0A",
+          "structure_qc_flagged",
+          "novelty_prescreen_not_searched",
+          "alphafold_missing",
+          "decoy_missing"
+        ]
+      },
+      {
+        "candidate_id": "il7ra-rfd4-4299d00838fb",
+        "reasons": [
+          "qc_reason:pose_shift:generator_vs_boltz2:10.70A>2.5A",
+          "qc_reason:pose_shift:esmfold2_vs_boltz2:10.70A>3.0A",
+          "structure_qc_flagged",
+          "novelty_prescreen_not_searched",
+          "alphafold_missing",
+          "decoy_missing"
+        ]
+      },
+      {
+        "candidate_id": "il7ra-rfd4-2054930b0dcd",
+        "reasons": [
+          "qc_reason:pose_shift:generator_vs_boltz2:3.20A>2.5A",
+          "structure_qc_flagged",
+          "novelty_prescreen_not_searched",
+          "alphafold_missing",
+          "decoy_missing"
+        ]
+      },
+      {
+        "candidate_id": "il7ra-rfd4-90b6d9399028",
+        "reasons": [
+          "excluded_by_request:sequence may have reached the public ColabFold server in the first AlphaFold attempt"
+        ]
+      },
+      {
+        "candidate_id": "il7ra-rfd4-6c750edc9d24",
+        "reasons": [
+          "qc_reason:pose_shift:generator_vs_boltz2:2.99A>2.5A",
+          "structure_qc_flagged",
+          "novelty_prescreen_not_searched",
+          "alphafold_missing",
+          "decoy_missing"
+        ]
+      },
+      {
+        "candidate_id": "il7ra-rfd4-37bf87334140",
+        "reasons": [
+          "qc_reason:pose_shift:generator_vs_esmfold2:12.18A>2.5A",
+          "qc_reason:pose_shift:generator_vs_boltz2:13.62A>2.5A",
+          "qc_reason:pose_shift:esmfold2_vs_boltz2:7.57A>3.0A",
+          "structure_qc_flagged",
+          "novelty_prescreen_not_searched",
+          "alphafold_missing",
+          "decoy_missing"
+        ]
+      },
+      {
+        "candidate_id": "il7ra-rfd4-800ab3709765",
+        "reasons": [
+          "qc_reason:clash:boltz2:1_heavy_atom_pairs_lt_2A",
+          "qc_reason:pose_shift:generator_vs_boltz2:10.63A>2.5A",
+          "qc_reason:pose_shift:esmfold2_vs_boltz2:11.23A>3.0A",
+          "structure_qc_flagged",
+          "novelty_prescreen_not_searched",
+          "alphafold_missing",
+          "decoy_missing"
+        ]
+      },
+      {
+        "candidate_id": "il7ra-rfd4-30c2cd9e5c4f",
+        "reasons": [
+          "qc_reason:pose_shift:generator_vs_esmfold2:18.11A>2.5A",
+          "qc_reason:pose_shift:generator_vs_boltz2:8.22A>2.5A",
+          "qc_reason:pose_shift:esmfold2_vs_boltz2:12.79A>3.0A",
+          "structure_qc_flagged",
+          "novelty_prescreen_not_searched",
+          "alphafold_missing",
+          "decoy_missing"
+        ]
+      },
+      {
+        "candidate_id": "il7ra-rfd4-31bc08d9dd8a",
+        "reasons": [
+          "qc_reason:clash:esmfold2:1_heavy_atom_pairs_lt_2A",
+          "qc_reason:pose_shift:generator_vs_boltz2:19.40A>2.5A",
+          "qc_reason:pose_shift:esmfold2_vs_boltz2:18.96A>3.0A",
+          "structure_qc_flagged",
+          "novelty_prescreen_not_searched",
+          "alphafold_missing",
+          "decoy_missing"
+        ]
+      },
+      {
+        "candidate_id": "il7ra-rfd4-a9ca4147761f",
+        "reasons": [
+          "excluded_by_request:sequence may have reached the public ColabFold server in the first AlphaFold attempt",
+          "alphafold_pose_shift:generator:25.0119A>2.5A",
+          "alphafold_pose_shift:esmfold2:25.088A>3.0A",
+          "alphafold_pose_shift:boltz2:25.1567A>3.0A",
+          "decoy_missing"
+        ]
+      },
+      {
+        "candidate_id": "il7ra-rfd4-e83591b129ad",
+        "reasons": [
+          "qc_reason:pose_shift:generator_vs_boltz2:11.23A>2.5A",
+          "qc_reason:pose_shift:esmfold2_vs_boltz2:12.07A>3.0A",
+          "structure_qc_flagged",
+          "novelty_prescreen_not_searched",
+          "alphafold_missing",
+          "decoy_missing"
+        ]
+      },
+      {
+        "candidate_id": "il7ra-rfd4-cd795632b052",
+        "reasons": [
+          "qc_reason:pose_shift:generator_vs_boltz2:8.96A>2.5A",
+          "qc_reason:pose_shift:esmfold2_vs_boltz2:9.90A>3.0A",
+          "structure_qc_flagged",
+          "novelty_prescreen_not_searched",
+          "alphafold_missing",
+          "decoy_missing"
+        ]
+      },
+      {
+        "candidate_id": "il7ra-rfd4-b71bcf79d966",
+        "reasons": [
+          "excluded_by_request:sequence may have reached the public ColabFold server in the first AlphaFold attempt"
+        ]
+      },
+      {
+        "candidate_id": "il7ra-rfd4-8d13ed2d54d6",
+        "reasons": [
+          "qc_reason:clash:generator:1_heavy_atom_pairs_lt_2A",
+          "qc_reason:clash:boltz2:1_heavy_atom_pairs_lt_2A",
+          "qc_reason:pose_shift:generator_vs_boltz2:3.37A>2.5A",
+          "structure_qc_flagged",
+          "novelty_prescreen_not_searched",
+          "alphafold_missing",
+          "decoy_missing"
+        ]
+      },
+      {
+        "candidate_id": "il7ra-rfd4-9b6f4a80d0a8",
+        "reasons": [
+          "qc_reason:clash:generator:1_heavy_atom_pairs_lt_2A",
+          "qc_reason:clash:boltz2:1_heavy_atom_pairs_lt_2A",
+          "structure_qc_flagged",
+          "novelty_prescreen_not_searched",
+          "alphafold_missing",
+          "decoy_missing"
+        ]
+      },
+      {
+        "candidate_id": "il7ra-rfd4-9111856e8955",
+        "reasons": [
+          "excluded_by_request:sequence may have reached the public ColabFold server in the first AlphaFold attempt",
+          "alphafold_iptm:0.27<=0.61",
+          "alphafold_pose_shift:generator:15.6979A>2.5A",
+          "alphafold_pose_shift:esmfold2:15.8945A>3.0A",
+          "alphafold_pose_shift:boltz2:15.9843A>3.0A",
+          "decoy_missing"
+        ]
+      },
+      {
+        "candidate_id": "il7ra-rfd4-f4a09ef61cb9",
+        "reasons": [
+          "qc_reason:clash:boltz2:1_heavy_atom_pairs_lt_2A",
+          "qc_reason:pose_shift:generator_vs_esmfold2:16.48A>2.5A",
+          "qc_reason:pose_shift:generator_vs_boltz2:18.03A>2.5A",
+          "qc_reason:pose_shift:esmfold2_vs_boltz2:5.15A>3.0A",
+          "structure_qc_flagged",
+          "novelty_prescreen_not_searched",
+          "alphafold_missing",
+          "decoy_missing"
+        ]
+      },
+      {
+        "candidate_id": "il7ra-rfd4-ae9942d832ba",
+        "reasons": [
+          "qc_reason:pose_shift:generator_vs_boltz2:2.82A>2.5A",
+          "qc_reason:pose_shift:esmfold2_vs_boltz2:3.09A>3.0A",
+          "structure_qc_flagged",
+          "novelty_prescreen_not_searched",
+          "alphafold_missing",
+          "decoy_missing"
+        ]
+      },
+      {
+        "candidate_id": "il7ra-rfd4-13af2bd8fd8a",
+        "reasons": [
+          "excluded_by_request:sequence may have reached the public ColabFold server in the first AlphaFold attempt"
+        ]
+      },
+      {
+        "candidate_id": "il7ra-rfd4-6cdab7cd564e",
+        "reasons": [
+          "qc_reason:pose_shift:generator_vs_boltz2:10.37A>2.5A",
+          "qc_reason:pose_shift:esmfold2_vs_boltz2:10.32A>3.0A",
+          "structure_qc_flagged",
+          "novelty_prescreen_not_searched",
+          "alphafold_missing",
+          "decoy_missing"
+        ]
+      },
+      {
+        "candidate_id": "il7ra-rfd4-13cfc0d5252c",
+        "reasons": [
+          "qc_reason:pose_shift:generator_vs_boltz2:24.08A>2.5A",
+          "qc_reason:pose_shift:esmfold2_vs_boltz2:23.98A>3.0A",
+          "structure_qc_flagged",
+          "novelty_prescreen_not_searched",
+          "alphafold_missing",
+          "decoy_missing"
+        ]
+      },
+      {
+        "candidate_id": "il7ra-rfd4-0583c3190c93",
+        "reasons": [
+          "qc_reason:clash:generator:1_heavy_atom_pairs_lt_2A",
+          "structure_qc_flagged",
+          "novelty_prescreen_not_searched",
+          "alphafold_missing",
+          "decoy_missing"
+        ]
+      },
+      {
+        "candidate_id": "il7ra-rfd4-3d017821d726",
+        "reasons": [
+          "alphafold_pose_shift:generator:22.4184A>2.5A",
+          "alphafold_pose_shift:esmfold2:22.7411A>3.0A",
+          "alphafold_pose_shift:boltz2:22.4161A>3.0A",
+          "decoy_missing"
+        ]
+      },
+      {
+        "candidate_id": "il7ra-rfd4-f677f3807b37",
+        "reasons": [
+          "qc_reason:pose_shift:generator_vs_boltz2:6.75A>2.5A",
+          "qc_reason:pose_shift:esmfold2_vs_boltz2:7.02A>3.0A",
+          "structure_qc_flagged",
+          "novelty_prescreen_not_searched",
+          "alphafold_missing",
+          "decoy_missing"
+        ]
+      },
+      {
+        "candidate_id": "il7ra-rfd4-43697d7984b9",
+        "reasons": [
+          "qc_reason:no_hotspot_contact:boltz2",
+          "qc_reason:pose_shift:generator_vs_esmfold2:4.92A>2.5A",
+          "qc_reason:pose_shift:generator_vs_boltz2:30.80A>2.5A",
+          "qc_reason:pose_shift:esmfold2_vs_boltz2:31.97A>3.0A",
+          "structure_qc_flagged",
+          "novelty_prescreen_not_searched",
+          "alphafold_missing",
+          "decoy_missing"
+        ]
+      },
+      {
+        "candidate_id": "il7ra-rfd4-bad22c76d6a2",
+        "reasons": [
+          "alphafold_iptm:0.29<=0.61",
+          "alphafold_pose_shift:generator:13.1209A>2.5A",
+          "alphafold_pose_shift:esmfold2:13.1977A>3.0A",
+          "alphafold_pose_shift:boltz2:13.1673A>3.0A",
+          "decoy_missing"
+        ]
+      },
+      {
+        "candidate_id": "il7ra-rfd4-9479605e4597",
+        "reasons": [
+          "qc_reason:clash:boltz2:1_heavy_atom_pairs_lt_2A",
+          "qc_reason:pose_shift:generator_vs_boltz2:21.67A>2.5A",
+          "qc_reason:pose_shift:esmfold2_vs_boltz2:21.47A>3.0A",
+          "structure_qc_flagged",
+          "novelty_prescreen_not_searched",
+          "alphafold_missing",
+          "decoy_missing"
+        ]
+      },
+      {
+        "candidate_id": "il7ra-rfd4-7675c0f19e73",
+        "reasons": [
+          "qc_reason:pose_shift:generator_vs_esmfold2:19.46A>2.5A",
+          "qc_reason:pose_shift:generator_vs_boltz2:6.18A>2.5A",
+          "qc_reason:pose_shift:esmfold2_vs_boltz2:18.76A>3.0A",
+          "structure_qc_flagged",
+          "novelty_prescreen_not_searched",
+          "alphafold_missing",
+          "decoy_missing"
+        ]
+      },
+      {
+        "candidate_id": "il7ra-rfd4-b2d1380e33e6",
+        "reasons": [
+          "alphafold_iptm:0.3<=0.61",
+          "alphafold_pose_shift:generator:15.6937A>2.5A",
+          "alphafold_pose_shift:esmfold2:15.6327A>3.0A",
+          "alphafold_pose_shift:boltz2:15.7537A>3.0A",
+          "decoy_missing"
+        ]
+      },
+      {
+        "candidate_id": "il7ra-rfd4-7c2897132bc2",
+        "reasons": [
+          "alphafold_iptm:0.32<=0.61",
+          "alphafold_pose_shift:generator:8.5352A>2.5A",
+          "alphafold_pose_shift:esmfold2:8.031A>3.0A",
+          "alphafold_pose_shift:boltz2:9.694A>3.0A",
+          "decoy_missing"
+        ]
+      },
+      {
+        "candidate_id": "il7ra-rfd4-67beaf7d227d",
+        "reasons": [
+          "qc_reason:clash:esmfold2:1_heavy_atom_pairs_lt_2A",
+          "qc_reason:pose_shift:generator_vs_esmfold2:11.23A>2.5A",
+          "qc_reason:pose_shift:generator_vs_boltz2:19.30A>2.5A",
+          "qc_reason:pose_shift:esmfold2_vs_boltz2:21.20A>3.0A",
+          "structure_qc_flagged",
+          "novelty_prescreen_not_searched",
+          "alphafold_missing",
+          "decoy_missing"
+        ]
+      },
+      {
+        "candidate_id": "il7ra-rfd4-be714b7a8185",
+        "reasons": [
+          "qc_reason:pose_shift:generator_vs_esmfold2:6.76A>2.5A",
+          "qc_reason:pose_shift:generator_vs_boltz2:9.15A>2.5A",
+          "qc_reason:pose_shift:esmfold2_vs_boltz2:4.20A>3.0A",
+          "structure_qc_flagged",
+          "novelty_prescreen_not_searched",
+          "alphafold_missing",
+          "decoy_missing"
+        ]
+      },
+      {
+        "candidate_id": "il7ra-rfd4-b46c0bd916ec",
+        "reasons": [
+          "qc_reason:pose_shift:generator_vs_esmfold2:2.55A>2.5A",
+          "qc_reason:pose_shift:generator_vs_boltz2:24.12A>2.5A",
+          "qc_reason:pose_shift:esmfold2_vs_boltz2:23.70A>3.0A",
+          "structure_qc_flagged",
+          "novelty_prescreen_not_searched",
+          "alphafold_missing",
+          "decoy_missing"
+        ]
+      },
+      {
+        "candidate_id": "il7ra-rfd4-c2e1a5f718b4",
+        "reasons": [
+          "qc_reason:pose_shift:generator_vs_boltz2:10.26A>2.5A",
+          "qc_reason:pose_shift:esmfold2_vs_boltz2:9.99A>3.0A",
+          "structure_qc_flagged",
+          "novelty_prescreen_not_searched",
+          "alphafold_missing",
+          "decoy_missing"
+        ]
+      },
+      {
+        "candidate_id": "il7ra-rfd4-c6bb7a56e7d6",
+        "reasons": [
+          "qc_reason:pose_shift:generator_vs_boltz2:3.56A>2.5A",
+          "qc_reason:pose_shift:esmfold2_vs_boltz2:3.08A>3.0A",
+          "structure_qc_flagged",
+          "novelty_prescreen_not_searched",
+          "alphafold_missing",
+          "decoy_missing"
+        ]
+      },
+      {
+        "candidate_id": "il7ra-rfd4-6c17aa3cc055",
+        "reasons": [
+          "qc_reason:pose_shift:generator_vs_esmfold2:7.98A>2.5A",
+          "qc_reason:pose_shift:generator_vs_boltz2:7.51A>2.5A",
+          "qc_reason:pose_shift:esmfold2_vs_boltz2:11.78A>3.0A",
+          "structure_qc_flagged",
+          "novelty_prescreen_not_searched",
+          "alphafold_missing",
+          "decoy_missing"
+        ]
+      },
+      {
+        "candidate_id": "il7ra-rfd4-10604225cd21",
+        "reasons": [
+          "qc_reason:clash:generator:1_heavy_atom_pairs_lt_2A",
+          "qc_reason:pose_shift:generator_vs_boltz2:6.86A>2.5A",
+          "qc_reason:pose_shift:esmfold2_vs_boltz2:7.13A>3.0A",
+          "structure_qc_flagged",
+          "novelty_prescreen_not_searched",
+          "alphafold_missing",
+          "decoy_missing"
+        ]
+      },
+      {
+        "candidate_id": "il7ra-rfd4-e78359d05b74",
+        "reasons": [
+          "qc_reason:pose_shift:generator_vs_boltz2:18.04A>2.5A",
+          "qc_reason:pose_shift:esmfold2_vs_boltz2:18.07A>3.0A",
+          "structure_qc_flagged",
+          "novelty_prescreen_not_searched",
+          "alphafold_missing",
+          "decoy_missing"
+        ]
+      },
+      {
+        "candidate_id": "il7ra-rfd4-36b1ede15e28",
+        "reasons": [
+          "qc_reason:pose_shift:generator_vs_esmfold2:2.89A>2.5A",
+          "qc_reason:pose_shift:generator_vs_boltz2:3.41A>2.5A",
+          "structure_qc_flagged",
+          "novelty_prescreen_not_searched",
+          "alphafold_missing",
+          "decoy_missing"
+        ]
+      },
+      {
+        "candidate_id": "il7ra-rfd4-cc188cf4a966",
+        "reasons": [
+          "qc_reason:pose_shift:generator_vs_esmfold2:15.31A>2.5A",
+          "qc_reason:pose_shift:generator_vs_boltz2:25.43A>2.5A",
+          "qc_reason:pose_shift:esmfold2_vs_boltz2:23.50A>3.0A",
+          "structure_qc_flagged",
+          "novelty_prescreen_not_searched",
+          "alphafold_missing",
+          "decoy_missing"
+        ]
+      },
+      {
+        "candidate_id": "il7ra-rfd4-8d66162bdfed",
+        "reasons": [
+          "qc_reason:pose_shift:generator_vs_boltz2:19.54A>2.5A",
+          "qc_reason:pose_shift:esmfold2_vs_boltz2:19.95A>3.0A",
+          "structure_qc_flagged",
+          "novelty_prescreen_not_searched",
+          "alphafold_missing",
+          "decoy_missing"
+        ]
+      },
+      {
+        "candidate_id": "il7ra-rfd4-062469e154dd",
+        "reasons": [
+          "qc_reason:clash:esmfold2:1_heavy_atom_pairs_lt_2A",
+          "qc_reason:pose_shift:generator_vs_boltz2:10.23A>2.5A",
+          "qc_reason:pose_shift:esmfold2_vs_boltz2:10.36A>3.0A",
+          "structure_qc_flagged",
+          "novelty_prescreen_not_searched",
+          "alphafold_missing",
+          "decoy_missing"
+        ]
+      },
+      {
+        "candidate_id": "il7ra-rfd4-290af2b95e5c",
+        "reasons": [
+          "qc_reason:clash:esmfold2:1_heavy_atom_pairs_lt_2A",
+          "qc_reason:clash:boltz2:2_heavy_atom_pairs_lt_2A",
+          "qc_reason:pose_shift:generator_vs_esmfold2:25.21A>2.5A",
+          "qc_reason:pose_shift:generator_vs_boltz2:24.31A>2.5A",
+          "qc_reason:pose_shift:esmfold2_vs_boltz2:4.19A>3.0A",
+          "structure_qc_flagged",
+          "novelty_prescreen_not_searched",
+          "alphafold_missing",
+          "decoy_missing"
+        ]
+      },
+      {
+        "candidate_id": "il7ra-rfd4-a04e99906bfd",
+        "reasons": [
+          "qc_reason:pose_shift:generator_vs_esmfold2:8.63A>2.5A",
+          "qc_reason:pose_shift:generator_vs_boltz2:9.87A>2.5A",
+          "structure_qc_flagged",
+          "novelty_prescreen_not_searched",
+          "alphafold_missing",
+          "decoy_missing"
+        ]
+      },
+      {
+        "candidate_id": "il7ra-rfd4-12207c826a18",
+        "reasons": [
+          "qc_reason:clash:esmfold2:1_heavy_atom_pairs_lt_2A",
+          "qc_reason:no_hotspot_contact:esmfold2",
+          "qc_reason:clash:boltz2:1_heavy_atom_pairs_lt_2A",
+          "qc_reason:pose_shift:generator_vs_esmfold2:51.66A>2.5A",
+          "qc_reason:pose_shift:generator_vs_boltz2:36.53A>2.5A",
+          "qc_reason:pose_shift:esmfold2_vs_boltz2:57.28A>3.0A",
+          "structure_qc_flagged",
+          "novelty_prescreen_not_searched",
+          "alphafold_missing",
+          "decoy_missing"
+        ]
+      },
+      {
+        "candidate_id": "il7ra-rfd4-2eff360cfaa4",
+        "reasons": [
+          "qc_reason:clash:generator:1_heavy_atom_pairs_lt_2A",
+          "structure_qc_flagged",
+          "novelty_prescreen_not_searched",
+          "alphafold_missing",
+          "decoy_missing"
+        ]
+      },
+      {
+        "candidate_id": "il7ra-rfd4-6bcad6db90d4",
+        "reasons": [
+          "qc_reason:clash:generator:1_heavy_atom_pairs_lt_2A",
+          "qc_reason:pose_shift:generator_vs_esmfold2:19.93A>2.5A",
+          "qc_reason:pose_shift:generator_vs_boltz2:21.71A>2.5A",
+          "qc_reason:pose_shift:esmfold2_vs_boltz2:27.66A>3.0A",
+          "structure_qc_flagged",
+          "novelty_prescreen_not_searched",
+          "alphafold_missing",
+          "decoy_missing"
+        ]
+      },
+      {
+        "candidate_id": "il7ra-rfd4-b3025b5ef521",
+        "reasons": [
+          "alphafold_iptm:0.26<=0.61",
+          "alphafold_pose_shift:generator:18.1372A>2.5A",
+          "alphafold_pose_shift:esmfold2:18.1628A>3.0A",
+          "alphafold_pose_shift:boltz2:17.9936A>3.0A",
+          "decoy_missing"
+        ]
+      },
+      {
+        "candidate_id": "il7ra-rfd4-223e72ad0dc0",
+        "reasons": [
+          "qc_reason:pose_shift:generator_vs_boltz2:13.19A>2.5A",
+          "qc_reason:pose_shift:esmfold2_vs_boltz2:12.48A>3.0A",
+          "structure_qc_flagged",
+          "novelty_prescreen_not_searched",
+          "alphafold_missing",
+          "decoy_missing"
+        ]
+      },
+      {
+        "candidate_id": "il7ra-rfd4-acae291febf6",
+        "reasons": [
+          "decoy_binding:gfp:0.9>0.61"
+        ]
+      },
+      {
+        "candidate_id": "il7ra-rfd4-aadb9af1ff2a",
+        "reasons": [
+          "alphafold_iptm:0.29<=0.61",
+          "alphafold_pose_shift:generator:16.3011A>2.5A",
+          "alphafold_pose_shift:esmfold2:16.208A>3.0A",
+          "alphafold_pose_shift:boltz2:16.5154A>3.0A",
+          "decoy_missing"
+        ]
+      },
+      {
+        "candidate_id": "il7ra-rfd4-b74d84213b33",
+        "reasons": [
+          "qc_reason:clash:generator:1_heavy_atom_pairs_lt_2A",
+          "qc_reason:clash:boltz2:1_heavy_atom_pairs_lt_2A",
+          "structure_qc_flagged",
+          "novelty_prescreen_not_searched",
+          "alphafold_missing",
+          "decoy_missing"
+        ]
+      },
+      {
+        "candidate_id": "il7ra-rfd4-861d7fea9539",
+        "reasons": [
+          "alphafold_iptm:0.51<=0.61",
+          "alphafold_pose_shift:generator:21.2449A>2.5A",
+          "alphafold_pose_shift:esmfold2:21.2265A>3.0A",
+          "alphafold_pose_shift:boltz2:21.1678A>3.0A",
+          "decoy_missing"
+        ]
+      },
+      {
+        "candidate_id": "il7ra-rfd4-1b17ee02f31d",
+        "reasons": [
+          "qc_reason:near_duplicate:backbone_tm",
+          "structure_qc_incomplete",
+          "novelty_prescreen_not_searched",
+          "not_scored_by_both_predictors",
+          "alphafold_missing",
+          "decoy_missing"
+        ]
+      },
+      {
+        "candidate_id": "il7ra-rfd4-f3d4e391d2d8",
+        "reasons": [
+          "qc_reason:clash:generator:1_heavy_atom_pairs_lt_2A",
+          "qc_reason:pose_shift:generator_vs_esmfold2:2.90A>2.5A",
+          "qc_reason:pose_shift:generator_vs_boltz2:2.87A>2.5A",
+          "structure_qc_flagged",
+          "novelty_prescreen_not_searched",
+          "alphafold_missing",
+          "decoy_missing"
+        ]
+      },
+      {
+        "candidate_id": "il7ra-rfd4-7cd5ab25c182",
+        "reasons": [
+          "qc_reason:pose_shift:generator_vs_boltz2:8.37A>2.5A",
+          "qc_reason:pose_shift:esmfold2_vs_boltz2:8.55A>3.0A",
+          "structure_qc_flagged",
+          "novelty_prescreen_not_searched",
+          "alphafold_missing",
+          "decoy_missing"
+        ]
+      },
+      {
+        "candidate_id": "il7ra-rfd4-a216d64dea48",
+        "reasons": [
+          "decoy_binding:lyz:0.82>0.61"
+        ]
+      },
+      {
+        "candidate_id": "il7ra-rfd4-eeedafb833d3",
+        "reasons": [
+          "qc_reason:clash:esmfold2:1_heavy_atom_pairs_lt_2A",
+          "structure_qc_flagged",
+          "novelty_prescreen_not_searched",
+          "alphafold_missing",
+          "decoy_missing"
+        ]
+      },
+      {
+        "candidate_id": "il7ra-rfd4-608544c2bc52",
+        "reasons": [
+          "qc_reason:clash:boltz2:2_heavy_atom_pairs_lt_2A",
+          "structure_qc_flagged",
+          "novelty_prescreen_not_searched",
+          "alphafold_missing",
+          "decoy_missing"
+        ]
+      }
+    ],
+    "selected": 20,
+    "limit": 20,
+    "source": "generator",
+    "fold_threshold": 0.5,
+    "site_threshold": 0.5,
+    "excluded_by_request": [
+      "il7ra-rfd4-08f9233a8a90",
+      "il7ra-rfd4-13af2bd8fd8a",
+      "il7ra-rfd4-2e2ec88e93b8",
+      "il7ra-rfd4-67f05b49fd19",
+      "il7ra-rfd4-7fc8ab07c02f",
+      "il7ra-rfd4-8d368322e6bf",
+      "il7ra-rfd4-90b6d9399028",
+      "il7ra-rfd4-9111856e8955",
+      "il7ra-rfd4-a9ca4147761f",
+      "il7ra-rfd4-b25d020a592d",
+      "il7ra-rfd4-b71bcf79d966",
+      "il7ra-rfd4-bf3f3264bcd4"
+    ],
+    "decoy_gate": {
+      "decoys": [
+        "gfp",
+        "lyz"
+      ],
+      "max_iptm_allowed": 0.61
+    },
+    "alphafold_gate": {
+      "min_iptm_exclusive": 0.61,
+      "max_pose_shift_A": {
+        "generator": 2.5,
+        "esmfold2": 3.0,
+        "boltz2": 3.0
+      },
+      "basis": "ipTM above every shuffled control; the team's pose limits"
+    },
+    "fold_groups_available": 14,
+    "fold_groups_selected": 14,
+    "site_groups_available": 2,
+    "site_groups_selected": 2,
+    "scope": "A proposal by coverage, not a ranking: pick_order is the order of picking, no design is better than another, and scores were not used to rank. Review fields are untouched, so the export guard still needs a person's reviews."
+  },
+  "export_check": {
+    "passes": false,
+    "message": "Required novelty/structure review is incomplete"
+  },
+  "review_gaps": {
+    "il7ra-rfd4-ee56c58e81b5": [
+      "novelty_review (pre-screen is public-database only; needs the organizers' check or your own judgement)",
+      "independent_prediction_status (the AlphaFold cross-check, Task 5.4)",
+      "screen_status (a person reviews the ESMFold2 screen)"
+    ],
+    "il7ra-rfd4-dbb68e85db49": [
+      "novelty_review (pre-screen is public-database only; needs the organizers' check or your own judgement)",
+      "independent_prediction_status (the AlphaFold cross-check, Task 5.4)",
+      "screen_status (a person reviews the ESMFold2 screen)"
+    ],
+    "il7ra-rfd4-a0f0f8c0cd1c": [
+      "novelty_review (pre-screen is public-database only; needs the organizers' check or your own judgement)",
+      "independent_prediction_status (the AlphaFold cross-check, Task 5.4)",
+      "screen_status (a person reviews the ESMFold2 screen)"
+    ],
+    "il7ra-rfd4-f5d48afb1a53": [
+      "novelty_review (pre-screen is public-database only; needs the organizers' check or your own judgement)",
+      "independent_prediction_status (the AlphaFold cross-check, Task 5.4)",
+      "screen_status (a person reviews the ESMFold2 screen)"
+    ],
+    "il7ra-rfd4-026e12ae07bc": [
+      "novelty_review (pre-screen is public-database only; needs the organizers' check or your own judgement)",
+      "independent_prediction_status (the AlphaFold cross-check, Task 5.4)",
+      "screen_status (a person reviews the ESMFold2 screen)"
+    ],
+    "il7ra-rfd4-e45f4580e44e": [
+      "novelty_review (pre-screen is public-database only; needs the organizers' check or your own judgement)",
+      "independent_prediction_status (the AlphaFold cross-check, Task 5.4)",
+      "screen_status (a person reviews the ESMFold2 screen)"
+    ],
+    "il7ra-rfd4-3c415d9af3c0": [
+      "novelty_review (pre-screen is public-database only; needs the organizers' check or your own judgement)",
+      "independent_prediction_status (the AlphaFold cross-check, Task 5.4)",
+      "screen_status (a person reviews the ESMFold2 screen)"
+    ],
+    "il7ra-rfd4-65355a2ab485": [
+      "novelty_review (pre-screen is public-database only; needs the organizers' check or your own judgement)",
+      "independent_prediction_status (the AlphaFold cross-check, Task 5.4)",
+      "screen_status (a person reviews the ESMFold2 screen)"
+    ],
+    "il7ra-rfd4-154c11f68ccc": [
+      "novelty_review (pre-screen is public-database only; needs the organizers' check or your own judgement)",
+      "independent_prediction_status (the AlphaFold cross-check, Task 5.4)",
+      "screen_status (a person reviews the ESMFold2 screen)"
+    ],
+    "il7ra-rfd4-c79f951a2a43": [
+      "novelty_review (pre-screen is public-database only; needs the organizers' check or your own judgement)",
+      "independent_prediction_status (the AlphaFold cross-check, Task 5.4)",
+      "screen_status (a person reviews the ESMFold2 screen)"
+    ],
+    "il7ra-rfd4-246e59d61754": [
+      "novelty_review (pre-screen is public-database only; needs the organizers' check or your own judgement)",
+      "independent_prediction_status (the AlphaFold cross-check, Task 5.4)",
+      "screen_status (a person reviews the ESMFold2 screen)"
+    ],
+    "il7ra-rfd4-f5206fc1de1f": [
+      "novelty_review (pre-screen is public-database only; needs the organizers' check or your own judgement)",
+      "independent_prediction_status (the AlphaFold cross-check, Task 5.4)",
+      "screen_status (a person reviews the ESMFold2 screen)"
+    ],
+    "il7ra-rfd4-5094a0d5dad8": [
+      "novelty_review (pre-screen is public-database only; needs the organizers' check or your own judgement)",
+      "independent_prediction_status (the AlphaFold cross-check, Task 5.4)",
+      "screen_status (a person reviews the ESMFold2 screen)"
+    ],
+    "il7ra-rfd4-32fb546d40cc": [
+      "novelty_review (pre-screen is public-database only; needs the organizers' check or your own judgement)",
+      "independent_prediction_status (the AlphaFold cross-check, Task 5.4)",
+      "screen_status (a person reviews the ESMFold2 screen)"
+    ],
+    "il7ra-rfd4-1fea9fc40149": [
+      "novelty_review (pre-screen is public-database only; needs the organizers' check or your own judgement)",
+      "independent_prediction_status (the AlphaFold cross-check, Task 5.4)",
+      "screen_status (a person reviews the ESMFold2 screen)"
+    ],
+    "il7ra-rfd4-f49e60a8d7a3": [
+      "novelty_review (pre-screen is public-database only; needs the organizers' check or your own judgement)",
+      "independent_prediction_status (the AlphaFold cross-check, Task 5.4)",
+      "screen_status (a person reviews the ESMFold2 screen)"
+    ],
+    "il7ra-rfd4-3dbfb374de02": [
+      "novelty_review (pre-screen is public-database only; needs the organizers' check or your own judgement)",
+      "independent_prediction_status (the AlphaFold cross-check, Task 5.4)",
+      "screen_status (a person reviews the ESMFold2 screen)"
+    ],
+    "il7ra-rfd4-b6eedc7da36b": [
+      "novelty_review (pre-screen is public-database only; needs the organizers' check or your own judgement)",
+      "independent_prediction_status (the AlphaFold cross-check, Task 5.4)",
+      "screen_status (a person reviews the ESMFold2 screen)"
+    ],
+    "il7ra-rfd4-c14adbbcb210": [
+      "novelty_review (pre-screen is public-database only; needs the organizers' check or your own judgement)",
+      "independent_prediction_status (the AlphaFold cross-check, Task 5.4)",
+      "screen_status (a person reviews the ESMFold2 screen)"
+    ],
+    "il7ra-rfd4-7ec112a2ac7a": [
+      "novelty_review (pre-screen is public-database only; needs the organizers' check or your own judgement)",
+      "independent_prediction_status (the AlphaFold cross-check, Task 5.4)",
+      "screen_status (a person reviews the ESMFold2 screen)"
+    ]
+  }
+}

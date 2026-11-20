@@ -52,6 +52,32 @@ def sha(data):
 
 
 @RUN
+class SettingsOverride(unittest.TestCase):
+    def test_the_default_is_exactly_the_teams_settings_with_no_deviation(self):
+        settings, deviations = MI.merged_settings(None)
+        self.assertEqual((settings, deviations), (MI.SETTINGS, []))
+        self.assertEqual(MI.merged_settings({"soft_steps": MI.SETTINGS["soft_steps"]})[1], [])         # an unchanged value is not a deviation
+
+    def test_a_change_is_applied_and_listed_and_never_alters_the_teams_constant(self):
+        before = dict(MI.SETTINGS)
+        settings, deviations = MI.merged_settings({"soft_steps": 150, "sharp_steps": 100})
+        self.assertEqual((settings["soft_steps"], settings["sharp_steps"]), (150, 100))
+        self.assertEqual(deviations, ["soft_steps: 75 -> 150", "sharp_steps: 50 -> 100"])
+        self.assertEqual(MI.SETTINGS, before)
+        self.assertEqual(settings["loss_weights"], MI.SETTINGS["loss_weights"])                         # everything else is the team's
+
+    def test_only_the_step_counts_can_change_and_only_within_bounds(self):
+        for bad in ({"soft_stepsize": 0.2}, {"loss_weights": {}}, {"soft_steps": 0}, {"soft_steps": 401}, {"soft_steps": True}, {"sharp_steps": 1.5}):
+            with self.subTest(bad=bad), self.assertRaises(ValueError):
+                MI.merged_settings(bad)
+
+    def test_inputs_carry_the_override_to_the_script(self):
+        got = MI.build_inputs(MANIFEST, PHASE1 / "target.a3m", HOTSPOTS, 60, settings_override={"soft_steps": 150})
+        self.assertEqual(got["settings"]["soft_steps"], 150)
+        self.assertEqual(MI.build_inputs(MANIFEST, PHASE1 / "target.a3m", HOTSPOTS, 60)["settings"], MI.SETTINGS)
+
+
+@RUN
 class Inputs(unittest.TestCase):
     def test_a_good_request(self):
         got = MI.build_inputs(MANIFEST, PHASE1 / "target.a3m", HOTSPOTS, 60)
@@ -350,6 +376,14 @@ else:
         inputs = json.loads((self.cache / "runs/mos-one/generation/inputs.json").read_text())
         self.assertEqual((inputs["binder_length"], inputs["seed"], inputs["epitope_idx"][0]), (60, 101, 79))
         self.assertTrue(Path(inputs["msa_path"]).is_file())
+
+    def test_a_changed_setting_reaches_the_script_and_is_written_into_the_audit(self):
+        result = self.call(settings_override={"soft_steps": 150})
+        audit = result["audit"]
+        self.assertEqual(audit["settings"]["soft_steps"], 150)
+        self.assertEqual(audit["settings_deviations_from_team"], ["soft_steps: 75 -> 150"])
+        default = self.call(run_id="mos-two")["audit"]
+        self.assertEqual((default["settings"], default["settings_deviations_from_team"]), (MI.SETTINGS, []))
 
     def test_smoke_runs_the_script_in_smoke_mode_and_returns_no_design(self):
         result = self.call(run_id="mos-smoke", mode="smoke")

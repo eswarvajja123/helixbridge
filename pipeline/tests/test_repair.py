@@ -350,6 +350,27 @@ class Script(unittest.TestCase):
         bad = self.call("ingest", "--records", str(self.dir / "r.json"), "--native-dir", str(run / "native"), "--tag", "bad tag!", "--out", str(self.dir / "o10"))
         self.assertNotEqual(bad.returncode, 0)
 
+    def test_only_types_repairs_just_those_kinds(self):
+        base = self.sequence.replace("C", "A")                                                       # no cysteine, so only the motifs added below count
+        seq = base[:4] + "NVT" + base[7:20] + "NG" + base[22:30] + "DP" + base[32:]
+        self.assertEqual(repair.liability_edits(seq)[1], ["asn_gly", "asp_pro", "sequon"])
+        self.assertEqual(repair.liability_edits(seq, ["sequon"]), ({5: "N"}, ["sequon"]))
+        self.assertEqual(repair.liability_edits(seq, ["asp_pro", "asn_gly"])[0], {21: "N", 31: "D"})
+        self.assertEqual(repair.liability_edits(seq, ["cysteine"]), ({}, []))                       # a kind the design does not have: nothing to do
+        for bad in ([], ["glycine"], ["sequon", "x"]):
+            with self.assertRaises(ValueError):
+                repair.liability_edits(seq, bad)
+
+    def test_the_script_passes_only_types_to_plan(self):
+        sequence = self.sequence
+        done = self.call("plan", "--records", str(self.dir / "r.json"), "--selection", str(self.dir / "sel.json"), "--only-types", "cysteine", "--out", str(self.dir / "o11"))
+        self.assertEqual(done.returncode, 0, done.stderr)
+        self.assertEqual(json.loads(done.stdout)["designs_with_liabilities"], 1)
+        none = self.call("plan", "--records", str(self.dir / "r.json"), "--selection", str(self.dir / "sel.json"), "--only-types", "sequon", "--out", str(self.dir / "o12"))
+        self.assertEqual(json.loads(none.stdout)["designs_with_liabilities"], 0)                   # the test design has only an odd cysteine
+        bad = self.call("plan", "--records", str(self.dir / "r.json"), "--only-types", "nonsense", "--out", str(self.dir / "o13"))
+        self.assertNotEqual(bad.returncode, 0)
+
     def test_the_local_run_mode_works_with_a_stand_in_for_the_upstream_program(self):
         code = self.dir / "code"
         code.mkdir()

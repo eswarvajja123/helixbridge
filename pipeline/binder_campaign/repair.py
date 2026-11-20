@@ -59,25 +59,35 @@ def cif_to_pdb(cif_path):
     return "\n".join(lines) + "\nTER\nEND\n", chains
 
 
-def liability_edits(sequence):
-    """{position (1-based): residue letters to forbid there} and the liability types addressed. Empty if nothing needs repair."""
-    edits, types = {}, set()
+LIABILITY_TYPES = ("cysteine", "sequon", "asn_gly", "asp_pro")
+
+
+def liability_edits(sequence, only_types=None):
+    """{position (1-based): residue letters to forbid there} and the liability types addressed. Empty if nothing needs repair.
+    `only_types` (a subset of LIABILITY_TYPES) repairs just those kinds and leaves the others alone: fewer changed positions, less risk to the fold."""
+    if only_types is not None:
+        only_types = set(only_types)
+        if not only_types or only_types - set(LIABILITY_TYPES):
+            raise ValueError("only_types must name one or more of: " + ", ".join(LIABILITY_TYPES))
+    found = {t: {} for t in LIABILITY_TYPES}
     cysteines = [i + 1 for i, a in enumerate(sequence) if a == "C"]
     if len(cysteines) % 2 == 1:
-        types.add("cysteine")
         for p in cysteines:
-            edits.setdefault(p, set()).add("C")
+            found["cysteine"].setdefault(p, set()).add("C")
     for i in range(len(sequence) - 2):
         if sequence[i] == "N" and sequence[i + 1] != "P" and sequence[i + 2] in "ST":
-            types.add("sequon")
-            edits.setdefault(i + 1, set()).add("N")
+            found["sequon"].setdefault(i + 1, set()).add("N")
     for i in range(len(sequence) - 1):
         if sequence[i:i + 2] == "NG":
-            types.add("asn_gly")
-            edits.setdefault(i + 1, set()).add("N")
+            found["asn_gly"].setdefault(i + 1, set()).add("N")
         if sequence[i:i + 2] == "DP":
-            types.add("asp_pro")
-            edits.setdefault(i + 1, set()).add("D")
+            found["asp_pro"].setdefault(i + 1, set()).add("D")
+    edits, types = {}, set()
+    for kind, positions in found.items():
+        if positions and (only_types is None or kind in only_types):
+            types.add(kind)
+            for position, letters in positions.items():
+                edits.setdefault(position, set()).update(letters)
     return {p: "".join(sorted(v)) for p, v in sorted(edits.items())}, sorted(types)
 
 

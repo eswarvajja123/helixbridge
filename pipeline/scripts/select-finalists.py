@@ -32,6 +32,8 @@ parser.add_argument("--alphafold-results", type=Path, nargs="+", default=None,
 parser.add_argument("--alphafold-min-iptm", type=float, default=ALPHAFOLD_MIN_IPTM)
 parser.add_argument("--decoy-results", type=Path, default=None,
                     help="a decoy summary from review-decoys.py; designs that bind an unrelated protein confidently (ipTM above the controls) are excluded")
+parser.add_argument("--exclude", type=Path, default=None,
+                    help="a JSON file {\"candidate id\": \"reason\"} of designs to leave out, for example sequences that must stay unpublished")
 parser.add_argument("--reviews", type=Path, default=None, help="a person's review decisions (JSON); see binder_campaign/selection.py")
 args = parser.parse_args()
 try:
@@ -51,8 +53,11 @@ try:
     if args.decoy_results:
         doc = json.loads(args.decoy_results.read_text())
         decoys, decoy_names = doc["designs"], tuple(doc["decoys"])
+    leave_out = json.loads(args.exclude.read_text()) if args.exclude else None
+    if leave_out is not None and (not isinstance(leave_out, dict) or not all(isinstance(v, str) and v for v in leave_out.values())):
+        raise ValueError("--exclude must hold an object of candidate id -> a non-empty reason")
     selected, report = select(records, diversity, args.limit, args.source, args.fold_threshold, args.site_threshold, alphafold, args.alphafold_min_iptm,
-                              decoys, decoy_names)
+                              decoys, decoy_names, leave_out)
     ids = [s["candidate_id"] for s in selected]
     reviewed = apply_reviews(records, ids, json.loads(args.reviews.read_text())) if args.reviews else [r for r in records if r["candidate_id"] in ids]
     args.out.mkdir(parents=True)

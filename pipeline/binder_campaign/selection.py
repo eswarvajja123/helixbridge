@@ -74,7 +74,7 @@ def alphafold_reasons(result, min_iptm=ALPHAFOLD_MIN_IPTM, max_shift=ALPHAFOLD_M
     return reasons
 
 
-def eligibility(record, alphafold=None, min_iptm=ALPHAFOLD_MIN_IPTM, decoys=None, decoy_names=()):
+def eligibility(record, alphafold=None, min_iptm=ALPHAFOLD_MIN_IPTM, decoys=None, decoy_names=(), excluded=None):
     """The reasons a design cannot be selected; an empty list means eligible. With `alphafold` ({candidate_id: result}) its gate applies too."""
     reasons = [f"qc_reason:{r}" for r in record.get("qc_reasons") or []]
     qc = record.get("qc")
@@ -91,6 +91,8 @@ def eligibility(record, alphafold=None, min_iptm=ALPHAFOLD_MIN_IPTM, decoys=None
         reasons.append("not_scored_by_both_predictors")
     if not record.get("liabilities") or record["liabilities"].get("diagnostic") is None:
         reasons.append("liabilities_not_reviewed")
+    if excluded and record["candidate_id"] in excluded:           # a design the owner has asked to leave out, with the stated reason
+        reasons.append("excluded_by_request:" + excluded[record["candidate_id"]])
     if alphafold is not None:
         reasons += alphafold_reasons(alphafold.get(record["candidate_id"]), min_iptm)
     if decoys is not None:                                   # specificity: confident binding of an unrelated protein excludes a design
@@ -114,7 +116,7 @@ def read_groups(diversity, source, fold_threshold, site_threshold, method="compl
 
 
 def select(records, diversity, limit=MAX_FINALISTS, source="generator", fold_threshold=0.5, site_threshold=0.5, alphafold=None,
-           min_iptm=ALPHAFOLD_MIN_IPTM, decoys=None, decoy_names=()):
+           min_iptm=ALPHAFOLD_MIN_IPTM, decoys=None, decoy_names=(), leave_out=None):
     """Return (selected, report). selected: [{candidate_id, pick_order, fold_group, site_group, ...}]."""
     if not isinstance(limit, int) or isinstance(limit, bool) or not 1 <= limit <= MAX_FINALISTS:
         raise ValueError(f"limit must be a whole number from 1 to {MAX_FINALISTS}")
@@ -124,7 +126,7 @@ def select(records, diversity, limit=MAX_FINALISTS, source="generator", fold_thr
         if record["candidate_id"] in by_id:
             raise ValueError("Duplicate candidate_id: " + record["candidate_id"])
         by_id[record["candidate_id"]] = record
-        reasons = eligibility(record, alphafold, min_iptm, decoys, decoy_names)
+        reasons = eligibility(record, alphafold, min_iptm, decoys, decoy_names, leave_out)
         if not reasons and record["candidate_id"] not in fold_of:
             reasons.append("not_in_the_diversity_report")
         if reasons:
@@ -165,6 +167,7 @@ def select(records, diversity, limit=MAX_FINALISTS, source="generator", fold_thr
     report = {"schema": SCHEMA_VERSION, "pool": len(records), "eligible": len(eligible_ids), "excluded": excluded,
               "selected": len(selected), "limit": limit, "source": source, "fold_threshold": fold_threshold,
               "site_threshold": site_threshold,
+              "excluded_by_request": sorted(leave_out) if leave_out else [],
               "decoy_gate": None if decoys is None else {"decoys": list(decoy_names), "max_iptm_allowed": DECOY_MAX_IPTM},
               "alphafold_gate": None if alphafold is None else {"min_iptm_exclusive": min_iptm, "max_pose_shift_A": ALPHAFOLD_MAX_SHIFT,
                                                                 "basis": "ipTM above every shuffled control; the team's pose limits"},

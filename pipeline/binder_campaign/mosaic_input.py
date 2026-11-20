@@ -35,6 +35,25 @@ SETTINGS = {"soft_steps": 75, "soft_stepsize": 0.1, "sharp_steps": 50, "sharp_st
             "loss_weights": {"binder_target_contact": 2, "within_binder_contact": 1, "inverse_folding_sequence_recovery": 5},
             "initial": "random simplex (gumbel 0.5), no known-positive input", "templates": False}
 LENGTH_RANGE = (40, 100)
+# The only settings a run may change, within these bounds. Anything changed is a DEVIATION from the team's predeclared settings and is
+# written into the audit of every design made with it.
+TUNABLE = {"soft_steps": (1, 400), "sharp_steps": (1, 400)}
+
+
+def merged_settings(override=None):
+    """The team's settings, with a validated override on top. Returns (settings, deviations) where deviations lists what changed."""
+    override = dict(override or {})
+    settings, deviations = dict(SETTINGS), []
+    for key, value in override.items():
+        if key not in TUNABLE:
+            raise ValueError(f"Only {', '.join(sorted(TUNABLE))} may be changed, not '{key}'")
+        low, high = TUNABLE[key]
+        if isinstance(value, bool) or not isinstance(value, int) or not low <= value <= high:
+            raise ValueError(f"{key} must be a whole number from {low} to {high}")
+        if value != SETTINGS[key]:
+            settings[key] = value
+            deviations.append(f"{key}: {SETTINGS[key]} -> {value}")
+    return settings, deviations
 ALPHABET = set("ACDEFGHIKLMNPQRSTVWY")
 
 
@@ -49,7 +68,7 @@ def read_msa(path, rows=MSA_ROWS):
     return [(h, s) for h, s in entries[:rows]]
 
 
-def build_inputs(manifest, msa_path, hotspots, length, rows=MSA_ROWS):
+def build_inputs(manifest, msa_path, hotspots, length, rows=MSA_ROWS, settings_override=None):
     """Validate and assemble the optimizer's inputs for the current target. Raises ValueError with a plain reason."""
     start, end, target = manifest["start"], manifest["end"], manifest["sequence"]
     if len(target) != end - start + 1:
@@ -60,6 +79,7 @@ def build_inputs(manifest, msa_path, hotspots, length, rows=MSA_ROWS):
         raise ValueError("Give at least one hotspot, without repeats, as whole UniProt positions")
     if not all(start <= h <= end for h in hotspots):
         raise ValueError(f"Every hotspot must lie inside the construct {start}-{end}")
+    settings, _ = merged_settings(settings_override)
     entries = read_msa(msa_path, rows)
     if not entries:
         raise ValueError("The MSA is empty")
@@ -69,7 +89,7 @@ def build_inputs(manifest, msa_path, hotspots, length, rows=MSA_ROWS):
     text = "\n".join(line for entry in entries for line in entry) + "\n"
     epitope = [h - start for h in sorted(hotspots)]                 # index into the construct, 0 = its first residue
     return {"target_sequence": target, "construct": [start, end], "msa_a3m": text, "msa_rows": len(entries), "epitope_idx": epitope,
-            "hotspots_uniprot": sorted(hotspots), "binder_length": length, "settings": SETTINGS}
+            "hotspots_uniprot": sorted(hotspots), "binder_length": length, "settings": settings}
 
 
 def check_revisions(found):
@@ -80,9 +100,10 @@ def check_revisions(found):
             raise ValueError(f"Unreviewed source revision or modifications: {name}")
 
 
-def build_audit(*, run_id, seed, hotspots, hotspot_source, binder_length, manifest_path, structure_path, extras):
+def build_audit(*, run_id, seed, hotspots, hotspot_source, binder_length, manifest_path, structure_path, extras, settings_override=None):
     """The audit for one finished Mosaic design, in the shape the RFD4 generation writes (see import_current)."""
     manifest = json.loads(Path(manifest_path).read_text())
+    settings, deviations = merged_settings(settings_override)
     chains = chain_sequences(structure_path)
     shaped = [{"id": cid, "sequence": seq} for cid, seq in chains.items()]
     target_chain, binder_chain = check_generated_chains(shaped, manifest["sequence"], binder_length)
@@ -97,6 +118,7 @@ def build_audit(*, run_id, seed, hotspots, hotspot_source, binder_length, manife
         "target_manifest_sha256": digest(manifest_path), "generated_structure": str(structure_path),
         "generated_sha256": digest(structure_path), "target_chain": target_chain["id"], "binder_chain": binder_chain["id"],
         "binder_sequence": binder_chain["sequence"], "binder_length_requested": binder_length, "chains": shaped,
-        "code_revision": REVISIONS["mosaic-runtime"], "revisions": REVISIONS, "seed": seed, "run_id": run_id, "settings": SETTINGS,
+        "code_revision": REVISIONS["mosaic-runtime"], "revisions": REVISIONS, "seed": seed, "run_id": run_id, "settings": settings,
+        "settings_deviations_from_team": deviations,
         "evidence_note": "Boltz-2 is inside the design objective: its agreement is related evidence, not independent. ESMFold2 is the check.",
         **extras}

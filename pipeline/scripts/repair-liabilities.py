@@ -34,6 +34,8 @@ for name in ("plan", "run", "ingest"):
     p.add_argument("--records", type=Path, required=True)
     p.add_argument("--selection", type=Path, default=None, help="only designs in this shortlist (selection.json); default: every design")
     p.add_argument("--out", type=Path, required=True)
+    p.add_argument("--only-types", default="", help="repair only these kinds (comma-separated: cysteine, sequon, asn_gly, asp_pro) and leave the "
+                   "others alone; default: all kinds the team's protocol repairs")
     if name == "ingest":
         p.add_argument("--native-dir", type=Path, required=True, help="folder holding <candidate_id>/seqs/*.fa from your own native run")
         p.add_argument("--tag", default="", help="1 to 6 letters or digits put in the variant ids (`<parent>-<tag>r1`), so variants from a second "
@@ -47,6 +49,7 @@ for name in ("plan", "run", "ingest"):
         p.add_argument("--python", type=Path, required=True, help="a python with torch, numpy, prody and openfold")
 args = parser.parse_args()
 keep = getattr(args, "max_variants", MAX_VARIANTS)
+only = [t for t in args.only_types.split(",") if t] or None
 try:
     if not isinstance(keep, int) or not 1 <= keep <= 8:
         raise ValueError("--max-variants must be a whole number from 1 to 8")
@@ -69,7 +72,7 @@ try:
     args.out.mkdir(parents=True)
     plan, variants, summary = [], [], []
     for parent in parents:
-        edits, types = repair.liability_edits(parent["sequence"])
+        edits, types = repair.liability_edits(parent["sequence"], only)
         if not edits:
             continue
         folder = args.out / parent["candidate_id"]

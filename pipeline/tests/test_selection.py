@@ -110,6 +110,22 @@ class DecoyGate(unittest.TestCase):
         self.assertIsNone(S.select(records, div)[1]["decoy_gate"])
 
 
+class Exclusions(unittest.TestCase):
+    def test_a_design_on_the_exclusion_list_is_not_eligible_and_the_reason_is_kept(self):
+        self.assertEqual(S.eligibility(rec("a"), excluded={"a": "possibly disclosed"}), ["excluded_by_request:possibly disclosed"])
+        self.assertEqual(S.eligibility(rec("b"), excluded={"a": "x"}), [])
+        self.assertEqual(S.eligibility(rec("a")), [])                                     # off by default
+
+    def test_select_leaves_it_out_and_reports_who_was_excluded(self):
+        records = [rec("a", 1), rec("b", 2), rec("c", 3)]
+        div = diversity([["a"], ["b"], ["c"]], [["a"], ["b"], ["c"]])
+        chosen, report = S.select(records, div, leave_out={"b": "disclosed"})
+        self.assertEqual(sorted(c["candidate_id"] for c in chosen), ["a", "c"])
+        self.assertEqual(report["excluded_by_request"], ["b"])
+        self.assertEqual([e["reasons"] for e in report["excluded"] if e["candidate_id"] == "b"], [["excluded_by_request:disclosed"]])
+        self.assertEqual(S.select(records, div)[1]["excluded_by_request"], [])
+
+
 class Picking(unittest.TestCase):
     def ids(self, selected):
         return [s["candidate_id"] for s in selected]

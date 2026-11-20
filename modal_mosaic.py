@@ -94,7 +94,7 @@ def _source_state():
 
 @app.function(image=image, gpu=GPU, cpu=4, memory=65536, volumes={str(CACHE): cache}, timeout=TIMEOUT_SECONDS, retries=0,
               max_containers=1, scaledown_window=2)
-def mosaic_run(run_id: str, seed: int, hotspots: list, hotspot_source: str, binder_length: list, mode: str = "design"):
+def mosaic_run(run_id: str, seed: int, hotspots: list, hotspot_source: str, binder_length: list, mode: str = "design", settings_override: dict = None):
     """One Mosaic smoke test or design. `binder_length` is [low, high] and must be one fixed length (Mosaic needs a length)."""
     import shutil
     import subprocess
@@ -116,7 +116,7 @@ def mosaic_run(run_id: str, seed: int, hotspots: list, hotspot_source: str, bind
     phase1 = OPT / "docs/eswar/phase1-data"
     manifest_path = phase1 / "il7ra-manifest.json"
     manifest = json.loads(manifest_path.read_text())
-    inputs = build_inputs(manifest, phase1 / "target.a3m", hotspots, low)
+    inputs = build_inputs(manifest, phase1 / "target.a3m", hotspots, low, settings_override=settings_override)
 
     checkpoints = json.loads((CACHE / "env/boltz-checkpoints.json").read_text())
     boltz_cache = Path(checkpoints["cache"])
@@ -151,7 +151,7 @@ def mosaic_run(run_id: str, seed: int, hotspots: list, hotspot_source: str, bind
     shutil.copy2(work / "raw.npz", generation / "raw.npz")
     (generation / "result.json").write_text(json.dumps(result, indent=2))
     audit = build_audit(run_id=run_id, seed=seed, hotspots=hotspots, hotspot_source=hotspot_source, binder_length=low,
-                        manifest_path=manifest_path, structure_path=generation / "model.cif",
+                        manifest_path=manifest_path, structure_path=generation / "model.cif", settings_override=settings_override,
                         extras={"generation_seconds": result["timings"].get("optimize_seconds", 0.0) + result["timings"].get("predict_seconds", 0.0),
                                 "timings": result["timings"], "memory_stats": result["memory_stats"], "device": gpu_name,
                                 "generator_model_iptm": result["generator_model_iptm"], "environment_sha256": hashlib.sha256(freeze.encode()).hexdigest(),
@@ -167,7 +167,7 @@ def mosaic_run(run_id: str, seed: int, hotspots: list, hotspot_source: str, bind
 @app.local_entrypoint()
 def main(stage: str = "plan", run_id: str = "", seed: int = 101, option: str = "", hotspots: str = "", hotspot_source: str = "",
          length: int = 60, batch_id: str = "", seeds: str = "", lengths: str = "", max_designs: int = 0, max_gpu_seconds: float = 0.0,
-         max_failures: int = 2, retry_failed: bool = False, retry_interrupted: bool = False, out: str = ""):
+         max_failures: int = 2, retry_failed: bool = False, retry_interrupted: bool = False, out: str = "", soft_steps: int = 0, sharp_steps: int = 0):
     """Stages: plan (free local checks), smoke (one GPU loss/gradient check), generate (one design) or batch (budget-capped, resumable)."""
     if stage not in {"plan", "smoke", "generate", "batch"}:
         raise ValueError("Choose plan, smoke, generate or batch")
@@ -179,9 +179,10 @@ def main(stage: str = "plan", run_id: str = "", seed: int = 101, option: str = "
     manifest = json.loads(manifest_path.read_text())
     msa_path = HERE / "docs/eswar/phase1-data/target.a3m"
     hotspot_list, source = resolve_hotspots(HERE, option, hotspots, hotspot_source)
+    override = {k: v for k, v in (("soft_steps", soft_steps), ("sharp_steps", sharp_steps)) if v}      # 0 keeps the team's value
 
     def check(binder_length):
-        return build_inputs(manifest, msa_path, hotspot_list, binder_length)       # the same input checks the GPU function makes
+        return build_inputs(manifest, msa_path, hotspot_list, binder_length, settings_override=override)       # the same input checks the GPU function makes
 
     if stage == "batch":
         from binder_campaign.batch import make_config, parse_lengths, parse_seeds, run_batch
@@ -194,7 +195,7 @@ def main(stage: str = "plan", run_id: str = "", seed: int = 101, option: str = "
         folder = Path(out) if out else HERE / "results" / f"batch-{batch_id}"
         print(json.dumps({"batch": cfg, "input_checks": "passed", "gpu_preference": GPU, "function_timeout_seconds": TIMEOUT_SECONDS,
                           "output": str(folder)}, indent=2))
-        report = run_batch(cfg, lambda t: mosaic_run.remote(t["run_id"], t["seed"], t["hotspots"], t["hotspot_source"], t["binder_length"]),
+        report = run_batch(cfg, lambda t: mosaic_run.remote(t["run_id"], t["seed"], t["hotspots"], t["hotspot_source"], t["binder_length"], "design", override or None),
                            folder, manifest_path, retry_failed=retry_failed, retry_interrupted=retry_interrupted)
         print(json.dumps({k: report[k] for k in ("stop_reason", "planned", "done", "kept", "dropped_by_dedup", "failed", "interrupted",
                                                  "not_started", "gpu_seconds_reported", "gpu_seconds_note")}, indent=2))
@@ -213,7 +214,7 @@ def main(stage: str = "plan", run_id: str = "", seed: int = 101, option: str = "
     if (output / f"{name}.json").exists():
         raise ValueError("Refusing to overwrite an existing local result")
     output.mkdir(parents=True, exist_ok=True)
-    result = mosaic_run.remote(rid, plan["seed"], hotspot_list, source, [length, length], "smoke" if stage == "smoke" else "design")
+    result = mosaic_run.remote(rid, plan["seed"], hotspot_list, source, [length, length], "smoke" if stage == "smoke" else "design", override or None)
     if "archive" in result:
         (output / f"{name}.tar.gz").write_bytes(result.pop("archive"))
     result["modal_profile"] = os.environ.get("MODAL_PROFILE", "active CLI profile")

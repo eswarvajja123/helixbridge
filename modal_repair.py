@@ -75,7 +75,7 @@ def native_repair(parent_id: str, pdb_text: str, edits: dict, binder_chain: str 
 
 
 @app.local_entrypoint()
-def main(records: str, selection: str = "", out: str = "", temperature: float = 0.1, seed: int = 401):
+def main(records: str, selection: str = "", out: str = "", temperature: float = 0.1, seed: int = 401, only_types: str = ""):
     """Run native SolubleMPNN for every chosen design that has a liability; writes native outputs for repair-liabilities.py ingest."""
     sys.path.insert(0, str(HERE / "pipeline"))
     from binder_campaign import repair
@@ -88,7 +88,7 @@ def main(records: str, selection: str = "", out: str = "", temperature: float = 
     for parent in doc:
         if (wanted is not None and parent["candidate_id"] not in wanted) or parent.get("parent_candidate_id"):
             continue
-        edits, types = repair.liability_edits(parent["sequence"])
+        edits, types = repair.liability_edits(parent["sequence"], [t for t in only_types.split(",") if t] or None)
         if edits:
             pdb, chains = repair.cif_to_pdb(parent["generator_structure"])
             jobs.append((parent, edits, types, pdb, chains))
@@ -105,5 +105,5 @@ def main(records: str, selection: str = "", out: str = "", temperature: float = 
         (target / result["fasta_name"]).write_text(result["fasta"])
         (folder / "native" / parent["candidate_id"] / "run.json").write_text(json.dumps({k: v for k, v in result.items() if k != "fasta"}, indent=2))
         summary.append({"candidate_id": parent["candidate_id"], "status": "ran", "types": types, "positions": edits, "seconds": round(result["seconds"], 1)})
-    (folder / "native-run.json").write_text(json.dumps({"revision": REVISION, "weights_sha256": WEIGHTS_SHA256, "temperature": temperature, "seed": seed, "designs": summary}, indent=2) + "\n")
+    (folder / "native-run.json").write_text(json.dumps({"revision": REVISION, "weights_sha256": WEIGHTS_SHA256, "temperature": temperature, "seed": seed, "only_types": only_types or "all", "designs": summary}, indent=2) + "\n")
     print(json.dumps({"output_folder": str(folder), "designs_with_liabilities": len(jobs), "results": summary}, indent=2))
