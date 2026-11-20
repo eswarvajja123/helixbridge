@@ -1,0 +1,11 @@
+{
+  "schema": 1,
+  "candidates": 6,
+  "status_counts": {
+    "not_searched": 2,
+    "no_public_hit": 4
+  },
+  "rule": "flag when query coverage >= 0.8 and identity > 0.7",
+  "database": "../pubdb/publicDB (../pubdb/publicDB)",
+  "scope": "Public-database pre-screen only. A flag is informative; no flag proves nothing, because the organizers' database is private and their exact search settings are unconfirmed. novelty_review stays pending."
+}

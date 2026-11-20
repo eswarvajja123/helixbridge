@@ -1,0 +1,36 @@
+{
+  "mode": "ingest",
+  "settings": {
+    "temperature": 0.3,
+    "seed": 403,
+    "samples": 16,
+    "max_variants_per_design": 6
+  },
+  "designs": [
+    {
+      "candidate_id": "il7ra-rfd4-13af2bd8fd8a",
+      "types": [
+        "sequon"
+      ],
+      "redesign_positions": {
+        "5": "N",
+        "17": "N"
+      },
+      "binder_chain": "B",
+      "binder_chain_index": 1
+    }
+  ],
+  "results": [
+    {
+      "candidate_id": "il7ra-rfd4-13af2bd8fd8a",
+      "status": "repaired",
+      "types": [
+        "sequon"
+      ],
+      "samples": 16,
+      "rejected": 0,
+      "variants": 6,
+      "shortfall": 0
+    }
+  ]
+}

@@ -1,0 +1,7 @@
+candidate_id,status,hits,best_target,best_identity,best_query_coverage,best_target_coverage,tripping_hits,both_coverages_ok
+il7ra-rfd4-13af2bd8fd8a-sqr1,not_searched,,,,,,,
+il7ra-rfd4-13af2bd8fd8a-sqr2,not_searched,,,,,,,
+il7ra-rfd4-13af2bd8fd8a-sqr3,no_public_hit,0,,,,,0,False
+il7ra-rfd4-13af2bd8fd8a-sqr4,no_public_hit,0,,,,,0,False
+il7ra-rfd4-13af2bd8fd8a-sqr5,no_public_hit,0,,,,,0,False
+il7ra-rfd4-13af2bd8fd8a-sqr6,no_public_hit,0,,,,,0,False
